@@ -12,11 +12,12 @@ public:
     virtual bool InitEngine();
     virtual bool StartApplication();
     virtual void SetFPS(int fps);
-    virtual int GetFPS() {return m_iFPS;}
+    virtual int GetFPS() const {return m_iFPS;}
 
     virtual ISceneManager *GetSceneManager() const { return m_pSceneManager; }
     virtual IRenderer *GetRenderer() const { return m_pRenderer; }
 private:
+    friend class CSingleton<CMagic>;
     CMagic();
     ~CMagic();
     CApplication *m_pApplication;
