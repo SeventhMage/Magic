@@ -10,7 +10,7 @@ class IMagic
 {
 public:
     virtual bool InitEngine() = 0;
-    virtual bool StartApplication() = 0;
+    virtual void StartApplication() = 0;
     virtual void SetFPS(int fps) = 0;
     virtual int GetFPS() const = 0;
     virtual ISceneManager *GetSceneManager() const = 0;

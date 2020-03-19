@@ -10,7 +10,7 @@ class CMagic : public IMagic, public CSingleton<CMagic>
 {
 public:
     virtual bool InitEngine();
-    virtual bool StartApplication();
+    virtual void StartApplication();
     virtual void SetFPS(int fps);
     virtual int GetFPS() const {return m_iFPS;}
 

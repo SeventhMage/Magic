@@ -15,6 +15,6 @@ int main(int argc, char *argv[])
     cout << "Application end." << endl;
     cout << "Cleaning ... " << endl;
     Clean();
-    cout << "Finish clean ... " << endl;
+    cout << "Finish clean." << endl;
     return 0;
 }

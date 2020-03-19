@@ -5,8 +5,8 @@
 
 namespace magic
 {
-static IMagic *GetMagic();
-static void Clean();
+IMagic *GetMagic();
+void Clean();
 }
 
 #endif

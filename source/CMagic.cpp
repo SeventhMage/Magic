@@ -3,21 +3,21 @@
 namespace magic
 {
 CMagic::CMagic()
+:m_pApplication(new CApplication())
 {
-    
 }
 
 CMagic::~CMagic()
 {
-
+    delete m_pApplication;
 }
 
 bool CMagic::InitEngine()
 {
-    
+    return true;   
 }
 
-bool CMagic::StartApplication()
+void CMagic::StartApplication()
 {
     while (m_pApplication->Run())
     {

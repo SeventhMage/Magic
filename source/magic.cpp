@@ -3,12 +3,12 @@
 
 namespace magic
 {
-static IMagic *GetMagic()
+IMagic *GetMagic()
 {
     return CMagic::Instance();
 }
 
-static void Clean()
+void Clean()
 {
     CMagic::DeleteInstance();
 }
