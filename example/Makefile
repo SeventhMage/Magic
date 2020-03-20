@@ -3,9 +3,11 @@ include ../config.mk
 .SUFFIXES:
 .PHONY: all clean
 
-CPPFLAGS := -Wall -g -std=c++11
+export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH 
+
+CPPFLAGS := -Wall -g -std=c++11 
 INCLUDES := -Iinclude
-LDFLAGS := -L../libmagic.so
+LDFLAGS := -L../
 LIBS    := -lm -lmagic
 TARGET := main
 

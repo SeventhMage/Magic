@@ -5,7 +5,7 @@ include config.mk
 CPPFLAGS := -Wall -g -std=c++11 -shared
 INCLUDES := -Iinclude
 LIBS := -lm
-TARGET := libmagic.so
+TARGET := libmagic.dll
 
 SRCDIRS := source srouce/render component component/render/gles
 SRCOBJS := $(foreach dir, $(SRCDIRS), $(patsubst %.cpp, %.o, $(wildcard $(dir)/*.cpp))) 

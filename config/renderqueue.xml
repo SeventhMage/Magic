@@ -1,0 +1,6 @@
+<RenderQueue>
+    <Name="Opaque">
+    <Name="Transparent">
+    <Name="ScreenQuad">
+    <Name="PostProcess">
+</RenderQueue>

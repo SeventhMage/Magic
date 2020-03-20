@@ -10,7 +10,12 @@ class IRenderer
 {
 public:
     virtual ~IRenderer(){}
+    /**
+     * Initalize RenderQueue by config.
+     **/
+    virtual void Initalize() = 0;
     virtual void Render(IRenderInput *pRenderInput, IRenderTarget *pRenderTarget) = 0;
+    virtual void SubmitToRenderQueue(IRenderInput *, int queueId) = 0;
 };
 } // namespace magic
 

@@ -1,10 +1,12 @@
 #include "CMagic.h"
+#include "scene/CSceneManager.h"
 
 namespace magic
 {
 CMagic::CMagic()
 :m_pApplication(new CApplication())
 {
+    m_pSceneManager = new CSceneManager();
 }
 
 CMagic::~CMagic()
@@ -35,7 +37,7 @@ void CMagic::StartApplication()
                 compensationTime -= m_iFixDelta;
             }while(compensationTime > m_iFixDelta);
 
-            m_pSceneManager->Render();
+            m_pSceneManager->Render(m_pRenderer);
             lastTime = m_pApplication->GetSystemTime();
         }
     }
