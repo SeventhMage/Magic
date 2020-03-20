@@ -1,19 +1,21 @@
-include config.mk
+
+include ../config.mk
 .SUFFIXES:
 .PHONY: all clean
 
-CPPFLAGS := -Wall -g -std=c++11 -shared
+CPPFLAGS := -Wall -g -std=c++11
 INCLUDES := -Iinclude
-LIBS := -lm
-TARGET := libmagic.so
+LDFLAGS := -L../libmagic.so
+LIBS    := -lm -lmagic
+TARGET := main
 
-SRCDIRS := source srouce/render component component/render/gles
+SRCDIRS := .
 SRCOBJS := $(foreach dir, $(SRCDIRS), $(patsubst %.cpp, %.o, $(wildcard $(dir)/*.cpp))) 
 OBJS := $(SRCOBJS)
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CPP) $(CPPFLAGS) $(INCLUDES) $(LIBS) $^ -o $@
+	$(CPP) $(CPPFLAGS) $(INCLUDES) $(LDFLAGS) $(LIBS) $^ -o $@
 
 $(OBJS): %.o: %.cpp
 	$(CPP) $(CPPFLAGS) $(INCLUDES) $< -c -o $@

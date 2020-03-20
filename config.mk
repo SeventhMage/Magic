@@ -9,8 +9,19 @@ else
 endif
 
 #########################################
+############MinGW ###################
+ifeq ($(findstring MINGW, $(OS)), MINGW)
+	CROSS ?= 
+	CC	:= $(CROSS)gcc -fPIC -DPIC
+	CPP	:= $(CROSS)g++ -fPIC -DPIC
+	LD	:= $(CROSS)ld
+	AR	:= $(CROSS)ar
+	ASM	:=	yasm -DPIC
+endif
+
+#########################################
 ############linux系统 ###################
-ifeq ($(findstring Linux, $(OS)), Linux)
+ifeq ($(findstring Linux, $(OS)), Linux) 
 	CROSS ?= 
 	CC	:= $(CROSS)gcc -fPIC -DPIC
 	CPP	:= $(CROSS)g++ -fPIC -DPIC
