@@ -1,13 +1,27 @@
-VPATH = include:source:include/render:source/render
-objects = main.o magic.o CMagic.o CApplication.o CRenderer.o 
-main:$(objects)
-	clang++ -std=c++11 -o main $(objects) 
+.SUFFIXES:
+.PHONY: all clean
 
-magic.o : magic.h CMagic.h
-CMagic.o : CMagic.h
-CApplication.o : CApplication.h
-CRenderer.o : CRenderer.h
+CXX := clang++
+CXXFLAGS := -Wall -g
+INCLUDES := -Iinclude
+LIBS := -lm
+TARGET := main
 
-.PHONY:clean
+VPATH := include:source
+SRCDIR := source
+COMPONENTDIR:= component 
+SRCOBJS := $(patsubst %.cpp, %.o, $(wildcard $(SRCDIR)/*.cpp))
+COMPONENTOBJS:= $(patsubst %.cpp, %.o, $(wildcard $(COMPONENTDIR)/*.cpp))
+OBJS := $(SRCOBJS) $(COMPONENTOBJS)
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(LIBS) $^ -o $@
+
+$(OBJS): %.o: %.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $< -c -o $@
+
 clean:
-	rm main $(objects)
+	-@rm -f $(TARGET)
+	-@rm -f $(OBJS)

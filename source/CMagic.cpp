@@ -9,7 +9,8 @@ CMagic::CMagic()
 
 CMagic::~CMagic()
 {
-    delete m_pApplication;
+    if (m_pApplication)
+        delete m_pApplication;
 }
 
 bool CMagic::InitEngine()

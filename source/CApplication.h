@@ -10,6 +10,7 @@ class CApplication : public IApplication
 {
 public:
 	CApplication();
+	virtual ~CApplication();
 	virtual bool Run();
     virtual long GetSystemTime();
 	CWindow *GetWindow() { return m_Window; }

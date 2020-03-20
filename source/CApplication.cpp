@@ -6,6 +6,11 @@ CApplication::CApplication()
 {
 }
 
+CApplication::~CApplication()
+{
+
+}
+
 bool CApplication::Run()
 {
     return false;

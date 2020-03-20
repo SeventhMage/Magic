@@ -6,6 +6,7 @@ namespace magic
 class IApplication
 {
 public:
+    virtual ~IApplication(){}
     virtual bool Run() = 0;
     virtual long GetSystemTime() = 0;
 };
