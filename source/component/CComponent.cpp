@@ -3,7 +3,6 @@
 namespace magic
 {
 CComponent::CComponent()
-    : m_ID(++m_sIDCount)
 {
 }
 

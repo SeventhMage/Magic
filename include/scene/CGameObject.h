@@ -1,24 +1,25 @@
 #ifndef _MAGIC_I_GAME_OBJECT_H_
 #define _MAGIC_I_GAME_OBJECT_H_
 
-#include "IObject.h"
-#include "component/IComponent.h"
+#include "CObject.h"
+#include "component/CComponent.h"
 #include "ISceneNode.h"
 
 #include <map>
 
 namespace magic
 {
-class CGameObject : public IObject
+class CGameObject : public CObject
 {
 public:
     CGameObject();
     ~CGameObject();
+
     template <typename T>
     T *AddComponent()
     {
         T *com = new T();
-        m_ComponetMap.insert(std::pair<int, IComponent *>(com->GetID(), com));
+        m_ComponetMap.insert(std::pair<int, CComponent *>(com->GetID(), com));
         return com;
     }
 
@@ -28,7 +29,7 @@ public:
         if (com)
         {
             int id = com->GetID();
-            m_ComponetMap.erase(id)
+            m_ComponetMap.erase(id);
         }
     }
 
@@ -48,7 +49,7 @@ public:
     void Update();
 
 private:
-    std::map<int, IComponent *> m_ComponetMap;
+    std::map<int, CComponent *> m_ComponetMap;
     ISceneNode *m_pSceneNode;
 };
 } // namespace magic

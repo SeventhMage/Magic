@@ -33,11 +33,11 @@ void CMagic::StartApplication()
             compensationTime += passTime;
             do
             {
-                m_pSceneManager->FixUpdate(m_iFixDelta);
+                m_pSceneManager->FixedUpdate(m_iFixDelta);
                 compensationTime -= m_iFixDelta;
             }while(compensationTime > m_iFixDelta);
 
-            m_pSceneManager->Render(m_pRenderer);
+            m_pSceneManager->Render();
             lastTime = m_pApplication->GetSystemTime();
         }
     }

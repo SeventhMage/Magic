@@ -10,15 +10,9 @@ class CCamera : public CComponent
 public:
     CCamera();
     ~CCamera();
+
+    virtual void Update();
 };
-
-CCamera::CCamera()
-{
-}
-
-CCamera::~CCamera()
-{
-}
 
 } // namespace magic
 

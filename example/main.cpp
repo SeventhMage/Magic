@@ -1,7 +1,6 @@
-#include "../include/magic.h"
-
-#include "../include/scene/CGameObject.h"
-#include "../include/component/CCamera.h"
+#include "magic.h"
+#include "scene/CGameObject.h"
+#include "component/CCamera.h"
 
 #include <stdio.h>
 
@@ -13,12 +12,11 @@ int main(int argc, char *argv[])
     mc->InitEngine();
     printf("Finished initalizing Engine.\n\n");
 
-    CGameObject go;
-    go.AddComponent<CCamera>();
-
     printf("Loading scene ... \n");
-    ISceneManager *pSceneMgr = mc->GetSceneManager();
-    IScene *pScene = pSceneMgr->LoadScene("Test.scene");
+    CSceneManager *pSceneMgr = mc->GetSceneManager();
+    CScene *pScene = pSceneMgr->LoadScene("Test.scene");
+    CGameObject *go = pScene->AddGameObject<CGameObject>();
+    go->AddComponent<CCamera>();
     printf("Finished loading scene. \n\n");
 
     printf("Start Application ... \n");

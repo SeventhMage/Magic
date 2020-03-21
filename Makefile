@@ -5,9 +5,8 @@ include config.mk
 CPPFLAGS := -Wall -g -std=c++11 -shared
 INCLUDES := -Iinclude -Icommon
 LIBS := -lm
-TARGET := libmagic.dylib
 
-SRCDIRS := source srouce/render component component/render/gles
+SRCDIRS := source source/render source/scene source/component component component/render/gles
 SRCOBJS := $(foreach dir, $(SRCDIRS), $(patsubst %.cpp, %.o, $(wildcard $(dir)/*.cpp))) 
 OBJS := $(SRCOBJS)
 all: $(TARGET)

@@ -6,7 +6,7 @@ include ../config.mk
 export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH 
 
 CPPFLAGS := -Wall -g -std=c++11 
-INCLUDES := -Iinclude
+INCLUDES := -I../include -I../common
 LDFLAGS := -L../
 LIBS    := -lm -lmagic
 TARGET := main

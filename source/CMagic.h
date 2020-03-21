@@ -14,7 +14,7 @@ public:
     virtual void SetFPS(int fps);
     virtual int GetFPS() const {return m_iFPS;}
 
-    virtual ISceneManager *GetSceneManager() const { return m_pSceneManager; }
+    virtual CSceneManager *GetSceneManager() const { return m_pSceneManager; }
     virtual IRenderer *GetRenderer() const { return m_pRenderer; }
 private:
     friend class CSingleton<CMagic>;
@@ -24,7 +24,7 @@ private:
     int m_iFPS;
     int m_iFixDelta;
 
-    ISceneManager *m_pSceneManager;
+    CSceneManager *m_pSceneManager;
     IRenderer *m_pRenderer;
 };
 }
