@@ -3,9 +3,9 @@ include config.mk
 .PHONY: all clean
 
 CPPFLAGS := -Wall -g -std=c++11 -shared
-INCLUDES := -Iinclude
+INCLUDES := -Iinclude -Icommon
 LIBS := -lm
-TARGET := libmagic.dll
+TARGET := libmagic.dylib
 
 SRCDIRS := source srouce/render component component/render/gles
 SRCOBJS := $(foreach dir, $(SRCDIRS), $(patsubst %.cpp, %.o, $(wildcard $(dir)/*.cpp))) 

@@ -17,6 +17,7 @@ ifeq ($(findstring MINGW, $(OS)), MINGW)
 	LD	:= $(CROSS)ld
 	AR	:= $(CROSS)ar
 	ASM	:=	yasm -DPIC
+	TARGET := libmagic.dll
 endif
 
 #########################################
@@ -28,7 +29,7 @@ ifeq ($(findstring Linux, $(OS)), Linux)
 	LD	:= $(CROSS)ld
 	AR	:= $(CROSS)ar
 	ASM	:=	yasm -DPIC
-	
+	TARGET := libmagic.so
 ###ARM32架构	
 ifeq ($(platform), arm32)
 	ARCH_DEF	:=
@@ -79,6 +80,7 @@ ifeq ($(target_plat), mac)
 	CPP	:= $(CROSS)g++ -fPIC -DPIC
 	AR	:= $(CROSS)ar
 	ASM	:=	yasm -DPIC
+	TARGET := libmagic.dylib
 	
 ##X86_32架构
 ifeq ($(platform), x86_32)
@@ -108,6 +110,7 @@ ifeq ($(platform), ios32)
 	CPP	:= g++
 	AR	:= ar
 	ASM	:= gas-preprocessor.pl -arch arm -as-type apple-clang --$(CC)
+	TARGET := libmagic.dylib
 	
 	ARCH_DEF	:=
 	EXTRA_CFLAGS := -arch armv7 -mios-version-min=6.0

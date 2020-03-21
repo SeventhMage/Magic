@@ -1,8 +1,8 @@
 #ifndef _MAGIC_CMAGIC_H_
 #define _MAGIC_CMAGIC_H_
 
-#include "../include/IMagic.h"
-#include "../common/base/CSingleton.h"
+#include "IMagic.h"
+#include "base/CSingleton.h"
 #include "CApplication.h"
 namespace magic
 {

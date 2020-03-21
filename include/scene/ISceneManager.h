@@ -2,7 +2,7 @@
 #define _MAGIC_SCENE_ISCENEMANAGER_H_
 
 #include "IScene.h"
-#include "../render/IRenderer.h"
+#include "render/IRenderer.h"
 namespace magic
 {
 class ISceneManager

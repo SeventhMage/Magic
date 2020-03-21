@@ -7,6 +7,8 @@ class IComponent
 {
 public:
     virtual ~IComponent(){}
+    virtual int GetID() const = 0;
+    virtual void Update() = 0;
 };
 }
 

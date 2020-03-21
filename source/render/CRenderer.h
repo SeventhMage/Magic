@@ -1,7 +1,7 @@
 #ifndef _MAGIC_RENDER_CRENDERER_H_
 #define _MAGIC_RENDER_CRENDERER_H_
 
-#include "../../include/render/IRenderer.h"
+#include "render/IRenderer.h"
 
 namespace magic
 {

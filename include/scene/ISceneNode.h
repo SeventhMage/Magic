@@ -6,8 +6,9 @@ namespace magic
 class ISceneNode
 {
 public:
-    virtual ~ISceneNode(){}
+    virtual ~ISceneNode() {}
+    virtual void Update() = 0;
 };
-}
+} // namespace magic
 
 #endif

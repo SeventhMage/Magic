@@ -1,4 +1,4 @@
-#include "../include/magic.h"
+#include "magic.h"
 #include "CMagic.h"
 
 namespace magic

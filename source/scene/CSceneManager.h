@@ -1,7 +1,7 @@
 #ifndef _MAGIC_C_SCENE_MANAGER_H_
 #define _MAGIC_C_SCENE_MANAGER_H_
 
-#include "../../include/scene/ISceneManager.h"
+#include "scene/ISceneManager.h"
 
 namespace magic
 {

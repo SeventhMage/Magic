@@ -2,7 +2,7 @@
 #define _MAGIC_CAPPLICATION_H_
 
 #include "CWindow.h"
-#include "../include/IApplication.h"
+#include "IApplication.h"
 
 namespace magic
 {
