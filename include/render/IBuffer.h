@@ -13,8 +13,6 @@ public:
     };
     virtual ~IBuffer(){}
 
-    virtual void UploadDataToGPU() = 0;
-    virtual void BindBufferObject() = 0;
 };
 }
 

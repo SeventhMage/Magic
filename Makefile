@@ -6,7 +6,7 @@ CPPFLAGS := -Wall -g -std=c++11 -shared
 INCLUDES := -Iinclude -Icommon
 LIBS := -lm
 
-SRCDIRS := source source/render source/scene source/component component component/render/gles
+SRCDIRS := source source/render source/scene source/component
 SRCOBJS := $(foreach dir, $(SRCDIRS), $(patsubst %.cpp, %.o, $(wildcard $(dir)/*.cpp))) 
 OBJS := $(SRCOBJS)
 all: $(TARGET)

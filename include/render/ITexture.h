@@ -8,7 +8,6 @@ class ITexture
 public:
     virtual ~ITexture(){}
 
-    virtual void BindTexture() = 0;
 };
 } 
 
