@@ -13,7 +13,7 @@ endif
 ifeq ($(findstring MINGW, $(OS)), MINGW)
 	CROSS ?= 
 	CC	:= $(CROSS)gcc -fPIC -DPIC
-	CPP	:= $(CROSS)c++ -fPIC -DPIC -isystem c:/mingw/lib/gcc/mingw32/6.3.0/include/c++
+	CPP	:= $(CROSS)g++ -fPIC -DPIC -isystem c:/mingw/lib/gcc/mingw32/6.3.0/include/c++
 	LD	:= $(CROSS)ld
 	AR	:= $(CROSS)ar
 	ASM	:=	yasm -DPIC
@@ -159,5 +159,15 @@ ifeq ($(platform), ios_sim64)
 endif 
 
 endif ##ifeq ($(target_plat), ios)
+
+define CRT_DIR
+	if [ ! -d $(1) ];\
+	 	then\
+    	mkdir -p $(1);\
+    	echo "******$(1) created success!!!******";\
+    else\
+      echo "******$(1) has been created!!!******";\
+	fi	
+endef
 
 endif

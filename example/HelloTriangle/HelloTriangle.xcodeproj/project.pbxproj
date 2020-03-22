@@ -1,0 +1,611 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		74C2302224274D930041B1AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C2302124274D930041B1AC /* AppDelegate.m */; };
+		74C2302524274D930041B1AC /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C2302424274D930041B1AC /* SceneDelegate.m */; };
+		74C2302824274D930041B1AC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C2302724274D930041B1AC /* ViewController.m */; };
+		74C2302B24274D930041B1AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74C2302924274D930041B1AC /* Main.storyboard */; };
+		74C2302E24274D930041B1AC /* HelloTriangle.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 74C2302C24274D930041B1AC /* HelloTriangle.xcdatamodeld */; };
+		74C2303024274D950041B1AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74C2302F24274D950041B1AC /* Assets.xcassets */; };
+		74C2303324274D950041B1AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74C2303124274D950041B1AC /* LaunchScreen.storyboard */; };
+		74C2303624274D950041B1AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C2303524274D950041B1AC /* main.m */; };
+		74C2304024274D950041B1AC /* HelloTriangleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C2303F24274D950041B1AC /* HelloTriangleTests.m */; };
+		74C2304B24274D950041B1AC /* HelloTriangleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C2304A24274D950041B1AC /* HelloTriangleUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		74C2303C24274D950041B1AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74C2301524274D930041B1AC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 74C2301C24274D930041B1AC;
+			remoteInfo = HelloTriangle;
+		};
+		74C2304724274D950041B1AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74C2301524274D930041B1AC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 74C2301C24274D930041B1AC;
+			remoteInfo = HelloTriangle;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		74C2301D24274D930041B1AC /* HelloTriangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTriangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		74C2302024274D930041B1AC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		74C2302124274D930041B1AC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		74C2302324274D930041B1AC /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		74C2302424274D930041B1AC /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		74C2302624274D930041B1AC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		74C2302724274D930041B1AC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		74C2302A24274D930041B1AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		74C2302D24274D930041B1AC /* HelloTriangle.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HelloTriangle.xcdatamodel; sourceTree = "<group>"; };
+		74C2302F24274D950041B1AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		74C2303224274D950041B1AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		74C2303424274D950041B1AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		74C2303524274D950041B1AC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		74C2303B24274D950041B1AC /* HelloTriangleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HelloTriangleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		74C2303F24274D950041B1AC /* HelloTriangleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloTriangleTests.m; sourceTree = "<group>"; };
+		74C2304124274D950041B1AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		74C2304624274D950041B1AC /* HelloTriangleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HelloTriangleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		74C2304A24274D950041B1AC /* HelloTriangleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloTriangleUITests.m; sourceTree = "<group>"; };
+		74C2304C24274D950041B1AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		74C2301A24274D930041B1AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74C2303824274D950041B1AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74C2304324274D950041B1AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		74C2301424274D930041B1AC = {
+			isa = PBXGroup;
+			children = (
+				74C2301F24274D930041B1AC /* HelloTriangle */,
+				74C2303E24274D950041B1AC /* HelloTriangleTests */,
+				74C2304924274D950041B1AC /* HelloTriangleUITests */,
+				74C2301E24274D930041B1AC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		74C2301E24274D930041B1AC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				74C2301D24274D930041B1AC /* HelloTriangle.app */,
+				74C2303B24274D950041B1AC /* HelloTriangleTests.xctest */,
+				74C2304624274D950041B1AC /* HelloTriangleUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		74C2301F24274D930041B1AC /* HelloTriangle */ = {
+			isa = PBXGroup;
+			children = (
+				74C2302024274D930041B1AC /* AppDelegate.h */,
+				74C2302124274D930041B1AC /* AppDelegate.m */,
+				74C2302324274D930041B1AC /* SceneDelegate.h */,
+				74C2302424274D930041B1AC /* SceneDelegate.m */,
+				74C2302624274D930041B1AC /* ViewController.h */,
+				74C2302724274D930041B1AC /* ViewController.m */,
+				74C2302924274D930041B1AC /* Main.storyboard */,
+				74C2302F24274D950041B1AC /* Assets.xcassets */,
+				74C2303124274D950041B1AC /* LaunchScreen.storyboard */,
+				74C2303424274D950041B1AC /* Info.plist */,
+				74C2303524274D950041B1AC /* main.m */,
+				74C2302C24274D930041B1AC /* HelloTriangle.xcdatamodeld */,
+			);
+			path = HelloTriangle;
+			sourceTree = "<group>";
+		};
+		74C2303E24274D950041B1AC /* HelloTriangleTests */ = {
+			isa = PBXGroup;
+			children = (
+				74C2303F24274D950041B1AC /* HelloTriangleTests.m */,
+				74C2304124274D950041B1AC /* Info.plist */,
+			);
+			path = HelloTriangleTests;
+			sourceTree = "<group>";
+		};
+		74C2304924274D950041B1AC /* HelloTriangleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				74C2304A24274D950041B1AC /* HelloTriangleUITests.m */,
+				74C2304C24274D950041B1AC /* Info.plist */,
+			);
+			path = HelloTriangleUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		74C2301C24274D930041B1AC /* HelloTriangle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74C2304F24274D950041B1AC /* Build configuration list for PBXNativeTarget "HelloTriangle" */;
+			buildPhases = (
+				74C2301924274D930041B1AC /* Sources */,
+				74C2301A24274D930041B1AC /* Frameworks */,
+				74C2301B24274D930041B1AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HelloTriangle;
+			productName = HelloTriangle;
+			productReference = 74C2301D24274D930041B1AC /* HelloTriangle.app */;
+			productType = "com.apple.product-type.application";
+		};
+		74C2303A24274D950041B1AC /* HelloTriangleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74C2305224274D950041B1AC /* Build configuration list for PBXNativeTarget "HelloTriangleTests" */;
+			buildPhases = (
+				74C2303724274D950041B1AC /* Sources */,
+				74C2303824274D950041B1AC /* Frameworks */,
+				74C2303924274D950041B1AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				74C2303D24274D950041B1AC /* PBXTargetDependency */,
+			);
+			name = HelloTriangleTests;
+			productName = HelloTriangleTests;
+			productReference = 74C2303B24274D950041B1AC /* HelloTriangleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		74C2304524274D950041B1AC /* HelloTriangleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74C2305524274D950041B1AC /* Build configuration list for PBXNativeTarget "HelloTriangleUITests" */;
+			buildPhases = (
+				74C2304224274D950041B1AC /* Sources */,
+				74C2304324274D950041B1AC /* Frameworks */,
+				74C2304424274D950041B1AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				74C2304824274D950041B1AC /* PBXTargetDependency */,
+			);
+			name = HelloTriangleUITests;
+			productName = HelloTriangleUITests;
+			productReference = 74C2304624274D950041B1AC /* HelloTriangleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		74C2301524274D930041B1AC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = xyj;
+				TargetAttributes = {
+					74C2301C24274D930041B1AC = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					74C2303A24274D950041B1AC = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 74C2301C24274D930041B1AC;
+					};
+					74C2304524274D950041B1AC = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 74C2301C24274D930041B1AC;
+					};
+				};
+			};
+			buildConfigurationList = 74C2301824274D930041B1AC /* Build configuration list for PBXProject "HelloTriangle" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 74C2301424274D930041B1AC;
+			productRefGroup = 74C2301E24274D930041B1AC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				74C2301C24274D930041B1AC /* HelloTriangle */,
+				74C2303A24274D950041B1AC /* HelloTriangleTests */,
+				74C2304524274D950041B1AC /* HelloTriangleUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		74C2301B24274D930041B1AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74C2303324274D950041B1AC /* LaunchScreen.storyboard in Resources */,
+				74C2303024274D950041B1AC /* Assets.xcassets in Resources */,
+				74C2302B24274D930041B1AC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74C2303924274D950041B1AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74C2304424274D950041B1AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		74C2301924274D930041B1AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74C2303624274D950041B1AC /* main.m in Sources */,
+				74C2302E24274D930041B1AC /* HelloTriangle.xcdatamodeld in Sources */,
+				74C2302824274D930041B1AC /* ViewController.m in Sources */,
+				74C2302224274D930041B1AC /* AppDelegate.m in Sources */,
+				74C2302524274D930041B1AC /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74C2303724274D950041B1AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74C2304024274D950041B1AC /* HelloTriangleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74C2304224274D950041B1AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74C2304B24274D950041B1AC /* HelloTriangleUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		74C2303D24274D950041B1AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 74C2301C24274D930041B1AC /* HelloTriangle */;
+			targetProxy = 74C2303C24274D950041B1AC /* PBXContainerItemProxy */;
+		};
+		74C2304824274D950041B1AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 74C2301C24274D930041B1AC /* HelloTriangle */;
+			targetProxy = 74C2304724274D950041B1AC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		74C2302924274D930041B1AC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				74C2302A24274D930041B1AC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		74C2303124274D950041B1AC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				74C2303224274D950041B1AC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		74C2304D24274D950041B1AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		74C2304E24274D950041B1AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		74C2305024274D950041B1AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 58DXM3G7FU;
+				INFOPLIST_FILE = HelloTriangle/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = xuyajie.HelloTriangle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		74C2305124274D950041B1AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 58DXM3G7FU;
+				INFOPLIST_FILE = HelloTriangle/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = xuyajie.HelloTriangle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		74C2305324274D950041B1AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 58DXM3G7FU;
+				INFOPLIST_FILE = HelloTriangleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = xuyajie.HelloTriangleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HelloTriangle.app/HelloTriangle";
+			};
+			name = Debug;
+		};
+		74C2305424274D950041B1AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 58DXM3G7FU;
+				INFOPLIST_FILE = HelloTriangleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = xuyajie.HelloTriangleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HelloTriangle.app/HelloTriangle";
+			};
+			name = Release;
+		};
+		74C2305624274D950041B1AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 58DXM3G7FU;
+				INFOPLIST_FILE = HelloTriangleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = xuyajie.HelloTriangleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = HelloTriangle;
+			};
+			name = Debug;
+		};
+		74C2305724274D950041B1AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 58DXM3G7FU;
+				INFOPLIST_FILE = HelloTriangleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = xuyajie.HelloTriangleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = HelloTriangle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		74C2301824274D930041B1AC /* Build configuration list for PBXProject "HelloTriangle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74C2304D24274D950041B1AC /* Debug */,
+				74C2304E24274D950041B1AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		74C2304F24274D950041B1AC /* Build configuration list for PBXNativeTarget "HelloTriangle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74C2305024274D950041B1AC /* Debug */,
+				74C2305124274D950041B1AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		74C2305224274D950041B1AC /* Build configuration list for PBXNativeTarget "HelloTriangleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74C2305324274D950041B1AC /* Debug */,
+				74C2305424274D950041B1AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		74C2305524274D950041B1AC /* Build configuration list for PBXNativeTarget "HelloTriangleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74C2305624274D950041B1AC /* Debug */,
+				74C2305724274D950041B1AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		74C2302C24274D930041B1AC /* HelloTriangle.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				74C2302D24274D930041B1AC /* HelloTriangle.xcdatamodel */,
+			);
+			currentVersion = 74C2302D24274D930041B1AC /* HelloTriangle.xcdatamodel */;
+			path = HelloTriangle.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 74C2301524274D930041B1AC /* Project object */;
+}

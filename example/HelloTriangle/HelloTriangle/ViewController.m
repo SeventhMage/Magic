@@ -1,0 +1,23 @@
+//
+//  ViewController.m
+//  HelloTriangle
+//
+//  Created by xuyajie on 2020/3/22.
+//  Copyright © 2020 xyj. All rights reserved.
+//
+
+#import "ViewController.h"
+
+@interface ViewController ()
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+
+
+@end
