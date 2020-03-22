@@ -12,7 +12,7 @@ LIBS := -lm
 
 OBJDIR := build/obj/magic
 BINDIR := build/bin
-SRCDIRS := source source/render source/scene source/component component component/render/gles
+SRCDIRS := source source/render source/scene source/component
 vpath %.cpp $(SRCDIRS)
 SRC_CPP = $(foreach dir, $(SRCDIRS), $(wildcard $(dir)/*.cpp))
 OBJ_CPP = $(addprefix $(OBJDIR)/,$(patsubst %.cpp, %.o,$(notdir $(SRC_CPP))))
