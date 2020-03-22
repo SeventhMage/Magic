@@ -26,22 +26,10 @@ void CSceneManager::UnloadScene(CScene *scene)
         delete scene;
 }
 
-void CSceneManager::Update(int delta)
+void CSceneManager::Update()
 {
     if (m_pScene)
-        m_pScene->Update(delta);
-}
-
-void CSceneManager::FixedUpdate(int delta)
-{
-    if (m_pScene)
-        m_pScene->FixedUpdate(delta);
-}
-
-void CSceneManager::Render()
-{
-    if (m_pScene)
-        m_pScene->Render();
+        m_pScene->Update();
 }
 
 }

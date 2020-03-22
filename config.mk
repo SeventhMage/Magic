@@ -105,12 +105,12 @@ endif
 ###IOS平台
 ifeq ($(target_plat), ios)
 	CROSS := iphone
+	TARGET := libmagic.dylib
 ifeq ($(platform), ios32)
 	CC	:= xcrun -sdk $(CROSS)os clang
 	CPP	:= g++
 	AR	:= ar
 	ASM	:= gas-preprocessor.pl -arch arm -as-type apple-clang --$(CC)
-	TARGET := libmagic.dylib
 	
 	ARCH_DEF	:=
 	EXTRA_CFLAGS := -arch armv7 -mios-version-min=6.0

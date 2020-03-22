@@ -12,14 +12,7 @@ public:
     ~CSceneManager();
     CScene *LoadScene(const char *fileName);
     void UnloadScene(CScene *);
-    void Update(int delta);
-    void FixedUpdate(int delta);
-    /**
-     *Submit scene data to IRenderer.
-     *Different material submit to different IRenderQueue. 
-     **/
-    void Render();
-
+    void Update();
 private:
     CScene *m_pScene;
 };

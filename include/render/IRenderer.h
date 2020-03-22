@@ -18,7 +18,7 @@ public:
     virtual void SubmitToRenderQueue(IRenderInput *pInput, int materialId) = 0;
     virtual void Render(IRenderInput *pRenderInput, IRenderTarget *pRenderTarget) = 0;
     virtual void Render() = 0;
-
+    virtual IRenderTarget *CreateRenderTarget(int width, int height, int format) = 0;
 };
 } // namespace magic
 

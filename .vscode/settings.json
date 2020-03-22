@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "__hash_table": "cpp",
+        "__tree": "cpp",
+        "map": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "new": "cpp",
+        "algorithm": "cpp"
+    }
+}

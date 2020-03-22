@@ -28,4 +28,5 @@ void CGameObject::Update()
             comIt.second->Update();
     }
 }
+
 } // namespace magic

@@ -30,10 +30,7 @@ public:
             m_GameObjectMap.erase(id);
         }
     }
-
-    void Update(int delta);
-    void FixedUpdate(int delta);
-    void Render();
+    void Update();
 private:
     std::map<OID, CGameObject *> m_GameObjectMap;
 };

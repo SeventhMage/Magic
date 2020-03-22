@@ -29,15 +29,15 @@ void CMagic::StartApplication()
         long passTime = m_pApplication->GetSystemTime() - lastTime;
         if (passTime >= m_iFixDelta)
         {
-            m_pSceneManager->Update(passTime);
+            m_pSceneManager->Update();
             compensationTime += passTime;
             do
             {
-                m_pSceneManager->FixedUpdate(m_iFixDelta);
+                //m_pSceneManager->FixedUpdate(m_iFixDelta);
                 compensationTime -= m_iFixDelta;
             }while(compensationTime > m_iFixDelta);
 
-            m_pSceneManager->Render();
+            //m_pSceneManager->Render();
             lastTime = m_pApplication->GetSystemTime();
         }
     }

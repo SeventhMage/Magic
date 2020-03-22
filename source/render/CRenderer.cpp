@@ -4,13 +4,15 @@ namespace magic
 {
 CRenderer::CRenderer()
 {
+    //Init Renderer
+    //Set clear color
 }
 
 void CRenderer::Render(IRenderInput *pRenderInput, IRenderTarget *pRenderTarget)
 {
-    const SShaderParam &shaderParam = pRenderInput->GetShaderParam();
-    ITexture *pTexture = pRenderInput->GetTexture();
-    IBuffer *pBuffer = pRenderInput->GetBuffer();
+    //const SShaderParam &shaderParam = pRenderInput->GetShaderParam();
+    //ITexture *pTexture = pRenderInput->GetTexture();
+    //IBuffer *pBuffer = pRenderInput->GetBuffer();
 
     //call platform api to real draw
 }
@@ -18,6 +20,10 @@ void CRenderer::Render(IRenderInput *pRenderInput, IRenderTarget *pRenderTarget)
 void CRenderer::CreateRenderPass(const CMatrix4 &viewProjMatrix)
 {
     
+}
+IRenderTarget *CRenderer::CreateRenderTarget(int width, int height, int format)
+{
+    return nullptr;
 }
 
 void CRenderer::Render()

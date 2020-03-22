@@ -1,18 +1,18 @@
 #target_plat := ios
-#platform := ios32
+#platform := ios_sim64
 target_plat := mac
 platform := x86_64
 include config.mk
 .SUFFIXES:
 .PHONY: all clean
 
-CPPFLAGS := -Wall -g -std=c++11 -shared -Qunused-arguments
+CPPFLAGS := -Wall -g -std=c++11 -Qunused-arguments -stdlib=libc++
 INCLUDES := -Iinclude -Icommon
 LIBS := -lm
 
 OBJDIR := build/obj/magic
 BINDIR := build/bin
-SRCDIRS := source source/render source/scene source/component
+SRCDIRS := . source source/render source/scene source/component common
 vpath %.cpp $(SRCDIRS)
 SRC_CPP = $(foreach dir, $(SRCDIRS), $(wildcard $(dir)/*.cpp))
 OBJ_CPP = $(addprefix $(OBJDIR)/,$(patsubst %.cpp, %.o,$(notdir $(SRC_CPP))))
@@ -26,10 +26,10 @@ dir_create:
 	@$(call CRT_DIR,$(BINDIR))
 
 $(TARGET) : $(OBJS)
-	$(CPP) $(CPPFLAGS) $(INCLUDES) $(LIBS) $^ -o $@
+	$(CPP) $(CPPFLAGS) $(EXTRA_LFLAGS) $(INCLUDES) $(LIBS) $^ -o $@
 	mv $(TARGET) $(BINDIR)
 $(OBJDIR)/%.o : %.cpp
-	$(CPP) $(CPPFLAGS) $(INCLUDES) $< -c -o $@
+	$(CPP) $(CPPFLAGS) $(EXTRA_LFLAGS) $(INCLUDES) $< -c -o $@
 
 clean:
 	-@rm -f $(BINDIR)/$(TARGET)

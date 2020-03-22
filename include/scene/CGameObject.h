@@ -47,7 +47,6 @@ public:
     ISceneNode *GetSceneNode() { return m_pSceneNode; }
 
     void Update();
-
 private:
     std::map<int, CComponent *> m_ComponetMap;
     ISceneNode *m_pSceneNode;

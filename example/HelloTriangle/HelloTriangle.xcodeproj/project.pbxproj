@@ -7,149 +7,392 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		74C2302224274D930041B1AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C2302124274D930041B1AC /* AppDelegate.m */; };
-		74C2302524274D930041B1AC /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C2302424274D930041B1AC /* SceneDelegate.m */; };
-		74C2302824274D930041B1AC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C2302724274D930041B1AC /* ViewController.m */; };
-		74C2302B24274D930041B1AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74C2302924274D930041B1AC /* Main.storyboard */; };
-		74C2302E24274D930041B1AC /* HelloTriangle.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 74C2302C24274D930041B1AC /* HelloTriangle.xcdatamodeld */; };
-		74C2303024274D950041B1AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74C2302F24274D950041B1AC /* Assets.xcassets */; };
-		74C2303324274D950041B1AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74C2303124274D950041B1AC /* LaunchScreen.storyboard */; };
-		74C2303624274D950041B1AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C2303524274D950041B1AC /* main.m */; };
-		74C2304024274D950041B1AC /* HelloTriangleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C2303F24274D950041B1AC /* HelloTriangleTests.m */; };
-		74C2304B24274D950041B1AC /* HelloTriangleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C2304A24274D950041B1AC /* HelloTriangleUITests.m */; };
+		74B22617242781EE008BAB64 /* CMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B22603242781EE008BAB64 /* CMagic.cpp */; };
+		74B22618242781EE008BAB64 /* CObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B22604242781EE008BAB64 /* CObject.cpp */; };
+		74B22619242781EE008BAB64 /* magic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B22605242781EE008BAB64 /* magic.cpp */; };
+		74B2261A242781EE008BAB64 /* CRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B22609242781EE008BAB64 /* CRenderer.cpp */; };
+		74B2261B242781EE008BAB64 /* CCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B2260B242781EE008BAB64 /* CCamera.cpp */; };
+		74B2261C242781EE008BAB64 /* CComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B2260C242781EE008BAB64 /* CComponent.cpp */; };
+		74B2261D242781EE008BAB64 /* CApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B2260D242781EE008BAB64 /* CApplication.cpp */; };
+		74B2261E242781EE008BAB64 /* CScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B2260F242781EE008BAB64 /* CScene.cpp */; };
+		74B2261F242781EE008BAB64 /* CSceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B22611242781EE008BAB64 /* CSceneManager.cpp */; };
+		74B22620242781EE008BAB64 /* CSceneNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B22612242781EE008BAB64 /* CSceneNode.cpp */; };
+		74B22621242781EE008BAB64 /* CGameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B22613242781EE008BAB64 /* CGameObject.cpp */; };
+		74C230FE242760260041B1AC /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74C230FD242760260041B1AC /* AppDelegate.mm */; };
+		74C23104242760260041B1AC /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74C23103242760260041B1AC /* ViewController.mm */; };
+		74C23107242760260041B1AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74C23105242760260041B1AC /* Main.storyboard */; };
+		74C2310A242760260041B1AC /* HelloTriangle.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 74C23108242760260041B1AC /* HelloTriangle.xcdatamodeld */; };
+		74C2310C2427602A0041B1AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74C2310B2427602A0041B1AC /* Assets.xcassets */; };
+		74C2310F2427602A0041B1AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74C2310D2427602A0041B1AC /* LaunchScreen.storyboard */; };
+		74C231122427602A0041B1AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C231112427602A0041B1AC /* main.m */; };
+		74C2311A242760CF0041B1AC /* SceneDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74C23118242760CF0041B1AC /* SceneDelegate.mm */; };
+		74C231212427612B0041B1AC /* esTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74C2311D2427612B0041B1AC /* esTransform.cpp */; };
+		74C231222427612B0041B1AC /* esShapes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74C2311E2427612B0041B1AC /* esShapes.cpp */; };
+		74C231232427612B0041B1AC /* esShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74C2311F2427612B0041B1AC /* esShader.cpp */; };
+		74C231242427612B0041B1AC /* esUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74C231202427612B0041B1AC /* esUtil.cpp */; };
+		74C23127242762250041B1AC /* FileWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74C23126242762250041B1AC /* FileWrapper.mm */; };
+		74C231292427627C0041B1AC /* Hello_Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74C231282427627C0041B1AC /* Hello_Triangle.cpp */; };
+		74C2318E242772F10041B1AC /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74C2318D242772F10041B1AC /* GLKit.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		74C2303C24274D950041B1AC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 74C2301524274D930041B1AC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 74C2301C24274D930041B1AC;
-			remoteInfo = HelloTriangle;
-		};
-		74C2304724274D950041B1AC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 74C2301524274D930041B1AC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 74C2301C24274D930041B1AC;
-			remoteInfo = HelloTriangle;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		74C2301D24274D930041B1AC /* HelloTriangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTriangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		74C2302024274D930041B1AC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		74C2302124274D930041B1AC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		74C2302324274D930041B1AC /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		74C2302424274D930041B1AC /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		74C2302624274D930041B1AC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		74C2302724274D930041B1AC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		74C2302A24274D930041B1AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		74C2302D24274D930041B1AC /* HelloTriangle.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HelloTriangle.xcdatamodel; sourceTree = "<group>"; };
-		74C2302F24274D950041B1AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		74C2303224274D950041B1AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		74C2303424274D950041B1AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		74C2303524274D950041B1AC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		74C2303B24274D950041B1AC /* HelloTriangleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HelloTriangleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		74C2303F24274D950041B1AC /* HelloTriangleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloTriangleTests.m; sourceTree = "<group>"; };
-		74C2304124274D950041B1AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		74C2304624274D950041B1AC /* HelloTriangleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HelloTriangleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		74C2304A24274D950041B1AC /* HelloTriangleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloTriangleUITests.m; sourceTree = "<group>"; };
-		74C2304C24274D950041B1AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		74B22603242781EE008BAB64 /* CMagic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMagic.cpp; sourceTree = "<group>"; };
+		74B22604242781EE008BAB64 /* CObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CObject.cpp; sourceTree = "<group>"; };
+		74B22605242781EE008BAB64 /* magic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = magic.cpp; sourceTree = "<group>"; };
+		74B22606242781EE008BAB64 /* CApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CApplication.h; sourceTree = "<group>"; };
+		74B22608242781EE008BAB64 /* CRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRenderer.h; sourceTree = "<group>"; };
+		74B22609242781EE008BAB64 /* CRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CRenderer.cpp; sourceTree = "<group>"; };
+		74B2260B242781EE008BAB64 /* CCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCamera.cpp; sourceTree = "<group>"; };
+		74B2260C242781EE008BAB64 /* CComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CComponent.cpp; sourceTree = "<group>"; };
+		74B2260D242781EE008BAB64 /* CApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CApplication.cpp; sourceTree = "<group>"; };
+		74B2260F242781EE008BAB64 /* CScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CScene.cpp; sourceTree = "<group>"; };
+		74B22610242781EE008BAB64 /* CSceneNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSceneNode.h; sourceTree = "<group>"; };
+		74B22611242781EE008BAB64 /* CSceneManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CSceneManager.cpp; sourceTree = "<group>"; };
+		74B22612242781EE008BAB64 /* CSceneNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CSceneNode.cpp; sourceTree = "<group>"; };
+		74B22613242781EE008BAB64 /* CGameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CGameObject.cpp; sourceTree = "<group>"; };
+		74B22615242781EE008BAB64 /* CMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMagic.h; sourceTree = "<group>"; };
+		74B22616242781EE008BAB64 /* CWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWindow.h; sourceTree = "<group>"; };
+		74C230F9242760260041B1AC /* HelloTriangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTriangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		74C230FC242760260041B1AC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		74C230FD242760260041B1AC /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		74C23102242760260041B1AC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		74C23103242760260041B1AC /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		74C23106242760260041B1AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		74C23109242760260041B1AC /* HelloTriangle.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HelloTriangle.xcdatamodel; sourceTree = "<group>"; };
+		74C2310B2427602A0041B1AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		74C2310E2427602A0041B1AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		74C231102427602A0041B1AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		74C231112427602A0041B1AC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		74C23118242760CF0041B1AC /* SceneDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SceneDelegate.mm; sourceTree = "<group>"; };
+		74C23119242760CF0041B1AC /* SceneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		74C2311B2427611C0041B1AC /* esUtil_win.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = esUtil_win.h; path = ../../../dependency/gles/Common/Include/esUtil_win.h; sourceTree = "<group>"; };
+		74C2311C2427611C0041B1AC /* esUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = esUtil.h; path = ../../../dependency/gles/Common/Include/esUtil.h; sourceTree = "<group>"; };
+		74C2311D2427612B0041B1AC /* esTransform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = esTransform.cpp; path = ../../../dependency/gles/Common/Source/esTransform.cpp; sourceTree = "<group>"; };
+		74C2311E2427612B0041B1AC /* esShapes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = esShapes.cpp; path = ../../../dependency/gles/Common/Source/esShapes.cpp; sourceTree = "<group>"; };
+		74C2311F2427612B0041B1AC /* esShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = esShader.cpp; path = ../../../dependency/gles/Common/Source/esShader.cpp; sourceTree = "<group>"; };
+		74C231202427612B0041B1AC /* esUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = esUtil.cpp; path = ../../../dependency/gles/Common/Source/esUtil.cpp; sourceTree = "<group>"; };
+		74C23125242762250041B1AC /* FileWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileWrapper.h; path = ../../../dependency/gles/Common/Source/iOS/FileWrapper.h; sourceTree = "<group>"; };
+		74C23126242762250041B1AC /* FileWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FileWrapper.mm; path = ../../../dependency/gles/Common/Source/iOS/FileWrapper.mm; sourceTree = "<group>"; };
+		74C231282427627C0041B1AC /* Hello_Triangle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hello_Triangle.cpp; sourceTree = "<group>"; };
+		74C2315A24276D5D0041B1AC /* CVector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVector2.h; sourceTree = "<group>"; };
+		74C2315B24276D5D0041B1AC /* CBoundingBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBoundingBox.h; sourceTree = "<group>"; };
+		74C2315C24276D5D0041B1AC /* CFrustum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFrustum.h; sourceTree = "<group>"; };
+		74C2315D24276D5D0041B1AC /* CRay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRay.h; sourceTree = "<group>"; };
+		74C2315E24276D5D0041B1AC /* CMatrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMatrix4.h; sourceTree = "<group>"; };
+		74C2315F24276D5D0041B1AC /* CPlane3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPlane3.h; sourceTree = "<group>"; };
+		74C2316024276D5D0041B1AC /* CVector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVector3.h; sourceTree = "<group>"; };
+		74C2316124276D5D0041B1AC /* CQuaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQuaternion.h; sourceTree = "<group>"; };
+		74C2316424276D5D0041B1AC /* magicDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = magicDef.h; sourceTree = "<group>"; };
+		74C2316524276D5D0041B1AC /* CSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSingleton.h; sourceTree = "<group>"; };
+		74C2316624276D5D0041B1AC /* magicType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = magicType.h; sourceTree = "<group>"; };
+		74C2316724276D5D0041B1AC /* magicString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = magicString.h; sourceTree = "<group>"; };
+		74C2316824276D5D0041B1AC /* StringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringHelper.h; sourceTree = "<group>"; };
+		74C2316924276D5D0041B1AC /* SColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SColor.h; sourceTree = "<group>"; };
+		74C2316A24276D5D0041B1AC /* base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base.h; sourceTree = "<group>"; };
+		74C2316C24276DD10041B1AC /* magic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = magic.h; sourceTree = "<group>"; };
+		74C2316D24276DD10041B1AC /* IApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IApplication.h; sourceTree = "<group>"; };
+		74C2316E24276DD10041B1AC /* CObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CObject.h; sourceTree = "<group>"; };
+		74C2317024276DD10041B1AC /* IRenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRenderTarget.h; sourceTree = "<group>"; };
+		74C2317124276DD10041B1AC /* IBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBuffer.h; sourceTree = "<group>"; };
+		74C2317224276DD10041B1AC /* IRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRenderer.h; sourceTree = "<group>"; };
+		74C2317324276DD10041B1AC /* IRenderable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRenderable.h; sourceTree = "<group>"; };
+		74C2317424276DD10041B1AC /* SShaderParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SShaderParam.h; sourceTree = "<group>"; };
+		74C2317524276DD10041B1AC /* IRenderPass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRenderPass.h; sourceTree = "<group>"; };
+		74C2317624276DD10041B1AC /* IRenderTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRenderTexture.h; sourceTree = "<group>"; };
+		74C2317724276DD10041B1AC /* ITexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITexture.h; sourceTree = "<group>"; };
+		74C2317824276DD10041B1AC /* IRenderInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRenderInput.h; sourceTree = "<group>"; };
+		74C2317A24276DD10041B1AC /* CMeshRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMeshRenderer.h; sourceTree = "<group>"; };
+		74C2317B24276DD10041B1AC /* CCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCamera.h; sourceTree = "<group>"; };
+		74C2317C24276DD10041B1AC /* CComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CComponent.h; sourceTree = "<group>"; };
+		74C2317D24276DD10041B1AC /* IMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMagic.h; sourceTree = "<group>"; };
+		74C2317F24276DD10041B1AC /* CScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CScene.h; sourceTree = "<group>"; };
+		74C2318024276DD10041B1AC /* CSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSceneManager.h; sourceTree = "<group>"; };
+		74C2318124276DD10041B1AC /* CMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMaterial.h; sourceTree = "<group>"; };
+		74C2318224276DD10041B1AC /* ISceneNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISceneNode.h; sourceTree = "<group>"; };
+		74C2318324276DD10041B1AC /* CGameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGameObject.h; sourceTree = "<group>"; };
+		74C2318424276DD10041B1AC /* CMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMesh.h; sourceTree = "<group>"; };
+		74C2318624276DD10041B1AC /* ITextureResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITextureResource.h; sourceTree = "<group>"; };
+		74C2318724276DD10041B1AC /* ISceneResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISceneResource.h; sourceTree = "<group>"; };
+		74C2318824276DD10041B1AC /* IMeshResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMeshResource.h; sourceTree = "<group>"; };
+		74C2318924276DD10041B1AC /* IResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IResourceManager.h; sourceTree = "<group>"; };
+		74C2318A24276DD10041B1AC /* IResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IResource.h; sourceTree = "<group>"; };
+		74C2318B242772E30041B1AC /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		74C2318D242772F10041B1AC /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		74C2301A24274D930041B1AC /* Frameworks */ = {
+		74C230F6242760260041B1AC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		74C2303824274D950041B1AC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		74C2304324274D950041B1AC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				74C2318E242772F10041B1AC /* GLKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		74C2301424274D930041B1AC = {
+		74B22602242781EE008BAB64 /* source */ = {
 			isa = PBXGroup;
 			children = (
-				74C2301F24274D930041B1AC /* HelloTriangle */,
-				74C2303E24274D950041B1AC /* HelloTriangleTests */,
-				74C2304924274D950041B1AC /* HelloTriangleUITests */,
-				74C2301E24274D930041B1AC /* Products */,
+				74B22603242781EE008BAB64 /* CMagic.cpp */,
+				74B22604242781EE008BAB64 /* CObject.cpp */,
+				74B22605242781EE008BAB64 /* magic.cpp */,
+				74B22606242781EE008BAB64 /* CApplication.h */,
+				74B22607242781EE008BAB64 /* render */,
+				74B2260A242781EE008BAB64 /* component */,
+				74B2260D242781EE008BAB64 /* CApplication.cpp */,
+				74B2260E242781EE008BAB64 /* scene */,
+				74B22614242781EE008BAB64 /* resource */,
+				74B22615242781EE008BAB64 /* CMagic.h */,
+				74B22616242781EE008BAB64 /* CWindow.h */,
+			);
+			name = source;
+			path = ../../../source;
+			sourceTree = "<group>";
+		};
+		74B22607242781EE008BAB64 /* render */ = {
+			isa = PBXGroup;
+			children = (
+				74B22608242781EE008BAB64 /* CRenderer.h */,
+				74B22609242781EE008BAB64 /* CRenderer.cpp */,
+			);
+			path = render;
+			sourceTree = "<group>";
+		};
+		74B2260A242781EE008BAB64 /* component */ = {
+			isa = PBXGroup;
+			children = (
+				74B2260B242781EE008BAB64 /* CCamera.cpp */,
+				74B2260C242781EE008BAB64 /* CComponent.cpp */,
+			);
+			path = component;
+			sourceTree = "<group>";
+		};
+		74B2260E242781EE008BAB64 /* scene */ = {
+			isa = PBXGroup;
+			children = (
+				74B2260F242781EE008BAB64 /* CScene.cpp */,
+				74B22610242781EE008BAB64 /* CSceneNode.h */,
+				74B22611242781EE008BAB64 /* CSceneManager.cpp */,
+				74B22612242781EE008BAB64 /* CSceneNode.cpp */,
+				74B22613242781EE008BAB64 /* CGameObject.cpp */,
+			);
+			path = scene;
+			sourceTree = "<group>";
+		};
+		74B22614242781EE008BAB64 /* resource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = resource;
+			sourceTree = "<group>";
+		};
+		74C230F0242760260041B1AC = {
+			isa = PBXGroup;
+			children = (
+				74C2315524276D410041B1AC /* Magic */,
+				74C230FB242760260041B1AC /* HelloTriangle */,
+				74C230FA242760260041B1AC /* Products */,
+				74C23130242769B50041B1AC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		74C2301E24274D930041B1AC /* Products */ = {
+		74C230FA242760260041B1AC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				74C2301D24274D930041B1AC /* HelloTriangle.app */,
-				74C2303B24274D950041B1AC /* HelloTriangleTests.xctest */,
-				74C2304624274D950041B1AC /* HelloTriangleUITests.xctest */,
+				74C230F9242760260041B1AC /* HelloTriangle.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		74C2301F24274D930041B1AC /* HelloTriangle */ = {
+		74C230FB242760260041B1AC /* HelloTriangle */ = {
 			isa = PBXGroup;
 			children = (
-				74C2302024274D930041B1AC /* AppDelegate.h */,
-				74C2302124274D930041B1AC /* AppDelegate.m */,
-				74C2302324274D930041B1AC /* SceneDelegate.h */,
-				74C2302424274D930041B1AC /* SceneDelegate.m */,
-				74C2302624274D930041B1AC /* ViewController.h */,
-				74C2302724274D930041B1AC /* ViewController.m */,
-				74C2302924274D930041B1AC /* Main.storyboard */,
-				74C2302F24274D950041B1AC /* Assets.xcassets */,
-				74C2303124274D950041B1AC /* LaunchScreen.storyboard */,
-				74C2303424274D950041B1AC /* Info.plist */,
-				74C2303524274D950041B1AC /* main.m */,
-				74C2302C24274D930041B1AC /* HelloTriangle.xcdatamodeld */,
+				74C2311F2427612B0041B1AC /* esShader.cpp */,
+				74C2311E2427612B0041B1AC /* esShapes.cpp */,
+				74C2311D2427612B0041B1AC /* esTransform.cpp */,
+				74C231202427612B0041B1AC /* esUtil.cpp */,
+				74C23125242762250041B1AC /* FileWrapper.h */,
+				74C23126242762250041B1AC /* FileWrapper.mm */,
+				74C2311B2427611C0041B1AC /* esUtil_win.h */,
+				74C2311C2427611C0041B1AC /* esUtil.h */,
+				74C230FC242760260041B1AC /* AppDelegate.h */,
+				74C230FD242760260041B1AC /* AppDelegate.mm */,
+				74C23119242760CF0041B1AC /* SceneDelegate.h */,
+				74C23118242760CF0041B1AC /* SceneDelegate.mm */,
+				74C231282427627C0041B1AC /* Hello_Triangle.cpp */,
+				74C23102242760260041B1AC /* ViewController.h */,
+				74C23103242760260041B1AC /* ViewController.mm */,
+				74C23105242760260041B1AC /* Main.storyboard */,
+				74C2310B2427602A0041B1AC /* Assets.xcassets */,
+				74C2310D2427602A0041B1AC /* LaunchScreen.storyboard */,
+				74C231102427602A0041B1AC /* Info.plist */,
+				74C231112427602A0041B1AC /* main.m */,
+				74C23108242760260041B1AC /* HelloTriangle.xcdatamodeld */,
 			);
 			path = HelloTriangle;
 			sourceTree = "<group>";
 		};
-		74C2303E24274D950041B1AC /* HelloTriangleTests */ = {
+		74C23130242769B50041B1AC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				74C2303F24274D950041B1AC /* HelloTriangleTests.m */,
-				74C2304124274D950041B1AC /* Info.plist */,
+				74C2318D242772F10041B1AC /* GLKit.framework */,
+				74C2318B242772E30041B1AC /* CoreMotion.framework */,
 			);
-			path = HelloTriangleTests;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		74C2304924274D950041B1AC /* HelloTriangleUITests */ = {
+		74C2315524276D410041B1AC /* Magic */ = {
 			isa = PBXGroup;
 			children = (
-				74C2304A24274D950041B1AC /* HelloTriangleUITests.m */,
-				74C2304C24274D950041B1AC /* Info.plist */,
+				74B22602242781EE008BAB64 /* source */,
+				74C2316B24276DD10041B1AC /* include */,
+				74C2315624276D5D0041B1AC /* common */,
 			);
-			path = HelloTriangleUITests;
+			path = Magic;
+			sourceTree = "<group>";
+		};
+		74C2315624276D5D0041B1AC /* common */ = {
+			isa = PBXGroup;
+			children = (
+				74C2315724276D5D0041B1AC /* net */,
+				74C2315824276D5D0041B1AC /* io */,
+				74C2315924276D5D0041B1AC /* math */,
+				74C2316224276D5D0041B1AC /* physics */,
+				74C2316324276D5D0041B1AC /* base */,
+			);
+			name = common;
+			path = ../../../common;
+			sourceTree = "<group>";
+		};
+		74C2315724276D5D0041B1AC /* net */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = net;
+			sourceTree = "<group>";
+		};
+		74C2315824276D5D0041B1AC /* io */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = io;
+			sourceTree = "<group>";
+		};
+		74C2315924276D5D0041B1AC /* math */ = {
+			isa = PBXGroup;
+			children = (
+				74C2315A24276D5D0041B1AC /* CVector2.h */,
+				74C2315B24276D5D0041B1AC /* CBoundingBox.h */,
+				74C2315C24276D5D0041B1AC /* CFrustum.h */,
+				74C2315D24276D5D0041B1AC /* CRay.h */,
+				74C2315E24276D5D0041B1AC /* CMatrix4.h */,
+				74C2315F24276D5D0041B1AC /* CPlane3.h */,
+				74C2316024276D5D0041B1AC /* CVector3.h */,
+				74C2316124276D5D0041B1AC /* CQuaternion.h */,
+			);
+			path = math;
+			sourceTree = "<group>";
+		};
+		74C2316224276D5D0041B1AC /* physics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = physics;
+			sourceTree = "<group>";
+		};
+		74C2316324276D5D0041B1AC /* base */ = {
+			isa = PBXGroup;
+			children = (
+				74C2316424276D5D0041B1AC /* magicDef.h */,
+				74C2316524276D5D0041B1AC /* CSingleton.h */,
+				74C2316624276D5D0041B1AC /* magicType.h */,
+				74C2316724276D5D0041B1AC /* magicString.h */,
+				74C2316824276D5D0041B1AC /* StringHelper.h */,
+				74C2316924276D5D0041B1AC /* SColor.h */,
+				74C2316A24276D5D0041B1AC /* base.h */,
+			);
+			path = base;
+			sourceTree = "<group>";
+		};
+		74C2316B24276DD10041B1AC /* include */ = {
+			isa = PBXGroup;
+			children = (
+				74C2316C24276DD10041B1AC /* magic.h */,
+				74C2316D24276DD10041B1AC /* IApplication.h */,
+				74C2316E24276DD10041B1AC /* CObject.h */,
+				74C2316F24276DD10041B1AC /* render */,
+				74C2317924276DD10041B1AC /* component */,
+				74C2317D24276DD10041B1AC /* IMagic.h */,
+				74C2317E24276DD10041B1AC /* scene */,
+				74C2318524276DD10041B1AC /* resource */,
+			);
+			name = include;
+			path = ../../../include;
+			sourceTree = "<group>";
+		};
+		74C2316F24276DD10041B1AC /* render */ = {
+			isa = PBXGroup;
+			children = (
+				74C2317024276DD10041B1AC /* IRenderTarget.h */,
+				74C2317124276DD10041B1AC /* IBuffer.h */,
+				74C2317224276DD10041B1AC /* IRenderer.h */,
+				74C2317324276DD10041B1AC /* IRenderable.h */,
+				74C2317424276DD10041B1AC /* SShaderParam.h */,
+				74C2317524276DD10041B1AC /* IRenderPass.h */,
+				74C2317624276DD10041B1AC /* IRenderTexture.h */,
+				74C2317724276DD10041B1AC /* ITexture.h */,
+				74C2317824276DD10041B1AC /* IRenderInput.h */,
+			);
+			path = render;
+			sourceTree = "<group>";
+		};
+		74C2317924276DD10041B1AC /* component */ = {
+			isa = PBXGroup;
+			children = (
+				74C2317A24276DD10041B1AC /* CMeshRenderer.h */,
+				74C2317B24276DD10041B1AC /* CCamera.h */,
+				74C2317C24276DD10041B1AC /* CComponent.h */,
+			);
+			path = component;
+			sourceTree = "<group>";
+		};
+		74C2317E24276DD10041B1AC /* scene */ = {
+			isa = PBXGroup;
+			children = (
+				74C2317F24276DD10041B1AC /* CScene.h */,
+				74C2318024276DD10041B1AC /* CSceneManager.h */,
+				74C2318124276DD10041B1AC /* CMaterial.h */,
+				74C2318224276DD10041B1AC /* ISceneNode.h */,
+				74C2318324276DD10041B1AC /* CGameObject.h */,
+				74C2318424276DD10041B1AC /* CMesh.h */,
+			);
+			path = scene;
+			sourceTree = "<group>";
+		};
+		74C2318524276DD10041B1AC /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				74C2318624276DD10041B1AC /* ITextureResource.h */,
+				74C2318724276DD10041B1AC /* ISceneResource.h */,
+				74C2318824276DD10041B1AC /* IMeshResource.h */,
+				74C2318924276DD10041B1AC /* IResourceManager.h */,
+				74C2318A24276DD10041B1AC /* IResource.h */,
+			);
+			path = resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		74C2301C24274D930041B1AC /* HelloTriangle */ = {
+		74C230F8242760260041B1AC /* HelloTriangle */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 74C2304F24274D950041B1AC /* Build configuration list for PBXNativeTarget "HelloTriangle" */;
+			buildConfigurationList = 74C231152427602A0041B1AC /* Build configuration list for PBXNativeTarget "HelloTriangle" */;
 			buildPhases = (
-				74C2301924274D930041B1AC /* Sources */,
-				74C2301A24274D930041B1AC /* Frameworks */,
-				74C2301B24274D930041B1AC /* Resources */,
+				74C230F5242760260041B1AC /* Sources */,
+				74C230F6242760260041B1AC /* Frameworks */,
+				74C230F7242760260041B1AC /* Resources */,
 			);
 			buildRules = (
 			);
@@ -157,68 +400,24 @@
 			);
 			name = HelloTriangle;
 			productName = HelloTriangle;
-			productReference = 74C2301D24274D930041B1AC /* HelloTriangle.app */;
+			productReference = 74C230F9242760260041B1AC /* HelloTriangle.app */;
 			productType = "com.apple.product-type.application";
-		};
-		74C2303A24274D950041B1AC /* HelloTriangleTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 74C2305224274D950041B1AC /* Build configuration list for PBXNativeTarget "HelloTriangleTests" */;
-			buildPhases = (
-				74C2303724274D950041B1AC /* Sources */,
-				74C2303824274D950041B1AC /* Frameworks */,
-				74C2303924274D950041B1AC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				74C2303D24274D950041B1AC /* PBXTargetDependency */,
-			);
-			name = HelloTriangleTests;
-			productName = HelloTriangleTests;
-			productReference = 74C2303B24274D950041B1AC /* HelloTriangleTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		74C2304524274D950041B1AC /* HelloTriangleUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 74C2305524274D950041B1AC /* Build configuration list for PBXNativeTarget "HelloTriangleUITests" */;
-			buildPhases = (
-				74C2304224274D950041B1AC /* Sources */,
-				74C2304324274D950041B1AC /* Frameworks */,
-				74C2304424274D950041B1AC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				74C2304824274D950041B1AC /* PBXTargetDependency */,
-			);
-			name = HelloTriangleUITests;
-			productName = HelloTriangleUITests;
-			productReference = 74C2304624274D950041B1AC /* HelloTriangleUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		74C2301524274D930041B1AC /* Project object */ = {
+		74C230F1242760260041B1AC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = xyj;
 				TargetAttributes = {
-					74C2301C24274D930041B1AC = {
+					74C230F8242760260041B1AC = {
 						CreatedOnToolsVersion = 11.3.1;
-					};
-					74C2303A24274D950041B1AC = {
-						CreatedOnToolsVersion = 11.3.1;
-						TestTargetID = 74C2301C24274D930041B1AC;
-					};
-					74C2304524274D950041B1AC = {
-						CreatedOnToolsVersion = 11.3.1;
-						TestTargetID = 74C2301C24274D930041B1AC;
 					};
 				};
 			};
-			buildConfigurationList = 74C2301824274D930041B1AC /* Build configuration list for PBXProject "HelloTriangle" */;
+			buildConfigurationList = 74C230F4242760260041B1AC /* Build configuration list for PBXProject "HelloTriangle" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -226,102 +425,74 @@
 				en,
 				Base,
 			);
-			mainGroup = 74C2301424274D930041B1AC;
-			productRefGroup = 74C2301E24274D930041B1AC /* Products */;
+			mainGroup = 74C230F0242760260041B1AC;
+			productRefGroup = 74C230FA242760260041B1AC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				74C2301C24274D930041B1AC /* HelloTriangle */,
-				74C2303A24274D950041B1AC /* HelloTriangleTests */,
-				74C2304524274D950041B1AC /* HelloTriangleUITests */,
+				74C230F8242760260041B1AC /* HelloTriangle */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		74C2301B24274D930041B1AC /* Resources */ = {
+		74C230F7242760260041B1AC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74C2303324274D950041B1AC /* LaunchScreen.storyboard in Resources */,
-				74C2303024274D950041B1AC /* Assets.xcassets in Resources */,
-				74C2302B24274D930041B1AC /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		74C2303924274D950041B1AC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		74C2304424274D950041B1AC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				74C2310F2427602A0041B1AC /* LaunchScreen.storyboard in Resources */,
+				74C2310C2427602A0041B1AC /* Assets.xcassets in Resources */,
+				74C23107242760260041B1AC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		74C2301924274D930041B1AC /* Sources */ = {
+		74C230F5242760260041B1AC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74C2303624274D950041B1AC /* main.m in Sources */,
-				74C2302E24274D930041B1AC /* HelloTriangle.xcdatamodeld in Sources */,
-				74C2302824274D930041B1AC /* ViewController.m in Sources */,
-				74C2302224274D930041B1AC /* AppDelegate.m in Sources */,
-				74C2302524274D930041B1AC /* SceneDelegate.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		74C2303724274D950041B1AC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				74C2304024274D950041B1AC /* HelloTriangleTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		74C2304224274D950041B1AC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				74C2304B24274D950041B1AC /* HelloTriangleUITests.m in Sources */,
+				74B22620242781EE008BAB64 /* CSceneNode.cpp in Sources */,
+				74C231122427602A0041B1AC /* main.m in Sources */,
+				74C2310A242760260041B1AC /* HelloTriangle.xcdatamodeld in Sources */,
+				74C231232427612B0041B1AC /* esShader.cpp in Sources */,
+				74B22617242781EE008BAB64 /* CMagic.cpp in Sources */,
+				74B2261C242781EE008BAB64 /* CComponent.cpp in Sources */,
+				74B22618242781EE008BAB64 /* CObject.cpp in Sources */,
+				74B2261F242781EE008BAB64 /* CSceneManager.cpp in Sources */,
+				74C231292427627C0041B1AC /* Hello_Triangle.cpp in Sources */,
+				74B2261A242781EE008BAB64 /* CRenderer.cpp in Sources */,
+				74C231212427612B0041B1AC /* esTransform.cpp in Sources */,
+				74B2261B242781EE008BAB64 /* CCamera.cpp in Sources */,
+				74B22619242781EE008BAB64 /* magic.cpp in Sources */,
+				74C231222427612B0041B1AC /* esShapes.cpp in Sources */,
+				74B2261D242781EE008BAB64 /* CApplication.cpp in Sources */,
+				74C2311A242760CF0041B1AC /* SceneDelegate.mm in Sources */,
+				74B22621242781EE008BAB64 /* CGameObject.cpp in Sources */,
+				74C23104242760260041B1AC /* ViewController.mm in Sources */,
+				74C230FE242760260041B1AC /* AppDelegate.mm in Sources */,
+				74B2261E242781EE008BAB64 /* CScene.cpp in Sources */,
+				74C231242427612B0041B1AC /* esUtil.cpp in Sources */,
+				74C23127242762250041B1AC /* FileWrapper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		74C2303D24274D950041B1AC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 74C2301C24274D930041B1AC /* HelloTriangle */;
-			targetProxy = 74C2303C24274D950041B1AC /* PBXContainerItemProxy */;
-		};
-		74C2304824274D950041B1AC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 74C2301C24274D930041B1AC /* HelloTriangle */;
-			targetProxy = 74C2304724274D950041B1AC /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		74C2302924274D930041B1AC /* Main.storyboard */ = {
+		74C23105242760260041B1AC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				74C2302A24274D930041B1AC /* Base */,
+				74C23106242760260041B1AC /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		74C2303124274D950041B1AC /* LaunchScreen.storyboard */ = {
+		74C2310D2427602A0041B1AC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				74C2303224274D950041B1AC /* Base */,
+				74C2310E2427602A0041B1AC /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -329,7 +500,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		74C2304D24274D950041B1AC /* Debug */ = {
+		74C231132427602A0041B1AC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -387,7 +558,7 @@
 			};
 			name = Debug;
 		};
-		74C2304E24274D950041B1AC /* Release */ = {
+		74C231142427602A0041B1AC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -439,11 +610,10 @@
 			};
 			name = Release;
 		};
-		74C2305024274D950041B1AC /* Debug */ = {
+		74C231162427602A0041B1AC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 58DXM3G7FU;
 				INFOPLIST_FILE = HelloTriangle/Info.plist;
@@ -451,18 +621,21 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = ../../build/bin;
 				PRODUCT_BUNDLE_IDENTIFIER = xuyajie.HelloTriangle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = (
+					../../include,
+					../../common,
+				);
 			};
 			name = Debug;
 		};
-		74C2305124274D950041B1AC /* Release */ = {
+		74C231172427602A0041B1AC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 58DXM3G7FU;
 				INFOPLIST_FILE = HelloTriangle/Info.plist;
@@ -470,124 +643,34 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = ../../build/bin;
 				PRODUCT_BUNDLE_IDENTIFIER = xuyajie.HelloTriangle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		74C2305324274D950041B1AC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 58DXM3G7FU;
-				INFOPLIST_FILE = HelloTriangleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
+				USER_HEADER_SEARCH_PATHS = (
+					../../include,
+					../../common,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = xuyajie.HelloTriangleTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HelloTriangle.app/HelloTriangle";
-			};
-			name = Debug;
-		};
-		74C2305424274D950041B1AC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 58DXM3G7FU;
-				INFOPLIST_FILE = HelloTriangleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = xuyajie.HelloTriangleTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HelloTriangle.app/HelloTriangle";
-			};
-			name = Release;
-		};
-		74C2305624274D950041B1AC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 58DXM3G7FU;
-				INFOPLIST_FILE = HelloTriangleUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = xuyajie.HelloTriangleUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = HelloTriangle;
-			};
-			name = Debug;
-		};
-		74C2305724274D950041B1AC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 58DXM3G7FU;
-				INFOPLIST_FILE = HelloTriangleUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = xuyajie.HelloTriangleUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = HelloTriangle;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		74C2301824274D930041B1AC /* Build configuration list for PBXProject "HelloTriangle" */ = {
+		74C230F4242760260041B1AC /* Build configuration list for PBXProject "HelloTriangle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				74C2304D24274D950041B1AC /* Debug */,
-				74C2304E24274D950041B1AC /* Release */,
+				74C231132427602A0041B1AC /* Debug */,
+				74C231142427602A0041B1AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		74C2304F24274D950041B1AC /* Build configuration list for PBXNativeTarget "HelloTriangle" */ = {
+		74C231152427602A0041B1AC /* Build configuration list for PBXNativeTarget "HelloTriangle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				74C2305024274D950041B1AC /* Debug */,
-				74C2305124274D950041B1AC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		74C2305224274D950041B1AC /* Build configuration list for PBXNativeTarget "HelloTriangleTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				74C2305324274D950041B1AC /* Debug */,
-				74C2305424274D950041B1AC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		74C2305524274D950041B1AC /* Build configuration list for PBXNativeTarget "HelloTriangleUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				74C2305624274D950041B1AC /* Debug */,
-				74C2305724274D950041B1AC /* Release */,
+				74C231162427602A0041B1AC /* Debug */,
+				74C231172427602A0041B1AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -595,17 +678,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		74C2302C24274D930041B1AC /* HelloTriangle.xcdatamodeld */ = {
+		74C23108242760260041B1AC /* HelloTriangle.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				74C2302D24274D930041B1AC /* HelloTriangle.xcdatamodel */,
+				74C23109242760260041B1AC /* HelloTriangle.xcdatamodel */,
 			);
-			currentVersion = 74C2302D24274D930041B1AC /* HelloTriangle.xcdatamodel */;
+			currentVersion = 74C23109242760260041B1AC /* HelloTriangle.xcdatamodel */;
 			path = HelloTriangle.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */
 	};
-	rootObject = 74C2301524274D930041B1AC /* Project object */;
+	rootObject = 74C230F1242760260041B1AC /* Project object */;
 }

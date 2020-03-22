@@ -1,13 +1,14 @@
 #ifndef _MAGIC_MATH_CMATRIX4_H_
 #define _MAGIC_MATH_CMATRIX4_H_
 
-#include <assert.h>
-#include <string.h>
-#include <float.h>
 
 #include "CVector3.h"
 #include "CPlane3.h"
-#include "magicType.h"
+#include "base/magicType.h"
+
+#include <assert.h>
+#include <string.h>
+#include <float.h>
 
 namespace magic
 {
@@ -264,6 +265,7 @@ public:
 	}
 	CMatrix4 &BuildShadowMatrix(const CVector3 &light, const CPlane3 &plane, float point = 1.0f)
 	{
+		return *this;
 	}
 
 	CMatrix4 &SetInverseTranslation(const CVector3 &translation)

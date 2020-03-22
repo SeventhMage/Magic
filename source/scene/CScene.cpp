@@ -15,13 +15,15 @@ CScene::~CScene()
     }
 }
 
-void CScene::Update(int delta)
+void CScene::Update()
 {
+    for (auto it : m_GameObjectMap)
+    {
+        if (it.second)
+        {
+            it.second->Update();
+        }
+    }
 }
-void CScene::FixedUpdate(int delta)
-{
-}
-void CScene::Render()
-{
-}
+
 } // namespace magic

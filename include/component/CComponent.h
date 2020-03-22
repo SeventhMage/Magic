@@ -11,6 +11,7 @@ public:
     CComponent();
     virtual ~CComponent(){}
     virtual void Update();
+    virtual void FixedUpdate();
 };
 } // namespace magic
 

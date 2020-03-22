@@ -4,6 +4,7 @@ namespace magic
 {
 CCamera::CCamera()
 {
+    
 }
 
 CCamera::~CCamera()

@@ -1,8 +1,9 @@
 #ifndef _MX_CORE_CVECTOR3_H_
 #define _MX_CORE_CVECTOR3_H_
 
+#include "base/magicDef.h"
+
 #include <math.h>
-#include "magicDef.h"
 
 namespace magic
 {
@@ -187,6 +188,7 @@ public:
 		x = (float)((double)b.x + ((double)(a.x - b.x)) * d);
 		y = (float)((double)b.y + ((double)(a.y - b.y)) * d);
 		z = (float)((double)b.z + ((double)(a.z - b.z)) * d);
+		return *this;
 	}
 
 	//Get the rotations that would make a (0,0,1) direction vector point in the same direction as this direction vector.
