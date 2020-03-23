@@ -210,15 +210,16 @@ using namespace magic;
 int esMain ( ESContext *esContext )
 {
    esContext->userData = malloc ( sizeof ( UserData ) );
-
-   esCreateWindow ( esContext, "Hello Triangle", 320, 240, ES_WINDOW_RGB );
+   
+    IMagic *mc = CreateMagic(esContext, "Hello Triangle", 320, 240, ES_WINDOW_RGB);
+   //esCreateWindow ( esContext, "Hello Triangle", 320, 240, ES_WINDOW_RGB );
 
    if ( !Init ( esContext ) )
    {
       return GL_FALSE;
    }
 
-    IMagic *mc = GetMagic();
+    
     
     printf("Start initalizing Engine ... \n");
     mc->InitEngine();

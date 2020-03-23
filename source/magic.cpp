@@ -3,13 +3,16 @@
 
 namespace magic
 {
-IMagic *GetMagic()
+static IMagic *s_magic = nullptr;
+IMagic *CreateMagic(void *context, const char *title, int width, int height, unsigned int flags)
 {
-    return CMagic::Instance();
+    s_magic = new CMagic(context, title, width, height, flags);
+    return s_magic;
 }
 
 void Clean()
 {
-    CMagic::DeleteInstance();
+    if (s_magic)
+        delete s_magic;
 }
 }

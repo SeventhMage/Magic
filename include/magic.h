@@ -5,7 +5,7 @@
 
 namespace magic
 {
-IMagic *GetMagic();
+IMagic *CreateMagic(void *context, const char *title, int width, int height, unsigned int flags);
 void Clean();
 }
 

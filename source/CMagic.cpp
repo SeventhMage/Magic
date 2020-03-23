@@ -1,18 +1,22 @@
 #include "CMagic.h"
 #include "scene/CSceneManager.h"
+#include "render/gles3/CGLES3Renderer.h"
 
 namespace magic
 {
-CMagic::CMagic()
+CMagic::CMagic(void *context, const char *title, int width, int height, unsigned int flags)
 :m_pApplication(new CApplication())
 {
     m_pSceneManager = new CSceneManager();
+    m_pRenderer = new CGLES3Renderer(context, title, width, height, flags);
 }
 
 CMagic::~CMagic()
 {
     if (m_pApplication)
         delete m_pApplication;
+    if (m_pRenderer)
+        delete m_pRenderer;
 }
 
 bool CMagic::InitEngine()

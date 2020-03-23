@@ -33,6 +33,7 @@
 		74C23127242762250041B1AC /* FileWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74C23126242762250041B1AC /* FileWrapper.mm */; };
 		74C231292427627C0041B1AC /* Hello_Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74C231282427627C0041B1AC /* Hello_Triangle.cpp */; };
 		74C2318E242772F10041B1AC /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74C2318D242772F10041B1AC /* GLKit.framework */; };
+		74D1622B242830730012AE6D /* CGLES3Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74D16229242830730012AE6D /* CGLES3Renderer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,6 +119,8 @@
 		74C2318A24276DD10041B1AC /* IResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IResource.h; sourceTree = "<group>"; };
 		74C2318B242772E30041B1AC /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		74C2318D242772F10041B1AC /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		74D16229242830730012AE6D /* CGLES3Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CGLES3Renderer.cpp; sourceTree = "<group>"; };
+		74D1622A242830730012AE6D /* CGLES3Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLES3Renderer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +157,7 @@
 		74B22607242781EE008BAB64 /* render */ = {
 			isa = PBXGroup;
 			children = (
+				74D16228242830730012AE6D /* gles3 */,
 				74B22608242781EE008BAB64 /* CRenderer.h */,
 				74B22609242781EE008BAB64 /* CRenderer.cpp */,
 			);
@@ -383,6 +387,15 @@
 			path = resource;
 			sourceTree = "<group>";
 		};
+		74D16228242830730012AE6D /* gles3 */ = {
+			isa = PBXGroup;
+			children = (
+				74D16229242830730012AE6D /* CGLES3Renderer.cpp */,
+				74D1622A242830730012AE6D /* CGLES3Renderer.h */,
+			);
+			path = gles3;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -459,6 +472,7 @@
 				74C231232427612B0041B1AC /* esShader.cpp in Sources */,
 				74B22617242781EE008BAB64 /* CMagic.cpp in Sources */,
 				74B2261C242781EE008BAB64 /* CComponent.cpp in Sources */,
+				74D1622B242830730012AE6D /* CGLES3Renderer.cpp in Sources */,
 				74B22618242781EE008BAB64 /* CObject.cpp in Sources */,
 				74B2261F242781EE008BAB64 /* CSceneManager.cpp in Sources */,
 				74C231292427627C0041B1AC /* Hello_Triangle.cpp in Sources */,

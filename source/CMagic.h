@@ -6,9 +6,12 @@
 #include "CApplication.h"
 namespace magic
 {
-class CMagic : public IMagic, public CSingleton<CMagic>
+class CMagic : public IMagic
 {
 public:
+    CMagic(void *context, const char *title, int width, int height, unsigned int flags);
+    ~CMagic();
+    
     virtual bool InitEngine();
     virtual void StartApplication();
     virtual void SetFPS(int fps);
@@ -17,9 +20,6 @@ public:
     virtual CSceneManager *GetSceneManager() const { return m_pSceneManager; }
     virtual IRenderer *GetRenderer() const { return m_pRenderer; }
 private:
-    friend class CSingleton<CMagic>;
-    CMagic();
-    ~CMagic();
     CApplication *m_pApplication;
     int m_iFPS;
     int m_iFixDelta;
