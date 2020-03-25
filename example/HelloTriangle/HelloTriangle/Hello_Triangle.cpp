@@ -38,6 +38,7 @@
 #include "esUtil.h"
 #include "magic.h"
 #include "component/CCamera.h"
+#include "component/CMeshRenderer.h"
 
 
 typedef struct
@@ -227,9 +228,13 @@ int esMain ( ESContext *esContext )
 
     printf("Loading scene ... \n");
     CSceneManager *pSceneMgr = mc->GetSceneManager();
-    CScene *pScene = pSceneMgr->LoadScene("Test.scene");
-    //CGameObject *go = pScene->AddGameObject<CGameObject>();
-    //go->AddComponent<CCamera>();
+    CScene *pScene = pSceneMgr->LoadScene();
+    CGameObject *camera = pScene->AddGameObject<CGameObject>();
+    camera->AddComponent<CCamera>();
+    CGameObject *triangle = pScene->AddGameObject<CGameObject>();
+    CMeshRenderer *renderer = triangle->AddComponent<CMeshRenderer>();
+    
+    
     printf("Finished loading scene. \n\n");
 
     printf("Start Application ... \n");

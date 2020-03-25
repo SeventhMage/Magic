@@ -34,6 +34,7 @@
 		74C231292427627C0041B1AC /* Hello_Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74C231282427627C0041B1AC /* Hello_Triangle.cpp */; };
 		74C2318E242772F10041B1AC /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74C2318D242772F10041B1AC /* GLKit.framework */; };
 		74D1622B242830730012AE6D /* CGLES3Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74D16229242830730012AE6D /* CGLES3Renderer.cpp */; };
+		74D1622D242AD8110012AE6D /* CMeshRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74D1622C242AD8110012AE6D /* CMeshRenderer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -121,6 +122,7 @@
 		74C2318D242772F10041B1AC /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		74D16229242830730012AE6D /* CGLES3Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CGLES3Renderer.cpp; sourceTree = "<group>"; };
 		74D1622A242830730012AE6D /* CGLES3Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLES3Renderer.h; sourceTree = "<group>"; };
+		74D1622C242AD8110012AE6D /* CMeshRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CMeshRenderer.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 			children = (
 				74B2260B242781EE008BAB64 /* CCamera.cpp */,
 				74B2260C242781EE008BAB64 /* CComponent.cpp */,
+				74D1622C242AD8110012AE6D /* CMeshRenderer.cpp */,
 			);
 			path = component;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				74C231222427612B0041B1AC /* esShapes.cpp in Sources */,
 				74B2261D242781EE008BAB64 /* CApplication.cpp in Sources */,
 				74C2311A242760CF0041B1AC /* SceneDelegate.mm in Sources */,
+				74D1622D242AD8110012AE6D /* CMeshRenderer.cpp in Sources */,
 				74B22621242781EE008BAB64 /* CGameObject.cpp in Sources */,
 				74C23104242760260041B1AC /* ViewController.mm in Sources */,
 				74C230FE242760260041B1AC /* AppDelegate.mm in Sources */,

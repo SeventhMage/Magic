@@ -10,6 +10,7 @@ class CSceneManager
 public:
     CSceneManager();
     ~CSceneManager();
+    CScene *LoadScene();
     CScene *LoadScene(const char *fileName);
     void UnloadScene(CScene *);
     void Update();

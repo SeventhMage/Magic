@@ -20,6 +20,12 @@ CScene *CSceneManager::LoadScene(const char *fileName)
     return m_pScene;
 }
 
+CScene *CSceneManager::LoadScene()
+{
+    m_pScene = new CScene();
+    return m_pScene;
+}
+
 void CSceneManager::UnloadScene(CScene *scene)
 {
     if (scene)

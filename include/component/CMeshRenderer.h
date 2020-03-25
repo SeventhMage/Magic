@@ -12,6 +12,10 @@ class CMeshRenderer : CComponent
 public:
     CMeshRenderer();
     virtual~CMeshRenderer();
+    
+    virtual void Update();
+    void SetMesh(CMesh *pMesh);
+    void SetMaterial(CMaterial *pMaterial);
 private:
     CMesh *m_pMesh;
     CMaterial *m_pMaterial;
