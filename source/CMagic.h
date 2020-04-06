@@ -4,20 +4,21 @@
 #include "IMagic.h"
 #include "base/CSingleton.h"
 #include "CApplication.h"
+#include "render/SRenderContent.h"
+
 namespace magic
 {
 class CMagic : public IMagic
 {
 public:
-    CMagic(void *context, const char *title, int width, int height, unsigned int flags);
+    CMagic(SRenderContent *context, const char *title, int width, int height);
     ~CMagic();
     
-    virtual bool InitEngine();
-    virtual void StartApplication();
+    virtual void Run();
     virtual void SetFPS(int fps);
     virtual int GetFPS() const {return m_iFPS;}
 
-    virtual CSceneManager *GetSceneManager() const { return m_pSceneManager; }
+    virtual ISceneManager *GetSceneManager() const { return m_pSceneManager; }
     virtual IRenderer *GetRenderer() const { return m_pRenderer; }
 private:
     CApplication *m_pApplication;

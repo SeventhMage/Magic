@@ -4,9 +4,9 @@
 namespace magic
 {
 static IMagic *s_magic = nullptr;
-IMagic *CreateMagic(void *context, const char *title, int width, int height, unsigned int flags)
+IMagic *CreateMagic(SRenderContent *context, const char *title, int width, int height)
 {
-    s_magic = new CMagic(context, title, width, height, flags);
+    s_magic = new CMagic(context, title, width, height);
     return s_magic;
 }
 

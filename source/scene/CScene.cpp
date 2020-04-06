@@ -1,29 +1,23 @@
-#include "scene/CScene.h"
+#include "CScene.h"
+#include "CGameObject.h"
 
 namespace magic
 {
+static OID s_SceneCount = 0;
 CScene::CScene()
+:m_RootObject(new CGameObject())
+,m_SceneID(++s_SceneCount)
 {
 }
 
 CScene::~CScene()
 {
-    for (auto it : m_GameObjectMap)
-    {
-        if (it.second)
-            delete it.second;
-    }
+    
 }
 
 void CScene::Update()
 {
-    for (auto it : m_GameObjectMap)
-    {
-        if (it.second)
-        {
-            it.second->Update();
-        }
-    }
+    
 }
 
 } // namespace magic

@@ -15,13 +15,17 @@ public:
     CRenderer();
 
     virtual void CreateRenderPass(const CMatrix4 &viewProjMatrix);
-    virtual void SubmitToRenderQueue(IRenderInput *pInput, int materialId);
-    virtual void Render(IRenderInput *pRenderInput, IRenderTarget *pRenderTarget);
+    virtual void SubmitToRenderQueue(IRenderInput *pInput);
     virtual void Render();
     virtual IRenderTarget *CreateRenderTarget(int width, int height, int format);
+    virtual IRenderInput *CreateRenderInput();
+    
+protected:
+    virtual void Render(IRenderInput *pRenderInput);
 private:
     typedef std::map<int, std::vector<IRenderInput*> > RenderQueueGroup;
-    RenderQueueGroup m_RenderQueueGroup;
+    RenderQueueGroup m_OpaqueRenderQueueGroup;
+    RenderQueueGroup m_TransparentRenderQueueGroup;
     std::vector<IRenderPass *> m_RenderPassVec;
 };
 }

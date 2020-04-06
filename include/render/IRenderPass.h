@@ -12,6 +12,8 @@ public:
      * bind current render target to render
      * **/
     virtual IRenderTarget *BindRenderTarget() = 0;
+    virtual void SetRenderTarget(IRenderTarget *) = 0;
+    virtual IRenderTarget *GetRenderTarget() = 0;
     virtual bool IsEnable() = 0;
 };
 } // namespace magic

@@ -7,7 +7,7 @@ include config.mk
 .PHONY: all clean
 
 CPPFLAGS := -Wall -g -std=c++11 -Qunused-arguments -stdlib=libc++
-INCLUDES := -Iinclude -Icommon
+INCLUDES := -Iinclude -Icommon -Idependency
 LIBS := -lm
 
 OBJDIR := build/obj/magic

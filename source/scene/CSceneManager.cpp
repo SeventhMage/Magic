@@ -1,4 +1,5 @@
-#include "scene/CSceneManager.h"
+#include "CSceneManager.h"
+#include "CScene.h"
 
 namespace magic
 {
@@ -14,22 +15,22 @@ CSceneManager::~CSceneManager()
         delete m_pScene;
 }
 
-CScene *CSceneManager::LoadScene(const char *fileName)
+IScene *CSceneManager::LoadScene(const char *fileName)
 {
     m_pScene = new CScene();
     return m_pScene;
 }
 
-CScene *CSceneManager::LoadScene()
+IScene *CSceneManager::LoadScene()
 {
     m_pScene = new CScene();
     return m_pScene;
 }
 
-void CSceneManager::UnloadScene(CScene *scene)
+void CSceneManager::UnloadScene()
 {
-    if (scene)
-        delete scene;
+    if (m_pScene)
+        delete m_pScene;
 }
 
 void CSceneManager::Update()

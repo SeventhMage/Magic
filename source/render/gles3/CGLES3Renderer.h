@@ -1,9 +1,11 @@
 #ifndef _MAGIC_C_GLES3RENDERER_H_
 #define _MAGIC_C_GLES3RENDERER_H_
 
-#include "../CRenderer.h"
-#include "esUtil.h"
+#include "render/CRenderer.h"
+#include "render/SRenderContent.h"
+#include "gl3.h"
 
+/*
 #ifdef __APPLE__
 #include <OpenGLES/ES3/gl.h>
 #else
@@ -11,16 +13,17 @@
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #endif
+*/
 
 namespace magic
 {
 class CGLES3Renderer : public CRenderer
 {
 public:
-    CGLES3Renderer(void *esContext, const char *title, GLint width, GLint height, GLuint flags);
-    virtual void SubmitToRenderQueue(IRenderInput *pInput, int materialId){}
-    virtual void Render(IRenderInput *pRenderInput, IRenderTarget *pRenderTarget){}
-    virtual void Render(){}
+    CGLES3Renderer(SRenderContent *esContext, const char *title, GLint width, GLint height);
+    virtual IShaderProgram *CreateShaderProgram();
+protected:
+    virtual void Render(IRenderInput *pRenderInput);
 };
 } // namespace magic
 

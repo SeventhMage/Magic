@@ -7,7 +7,7 @@ class ITexture
 {
 public:
     virtual ~ITexture(){}
-
+    virtual void BindTextureSlot(int slot);
 };
 } 
 

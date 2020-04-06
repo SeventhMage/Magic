@@ -237,10 +237,6 @@ int esMain ( ESContext *esContext )
     
     printf("Finished loading scene. \n\n");
 
-    printf("Start Application ... \n");
-    mc->StartApplication();
-    printf("Application end.\n\n");
-
     printf("Cleaning ... \n");
     pSceneMgr->UnloadScene(pScene);
      

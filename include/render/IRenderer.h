@@ -3,6 +3,7 @@
 
 #include "IRenderInput.h"
 #include "IRenderTarget.h"
+#include "IShaderProgram.h"
 #include "math/CMatrix4.h"
 
 namespace magic
@@ -15,10 +16,13 @@ public:
      * Each camera will create a render pass
      * **/
     virtual void CreateRenderPass(const CMatrix4 &viewProjMatrix) = 0;
-    virtual void SubmitToRenderQueue(IRenderInput *pInput, int materialId) = 0;
-    virtual void Render(IRenderInput *pRenderInput, IRenderTarget *pRenderTarget) = 0;
+    virtual void SubmitToRenderQueue(IRenderInput *pInput) = 0;
     virtual void Render() = 0;
     virtual IRenderTarget *CreateRenderTarget(int width, int height, int format) = 0;
+    virtual IRenderInput *CreateRenderInput();
+    virtual IShaderProgram *CreateShaderProgram() = 0;
+protected:
+    virtual void Render(IRenderInput *pRenderInput, IRenderTarget *pRenderTarget) = 0;
 };
 } // namespace magic
 

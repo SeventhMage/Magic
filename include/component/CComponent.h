@@ -1,11 +1,12 @@
 #ifndef _MAGIC_C_COMPONENT_H_
 #define _MAGIC_C_COMPONENT_H_
 
-#include "CObject.h"
+#include "IObject.h"
+#include "IComponent.h"
 
 namespace magic
 {
-class CComponent : public CObject
+class CComponent : public IComponent
 {
 public:
     CComponent();

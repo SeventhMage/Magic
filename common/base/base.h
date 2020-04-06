@@ -1,5 +1,5 @@
-#ifndef _MAGIC_COMMON_BASE_BASE_H_
-#define _MAGIC_COMMON_BASE_BASE_H_
+#ifndef _MAGIC_BASE_H_
+#define _MAGIC_BASE_H_
 
 #include "StringHelper.h"
 

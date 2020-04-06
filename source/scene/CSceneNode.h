@@ -11,6 +11,8 @@ public:
     CSceneNode();
     virtual ~CSceneNode();
     virtual void Update();
+    virtual void AddChild(ISceneNode *pChild);
+    virtual void AddParent(ISceneNode *pParent);
 };
 } // namespace magic
 

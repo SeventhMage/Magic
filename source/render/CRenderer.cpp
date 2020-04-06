@@ -1,4 +1,5 @@
 #include "CRenderer.h"
+#include "CRenderInput.h"
 
 namespace magic
 {
@@ -8,11 +9,8 @@ CRenderer::CRenderer()
     //Set clear color
 }
 
-void CRenderer::Render(IRenderInput *pRenderInput, IRenderTarget *pRenderTarget)
+void CRenderer::Render(IRenderInput *pRenderInput)
 {
-    //const SShaderParam &shaderParam = pRenderInput->GetShaderParam();
-    //ITexture *pTexture = pRenderInput->GetTexture();
-    //IBuffer *pBuffer = pRenderInput->GetBuffer();
 
     //call platform api to real draw
 }
@@ -26,6 +24,11 @@ IRenderTarget *CRenderer::CreateRenderTarget(int width, int height, int format)
     return nullptr;
 }
 
+IRenderInput *CRenderer::CreateRenderInput()
+{
+    return new CRenderInput();
+}
+
 void CRenderer::Render()
 {
     for (auto pass : m_RenderPassVec)
@@ -33,21 +36,34 @@ void CRenderer::Render()
         if (pass->IsEnable())
         {
             IRenderTarget *pRenderTarget = pass->BindRenderTarget();
-            for (auto queIt: m_RenderQueueGroup)
+            for (auto queIt: m_OpaqueRenderQueueGroup)
             {
                 for (auto input: queIt.second)
                 {
-                    Render(input, pRenderTarget);
+                    Render(input);
+                }
+            }
+
+            for (auto queIt: m_TransparentRenderQueueGroup)
+            {
+                for (auto input: queIt.second)
+                {
+                    Render(input);
                 }
             }
         }
     }
-    m_RenderQueueGroup.clear();
+    m_OpaqueRenderQueueGroup.clear();
+    m_TransparentRenderQueueGroup.clear();
 }
 
-void CRenderer::SubmitToRenderQueue(IRenderInput *pInput, int materialId)
+void CRenderer::SubmitToRenderQueue(IRenderInput *pInput)
 {
-    m_RenderQueueGroup[materialId].push_back(pInput);
+    int renderqueue = pInput->GetRenderQueue();
+    if (pInput->IsTransparent())
+        m_TransparentRenderQueueGroup[renderqueue].push_back(pInput);
+    else
+        m_OpaqueRenderQueueGroup[renderqueue].push_back(pInput);
 }
 
 
