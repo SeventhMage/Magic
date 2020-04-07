@@ -17,22 +17,21 @@ public:
     virtual int GetRenderQueue() const { return m_RenderQueueID; }
     virtual ITexture *GetTexture(int slot) const;
     virtual int GetTextureCount() const { return m_TextureArray.size(); }
-    virtual int GetVertexSize() const;
-    virtual int GetVertexStride() const;
-    virtual int GetVertexOffset() const;
-    virtual bool IsTransparent() const;
+    virtual IBufferObject *GetVertexArrayObject() const;
     virtual IBufferObject *GetVertexBufferObject() const;
     virtual IBufferObject *GetIndexBufferObject() const;
 
     virtual void SetRenderQueue(int id);
+    virtual void SetVertexAttribute(int index, int size, int stride, int offset);
     virtual void SetVertexBuffer(void *data, int size);
     virtual void SetIndexBuffer(void *data, int size);
-    virtual void SetVertexStride(int stride);
-    virtual void SetVertexOffset(int location, int offset);
+    virtual void SetShaderProgram(IShaderProgram *pShaderProgram);
+    virtual void SetTexture(int slot, ITexture *texture);
 private:
     std::vector<ITexture *> m_TextureArray;
     IShaderProgram *m_pShaderProgram;
     int m_RenderQueueID;
+    IBufferObject *m_pVAO;
     IBufferObject *m_pVBO;
     IBufferObject *m_pIBO;
 };

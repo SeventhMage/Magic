@@ -45,7 +45,8 @@ void CMeshRendererComponent::SetMesh(IMesh *pMesh)
         if (m_pMesh)
         {
             for (int i=0; i<m_pMesh->GetVerticesAttributeCount(); ++i)
-                m_pRenderInput->InitializeVertexAttribute(i, m_pMesh->GetVerticesOffset(i), m_pMesh->GetVerticesStride(), m_pMesh->GetVerticesOffset(i));
+                m_pRenderInput->SetVertexAttribute(i, m_pMesh->GetVerticesOffset(i), 
+                    m_pMesh->GetVerticesStride(), m_pMesh->GetVerticesOffset(i));
             m_pRenderInput->SetVertexBuffer(m_pMesh->GetVertices(), m_pMesh->GetVerticesCount() * sizeof(float));
             m_pRenderInput->SetIndexBuffer(pMesh->GetIndices(), m_pMesh->GetIndicesCount() * sizeof(float));
         }
@@ -61,6 +62,7 @@ void CMeshRendererComponent::SetMaterial(IMaterial *pMaterial)
         {
             m_pMaterialInstance->Initialize(m_pRenderer, m_pMaterial);
             m_pRenderInput->SetRenderQueue(m_pMaterial->GetID());
+            m_pRenderInput->SetShaderProgram(m_pMaterialInstance->GetShaderProgram());
         }
     }
 }
