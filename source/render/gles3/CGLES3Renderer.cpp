@@ -14,7 +14,7 @@ void CGLES3Renderer::Render(IRenderInput *pRenderInput)
 {
     IShaderProgram *pProgram = pRenderInput->GetShaderProgram();
     if (pProgram)
-        pProgram->BindShaderParam();
+        pProgram->Bind();
     for (int i=0; i<pRenderInput->GetTextureCount(); ++i)
     {
         ITexture *pTexture = pRenderInput->GetTexture(i);

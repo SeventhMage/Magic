@@ -45,6 +45,9 @@
 		74C2311A242760CF0041B1AC /* SceneDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74C23118242760CF0041B1AC /* SceneDelegate.mm */; };
 		74C231292427627C0041B1AC /* Hello_Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74C231282427627C0041B1AC /* Hello_Triangle.cpp */; };
 		74C2318E242772F10041B1AC /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74C2318D242772F10041B1AC /* GLKit.framework */; };
+		74DECBBC243D4F8F0069223C /* CGLES3VertexArrayObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DECBBA243D4F8F0069223C /* CGLES3VertexArrayObject.cpp */; };
+		74DECBBF243D4FC30069223C /* CGLES3VertexBufferObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DECBBD243D4FC30069223C /* CGLES3VertexBufferObject.cpp */; };
+		74DECBC2243D4FE30069223C /* CGLES3IndexBufferObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DECBC0243D4FE30069223C /* CGLES3IndexBufferObject.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -162,6 +165,12 @@
 		74C231282427627C0041B1AC /* Hello_Triangle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hello_Triangle.cpp; sourceTree = "<group>"; };
 		74C2318B242772E30041B1AC /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		74C2318D242772F10041B1AC /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		74DECBBA243D4F8F0069223C /* CGLES3VertexArrayObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CGLES3VertexArrayObject.cpp; sourceTree = "<group>"; };
+		74DECBBB243D4F8F0069223C /* CGLES3VertexArrayObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGLES3VertexArrayObject.h; sourceTree = "<group>"; };
+		74DECBBD243D4FC30069223C /* CGLES3VertexBufferObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CGLES3VertexBufferObject.cpp; sourceTree = "<group>"; };
+		74DECBBE243D4FC30069223C /* CGLES3VertexBufferObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGLES3VertexBufferObject.h; sourceTree = "<group>"; };
+		74DECBC0243D4FE30069223C /* CGLES3IndexBufferObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CGLES3IndexBufferObject.cpp; sourceTree = "<group>"; };
+		74DECBC1243D4FE30069223C /* CGLES3IndexBufferObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGLES3IndexBufferObject.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +315,12 @@
 				742A7E8A2434246600D45F20 /* gl3platform.h */,
 				742A7E8B2434246600D45F20 /* Win32 */,
 				742A7E8D2434246600D45F20 /* khrplatform.h */,
+				74DECBC0243D4FE30069223C /* CGLES3IndexBufferObject.cpp */,
+				74DECBC1243D4FE30069223C /* CGLES3IndexBufferObject.h */,
+				74DECBBA243D4F8F0069223C /* CGLES3VertexArrayObject.cpp */,
+				74DECBBB243D4F8F0069223C /* CGLES3VertexArrayObject.h */,
+				74DECBBD243D4FC30069223C /* CGLES3VertexBufferObject.cpp */,
+				74DECBBE243D4FC30069223C /* CGLES3VertexBufferObject.h */,
 			);
 			path = gles3;
 			sourceTree = "<group>";
@@ -582,17 +597,20 @@
 				742A7EAA2434246600D45F20 /* esShader.cpp in Sources */,
 				74C2310A242760260041B1AC /* HelloTriangle.xcdatamodeld in Sources */,
 				742A7EAF2434246600D45F20 /* esShapes.cpp in Sources */,
+				74DECBBF243D4FC30069223C /* CGLES3VertexBufferObject.cpp in Sources */,
 				742A7EA62434246600D45F20 /* CMagic.cpp in Sources */,
 				742A7EDC2434406C00D45F20 /* CShader.cpp in Sources */,
 				74C231292427627C0041B1AC /* Hello_Triangle.cpp in Sources */,
 				742A7EB42434246600D45F20 /* CRenderPass.cpp in Sources */,
 				74C2311A242760CF0041B1AC /* SceneDelegate.mm in Sources */,
 				742A7EB32434246600D45F20 /* CRenderer.cpp in Sources */,
+				74DECBC2243D4FE30069223C /* CGLES3IndexBufferObject.cpp in Sources */,
 				742A7EE2243ACA2800D45F20 /* CShaderProgram.cpp in Sources */,
 				742A7EBA2434246600D45F20 /* CSceneManager.cpp in Sources */,
 				74C23104242760260041B1AC /* ViewController.mm in Sources */,
 				742A7EDF2439E71900D45F20 /* CMaterialInstance.cpp in Sources */,
 				742A7EA72434246600D45F20 /* CObject.cpp in Sources */,
+				74DECBBC243D4F8F0069223C /* CGLES3VertexArrayObject.cpp in Sources */,
 				742A7EDA2434405700D45F20 /* CMaterial.cpp in Sources */,
 				74C230FE242760260041B1AC /* AppDelegate.mm in Sources */,
 			);
