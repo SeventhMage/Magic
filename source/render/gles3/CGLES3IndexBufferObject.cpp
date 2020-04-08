@@ -8,7 +8,7 @@ CGLES3IndexBufferObject::CGLES3IndexBufferObject(void *indices, GLsizei idsCount
 {
     GLDebug(glGenBuffers(1, &m_IBO));
     GLDebug(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO));
-    GLDebug(glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetGLVariableSize(idsType) * idsCount, indices, usage));
+    GLDebug(glBufferData(GL_ELEMENT_ARRAY_BUFFER, idsType * idsCount, indices, usage));
 }
 
 CGLES3IndexBufferObject::~CGLES3IndexBufferObject()
