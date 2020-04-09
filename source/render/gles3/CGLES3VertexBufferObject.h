@@ -1,7 +1,7 @@
 #ifndef _MAGIC_CGLES3VERTEXBUFFEROBJECT_H_
 #define _MAGIC_CGLES3VERTEXBUFFEROBJECT_H_
 
-#include "IBufferObject.h"
+#include "render/IBufferObject.h"
 #include "gl3.h"
 
 namespace magic

@@ -5,13 +5,15 @@
 
 namespace magic
 {
-CGLES3Renderer::CGLES3Renderer(SRenderContext *esContextt, const char *title, GLint width, GLint height)
+CGLES3Renderer::CGLES3Renderer(SRenderContent *esContext, const char *title, GLint width, GLint height)
 {
     //esCreateWindow(esContextt, title, width, height, flags);
 }
 
 void CGLES3Renderer::Render(IRenderInput *pRenderInput)
 {
+    IBufferObject *pVAO = pRenderInput->GetVertexArrayObject();
+    pVAO->Bind();
     IShaderProgram *pProgram = pRenderInput->GetShaderProgram();
     if (pProgram)
         pProgram->Bind();
@@ -32,6 +34,11 @@ void CGLES3Renderer::Render(IRenderInput *pRenderInput)
         GLDebug(glDrawArrays(pVBO->GetMode(), pVBO->GetFirstIndex(), pVBO->GetVerticesCount()));
     }
     
+}
+
+IRenderTarget *CGLES3Renderer::CreateRenderTarget(int width, int height, int format)
+{
+
 }
 
 IShaderProgram *CGLES3Renderer::CreateShaderProgram()

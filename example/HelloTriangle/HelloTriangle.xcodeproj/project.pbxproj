@@ -48,6 +48,9 @@
 		74DECBBC243D4F8F0069223C /* CGLES3VertexArrayObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DECBBA243D4F8F0069223C /* CGLES3VertexArrayObject.cpp */; };
 		74DECBBF243D4FC30069223C /* CGLES3VertexBufferObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DECBBD243D4FC30069223C /* CGLES3VertexBufferObject.cpp */; };
 		74DECBC2243D4FE30069223C /* CGLES3IndexBufferObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DECBC0243D4FE30069223C /* CGLES3IndexBufferObject.cpp */; };
+		74DECBC5243E97DA0069223C /* CGLES3RenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DECBC4243E97D90069223C /* CGLES3RenderTarget.cpp */; };
+		74DECBC8243E98990069223C /* CGLES3Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DECBC7243E98990069223C /* CGLES3Texture.cpp */; };
+		74DECBCC243EA02A0069223C /* CTGAImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DECBCA243EA02A0069223C /* CTGAImage.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -171,6 +174,14 @@
 		74DECBBE243D4FC30069223C /* CGLES3VertexBufferObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGLES3VertexBufferObject.h; sourceTree = "<group>"; };
 		74DECBC0243D4FE30069223C /* CGLES3IndexBufferObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CGLES3IndexBufferObject.cpp; sourceTree = "<group>"; };
 		74DECBC1243D4FE30069223C /* CGLES3IndexBufferObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGLES3IndexBufferObject.h; sourceTree = "<group>"; };
+		74DECBC3243E97D90069223C /* CGLES3RenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLES3RenderTarget.h; sourceTree = "<group>"; };
+		74DECBC4243E97D90069223C /* CGLES3RenderTarget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CGLES3RenderTarget.cpp; sourceTree = "<group>"; };
+		74DECBC6243E98990069223C /* CGLES3Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLES3Texture.h; sourceTree = "<group>"; };
+		74DECBC7243E98990069223C /* CGLES3Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CGLES3Texture.cpp; sourceTree = "<group>"; };
+		74DECBC9243E998C0069223C /* GLESDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLESDebug.h; sourceTree = "<group>"; };
+		74DECBCA243EA02A0069223C /* CTGAImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTGAImage.cpp; sourceTree = "<group>"; };
+		74DECBCB243EA02A0069223C /* CTGAImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGAImage.h; sourceTree = "<group>"; };
+		74DECBCD243EA0420069223C /* IImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IImage.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +259,7 @@
 				742A7E6C2434245A00D45F20 /* IModel.h */,
 				742A7E6D2434245A00D45F20 /* IMaterial.h */,
 				742A7E6E2434245A00D45F20 /* IResourceManager.h */,
+				74DECBCD243EA0420069223C /* IImage.h */,
 				742A7E6F2434245A00D45F20 /* IResource.h */,
 				742A7E702434245A00D45F20 /* IShader.h */,
 				742A7ED424343F2A00D45F20 /* CMesh.h */,
@@ -295,6 +307,11 @@
 		742A7E772434246600D45F20 /* gles3 */ = {
 			isa = PBXGroup;
 			children = (
+				74DECBC9243E998C0069223C /* GLESDebug.h */,
+				74DECBC7243E98990069223C /* CGLES3Texture.cpp */,
+				74DECBC6243E98990069223C /* CGLES3Texture.h */,
+				74DECBC4243E97D90069223C /* CGLES3RenderTarget.cpp */,
+				74DECBC3243E97D90069223C /* CGLES3RenderTarget.h */,
 				742A7EE3243AD13600D45F20 /* OpenGLType.h */,
 				742A7E782434246600D45F20 /* LinuxX11 */,
 				742A7E7A2434246600D45F20 /* egl.h */,
@@ -378,6 +395,8 @@
 			isa = PBXGroup;
 			children = (
 				742A7ED72434404300D45F20 /* CMesh.cpp */,
+				74DECBCA243EA02A0069223C /* CTGAImage.cpp */,
+				74DECBCB243EA02A0069223C /* CTGAImage.h */,
 				742A7ED92434405700D45F20 /* CMaterial.cpp */,
 				742A7EDB2434406C00D45F20 /* CShader.cpp */,
 			);
@@ -581,8 +600,10 @@
 				742A7EB92434246600D45F20 /* CScene.cpp in Sources */,
 				742A7EB62434246600D45F20 /* CMeshRendererComponent.cpp in Sources */,
 				742A7EAD2434246600D45F20 /* CGLES3ShaderProgram.cpp in Sources */,
+				74DECBC5243E97DA0069223C /* CGLES3RenderTarget.cpp in Sources */,
 				742A7EB82434246600D45F20 /* CApplication.cpp in Sources */,
 				742A7EAB2434246600D45F20 /* esUtil.cpp in Sources */,
+				74DECBCC243EA02A0069223C /* CTGAImage.cpp in Sources */,
 				742A7EB72434246600D45F20 /* CComponent.cpp in Sources */,
 				742A7ED82434404300D45F20 /* CMesh.cpp in Sources */,
 				74C231122427602A0041B1AC /* main.m in Sources */,
@@ -610,6 +631,7 @@
 				74C23104242760260041B1AC /* ViewController.mm in Sources */,
 				742A7EDF2439E71900D45F20 /* CMaterialInstance.cpp in Sources */,
 				742A7EA72434246600D45F20 /* CObject.cpp in Sources */,
+				74DECBC8243E98990069223C /* CGLES3Texture.cpp in Sources */,
 				74DECBBC243D4F8F0069223C /* CGLES3VertexArrayObject.cpp in Sources */,
 				742A7EDA2434405700D45F20 /* CMaterial.cpp in Sources */,
 				74C230FE242760260041B1AC /* AppDelegate.mm in Sources */,

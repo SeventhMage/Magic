@@ -20,7 +20,7 @@ public:
     virtual IBufferObject *GetVertexArrayObject() const = 0;
     virtual IBufferObject *GetVertexBufferObject() const = 0;
     virtual IBufferObject *GetIndexBufferObject() const = 0;
-
+    virtual bool IsTransparent() const = 0;
     virtual void SetRenderQueue(int id) = 0;
     virtual void SetVertexAttribute(int index, int size, int stride, int offset) = 0;
     virtual void SetVertexBuffer(void *data, int size) = 0;

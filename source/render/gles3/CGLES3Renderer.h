@@ -21,6 +21,7 @@ class CGLES3Renderer : public CRenderer
 {
 public:
     CGLES3Renderer(SRenderContent *esContext, const char *title, GLint width, GLint height);
+    virtual IRenderTarget *CreateRenderTarget(int width, int height, int format);
     virtual IShaderProgram *CreateShaderProgram();
 protected:
     virtual void Render(IRenderInput *pRenderInput);
