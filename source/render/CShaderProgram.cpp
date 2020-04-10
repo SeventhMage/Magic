@@ -49,4 +49,3 @@ int CShaderProgram::GetUniformTypeSizeByLocation(int location) const
 }
 
 } // namespace magic
-}

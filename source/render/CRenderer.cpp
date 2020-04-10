@@ -1,5 +1,5 @@
 #include "CRenderer.h"
-#include "CRenderInput.h"
+#include "render/CRenderInput.h"
 
 namespace magic
 {
@@ -17,7 +17,6 @@ void CRenderer::Render(IRenderInput *pRenderInput)
 
 void CRenderer::CreateRenderPass(const CMatrix4 &viewProjMatrix)
 {
-    
 }
 IRenderTarget *CRenderer::CreateRenderTarget(int width, int height, int format)
 {
@@ -35,21 +34,26 @@ void CRenderer::Render()
     {
         if (pass->IsEnable())
         {
-            IRenderTarget *pRenderTarget = pass->BindRenderTarget();
-            for (auto queIt: m_OpaqueRenderQueueGroup)
+            IRenderTarget *pRenderTarget = pass->GetRenderTarget();
+            if (pRenderTarget)
             {
-                for (auto input: queIt.second)
+                pRenderTarget->BeginTarget();
+                for (auto queIt : m_OpaqueRenderQueueGroup)
                 {
-                    Render(input);
+                    for (auto input : queIt.second)
+                    {
+                        Render(input);
+                    }
                 }
-            }
+                for (auto queIt : m_TransparentRenderQueueGroup)
+                {
+                    for (auto input : queIt.second)
+                    {
+                        Render(input);
+                    }
+                }
 
-            for (auto queIt: m_TransparentRenderQueueGroup)
-            {
-                for (auto input: queIt.second)
-                {
-                    Render(input);
-                }
+                pRenderTarget->EndTarget();
             }
         }
     }
@@ -65,6 +69,5 @@ void CRenderer::SubmitToRenderQueue(IRenderInput *pInput)
     else
         m_OpaqueRenderQueueGroup[renderqueue].push_back(pInput);
 }
-
 
 } // namespace magic

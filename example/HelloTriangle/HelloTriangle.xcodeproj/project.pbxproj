@@ -8,17 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		742A7EA62434246600D45F20 /* CMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 742A7E722434246600D45F20 /* CMagic.cpp */; };
-		742A7EA72434246600D45F20 /* CObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 742A7E732434246600D45F20 /* CObject.cpp */; };
 		742A7EA82434246600D45F20 /* magic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 742A7E742434246600D45F20 /* magic.cpp */; };
-		742A7EA92434246600D45F20 /* esUtil_X11.c in Sources */ = {isa = PBXBuildFile; fileRef = 742A7E792434246600D45F20 /* esUtil_X11.c */; };
-		742A7EAA2434246600D45F20 /* esShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 742A7E7C2434246600D45F20 /* esShader.cpp */; };
-		742A7EAB2434246600D45F20 /* esUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 742A7E7F2434246600D45F20 /* esUtil.cpp */; };
 		742A7EAC2434246600D45F20 /* CGLES3Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 742A7E802434246600D45F20 /* CGLES3Renderer.cpp */; };
 		742A7EAD2434246600D45F20 /* CGLES3ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 742A7E812434246600D45F20 /* CGLES3ShaderProgram.cpp */; };
-		742A7EAE2434246600D45F20 /* esTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 742A7E832434246600D45F20 /* esTransform.cpp */; };
-		742A7EAF2434246600D45F20 /* esShapes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 742A7E872434246600D45F20 /* esShapes.cpp */; };
-		742A7EB02434246600D45F20 /* esUtil_Android.c in Sources */ = {isa = PBXBuildFile; fileRef = 742A7E892434246600D45F20 /* esUtil_Android.c */; };
-		742A7EB12434246600D45F20 /* esUtil_win32.c in Sources */ = {isa = PBXBuildFile; fileRef = 742A7E8C2434246600D45F20 /* esUtil_win32.c */; };
 		742A7EB22434246600D45F20 /* CRenderInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 742A7E902434246600D45F20 /* CRenderInput.cpp */; };
 		742A7EB32434246600D45F20 /* CRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 742A7E912434246600D45F20 /* CRenderer.cpp */; };
 		742A7EB42434246600D45F20 /* CRenderPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 742A7E942434246600D45F20 /* CRenderPass.cpp */; };
@@ -81,27 +73,17 @@
 		742A7E6F2434245A00D45F20 /* IResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IResource.h; sourceTree = "<group>"; };
 		742A7E702434245A00D45F20 /* IShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IShader.h; sourceTree = "<group>"; };
 		742A7E722434246600D45F20 /* CMagic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMagic.cpp; sourceTree = "<group>"; };
-		742A7E732434246600D45F20 /* CObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CObject.cpp; sourceTree = "<group>"; };
 		742A7E742434246600D45F20 /* magic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = magic.cpp; sourceTree = "<group>"; };
 		742A7E752434246600D45F20 /* CApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CApplication.h; sourceTree = "<group>"; };
-		742A7E792434246600D45F20 /* esUtil_X11.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = esUtil_X11.c; sourceTree = "<group>"; };
 		742A7E7A2434246600D45F20 /* egl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = egl.h; sourceTree = "<group>"; };
-		742A7E7B2434246600D45F20 /* esUtil_win.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = esUtil_win.h; sourceTree = "<group>"; };
-		742A7E7C2434246600D45F20 /* esShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = esShader.cpp; sourceTree = "<group>"; };
 		742A7E7D2434246600D45F20 /* eglext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eglext.h; sourceTree = "<group>"; };
-		742A7E7E2434246600D45F20 /* esUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = esUtil.h; sourceTree = "<group>"; };
-		742A7E7F2434246600D45F20 /* esUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = esUtil.cpp; sourceTree = "<group>"; };
 		742A7E802434246600D45F20 /* CGLES3Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CGLES3Renderer.cpp; sourceTree = "<group>"; };
 		742A7E812434246600D45F20 /* CGLES3ShaderProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CGLES3ShaderProgram.cpp; sourceTree = "<group>"; };
 		742A7E822434246600D45F20 /* CGLES3Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLES3Renderer.h; sourceTree = "<group>"; };
-		742A7E832434246600D45F20 /* esTransform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = esTransform.cpp; sourceTree = "<group>"; };
 		742A7E842434246600D45F20 /* eglplatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eglplatform.h; sourceTree = "<group>"; };
 		742A7E852434246600D45F20 /* gl3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gl3.h; sourceTree = "<group>"; };
 		742A7E862434246600D45F20 /* CGLES3ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLES3ShaderProgram.h; sourceTree = "<group>"; };
-		742A7E872434246600D45F20 /* esShapes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = esShapes.cpp; sourceTree = "<group>"; };
-		742A7E892434246600D45F20 /* esUtil_Android.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = esUtil_Android.c; sourceTree = "<group>"; };
 		742A7E8A2434246600D45F20 /* gl3platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gl3platform.h; sourceTree = "<group>"; };
-		742A7E8C2434246600D45F20 /* esUtil_win32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = esUtil_win32.c; sourceTree = "<group>"; };
 		742A7E8D2434246600D45F20 /* khrplatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = khrplatform.h; sourceTree = "<group>"; };
 		742A7E8E2434246600D45F20 /* CRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRenderer.h; sourceTree = "<group>"; };
 		742A7E8F2434246600D45F20 /* CShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CShaderProgram.h; sourceTree = "<group>"; };
@@ -273,7 +255,6 @@
 			isa = PBXGroup;
 			children = (
 				742A7E722434246600D45F20 /* CMagic.cpp */,
-				742A7E732434246600D45F20 /* CObject.cpp */,
 				742A7E742434246600D45F20 /* magic.cpp */,
 				742A7E752434246600D45F20 /* CApplication.h */,
 				742A7E762434246600D45F20 /* render */,
@@ -313,24 +294,15 @@
 				74DECBC4243E97D90069223C /* CGLES3RenderTarget.cpp */,
 				74DECBC3243E97D90069223C /* CGLES3RenderTarget.h */,
 				742A7EE3243AD13600D45F20 /* OpenGLType.h */,
-				742A7E782434246600D45F20 /* LinuxX11 */,
 				742A7E7A2434246600D45F20 /* egl.h */,
-				742A7E7B2434246600D45F20 /* esUtil_win.h */,
-				742A7E7C2434246600D45F20 /* esShader.cpp */,
 				742A7E7D2434246600D45F20 /* eglext.h */,
-				742A7E7E2434246600D45F20 /* esUtil.h */,
-				742A7E7F2434246600D45F20 /* esUtil.cpp */,
 				742A7E802434246600D45F20 /* CGLES3Renderer.cpp */,
 				742A7E812434246600D45F20 /* CGLES3ShaderProgram.cpp */,
 				742A7E822434246600D45F20 /* CGLES3Renderer.h */,
-				742A7E832434246600D45F20 /* esTransform.cpp */,
 				742A7E842434246600D45F20 /* eglplatform.h */,
 				742A7E852434246600D45F20 /* gl3.h */,
 				742A7E862434246600D45F20 /* CGLES3ShaderProgram.h */,
-				742A7E872434246600D45F20 /* esShapes.cpp */,
-				742A7E882434246600D45F20 /* Android */,
 				742A7E8A2434246600D45F20 /* gl3platform.h */,
-				742A7E8B2434246600D45F20 /* Win32 */,
 				742A7E8D2434246600D45F20 /* khrplatform.h */,
 				74DECBC0243D4FE30069223C /* CGLES3IndexBufferObject.cpp */,
 				74DECBC1243D4FE30069223C /* CGLES3IndexBufferObject.h */,
@@ -340,30 +312,6 @@
 				74DECBBE243D4FC30069223C /* CGLES3VertexBufferObject.h */,
 			);
 			path = gles3;
-			sourceTree = "<group>";
-		};
-		742A7E782434246600D45F20 /* LinuxX11 */ = {
-			isa = PBXGroup;
-			children = (
-				742A7E792434246600D45F20 /* esUtil_X11.c */,
-			);
-			path = LinuxX11;
-			sourceTree = "<group>";
-		};
-		742A7E882434246600D45F20 /* Android */ = {
-			isa = PBXGroup;
-			children = (
-				742A7E892434246600D45F20 /* esUtil_Android.c */,
-			);
-			path = Android;
-			sourceTree = "<group>";
-		};
-		742A7E8B2434246600D45F20 /* Win32 */ = {
-			isa = PBXGroup;
-			children = (
-				742A7E8C2434246600D45F20 /* esUtil_win32.c */,
-			);
-			path = Win32;
 			sourceTree = "<group>";
 		};
 		742A7E952434246600D45F20 /* component */ = {
@@ -602,22 +550,15 @@
 				742A7EAD2434246600D45F20 /* CGLES3ShaderProgram.cpp in Sources */,
 				74DECBC5243E97DA0069223C /* CGLES3RenderTarget.cpp in Sources */,
 				742A7EB82434246600D45F20 /* CApplication.cpp in Sources */,
-				742A7EAB2434246600D45F20 /* esUtil.cpp in Sources */,
 				74DECBCC243EA02A0069223C /* CTGAImage.cpp in Sources */,
 				742A7EB72434246600D45F20 /* CComponent.cpp in Sources */,
 				742A7ED82434404300D45F20 /* CMesh.cpp in Sources */,
 				74C231122427602A0041B1AC /* main.m in Sources */,
-				742A7EAE2434246600D45F20 /* esTransform.cpp in Sources */,
-				742A7EB02434246600D45F20 /* esUtil_Android.c in Sources */,
-				742A7EB12434246600D45F20 /* esUtil_win32.c in Sources */,
 				742A7EB22434246600D45F20 /* CRenderInput.cpp in Sources */,
-				742A7EA92434246600D45F20 /* esUtil_X11.c in Sources */,
 				742A7EBB2434246600D45F20 /* CSceneNode.cpp in Sources */,
 				742A7EB52434246600D45F20 /* CCameraComponent.cpp in Sources */,
 				742A7EBC2434246600D45F20 /* CGameObject.cpp in Sources */,
-				742A7EAA2434246600D45F20 /* esShader.cpp in Sources */,
 				74C2310A242760260041B1AC /* HelloTriangle.xcdatamodeld in Sources */,
-				742A7EAF2434246600D45F20 /* esShapes.cpp in Sources */,
 				74DECBBF243D4FC30069223C /* CGLES3VertexBufferObject.cpp in Sources */,
 				742A7EA62434246600D45F20 /* CMagic.cpp in Sources */,
 				742A7EDC2434406C00D45F20 /* CShader.cpp in Sources */,
@@ -630,7 +571,6 @@
 				742A7EBA2434246600D45F20 /* CSceneManager.cpp in Sources */,
 				74C23104242760260041B1AC /* ViewController.mm in Sources */,
 				742A7EDF2439E71900D45F20 /* CMaterialInstance.cpp in Sources */,
-				742A7EA72434246600D45F20 /* CObject.cpp in Sources */,
 				74DECBC8243E98990069223C /* CGLES3Texture.cpp in Sources */,
 				74DECBBC243D4F8F0069223C /* CGLES3VertexArrayObject.cpp in Sources */,
 				742A7EDA2434405700D45F20 /* CMaterial.cpp in Sources */,

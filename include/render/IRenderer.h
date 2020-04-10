@@ -21,8 +21,6 @@ public:
     virtual IRenderTarget *CreateRenderTarget(int width, int height, int format) = 0;
     virtual IRenderInput *CreateRenderInput();
     virtual IShaderProgram *CreateShaderProgram() = 0;
-protected:
-    virtual void Render(IRenderInput *pRenderInput, IRenderTarget *pRenderTarget) = 0;
 };
 } // namespace magic
 

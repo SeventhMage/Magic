@@ -19,7 +19,7 @@ IRenderTarget *CRenderPass::BindRenderTarget()
     return m_pRenderTarget;
 }
 
-void CRenderPass::SetRenderTarget(<#IRenderTarget *#>target)
+void CRenderPass::SetRenderTarget(IRenderTarget *target)
 {
     m_pRenderTarget = target;
 }

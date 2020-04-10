@@ -44,6 +44,7 @@ struct SShaderParam
             memcpy(paramData, param.paramData, paramSize);
             strncpy(paramName, param.paramName, MAX_PATH * sizeof(char));
         }
+        return *this;
     }
 
     ~SShaderParam()

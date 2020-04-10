@@ -8,7 +8,7 @@ CMagic::CMagic(SRenderContent *context, const char *title, int width, int height
 :m_pApplication(new CApplication())
 {
     m_pSceneManager = new CSceneManager();
-    m_pRenderer = new CGLES3Renderer(context, title, width, height, 0);
+    m_pRenderer = new CGLES3Renderer(context, title, width, height);
 }
 
 CMagic::~CMagic()

@@ -18,7 +18,6 @@ public:
 	virtual void EndTarget();
 	virtual ITexture *GetBindTexture(int index) const;
 	virtual ITexture *GetDepthTexture() const;
-	virtual ITexture *GetTexture(int index) const;
 
 private:
 	std::vector<ITexture *> m_bindTexture;

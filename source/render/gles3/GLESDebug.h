@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <assert.h>
-#include "GL/glew.h"
+#include "gl3.h"
 
 namespace magic
 {
@@ -60,21 +60,25 @@ inline void CheckGLFBOStatus(const char *filename, int lineNum, GLenum target)
 		case GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
 			printf("File Line Number[%s:%d] GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT\n", filename, lineNum);
 			break;
+			/*
 		case GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER:
 			printf("File Line Number[%s:%d] GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER\n", filename, lineNum);
 			break;
 		case GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER:
 			printf("File Line Number[%s:%d] GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER\n", filename, lineNum);
 			break;
+			*/
 		case GL_FRAMEBUFFER_UNSUPPORTED:
 			printf("File Line Number[%s:%d] GL_FRAMEBUFFER_UNSUPPORTED\n", filename, lineNum);
 			break;
 		case GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE:
 			printf("File Line Number[%s:%d] GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE\n", filename, lineNum);
 			break;
+			/*
 		case GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS:
 			printf("File Line Number[%s:%d] GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS\n", filename, lineNum);
 			break;
+			*/
 		default:
 			printf("File Line Number[%s:%d] unknown error\n", filename, lineNum);
 			break;

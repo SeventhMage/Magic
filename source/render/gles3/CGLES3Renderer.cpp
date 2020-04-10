@@ -21,7 +21,7 @@ void CGLES3Renderer::Render(IRenderInput *pRenderInput)
     {
         ITexture *pTexture = pRenderInput->GetTexture(i);
         if (pTexture)
-            pTexture->BindTextureSlot(i);
+            pTexture->Bind(i);
     }
     IBufferObject *pIBO = pRenderInput->GetIndexBufferObject();
     if (pIBO)

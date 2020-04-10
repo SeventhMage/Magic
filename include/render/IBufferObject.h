@@ -1,5 +1,5 @@
-#ifndef _MAGIC_RENDER_IBUFFER_H_
-#define _MAGIC_RENDER_IBUFFER_OBJECT_H_
+#ifndef _MAGIC_I_BUFFEROBJECT_H_
+#define _MAGIC_I_BUFFEROBJECT_H_
 
 namespace magic
 {

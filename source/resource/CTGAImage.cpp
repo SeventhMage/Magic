@@ -39,6 +39,7 @@ ubyte *CTGAImage::Load(const char *filename)
 	fread(&m_tgaHeader, 18 /* sizeof(TGAHEADER)*/, 1, pFile);
 
 	// Do byte swap for big vs little endian
+	/*
 #ifdef __APPLE__
 	LITTLE_ENDIAN_WORD(&tgaHeader.colorMapStart);
 	LITTLE_ENDIAN_WORD(&tgaHeader.colorMapLength);
@@ -47,6 +48,7 @@ ubyte *CTGAImage::Load(const char *filename)
 	LITTLE_ENDIAN_WORD(&tgaHeader.width);
 	LITTLE_ENDIAN_WORD(&tgaHeader.height);
 #endif
+*/
 
 	// Get width, height, and depth of texture
 	m_iWidth = m_tgaHeader.width;

@@ -27,6 +27,7 @@ public:
     virtual void SetIndexBuffer(void *data, int size) = 0;
     virtual void SetShaderProgram(IShaderProgram *pShaderProgram) = 0;
     virtual void SetTexture(int slot, ITexture *texture) = 0;
+    virtual void SetTransparent(bool transparent) = 0;
     
 };
 }

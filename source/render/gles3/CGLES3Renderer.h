@@ -1,7 +1,7 @@
 #ifndef _MAGIC_C_GLES3RENDERER_H_
 #define _MAGIC_C_GLES3RENDERER_H_
 
-#include "render/CRenderer.h"
+#include "../CRenderer.h"
 #include "render/SRenderContent.h"
 #include "gl3.h"
 

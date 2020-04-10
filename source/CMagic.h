@@ -25,7 +25,7 @@ private:
     int m_iFPS;
     int m_iFixDelta;
 
-    CSceneManager *m_pSceneManager;
+    ISceneManager *m_pSceneManager;
     IRenderer *m_pRenderer;
 };
 }

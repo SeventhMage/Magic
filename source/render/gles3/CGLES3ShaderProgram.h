@@ -2,6 +2,7 @@
 #define _MAGIC_C_GLES3_SHADERPROGRAM_H_
 
 #include "../CShaderProgram.h"
+#include "gl3.h"
 
 namespace magic
 {
@@ -22,10 +23,6 @@ public:
     virtual void BindAttributeLocation(int index, const char *name);
 
 private:
-    void GetShaderUniform();
-
-private:
-    GLuint LoadShader(GLenum type, char *shaderSrc);
     void GetShaderUniform();
 
 private:

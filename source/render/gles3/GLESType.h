@@ -3,7 +3,7 @@
 
 #include "resource/IShader.h"
 #include "render/ITexture.h"
-#include "magicType.h"
+#include "base/magicType.h"
 #include "gl3.h"
 
 namespace magic
@@ -62,9 +62,11 @@ static GLenum GetGLColorFormat(EColorFormat format)
 	case EColorFormat::RGBA16F:
 		return GL_RGBA16F;
 	case EColorFormat::BGR:
+	/*
 		return GL_BGR;
 	case EColorFormat::BGRA:
 		return GL_BGRA;
+		*/
 	case EColorFormat::LUMINANCE:
 		return GL_LUMINANCE;
 	default:

@@ -26,7 +26,7 @@ public:
     T *AddComponent()
     {
         T *com = new T();
-        m_ComponetMap.insert(std::pair<int, CComponent *>(com->GetID(), com));
+        m_ComponetMap.insert(std::pair<int, IComponent *>(com->GetID(), com));
         return com;
     }
 

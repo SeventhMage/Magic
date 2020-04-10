@@ -20,6 +20,7 @@ public:
     virtual IBufferObject *GetVertexArrayObject() const;
     virtual IBufferObject *GetVertexBufferObject() const;
     virtual IBufferObject *GetIndexBufferObject() const;
+    virtual bool IsTransparent() const { return m_bTransparent; }
 
     virtual void SetRenderQueue(int id);
     virtual void SetVertexAttribute(int index, int size, int stride, int offset);
@@ -27,6 +28,7 @@ public:
     virtual void SetIndexBuffer(void *data, int size);
     virtual void SetShaderProgram(IShaderProgram *pShaderProgram);
     virtual void SetTexture(int slot, ITexture *texture);
+    virtual void SetTransparent(bool transparent) { m_bTransparent = transparent; }
 private:
     std::vector<ITexture *> m_TextureArray;
     IShaderProgram *m_pShaderProgram;
@@ -34,6 +36,7 @@ private:
     IBufferObject *m_pVAO;
     IBufferObject *m_pVBO;
     IBufferObject *m_pIBO;
+    bool m_bTransparent;
 };
 }
 

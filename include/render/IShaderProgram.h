@@ -2,6 +2,7 @@
 #define _MAGIC_I_SHADER_PROGRAM_H_
 
 #include "resource/IShader.h"
+#include "base/magicType.h"
 
 namespace magic
 {

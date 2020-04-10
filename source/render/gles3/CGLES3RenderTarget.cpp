@@ -47,7 +47,7 @@ CGLES3RenderTarget::CGLES3RenderTarget(int textureCount, int width, int height, 
 	}
 	else if (textureCount == 0 && bHaveDepth)
 	{
-		glDrawBuffer(GL_NONE);
+		glDrawBuffers(1, drawBuffers);
 	}
 }
 CGLES3RenderTarget::~CGLES3RenderTarget()
@@ -64,7 +64,7 @@ void CGLES3RenderTarget::BeginTarget()
 {
 	GLDebug(glBindFramebuffer(GL_FRAMEBUFFER, m_fbo));
 	GLDebug(glViewport(0, 0, m_iWidth, m_iHeight));
-	GLDebug(glClearDepth(1.0f));
+	GLDebug(glClearDepthf(1.0f));
 	GLDebug(glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
 	if (m_textureCount == 0 && m_depthTexture != nullptr)
 	{
@@ -87,13 +87,6 @@ ITexture *CGLES3RenderTarget::GetBindTexture(int index) const
 ITexture *CGLES3RenderTarget::GetDepthTexture() const
 {
 	return m_depthTexture;
-}
-
-ITexture *CGLES3RenderTarget::GetTexture(int index) const
-{
-	if (index < 0)
-		return GetDepthTexture();
-	return GetBindTexture(index);
 }
 
 } // namespace magic

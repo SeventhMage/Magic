@@ -9,6 +9,7 @@ namespace magic
 class IMagic
 {
 public:
+    virtual ~IMagic() {}
     virtual void Run() = 0;
     virtual void SetFPS(int fps) = 0;
     virtual int GetFPS() const = 0;

@@ -18,7 +18,7 @@ public:
 	virtual void CreateCube(EColorFormat internalformat, int width, int height, EColorFormat format, EPixelType type, void *data[6]);
 	virtual void CreateDepth(int width, int height);
 	virtual void Create(uint target, uint handle);
-	virtual uint GetHandle() { return m_hTexture; }
+	virtual uint GetHandle() const { return m_hTexture; }
 
 private:
 	uint m_hTexture;

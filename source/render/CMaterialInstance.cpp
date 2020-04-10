@@ -3,8 +3,8 @@
 namespace magic
 {
 CMaterialInstance::CMaterialInstance()
-:m_pMaterial(nullptr)
-,m_pShaderProgram(nullptr)
+:m_pShaderProgram(nullptr)
+,m_pMaterial(nullptr)
 {
 }
 
