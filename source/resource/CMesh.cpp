@@ -6,11 +6,11 @@
 namespace magic
 {
 CMesh::CMesh()
-:m_Vertices(nullptr)
-,m_Indices(nullptr)
-,m_VerticesCount(0)
+:m_VerticesCount(0)
 ,m_IndicesCount(0)
 ,m_VerticesStride(0)
+,m_Vertices(nullptr)
+,m_Indices(nullptr)
 {
 
 }
@@ -18,6 +18,26 @@ CMesh::~CMesh()
 {
     SAFE_DEL_ARRAY(m_Vertices);
     SAFE_DEL_ARRAY(m_Indices);
+}
+
+int CMesh::GetVerticesOffset(int index) const
+{
+    auto it = m_VerticesOffset.find(index);
+    if (it != m_VerticesOffset.end())
+    {
+        return it->second;
+    }
+    return 0;
+}
+
+int CMesh::GetVerticesSize(int index) const
+{
+    auto it = m_VerticesSize.find(index);
+    if (it != m_VerticesSize.end())
+    {
+        return it->second;
+    }
+    return 0;
 }
 
 void CMesh::SetIndices(const short *indices, int size)
@@ -36,24 +56,19 @@ void CMesh::SetVertices(const float *vertices, int size)
     m_VerticesCount = size / (sizeof(float) * 3);
 }
 
-int CMesh::GetVerticesOffset(int location) const
+void CMesh::SetVerticesOffset(int index, int offset)
 {
-    auto it = m_VerticesOffset.find(location);
-    if (it != m_VerticesOffset.end())
-    {
-        return it->second;
-    }
-    return 0;
-}
-
-void CMesh::SetVerticesOffset(int location, int offset)
-{
-    m_VerticesOffset[location] = offset;
+    m_VerticesOffset[index] = offset;
 }
 
 void CMesh::SetVerticesStride(int stride)
 {
     m_VerticesStride = stride;
+}
+
+void CMesh::SetVerticesSize(int index, int size)
+{
+    m_VerticesSize[index] = size;
 }
 
 }

@@ -29,11 +29,11 @@ public:
     virtual void CreateStandShader(E_STAND_SHADER standShader) = 0;
     virtual bool Attach(IShader *shader) = 0;
     virtual bool AttachSource(const char *shaderSrc, EShaderType shaderType) = 0;
-    virtual void Detach(EShaderType shaderType);
-    virtual bool Link();
+    virtual void Detach(EShaderType shaderType) = 0;
+    virtual bool Link() = 0;
     virtual uint GetHandle() const = 0;
-    virtual void BindAttributeLocation(int argc, ...);
-    virtual void BindAttributeLocation(int index, const char *name);
+    virtual void BindAttributeLocation(int argc, ...) = 0;
+    virtual void BindAttributeLocation(int index, const char *name) = 0;
 
 
 };

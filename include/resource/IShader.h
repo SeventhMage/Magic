@@ -14,6 +14,7 @@ enum EShaderType
 class IShader : public IResource
 {
 public:
+    virtual ~IShader() {}
     virtual EResourceType GetType() const { return EResourceType::Shader; }
     virtual EShaderType GetShaderType() const = 0;
     virtual char *GetSource() const = 0;

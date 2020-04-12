@@ -1,10 +1,12 @@
 #include "resource/CMaterial.h"
 
+#include <string.h>
+
 namespace magic
 {
 CMaterial::CMaterial()
 {
-
+    memset(m_Shaders, 0, sizeof(IShader *) * EShaderType::Count);
 }
 CMaterial::~CMaterial()
 {
@@ -56,6 +58,7 @@ const char *CMaterial::GetAttributeName(int index) const
     {
         return m_VertexAttribute[index].name.c_str();
     }
+    return "";
 }
 
 void CMaterial::AddAttribute(const char *name)

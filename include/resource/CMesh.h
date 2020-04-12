@@ -12,7 +12,6 @@ class CMesh : public IMesh
 public:
     CMesh();
     virtual ~CMesh();
-
     virtual float *GetVertices() const {return m_Vertices;}
     virtual short *GetIndices() const {return m_Indices; }
     virtual int GetVerticesCount() const {return m_VerticesCount;}
@@ -34,6 +33,7 @@ private:
     float *m_Vertices;
     short *m_Indices;
     std::map<int, int> m_VerticesOffset;
+    std::map<int, int> m_VerticesSize;
 };
 } // namespace magic
 

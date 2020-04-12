@@ -1,7 +1,7 @@
 #ifndef _MAGIC_I_GAME_OBJECT_H_
 #define _MAGIC_I_GAME_OBJECT_H_
 
-#include "scene/IGameObject.h"
+#include "IGameObject.h"
 
 namespace magic
 {
@@ -11,7 +11,7 @@ public:
     CGameObject();
     ~CGameObject();
 
-    virtual OID GetID() const;
+    virtual OID GetID() const { return m_OID; }
     virtual ISceneNode *GetSceneNode() const { return m_pSceneNode; }
 
     void Update();

@@ -121,7 +121,7 @@
 		742A7ECF2434247C00D45F20 /* StringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringHelper.h; sourceTree = "<group>"; };
 		742A7ED02434247C00D45F20 /* SColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SColor.h; sourceTree = "<group>"; };
 		742A7ED12434247C00D45F20 /* base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base.h; sourceTree = "<group>"; };
-		742A7ED2243425F300D45F20 /* SRenderContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRenderContent.h; sourceTree = "<group>"; };
+		742A7ED2243425F300D45F20 /* SRenderContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRenderContext.h; sourceTree = "<group>"; };
 		742A7ED324343A5800D45F20 /* CVector4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVector4.h; sourceTree = "<group>"; };
 		742A7ED424343F2A00D45F20 /* CMesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMesh.h; sourceTree = "<group>"; };
 		742A7ED524343F4300D45F20 /* CMaterial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMaterial.h; sourceTree = "<group>"; };
@@ -164,6 +164,7 @@
 		74DECBCA243EA02A0069223C /* CTGAImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTGAImage.cpp; sourceTree = "<group>"; };
 		74DECBCB243EA02A0069223C /* CTGAImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGAImage.h; sourceTree = "<group>"; };
 		74DECBCD243EA0420069223C /* IImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IImage.h; sourceTree = "<group>"; };
+		74DECBCE2442B1790069223C /* ERender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ERender.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,7 +208,8 @@
 				742A7E5B2434245A00D45F20 /* IRenderPass.h */,
 				742A7E5C2434245A00D45F20 /* ITexture.h */,
 				742A7E5D2434245A00D45F20 /* IRenderInput.h */,
-				742A7ED2243425F300D45F20 /* SRenderContent.h */,
+				742A7ED2243425F300D45F20 /* SRenderContext.h */,
+				74DECBCE2442B1790069223C /* ERender.h */,
 			);
 			path = render;
 			sourceTree = "<group>";
@@ -228,6 +230,7 @@
 			children = (
 				742A7E662434245A00D45F20 /* ISceneNode.h */,
 				742A7E672434245A00D45F20 /* ISceneManager.h */,
+				742A7EA12434246600D45F20 /* CGameObject.h */,
 				742A7E682434245A00D45F20 /* IScene.h */,
 				742A7E692434245A00D45F20 /* IGameObject.h */,
 			);
@@ -333,7 +336,6 @@
 				742A7E9E2434246600D45F20 /* CSceneNode.h */,
 				742A7E9F2434246600D45F20 /* CSceneManager.cpp */,
 				742A7EA02434246600D45F20 /* CSceneNode.cpp */,
-				742A7EA12434246600D45F20 /* CGameObject.h */,
 				742A7EA22434246600D45F20 /* CGameObject.cpp */,
 			);
 			path = scene;

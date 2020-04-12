@@ -35,216 +35,107 @@
 //    a minimal vertex/fragment shader.  The purpose of this
 //    example is to demonstrate the basic concepts of
 //    OpenGL ES 3.0 rendering.
-#include "esUtil.h"
 #include "magic.h"
-#include "component/CCamera.h"
-#include "component/CMeshRenderer.h"
+#include "scene/CGameObject.h"
+#include "resource/CMesh.h"
+#include "resource/CMaterial.h"
+#include "resource/CShader.h"
+#include "component/CCameraComponent.h"
+#include "component/CMeshRendererComponent.h"
 
+#include <stdio.h>
 
-typedef struct
-{
-   // Handle to a program object
-   GLuint programObject;
+#include <OpenGLES/ES3/gl.h>
 
-} UserData;
-
-///
-// Create a shader object, load the shader source, and
-// compile the shader.
-//
-GLuint LoadShader ( GLenum type, const char *shaderSrc )
-{
-   GLuint shader;
-   GLint compiled;
-
-   // Create the shader object
-   shader = glCreateShader ( type );
-
-   if ( shader == 0 )
-   {
-      return 0;
-   }
-
-   // Load the shader source
-   glShaderSource ( shader, 1, &shaderSrc, NULL );
-
-   // Compile the shader
-   glCompileShader ( shader );
-
-   // Check the compile status
-   glGetShaderiv ( shader, GL_COMPILE_STATUS, &compiled );
-
-   if ( !compiled )
-   {
-      GLint infoLen = 0;
-
-      glGetShaderiv ( shader, GL_INFO_LOG_LENGTH, &infoLen );
-
-      if ( infoLen > 1 )
-      {
-         char *infoLog = (char *)malloc ( sizeof ( char ) * infoLen );
-
-         glGetShaderInfoLog ( shader, infoLen, NULL, infoLog );
-         esLogMessage ( "Error compiling shader:\n%s\n", infoLog );
-
-         free ( infoLog );
-      }
-
-      glDeleteShader ( shader );
-      return 0;
-   }
-
-   return shader;
-
-}
-
-///
-// Initialize the shader and program object
-//
-int Init ( ESContext *esContext )
-{
-   UserData *userData = (UserData *)esContext->userData;
-   char vShaderStr[] =
-      "#version 300 es                          \n"
-      "layout(location = 0) in vec4 vPosition;  \n"
-      "void main()                              \n"
-      "{                                        \n"
-      "   gl_Position = vPosition;              \n"
-      "}                                        \n";
-
-   char fShaderStr[] =
-      "#version 300 es                              \n"
-      "precision mediump float;                     \n"
-      "out vec4 fragColor;                          \n"
-      "void main()                                  \n"
-      "{                                            \n"
-      "   fragColor = vec4 ( 1.0, 0.0, 0.0, 1.0 );  \n"
-      "}                                            \n";
-
-   GLuint vertexShader;
-   GLuint fragmentShader;
-   GLuint programObject;
-   GLint linked;
-
-   // Load the vertex/fragment shaders
-   vertexShader = LoadShader ( GL_VERTEX_SHADER, vShaderStr );
-   fragmentShader = LoadShader ( GL_FRAGMENT_SHADER, fShaderStr );
-
-   // Create the program object
-   programObject = glCreateProgram ( );
-
-   if ( programObject == 0 )
-   {
-      return 0;
-   }
-
-   glAttachShader ( programObject, vertexShader );
-   glAttachShader ( programObject, fragmentShader );
-
-   // Link the program
-   glLinkProgram ( programObject );
-
-   // Check the link status
-   glGetProgramiv ( programObject, GL_LINK_STATUS, &linked );
-
-   if ( !linked )
-   {
-      GLint infoLen = 0;
-
-      glGetProgramiv ( programObject, GL_INFO_LOG_LENGTH, &infoLen );
-
-      if ( infoLen > 1 )
-      {
-         char *infoLog = (char *)malloc ( sizeof ( char ) * infoLen );
-
-         glGetProgramInfoLog ( programObject, infoLen, NULL, infoLog );
-         esLogMessage ( "Error linking program:\n%s\n", infoLog );
-
-         free ( infoLog );
-      }
-
-      glDeleteProgram ( programObject );
-      return FALSE;
-   }
-
-   // Store the program object
-   userData->programObject = programObject;
-
-   glClearColor ( 1.0f, 1.0f, 1.0f, 0.0f );
-   return TRUE;
-}
-
-///
-// Draw a triangle using the shader pair created in Init()
-//
-void Draw ( ESContext *esContext )
-{
-   UserData *userData = (UserData *)esContext->userData;
-   GLfloat vVertices[] = {  0.0f,  0.5f, 0.0f,
-                            -0.5f, -0.5f, 0.0f,
-                            0.5f, -0.5f, 0.0f
-                         };
-
-   // Set the viewport
-   glViewport ( 0, 0, esContext->width, esContext->height );
-
-   // Clear the color buffer
-   glClear ( GL_COLOR_BUFFER_BIT );
-
-   // Use the program object
-   glUseProgram ( userData->programObject );
-
-   // Load the vertex data
-   glVertexAttribPointer ( 0, 3, GL_FLOAT, GL_FALSE, 0, vVertices );
-   glEnableVertexAttribArray ( 0 );
-
-   glDrawArrays ( GL_TRIANGLES, 0, 3 );
-}
-
-void Shutdown ( ESContext *esContext )
-{
-   UserData *userData = (UserData *)esContext->userData;
-
-   glDeleteProgram ( userData->programObject );
-}
 using namespace magic;
-int esMain ( ESContext *esContext )
+
+IMagic *mc = nullptr;
+IRenderer *renderer;
+ISceneManager *pSceneMgr = nullptr;
+IMesh *mesh = nullptr;
+IShader *vertShader;
+IShader *fragShader;
+IMaterial *material;
+
+void update()
 {
-   esContext->userData = malloc ( sizeof ( UserData ) );
-   
-    IMagic *mc = CreateMagic(esContext, "Hello Triangle", 320, 240, ES_WINDOW_RGB);
-   //esCreateWindow ( esContext, "Hello Triangle", 320, 240, ES_WINDOW_RGB );
+    renderer->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    mc->Run();
+}
 
-   if ( !Init ( esContext ) )
-   {
-      return GL_FALSE;
-   }
+void shutdown()
+{
+    printf("Application end.\n\n");
 
-    
-    
+    printf("Cleaning ... \n");
+    pSceneMgr->UnloadScene();
+    delete material;
+    delete fragShader;
+    delete vertShader;
+    delete mesh;
+    Clean();
+    printf("Finish clean.\n\n");
+}
+
+int esMain ( SRenderContext *esContext )
+{
     printf("Start initalizing Engine ... \n");
-    mc->InitEngine();
+    mc = CreateMagic(esContext, "Test", 1280, 960);
+    esContext->updateFunc = &update;
+    esContext->shutdownFunc = &shutdown;
+    renderer = mc->GetRenderer();
+    renderer->SetClearColor(1, 0, 0, 0);
     printf("Finished initalizing Engine.\n\n");
 
     printf("Loading scene ... \n");
-    CSceneManager *pSceneMgr = mc->GetSceneManager();
-    CScene *pScene = pSceneMgr->LoadScene();
-    CGameObject *camera = pScene->AddGameObject<CGameObject>();
-    camera->AddComponent<CCamera>();
-    CGameObject *triangle = pScene->AddGameObject<CGameObject>();
-    CMeshRenderer *renderer = triangle->AddComponent<CMeshRenderer>();
-    
-    
+    pSceneMgr = mc->GetSceneManager();
+    IScene *pScene = pSceneMgr->LoadScene();
+    IGameObject *go = pScene->GetRootGameObject();
+    CGameObject camera;
+    camera.AddComponent<CCameraComponent>();
+    go->GetSceneNode()->AddChild(camera.GetSceneNode());
+    CGameObject triangle;
+    CMeshRendererComponent *pMeshRenderer = triangle.AddComponent<CMeshRendererComponent>();
+    mesh = new CMesh();
+    float vertices[] = {
+     -1, -1, 0, 1, 0, 0, 1,
+     1, -1, 0, 0, 1, 0, 1,
+     0, 1, 0, 0, 0, 1, 1};
+    short indices[] = {0, 1, 2};
+    mesh->SetVertices(vertices, sizeof(vertices));
+    mesh->SetVerticesStride(7 * sizeof(float));
+    mesh->SetVerticesOffset(0, 0);
+    mesh->SetVerticesOffset(1, sizeof(float) * 3);
+    mesh->SetVerticesSize(0, 3);
+    mesh->SetVerticesSize(1, 4);
+    mesh->SetIndices(indices, sizeof(indices));
+    char vShaderStr[] =
+     "#version 300 es                          \n"
+     "layout(location = 0) in vec4 vPosition;  \n"
+     "void main()                              \n"
+     "{                                        \n"
+     "   gl_Position = vPosition;              \n"
+     "}                                        \n";
+
+    char fShaderStr[] =
+     "#version 300 es                              \n"
+     "precision mediump float;                     \n"
+     "out vec4 fragColor;                          \n"
+     "void main()                                  \n"
+     "{                                            \n"
+     "   fragColor = vec4 ( 1.0, 0.0, 0.0, 1.0 );  \n"
+     "}                                            \n";
+    vertShader = new CShader(EShaderType::Vertex, vShaderStr);
+    fragShader = new CShader(EShaderType::Fragment, fShaderStr);
+    material = new CMaterial();
+    material->AddAttribute("vPosition");
+    material->SetShader(vertShader->GetShaderType(), vertShader);
+    material->SetShader(fragShader->GetShaderType(), fragShader);
+    pMeshRenderer->Initialize(mc->GetRenderer(), material, mesh);
+    go->GetSceneNode()->AddChild(triangle.GetSceneNode());
     printf("Finished loading scene. \n\n");
 
-    printf("Cleaning ... \n");
-    pSceneMgr->UnloadScene(pScene);
-     
-    Clean();
-    printf("Finish clean.\n\n");
+    printf("Start Application ... \n");
 
-   esRegisterShutdownFunc ( esContext, Shutdown );
-   esRegisterDrawFunc ( esContext, Draw );
-
-   return GL_TRUE;
+    return 1;
 }

@@ -3,7 +3,7 @@
 
 namespace magic
 {
-struct SRenderContent
+struct SRenderContext
 {
     /// Put platform specific data here
     void *platformData;
@@ -33,6 +33,10 @@ struct SRenderContent
     /// EGL surface
     EGLSurface eglSurface;
 #endif
+    void ( *drawFunc ) ( SRenderContext * );
+    void ( *shutdownFunc ) ();
+    void ( *keyFunc ) ( SRenderContext *, unsigned char, int, int );
+    void ( *updateFunc ) ();
 };
 } // namespace magic
 

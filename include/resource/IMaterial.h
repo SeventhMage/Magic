@@ -9,6 +9,7 @@ namespace magic
 class IMaterial : public IResource
 {
 public:
+    virtual ~IMaterial(){}
     virtual EResourceType GetType() const { return EResourceType::Material; }
     virtual void SetShader(EShaderType, IShader *) = 0;
     virtual IShader *GetShader(EShaderType) const = 0;

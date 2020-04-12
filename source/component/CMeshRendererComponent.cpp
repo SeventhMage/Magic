@@ -26,7 +26,7 @@ void CMeshRendererComponent::Initialize(IRenderer *pRenderer, IMaterial *pMateri
     if (m_pRenderer)
     {
         m_pRenderInput = pRenderer->CreateRenderInput();
-        m_pMaterialInstance->Initialize(m_pRenderer, m_pMaterial);
+        m_pMaterialInstance->Initialize(m_pRenderer, pMaterial);
         SetMaterial(pMaterial);
         SetMesh(pMesh);
     }

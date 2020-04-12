@@ -9,7 +9,7 @@
 
 namespace magic
 {
-class CMeshRendererComponent : CComponent
+class CMeshRendererComponent : public CComponent
 {
 public:
     CMeshRendererComponent();

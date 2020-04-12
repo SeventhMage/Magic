@@ -2,11 +2,11 @@
 #define _MAGIC_H_
 
 #include "IMagic.h"
-#include "render/SRenderContent.h"
+#include "render/SRenderContext.h"
 
 namespace magic
 {
-IMagic *CreateMagic(SRenderContent *context, const char *title, int width, int height);
+IMagic *CreateMagic(SRenderContext *context, const char *title, int width, int height);
 void Clean();
 }
 

@@ -19,7 +19,6 @@ public:
 
 private:
     IShaderProgram *m_pShaderProgram;
-    IMaterial *m_pMaterial;
 };
 } // namespace magic
 

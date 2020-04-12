@@ -15,7 +15,7 @@ enum EResourceType
 class IResource : public IObject
 {
 public:
-    virtual ~IResource();
+    virtual ~IResource() {}
     virtual EResourceType GetType() const = 0;
 };
 }

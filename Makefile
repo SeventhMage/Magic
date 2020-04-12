@@ -7,7 +7,7 @@ include config.mk
 .PHONY: all clean
 
 CPPFLAGS := -Wall -g -std=c++11 -Qunused-arguments -stdlib=libc++
-INCLUDES := -Iinclude -Icommon -Idependency
+INCLUDES := -Iinclude -Icommon -Idependency/gl
 LIBS := -lm
 
 OBJDIR := build/obj/magic
@@ -26,7 +26,7 @@ dir_create:
 	@$(call CRT_DIR,$(BINDIR))
 
 $(TARGET) : $(OBJS)
-	$(CPP) $(CPPFLAGS) $(EXTRA_LFLAGS) $(INCLUDES) $(LIBS) $^ -o $@
+	$(CPP) $(CPPFLAGS) $() $(EXTRA_LFLAGS) $(INCLUDES) $(LIBS) $^ -o $@
 	mv $(TARGET) $(BINDIR)
 $(OBJDIR)/%.o : %.cpp
 	$(CPP) $(CPPFLAGS) $(EXTRA_LFLAGS) $(INCLUDES) $< -c -o $@

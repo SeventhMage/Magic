@@ -4,7 +4,6 @@ namespace magic
 {
 CMaterialInstance::CMaterialInstance()
 :m_pShaderProgram(nullptr)
-,m_pMaterial(nullptr)
 {
 }
 
@@ -23,9 +22,9 @@ void CMaterialInstance::Initialize(IRenderer *pRenderer, IMaterial *pMaterial)
             m_pShaderProgram->Attach(pShader);
     }
 
-    for (int i=0; i<m_pMaterial->GetAttributeCount(); ++i)
+    for (int i=0; i< pMaterial->GetAttributeCount(); ++i)
     {
-        m_pShaderProgram->BindAttributeLocation(i, m_pMaterial->GetAttributeName(i));
+        m_pShaderProgram->BindAttributeLocation(i, pMaterial->GetAttributeName(i));
     }
     m_pShaderProgram->Link();
 }

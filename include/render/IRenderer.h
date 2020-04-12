@@ -18,8 +18,10 @@ public:
     virtual void CreateRenderPass(const CMatrix4 &viewProjMatrix) = 0;
     virtual void SubmitToRenderQueue(IRenderInput *pInput) = 0;
     virtual void Render() = 0;
+    virtual void SetClearColor(float r, float g, float b, float a) = 0;
+    virtual void Clear(int flags) = 0;
     virtual IRenderTarget *CreateRenderTarget(int width, int height, int format) = 0;
-    virtual IRenderInput *CreateRenderInput();
+    virtual IRenderInput *CreateRenderInput() = 0;
     virtual IShaderProgram *CreateShaderProgram() = 0;
 };
 } // namespace magic

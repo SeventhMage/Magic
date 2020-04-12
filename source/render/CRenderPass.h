@@ -13,7 +13,7 @@ public:
     virtual IRenderTarget *BindRenderTarget();
     virtual void SetRenderTarget(IRenderTarget *);
     virtual IRenderTarget *GetRenderTarget() { return m_pRenderTarget; }
-    virtual bool IsEnable();
+    virtual bool IsEnable() const { return m_bEnable; }
 private:
     IRenderTarget *m_pRenderTarget;
     bool m_bEnable;

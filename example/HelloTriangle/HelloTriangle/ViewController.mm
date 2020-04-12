@@ -7,15 +7,15 @@
 //
 
 #import "ViewController.h"
-#include "esUtil.h"
+#import "SRenderContext.h"
 
-extern void esMain( ESContext *esContext );
+extern void esMain( magic::SRenderContext *esContext );
 
 
 @interface ViewController ()
 {
     
-    ESContext _esContext;
+    magic::SRenderContext _esContext;
 }
 @property (strong, nonatomic) EAGLContext *context;
 
@@ -86,7 +86,7 @@ extern void esMain( ESContext *esContext );
 
     if ( _esContext.shutdownFunc )
     {
-        _esContext.shutdownFunc( &_esContext );
+        _esContext.shutdownFunc();
     }
 }
 
@@ -95,7 +95,7 @@ extern void esMain( ESContext *esContext );
 {
     if ( _esContext.updateFunc )
     {
-        _esContext.updateFunc( &_esContext, self.timeSinceLastUpdate );
+        _esContext.updateFunc( );
     }
 }
 

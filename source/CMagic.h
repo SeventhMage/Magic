@@ -4,14 +4,14 @@
 #include "IMagic.h"
 #include "base/CSingleton.h"
 #include "CApplication.h"
-#include "render/SRenderContent.h"
+#include "render/SRenderContext.h"
 
 namespace magic
 {
 class CMagic : public IMagic
 {
 public:
-    CMagic(SRenderContent *context, const char *title, int width, int height);
+    CMagic(SRenderContext *context, const char *title, int width, int height);
     ~CMagic();
     
     virtual void Run();

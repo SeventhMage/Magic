@@ -11,12 +11,13 @@ namespace magic
 class CRenderInput : public IRenderInput
 {
 public:
+    static const int MAX_TEXTURE_NUM = 32;
     CRenderInput();
     virtual ~CRenderInput();
     virtual IShaderProgram *GetShaderProgram() const { return m_pShaderProgram; }
     virtual int GetRenderQueue() const { return m_RenderQueueID; }
     virtual ITexture *GetTexture(int slot) const;
-    virtual int GetTextureCount() const { return m_TextureArray.size(); }
+    virtual int GetTextureCount() const { return m_TextureCount; }
     virtual IBufferObject *GetVertexArrayObject() const;
     virtual IBufferObject *GetVertexBufferObject() const;
     virtual IBufferObject *GetIndexBufferObject() const;
@@ -30,7 +31,8 @@ public:
     virtual void SetTexture(int slot, ITexture *texture);
     virtual void SetTransparent(bool transparent) { m_bTransparent = transparent; }
 private:
-    std::vector<ITexture *> m_TextureArray;
+    ITexture *m_TextureArray[MAX_TEXTURE_NUM];
+    int m_TextureCount;
     IShaderProgram *m_pShaderProgram;
     int m_RenderQueueID;
     IBufferObject *m_pVAO;

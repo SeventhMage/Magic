@@ -9,12 +9,21 @@ CRenderInput::CRenderInput()
 ,m_pVBO(nullptr)
 ,m_pIBO(nullptr)
 {
-
+    memset(m_TextureArray, 0, sizeof(ITexture *) * MAX_TEXTURE_NUM);
 }
 
 CRenderInput::~CRenderInput()
 {
 
+}
+
+ITexture *CRenderInput::GetTexture(int slot) const
+{
+    if (slot >=0 && slot < MAX_TEXTURE_NUM)
+    {
+        return m_TextureArray[slot];
+    }
+    return nullptr;
 }
 
 IBufferObject *CRenderInput::GetVertexArrayObject() const
@@ -59,7 +68,10 @@ void CRenderInput::SetIndexBuffer(void *data, int size)
 
 void CRenderInput::SetTexture(int slot, ITexture *pTexture)
 {
-
+    if (slot >=0 && slot < MAX_TEXTURE_NUM)
+    {
+        m_TextureArray[slot] = pTexture;
+    }
 }
 
 }

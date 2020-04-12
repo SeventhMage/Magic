@@ -4,7 +4,7 @@
 
 namespace magic
 {
-CMagic::CMagic(SRenderContent *context, const char *title, int width, int height)
+CMagic::CMagic(SRenderContext *context, const char *title, int width, int height)
 :m_pApplication(new CApplication())
 {
     m_pSceneManager = new CSceneManager();
@@ -28,12 +28,13 @@ void CMagic::Run()
     {
         m_pSceneManager->Update();
         compensationTime += passTime;
+        /*
         do
         {
-            //m_pSceneManager->FixedUpdate(m_iFixDelta);
+            m_pSceneManager->FixedUpdate(m_iFixDelta);
             compensationTime -= m_iFixDelta;
         } while (compensationTime > m_iFixDelta);
-
+*/
         //m_pSceneManager->Render();
         lastTime = m_pApplication->GetSystemTime();
     }
