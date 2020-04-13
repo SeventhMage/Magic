@@ -3,12 +3,12 @@
 
 namespace magic
 {
-enum
-{
-    MAGIC_COLOR_BUFFER,
-    MAGIC_DEPTH_BUFFER,
-    MAGIC_STENCIL_BUFFER,
-}
+
+/* ClearBufferMask */
+#define MAGIC_DEPTH_BUFFER_BIT                              0x00000100
+#define MAGIC_STENCIL_BUFFER_BIT                            0x00000400
+#define MAGIC_COLOR_BUFFER_BIT                              0x00004000
+
 }
 
 #endif

@@ -3,6 +3,7 @@
 
 #include "resource/IShader.h"
 #include "render/ITexture.h"
+#include "render/ERender.h"
 #include "base/magicType.h"
 #include "gl3.h"
 
@@ -89,6 +90,18 @@ static GLenum GetGLPixelType(EPixelType type)
 	default:
 		return GL_UNSIGNED_BYTE;
 	}
+}
+
+static int GetGLColorMask(int mask)
+{
+    int result = 0;
+    if (mask & MAGIC_DEPTH_BUFFER_BIT)
+        result |= GL_DEPTH_BUFFER_BIT;
+    if (mask & MAGIC_DEPTH_BUFFER_BIT)
+        result |= GL_DEPTH_BUFFER_BIT;
+    if (mask & MAGIC_DEPTH_BUFFER_BIT)
+        result |= GL_DEPTH_BUFFER_BIT;
+    return result;
 }
 
 } // namespace magic

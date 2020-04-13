@@ -40,6 +40,7 @@
 #include "resource/CMesh.h"
 #include "resource/CMaterial.h"
 #include "resource/CShader.h"
+#include "ERender.h"
 #include "component/CCameraComponent.h"
 #include "component/CMeshRendererComponent.h"
 
@@ -59,7 +60,7 @@ IMaterial *material;
 
 void update()
 {
-    renderer->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    renderer->Clear(MAGIC_COLOR_BUFFER_BIT | MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT);
     mc->Run();
 }
 

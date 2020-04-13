@@ -132,7 +132,6 @@
 		742A7EDD2439E71900D45F20 /* CMaterialInstance.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CMaterialInstance.cpp; sourceTree = "<group>"; };
 		742A7EDE2439E71900D45F20 /* CMaterialInstance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMaterialInstance.h; sourceTree = "<group>"; };
 		742A7EE0243ACA2800D45F20 /* CShaderProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CShaderProgram.cpp; sourceTree = "<group>"; };
-		742A7EE3243AD13600D45F20 /* OpenGLType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLType.h; sourceTree = "<group>"; };
 		742A7EE4243AD40900D45F20 /* Log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		74C230F9242760260041B1AC /* HelloTriangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTriangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74C230FC242760260041B1AC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -165,6 +164,7 @@
 		74DECBCB243EA02A0069223C /* CTGAImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGAImage.h; sourceTree = "<group>"; };
 		74DECBCD243EA0420069223C /* IImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IImage.h; sourceTree = "<group>"; };
 		74DECBCE2442B1790069223C /* ERender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ERender.h; sourceTree = "<group>"; };
+		74DECBCF2443E3A20069223C /* GLESType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLESType.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,12 +296,12 @@
 				74DECBC6243E98990069223C /* CGLES3Texture.h */,
 				74DECBC4243E97D90069223C /* CGLES3RenderTarget.cpp */,
 				74DECBC3243E97D90069223C /* CGLES3RenderTarget.h */,
-				742A7EE3243AD13600D45F20 /* OpenGLType.h */,
 				742A7E7A2434246600D45F20 /* egl.h */,
 				742A7E7D2434246600D45F20 /* eglext.h */,
 				742A7E802434246600D45F20 /* CGLES3Renderer.cpp */,
 				742A7E812434246600D45F20 /* CGLES3ShaderProgram.cpp */,
 				742A7E822434246600D45F20 /* CGLES3Renderer.h */,
+				74DECBCF2443E3A20069223C /* GLESType.h */,
 				742A7E842434246600D45F20 /* eglplatform.h */,
 				742A7E852434246600D45F20 /* gl3.h */,
 				742A7E862434246600D45F20 /* CGLES3ShaderProgram.h */,

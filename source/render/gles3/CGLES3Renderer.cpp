@@ -2,6 +2,7 @@
 #include "CGLES3ShaderProgram.h"
 #include "CGLES3RenderTarget.h"
 #include "GLESDebug.h"
+#include "GLESType.h"
 #include "base/Log.h"
 
 namespace magic
@@ -19,7 +20,7 @@ void CGLES3Renderer::SetClearColor(float r, float g, float b, float a)
 
 void CGLES3Renderer::Clear(int flags)
 {
-    glClear(flags);
+    glClear(GetGLColorMask(flags));
 }
 
 void CGLES3Renderer::Render(IRenderInput *pRenderInput)
