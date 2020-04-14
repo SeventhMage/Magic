@@ -97,10 +97,10 @@ static int GetGLColorMask(int mask)
     int result = 0;
     if (mask & MAGIC_DEPTH_BUFFER_BIT)
         result |= GL_DEPTH_BUFFER_BIT;
-    if (mask & MAGIC_DEPTH_BUFFER_BIT)
-        result |= GL_DEPTH_BUFFER_BIT;
-    if (mask & MAGIC_DEPTH_BUFFER_BIT)
-        result |= GL_DEPTH_BUFFER_BIT;
+    if (mask & MAGIC_STENCIL_BUFFER_BIT)
+        result |= GL_STENCIL_BUFFER_BIT;
+    if (mask & MAGIC_COLOR_BUFFER_BIT)
+        result |= GL_COLOR_BUFFER_BIT;
     return result;
 }
 

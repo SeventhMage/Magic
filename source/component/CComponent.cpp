@@ -3,6 +3,7 @@
 namespace magic
 {
 CComponent::CComponent()
+:m_pGameObject(nullptr)
 {
 }
 

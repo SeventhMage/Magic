@@ -2,7 +2,8 @@
 #define _MAGIC_C_CAMERA_H_
 
 #include "CComponent.h"
-#include "render/IRenderTarget.h"
+#include "render/IRenderPass.h"
+#include "render/IRenderer.h"
 
 namespace magic
 {
@@ -19,12 +20,12 @@ public:
 
     virtual void Update();
 
-    /**
-     * Camera will render to RenderTarget
-     * **/
-    void SetRenderTarget(IRenderTarget *pRenderTarget);
-    IRenderTarget *GetRenderTarget();
-    
+    void Initialize(IRenderer *pRenderer, CameraType type);
+    void SetClearColor(float a, float r, float g, float b);
+    void SetClearBit(int bit);
+private:
+    IRenderPass *m_pRenderPass;
+    CameraType m_Type;
 };
 
 } // namespace magic

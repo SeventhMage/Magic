@@ -14,7 +14,7 @@ class CRenderer : public IRenderer
 public:
     CRenderer();
 
-    virtual void CreateRenderPass(const CMatrix4 &viewProjMatrix);
+    virtual IRenderPass *CreateRenderPass();
     virtual void SubmitToRenderQueue(IRenderInput *pInput);
     virtual void Render();
     virtual IRenderTarget *CreateRenderTarget(int width, int height, int format);

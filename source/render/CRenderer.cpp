@@ -1,4 +1,5 @@
 #include "CRenderer.h"
+#include "CRenderPass.h"
 #include "render/CRenderInput.h"
 
 namespace magic
@@ -15,8 +16,9 @@ void CRenderer::Render(IRenderInput *pRenderInput)
     //call platform api to real draw
 }
 
-void CRenderer::CreateRenderPass(const CMatrix4 &viewProjMatrix)
+IRenderPass *CRenderer::CreateRenderPass()
 {
+    return new CRenderPass(this, nullptr);
 }
 IRenderTarget *CRenderer::CreateRenderTarget(int width, int height, int format)
 {
