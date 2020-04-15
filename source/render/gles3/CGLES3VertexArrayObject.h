@@ -1,12 +1,12 @@
 #ifndef _MAGIC_C_GLES3_VERTEX_ARRAY_OBJECT_H_
 #define _MAGIC_C_GLES3_VERTEX_ARRAY_OBJECT_H_
 
-#include "render/IBufferObject.h"
+#include "../CVertexArrayObject.h"
 #include "gl3.h"
 
 namespace magic
 {
-class CGLES3VertexArrayObject : public IBufferObject
+class CGLES3VertexArrayObject : public CVertexArrayObject
 {
 public:
     CGLES3VertexArrayObject();

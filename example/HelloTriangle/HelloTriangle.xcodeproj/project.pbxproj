@@ -43,6 +43,9 @@
 		74DECBC5243E97DA0069223C /* CGLES3RenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DECBC4243E97D90069223C /* CGLES3RenderTarget.cpp */; };
 		74DECBC8243E98990069223C /* CGLES3Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DECBC7243E98990069223C /* CGLES3Texture.cpp */; };
 		74DECBCC243EA02A0069223C /* CTGAImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DECBCA243EA02A0069223C /* CTGAImage.cpp */; };
+		74DECBD2244689AF0069223C /* CVertexBufferObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DECBD0244689AF0069223C /* CVertexBufferObject.cpp */; };
+		74DECBD5244689C90069223C /* CIndexBufferObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DECBD3244689C90069223C /* CIndexBufferObject.cpp */; };
+		74DECBD8244689E00069223C /* CVertexArrayObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DECBD6244689E00069223C /* CVertexArrayObject.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -165,6 +168,12 @@
 		74DECBCD243EA0420069223C /* IImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IImage.h; sourceTree = "<group>"; };
 		74DECBCE2442B1790069223C /* ERender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ERender.h; sourceTree = "<group>"; };
 		74DECBCF2443E3A20069223C /* GLESType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLESType.h; sourceTree = "<group>"; };
+		74DECBD0244689AF0069223C /* CVertexBufferObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CVertexBufferObject.cpp; sourceTree = "<group>"; };
+		74DECBD1244689AF0069223C /* CVertexBufferObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVertexBufferObject.h; sourceTree = "<group>"; };
+		74DECBD3244689C90069223C /* CIndexBufferObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CIndexBufferObject.cpp; sourceTree = "<group>"; };
+		74DECBD4244689C90069223C /* CIndexBufferObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIndexBufferObject.h; sourceTree = "<group>"; };
+		74DECBD6244689E00069223C /* CVertexArrayObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CVertexArrayObject.cpp; sourceTree = "<group>"; };
+		74DECBD7244689E00069223C /* CVertexArrayObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVertexArrayObject.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,6 +293,12 @@
 				742A7E942434246600D45F20 /* CRenderPass.cpp */,
 				742A7EDD2439E71900D45F20 /* CMaterialInstance.cpp */,
 				742A7EE0243ACA2800D45F20 /* CShaderProgram.cpp */,
+				74DECBD0244689AF0069223C /* CVertexBufferObject.cpp */,
+				74DECBD1244689AF0069223C /* CVertexBufferObject.h */,
+				74DECBD3244689C90069223C /* CIndexBufferObject.cpp */,
+				74DECBD4244689C90069223C /* CIndexBufferObject.h */,
+				74DECBD6244689E00069223C /* CVertexArrayObject.cpp */,
+				74DECBD7244689E00069223C /* CVertexArrayObject.h */,
 			);
 			path = render;
 			sourceTree = "<group>";
@@ -550,6 +565,7 @@
 				742A7EB92434246600D45F20 /* CScene.cpp in Sources */,
 				742A7EB62434246600D45F20 /* CMeshRendererComponent.cpp in Sources */,
 				742A7EAD2434246600D45F20 /* CGLES3ShaderProgram.cpp in Sources */,
+				74DECBD5244689C90069223C /* CIndexBufferObject.cpp in Sources */,
 				74DECBC5243E97DA0069223C /* CGLES3RenderTarget.cpp in Sources */,
 				742A7EB82434246600D45F20 /* CApplication.cpp in Sources */,
 				74DECBCC243EA02A0069223C /* CTGAImage.cpp in Sources */,
@@ -563,6 +579,7 @@
 				74C2310A242760260041B1AC /* HelloTriangle.xcdatamodeld in Sources */,
 				74DECBBF243D4FC30069223C /* CGLES3VertexBufferObject.cpp in Sources */,
 				742A7EA62434246600D45F20 /* CMagic.cpp in Sources */,
+				74DECBD8244689E00069223C /* CVertexArrayObject.cpp in Sources */,
 				742A7EDC2434406C00D45F20 /* CShader.cpp in Sources */,
 				74C231292427627C0041B1AC /* Hello_Triangle.cpp in Sources */,
 				742A7EB42434246600D45F20 /* CRenderPass.cpp in Sources */,
@@ -570,6 +587,7 @@
 				742A7EB32434246600D45F20 /* CRenderer.cpp in Sources */,
 				74DECBC2243D4FE30069223C /* CGLES3IndexBufferObject.cpp in Sources */,
 				742A7EE2243ACA2800D45F20 /* CShaderProgram.cpp in Sources */,
+				74DECBD2244689AF0069223C /* CVertexBufferObject.cpp in Sources */,
 				742A7EBA2434246600D45F20 /* CSceneManager.cpp in Sources */,
 				74C23104242760260041B1AC /* ViewController.mm in Sources */,
 				742A7EDF2439E71900D45F20 /* CMaterialInstance.cpp in Sources */,

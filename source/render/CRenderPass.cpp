@@ -33,4 +33,9 @@ void CRenderPass::SetClearColor(float a, float r, float g, float b)
     m_ClearColor[3] = b;
 }
 
+void CRenderPass::SetViewProjectMatirx(float *matrix)
+{
+    memcpy(m_vpMatrix, matrix, sizeof(m_vpMatrix));
+}
+
 }

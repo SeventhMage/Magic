@@ -60,7 +60,6 @@ IMaterial *material;
 
 void update()
 {
-    renderer->Clear(MAGIC_COLOR_BUFFER_BIT | MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT);
     mc->Run();
 }
 
@@ -93,7 +92,8 @@ int esMain ( SRenderContext *esContext )
     IScene *pScene = pSceneMgr->LoadScene();
     IGameObject *go = pScene->GetRootGameObject();
     CGameObject camera;
-    camera.AddComponent<CCameraComponent>();
+    CCameraComponent *pCamera = camera.AddComponent<CCameraComponent>();
+    pCamera->Initialize(renderer, CCameraComponent::Projection);
     go->GetSceneNode()->AddChild(camera.GetSceneNode());
     CGameObject triangle;
     CMeshRendererComponent *pMeshRenderer = triangle.AddComponent<CMeshRendererComponent>();

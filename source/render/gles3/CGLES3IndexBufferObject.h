@@ -1,12 +1,12 @@
 #ifndef _MAGIC_C_GLES3INDEXBUFFEROBJECT_H_
 #define _MAGIC_C_GLES3INDEXBUFFEROBJECT_H_
 
-#include "render/IBufferObject.h"
+#include "../CIndexBufferObject.h"
 #include "gl3.h"
 
 namespace magic
 {
-class CGLES3IndexBufferObject : public IBufferObject
+class CGLES3IndexBufferObject : public CIndexBufferObject
 {
 public:
     CGLES3IndexBufferObject(void *indices, GLsizei idsCount, GLenum idsType, GLenum mode, GLenum usage);
@@ -19,10 +19,10 @@ public:
     virtual void BufferSubData(void *data, int size, int offset);
 
     //GPUBufferType GetBufferType(){ return GBT_INDEX; };
-    GLenum GetGPUBufferMode() { return m_gpuBufferMode; }
-    GLenum GetGPUBufferUsage() { return m_gpuBufferUsage; }
+    int GetGPUBufferMode() { return m_gpuBufferMode; }
+    int GetGPUBufferUsage() { return m_gpuBufferUsage; }
     int GetIndicesNum() { return m_uIndicesNum; }
-    GLenum GetIndexType() { return m_idsType; }
+    int GetIndexType() { return m_idsType; }
 
 private:
     GLuint m_IBO;

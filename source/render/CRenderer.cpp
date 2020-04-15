@@ -36,26 +36,21 @@ void CRenderer::Render()
     {
         if (pass->IsEnable())
         {
-            IRenderTarget *pRenderTarget = pass->GetRenderTarget();
-            if (pRenderTarget)
-            {
-                pRenderTarget->BeginTarget();
-                for (auto queIt : m_OpaqueRenderQueueGroup)
-                {
-                    for (auto input : queIt.second)
-                    {
-                        Render(input);
-                    }
-                }
-                for (auto queIt : m_TransparentRenderQueueGroup)
-                {
-                    for (auto input : queIt.second)
-                    {
-                        Render(input);
-                    }
-                }
+            pass->BeginRenderTarget();
 
-                pRenderTarget->EndTarget();
+            for (auto queIt : m_OpaqueRenderQueueGroup)
+            {
+                for (auto input : queIt.second)
+                {
+                    Render(input);
+                }
+            }
+            for (auto queIt : m_TransparentRenderQueueGroup)
+            {
+                for (auto input : queIt.second)
+                {
+                    Render(input);
+                }
             }
         }
     }

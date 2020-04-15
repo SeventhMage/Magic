@@ -28,17 +28,17 @@ ITexture *CRenderInput::GetTexture(int slot) const
 
 IBufferObject *CRenderInput::GetVertexArrayObject() const
 {
-    return nullptr;
+    return m_pVAO;
 }
 
 IBufferObject *CRenderInput::GetVertexBufferObject() const
 {
-    return nullptr;
+    return m_pVBO;
 }
 
 IBufferObject *CRenderInput::GetIndexBufferObject() const
 {
-    return nullptr;
+    return m_pIBO;
 }
 
 void CRenderInput::SetRenderQueue(int id)
@@ -53,12 +53,12 @@ void CRenderInput::SetShaderProgram(IShaderProgram *pShaderProgram)
 
 void CRenderInput::SetVertexAttribute(int index, int size, int stride, int offset)
 {
-
+    //m_pVAO->EnableVertexAttrib(index, size, , stride, offset)
 }
 
 void CRenderInput::SetVertexBuffer(void *data, int size)
 {
-
+    
 }
 
 void CRenderInput::SetIndexBuffer(void *data, int size)

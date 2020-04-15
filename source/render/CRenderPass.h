@@ -14,16 +14,19 @@ public:
     virtual void BeginRenderTarget();
     virtual void SetRenderTarget(IRenderTarget *pRenderTarget) { m_pRenderTarget = pRenderTarget; }
     virtual IRenderTarget *GetRenderTarget() { return m_pRenderTarget; }
+    virtual float *GetViewProjectMatrix() const { return (float *)m_vpMatrix; }
     virtual bool IsEnable() const { return m_bEnable; }
     
     virtual void SetClearColor(float a, float r, float g, float b);
     virtual void SetClearBit(int bit) { m_ClearBit = bit; }
+    virtual void SetViewProjectMatirx(float matrix[16]);
     virtual void SetEnable(bool enable) { m_bEnable = enable; }
 private:
     IRenderer *m_pRenderer;
     IRenderTarget *m_pRenderTarget;
     int m_ClearBit;
     float m_ClearColor[4];
+    float m_vpMatrix[16];
     bool m_bEnable;
 };
 } // namespace magic

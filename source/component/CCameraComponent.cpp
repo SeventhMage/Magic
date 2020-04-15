@@ -1,4 +1,5 @@
 #include "component/CCameraComponent.h"
+#include "base/magicDef.h"
 
 #include <string.h>
 
@@ -13,6 +14,7 @@ CCameraComponent::CCameraComponent()
 
 CCameraComponent::~CCameraComponent()
 {
+    SAFE_DEL(m_pRenderPass);
 }
 
 void CCameraComponent::Initialize(IRenderer *pRenderer, CameraType type)

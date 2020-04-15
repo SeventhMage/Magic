@@ -3,6 +3,9 @@
 
 #include "render/IRenderInput.h"
 #include "render/IShaderProgram.h"
+#include "CVertexArrayObject.h"
+#include "CVertexBufferObject.h"
+#include "CIndexBufferObject.h"
 
 #include <vector>
 
@@ -35,9 +38,9 @@ private:
     int m_TextureCount;
     IShaderProgram *m_pShaderProgram;
     int m_RenderQueueID;
-    IBufferObject *m_pVAO;
-    IBufferObject *m_pVBO;
-    IBufferObject *m_pIBO;
+    CVertexArrayObject *m_pVAO;
+    CVertexBufferObject *m_pVBO;
+    CIndexBufferObject *m_pIBO;
     bool m_bTransparent;
 };
 }
