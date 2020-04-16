@@ -1,5 +1,5 @@
 #include "CScene.h"
-#include "CGameObject.h"
+#include "scene/CGameObject.h"
 
 namespace magic
 {

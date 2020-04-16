@@ -1,12 +1,12 @@
 #target_plat := ios
 #platform := ios_sim64
-target_plat := mac
-platform := x86_64
+#target_plat := mac
+#platform := x86_64
 include config.mk
 .SUFFIXES:
 .PHONY: all clean
 
-CPPFLAGS := -Wall -g -std=c++11 -Qunused-arguments -stdlib=libc++
+CPPFLAGS := -Wall -g -std=c++11 -Wunused-function #-Qunused-arguments -stdlib=libc++
 INCLUDES := -Iinclude -Icommon -Idependency/gl
 LIBS := -lm
 

@@ -1,5 +1,8 @@
 #include "render/CRenderInput.h"
 #include "render/ERender.h"
+#include "CVertexArrayObject.h"
+#include "CVertexBufferObject.h"
+#include "CIndexBufferObject.h"
 
 namespace magic
 {
@@ -16,7 +19,9 @@ CRenderInput::CRenderInput(IRenderer *pRenderer)
 
 CRenderInput::~CRenderInput()
 {
-
+    SAFE_DEL(m_pVAO);
+    SAFE_DEL(m_pVBO);
+    SAFE_DEL(m_pIBO);
 }
 
 ITexture *CRenderInput::GetTexture(int slot) const
@@ -55,17 +60,21 @@ void CRenderInput::SetShaderProgram(IShaderProgram *pShaderProgram)
 
 void CRenderInput::SetVertexAttribute(int index, int size, int stride, int offset)
 {
-    m_pVAO->EnableVertexAttrib(index, size, VariableType::FLOAT, stride, offset);
+    if (!m_pVAO)
+        m_pVAO = m_pRenderer->CreateVertexArrayObject();
+    ((CVertexArrayObject *)m_pVAO)->EnableVertexAttrib(index, size, VariableType::FLOAT, stride, offset);
 }
 
-void CRenderInput::SetVertexBuffer(void *data, int size)
+void CRenderInput::SetVertexBuffer(void *vertexes, int size, int usage, int first, int count, int mode)
 {
-    //m_pRenderer->CreateVertexBufferObject(data, size, <#int usage#>, <#int first#>, <#int count#>, <#int mode#>)
+    if (!m_pVBO)
+        m_pVBO = m_pRenderer->CreateVertexBufferObject(vertexes, size, usage, first, count, mode);
 }
 
-void CRenderInput::SetIndexBuffer(void *data, int size)
+void CRenderInput::SetIndexBuffer(void *indices, int idsCount, int idsType, int mode, int usage)
 {
-
+    if (!m_pIBO)
+        m_pIBO = m_pRenderer->CreateIndexBufferObject(indices, idsCount, idsType, mode, usage);
 }
 
 void CRenderInput::SetTexture(int slot, ITexture *pTexture)

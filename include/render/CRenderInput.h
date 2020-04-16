@@ -4,9 +4,6 @@
 #include "render/IRenderInput.h"
 #include "render/IShaderProgram.h"
 #include "render/IRenderer.h"
-#include "CVertexArrayObject.h"
-#include "CVertexBufferObject.h"
-#include "CIndexBufferObject.h"
 
 #include <vector>
 
@@ -29,8 +26,8 @@ public:
 
     virtual void SetRenderQueue(int id);
     virtual void SetVertexAttribute(int index, int size, int stride, int offset);
-    virtual void SetVertexBuffer(void *data, int size);
-    virtual void SetIndexBuffer(void *data, int size);
+    virtual void SetVertexBuffer(void *vertexes, int size, int usage, int first, int count, int mode);
+    virtual void SetIndexBuffer(void *indices, int idsCount, int idsType, int mode, int usage);
     virtual void SetShaderProgram(IShaderProgram *pShaderProgram);
     virtual void SetTexture(int slot, ITexture *texture);
     virtual void SetTransparent(bool transparent) { m_bTransparent = transparent; }
@@ -40,9 +37,9 @@ private:
     int m_TextureCount;
     IShaderProgram *m_pShaderProgram;
     int m_RenderQueueID;
-    CVertexArrayObject *m_pVAO;
-    CVertexBufferObject *m_pVBO;
-    CIndexBufferObject *m_pIBO;
+    IBufferObject *m_pVAO;
+    IBufferObject *m_pVBO;
+    IBufferObject *m_pIBO;
     bool m_bTransparent;
 };
 }

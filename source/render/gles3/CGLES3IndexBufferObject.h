@@ -19,8 +19,7 @@ public:
     virtual void BufferSubData(void *data, int size, int offset);
 
     //GPUBufferType GetBufferType(){ return GBT_INDEX; };
-    int GetGPUBufferMode() { return m_gpuBufferMode; }
-    int GetGPUBufferUsage() { return m_gpuBufferUsage; }
+    int GetMode() { return m_gpuBufferMode; }
     int GetIndicesNum() { return m_uIndicesNum; }
     int GetIndexType() { return m_idsType; }
 

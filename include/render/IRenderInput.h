@@ -23,8 +23,8 @@ public:
     virtual bool IsTransparent() const = 0;
     virtual void SetRenderQueue(int id) = 0;
     virtual void SetVertexAttribute(int index, int size, int stride, int offset) = 0;
-    virtual void SetVertexBuffer(void *data, int size) = 0;
-    virtual void SetIndexBuffer(void *data, int size) = 0;
+    virtual void SetVertexBuffer(void *vertexes, int size, int usage, int first, int count, int mode) = 0;
+    virtual void SetIndexBuffer(void *indices, int idsCount, int idsType, int mode, int usage) = 0;
     virtual void SetShaderProgram(IShaderProgram *pShaderProgram) = 0;
     virtual void SetTexture(int slot, ITexture *texture) = 0;
     virtual void SetTransparent(bool transparent) = 0;

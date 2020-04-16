@@ -3,6 +3,8 @@
 
 #include "magicType.h"
 
+#include <string.h>
+
 namespace magic
 {
 static std::string GetFileExtName(const char *filename)

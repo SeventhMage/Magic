@@ -1,6 +1,14 @@
 #ifndef _MAGIC_S_RENDER_CONTENT_H_
 #define _MAGIC_S_RENDER_CONTENT_H_
 
+#ifdef __APPLE__
+#include <OpenGLES/ES3/gl.h>
+#else
+#include <GLES3/gl3.h>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+#endif
+
 namespace magic
 {
 struct SRenderContext

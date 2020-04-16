@@ -47,8 +47,8 @@ void CMeshRendererComponent::SetMesh(IMesh *pMesh)
             for (int i=0; i<m_pMesh->GetVerticesAttributeCount(); ++i)
                 m_pRenderInput->SetVertexAttribute(i, m_pMesh->GetVerticesOffset(i), 
                     m_pMesh->GetVerticesStride(), m_pMesh->GetVerticesOffset(i));
-            m_pRenderInput->SetVertexBuffer(m_pMesh->GetVertices(), m_pMesh->GetVerticesCount() * sizeof(float));
-            m_pRenderInput->SetIndexBuffer(pMesh->GetIndices(), m_pMesh->GetIndicesCount() * sizeof(float));
+            //m_pRenderInput->SetVertexBuffer(m_pMesh->GetVertices(), m_pMesh->GetVerticesCount() * sizeof(float));
+            //m_pRenderInput->SetIndexBuffer(pMesh->GetIndices(), m_pMesh->GetIndicesCount() * sizeof(float));
         }
     }
 }

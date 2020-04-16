@@ -4,6 +4,8 @@
 #include "base/Log.h"
 #include "base/StringHelper.h"
 
+#include <stdarg.h>
+
 namespace magic
 {
 ///////////////////////////////////////////////////////////////////////////////

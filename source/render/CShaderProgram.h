@@ -6,6 +6,7 @@
 #include "render/IShaderProgram.h"
 
 #include <map>
+#include <string.h>
 
 namespace magic
 {

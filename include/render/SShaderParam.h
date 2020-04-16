@@ -2,6 +2,7 @@
 #define _MAGIC_S_SHADER_PARAM
 
 #include <stdlib.h>
+#include <string.h>
 
 namespace magic
 {

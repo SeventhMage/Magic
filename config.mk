@@ -159,6 +159,7 @@ ifeq ($(platform), ios_sim64)
 endif 
 
 endif ##ifeq ($(target_plat), ios)
+endif
 
 define CRT_DIR
 	if [ ! -d $(1) ];\
@@ -169,5 +170,3 @@ define CRT_DIR
       echo "******$(1) has been created!!!******";\
 	fi	
 endef
-
-endif

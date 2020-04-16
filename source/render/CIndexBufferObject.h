@@ -15,10 +15,9 @@ public:
     virtual void BufferSubData(void *data, int size, int offset) {}
 
     //GPUBufferType GetBufferType(){ return GBT_INDEX; };
-    int GetGPUBufferMode() { return 0; }
-    int GetGPUBufferUsage() { return 0; }
-    int GetIndicesNum() { return 0; }
-    int GetIndexType() { return 0; }
+    virtual int GetMode() { return 0; }
+    virtual int GetIndicesNum() { return 0; }
+    virtual int GetIndexType() { return 0; }
 
 private:
 };
