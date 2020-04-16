@@ -27,7 +27,7 @@ IRenderTarget *CRenderer::CreateRenderTarget(int width, int height, int format)
 
 IRenderInput *CRenderer::CreateRenderInput()
 {
-    return new CRenderInput();
+    return new CRenderInput(this);
 }
 
 void CRenderer::Render()

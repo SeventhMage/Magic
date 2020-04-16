@@ -1,6 +1,9 @@
 #include "CGLES3Renderer.h"
 #include "CGLES3ShaderProgram.h"
 #include "CGLES3RenderTarget.h"
+#include "CGLES3VertexArrayObject.h"
+#include "CGLES3VertexBufferObject.h"
+#include "CGLES3IndexBufferObject.h"
 #include "GLESDebug.h"
 #include "GLESType.h"
 #include "base/Log.h"
@@ -25,7 +28,7 @@ void CGLES3Renderer::Clear(int flags)
 
 void CGLES3Renderer::Render(IRenderInput *pRenderInput)
 {
-   IBufferObject *pVAO = pRenderInput->GetVertexArrayObject();
+   CVertexArrayObject *pVAO = (CVertexArrayObject *)pRenderInput->GetVertexArrayObject();
    pVAO->Bind();
    IShaderProgram *pProgram = pRenderInput->GetShaderProgram();
    if (pProgram)
@@ -36,14 +39,14 @@ void CGLES3Renderer::Render(IRenderInput *pRenderInput)
       if (pTexture)
          pTexture->Bind(i);
    }
-   IBufferObject *pIBO = pRenderInput->GetIndexBufferObject();
+   CIndexBufferObject *pIBO = (CIndexBufferObject *)pRenderInput->GetIndexBufferObject();
    if (pIBO)
    {
-      GLDebug(glDrawElements(pIBO->GetMode(), pIBO->GetVerticesCount(), pIBO->GetValueType(), 0));
+     // GLDebug(glDrawElements(pIBO->GetMode(), pIBO->GetVerticesCount(), pIBO->GetValueType(), 0));
    }
    else
    {
-      IBufferObject *pVBO = pRenderInput->GetVertexBufferObject();
+      CVertexBufferObject *pVBO = (CVertexBufferObject *)pRenderInput->GetVertexBufferObject();
       GLDebug(glDrawArrays(pVBO->GetMode(), pVBO->GetFirstIndex(), pVBO->GetVerticesCount()));
    }
 }
@@ -162,6 +165,21 @@ bool CGLES3Renderer::Init(SRenderContext *esContext, const char *title, GLint wi
 
 #endif // #ifndef __APPLE__
     return GL_TRUE;
+}
+
+IBufferObject *CGLES3Renderer::CreateVertexArrayObject()
+{
+    return new CGLES3VertexArrayObject();
+}
+
+IBufferObject *CGLES3Renderer::CreateVertexBufferObject(void *vertexes, int size, int usage, int first, int count, int mode)
+{
+    return new CGLES3VertexBufferObject(vertexes, size, usage, first, count, mode);
+}
+
+IBufferObject *CGLES3Renderer::CreateIndexBufferObject(void *indices, int idsCount, int idsType, int mode, int usage)
+{
+    return new CGLES3IndexBufferObject(indices, idsCount, idsType, mode, usage);
 }
 
 } // namespace magic

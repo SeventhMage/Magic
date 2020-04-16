@@ -1,9 +1,11 @@
 #include "render/CRenderInput.h"
+#include "render/ERender.h"
 
 namespace magic
 {
-CRenderInput::CRenderInput()
-:m_pShaderProgram(nullptr)
+CRenderInput::CRenderInput(IRenderer *pRenderer)
+:m_pRenderer(pRenderer)
+,m_pShaderProgram(nullptr)
 ,m_RenderQueueID(0)
 ,m_pVAO(nullptr)
 ,m_pVBO(nullptr)
@@ -53,12 +55,12 @@ void CRenderInput::SetShaderProgram(IShaderProgram *pShaderProgram)
 
 void CRenderInput::SetVertexAttribute(int index, int size, int stride, int offset)
 {
-    //m_pVAO->EnableVertexAttrib(index, size, , stride, offset)
+    m_pVAO->EnableVertexAttrib(index, size, VariableType::FLOAT, stride, offset);
 }
 
 void CRenderInput::SetVertexBuffer(void *data, int size)
 {
-    
+    //m_pRenderer->CreateVertexBufferObject(data, size, <#int usage#>, <#int first#>, <#int count#>, <#int mode#>)
 }
 
 void CRenderInput::SetIndexBuffer(void *data, int size)

@@ -5,6 +5,7 @@
 #include "IRenderTarget.h"
 #include "IRenderPass.h"
 #include "IShaderProgram.h"
+#include "IBufferObject.h"
 #include "math/CMatrix4.h"
 
 namespace magic
@@ -24,6 +25,9 @@ public:
     virtual IRenderTarget *CreateRenderTarget(int width, int height, int format) = 0;
     virtual IRenderInput *CreateRenderInput() = 0;
     virtual IShaderProgram *CreateShaderProgram() = 0;
+    virtual IBufferObject *CreateVertexArrayObject() = 0;
+    virtual IBufferObject *CreateVertexBufferObject(void *vertexes, int size, int usage, int first, int count, int mode) = 0;
+    virtual IBufferObject *CreateIndexBufferObject(void *indices, int idsCount, int idsType, int mode, int usage) = 0;
 };
 } // namespace magic
 

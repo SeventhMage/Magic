@@ -94,14 +94,116 @@ static GLenum GetGLPixelType(EPixelType type)
 
 static int GetGLColorMask(int mask)
 {
-    int result = 0;
-    if (mask & MAGIC_DEPTH_BUFFER_BIT)
-        result |= GL_DEPTH_BUFFER_BIT;
-    if (mask & MAGIC_STENCIL_BUFFER_BIT)
-        result |= GL_STENCIL_BUFFER_BIT;
-    if (mask & MAGIC_COLOR_BUFFER_BIT)
-        result |= GL_COLOR_BUFFER_BIT;
-    return result;
+	int result = 0;
+	if (mask & MAGIC_DEPTH_BUFFER_BIT)
+		result |= GL_DEPTH_BUFFER_BIT;
+	if (mask & MAGIC_STENCIL_BUFFER_BIT)
+		result |= GL_STENCIL_BUFFER_BIT;
+	if (mask & MAGIC_COLOR_BUFFER_BIT)
+		result |= GL_COLOR_BUFFER_BIT;
+	return result;
+}
+
+static GLenum GetGLVariableType(VariableType vat)
+{
+	switch (vat)
+	{
+	case BYTE:
+		return GL_BYTE;
+	case UBYTE:
+		return GL_UNSIGNED_BYTE;
+	case SHORT:
+		return GL_SHORT;
+	case USHORT:
+		return GL_UNSIGNED_SHORT;
+	case INT:
+		return GL_INT;
+	case UINT:
+		return GL_UNSIGNED_INT;
+	case FIXED:
+		return GL_FIXED;
+	case FLOAT:
+		return GL_FLOAT;
+	case HALF_FLOAT:
+		return GL_HALF_FLOAT;
+	//case DOUBLE:
+		//return GL_DOUBLE;
+	case INT_2_10_10_10_REV:
+		return GL_INT_2_10_10_10_REV;
+	case UINT_2_10_10_10_REV:
+		return GL_UNSIGNED_INT_2_10_10_10_REV;
+	default:
+		break;
+	}
+	return GL_FLOAT;
+}
+
+static int GetGLVariableSize(int vat)
+{
+	switch (vat)
+	{
+	case GL_BYTE:
+		return 1;
+	case GL_UNSIGNED_BYTE:
+		return 1;
+	case GL_SHORT:
+		return 2;
+	case GL_UNSIGNED_SHORT:
+		return 2;
+	case GL_INT:
+		return 4;
+	case GL_UNSIGNED_INT:
+		return 4;
+	case GL_FIXED:
+		return 4;
+	case GL_FLOAT:
+		return 4;
+	case GL_HALF_FLOAT:
+		return 4;
+	//case GL_DOUBLE:
+		//return 8;
+	case GL_INT_2_10_10_10_REV:
+		return 4;
+	case GL_UNSIGNED_INT_2_10_10_10_REV:
+		return 4;
+	default:
+		break;
+	}
+	return 4;
+}
+
+static uint GetVariableSize(VariableType vat)
+{
+	switch (vat)
+	{
+	case BYTE:
+		return 1;
+	case UBYTE:
+		return 1;
+	case SHORT:
+		return 2;
+	case USHORT:
+		return 2;
+	case INT:
+		return 4;
+	case UINT:
+		return 4;
+	case FIXED:
+		return 4;
+	case FLOAT:
+		return 4;
+	case HALF_FLOAT:
+		return 4;
+	case DOUBLE:
+		return 8;
+	case INT_2_10_10_10_REV:
+		return 4;
+	case UINT_2_10_10_10_REV:
+		return 4;
+	default:
+		break;
+	}
+	return 4;
 }
 
 } // namespace magic

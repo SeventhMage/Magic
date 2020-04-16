@@ -1,5 +1,6 @@
 #include "CGLES3VertexArrayObject.h"
 #include "GLESDebug.h"
+#include "GLESType.h"
 
 namespace magic
 {
@@ -26,6 +27,6 @@ void CGLES3VertexArrayObject::UnBind()
 void CGLES3VertexArrayObject::EnableVertexAttrib(int vertexArrayIndex, int size, int vertType, int stride, int offset)
 {
     GLDebug(glEnableVertexAttribArray(vertexArrayIndex));
-    GLDebug(glVertexAttribPointer(vertexArrayIndex, size, vertType, false, stride, (GLvoid *)offset));
+    GLDebug(glVertexAttribPointer(vertexArrayIndex, size, GetGLVariableType((VariableType)vertType), false, stride, (GLvoid *)offset));
 }
 }

@@ -15,10 +15,6 @@ public:
 
     virtual void Bind() = 0;
     virtual void UnBind() = 0;
-    virtual int GetMode() const = 0;
-    virtual int GetVerticesCount() const = 0;
-    virtual int GetValueType() const = 0;
-    virtual int GetFirstIndex() const = 0;
 };
 }
 

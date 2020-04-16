@@ -3,6 +3,7 @@
 
 #include "render/IRenderInput.h"
 #include "render/IShaderProgram.h"
+#include "render/IRenderer.h"
 #include "CVertexArrayObject.h"
 #include "CVertexBufferObject.h"
 #include "CIndexBufferObject.h"
@@ -15,7 +16,7 @@ class CRenderInput : public IRenderInput
 {
 public:
     static const int MAX_TEXTURE_NUM = 32;
-    CRenderInput();
+    CRenderInput(IRenderer *pRenderer);
     virtual ~CRenderInput();
     virtual IShaderProgram *GetShaderProgram() const { return m_pShaderProgram; }
     virtual int GetRenderQueue() const { return m_RenderQueueID; }
@@ -34,6 +35,7 @@ public:
     virtual void SetTexture(int slot, ITexture *texture);
     virtual void SetTransparent(bool transparent) { m_bTransparent = transparent; }
 private:
+    IRenderer *m_pRenderer;
     ITexture *m_TextureArray[MAX_TEXTURE_NUM];
     int m_TextureCount;
     IShaderProgram *m_pShaderProgram;
