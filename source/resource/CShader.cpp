@@ -1,21 +1,20 @@
 #include "resource/CShader.h"
 
 #include <string.h>
+#include <stdlib.h>
 
 namespace magic
 {
-CShader::CShader(EShaderType type, const char *source)
+CShader::CShader(EShaderType type, const char *source, int size)
 :m_ShaderType(type)
 {
-    int len = strlen(source);
-    m_Source = new char[len];
-    memcpy(m_Source, source, len * sizeof(char));
+    m_Source = (char *)malloc(size);
+    memcpy(m_Source, source, size);
 }
 
 CShader::~CShader()
 {
-    if (m_Source)
-        delete[]m_Source;
+    free(m_Source);
 }
 
 

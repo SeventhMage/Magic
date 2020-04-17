@@ -5,7 +5,7 @@ namespace magic
 {
 static OID s_OIDCount;
 CGameObject::CGameObject()
-: m_pSceneNode(new CSceneNode())
+: m_pSceneNode(new CSceneNode(this))
 , m_OID(++s_OIDCount)
 {
 }
@@ -17,9 +17,7 @@ CGameObject::~CGameObject()
 }
 void CGameObject::Update()
 {
-    IGameObject::Update();
-    if (m_pSceneNode)
-        m_pSceneNode->Update();
+    IGameObject::Update();    
 }
 
 } // namespace magic

@@ -24,7 +24,7 @@ void CMagic::Run()
     static long lastTime = m_pApplication->GetSystemTime();
     static long compensationTime = 0;
     long passTime = m_pApplication->GetSystemTime() - lastTime;
-    if (passTime >= m_iFixDelta)
+    //if (passTime >= m_iFixDelta)
     {
         m_pSceneManager->Update();
         compensationTime += passTime;

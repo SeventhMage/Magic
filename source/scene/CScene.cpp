@@ -17,7 +17,7 @@ CScene::~CScene()
 
 void CScene::Update()
 {
-    
+    m_RootObject->GetSceneNode()->Update();
 }
 
 } // namespace magic

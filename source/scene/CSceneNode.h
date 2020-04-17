@@ -3,16 +3,22 @@
 
 #include "scene/ISceneNode.h"
 
+#include <vector>
+
 namespace magic
 {
+class IGameObject;
 class CSceneNode : public ISceneNode
 {
 public:
-    CSceneNode();
+    CSceneNode(IGameObject *pGameObject);
     virtual ~CSceneNode();
     virtual void Update();
     virtual void AddChild(ISceneNode *pChild);
     virtual void AddParent(ISceneNode *pParent);
+private:
+    IGameObject *m_pGameObject;
+    std::vector<ISceneNode *> m_SceneNodeList;
 };
 } // namespace magic
 

@@ -97,6 +97,7 @@ int esMain ( SRenderContext *esContext )
     go->GetSceneNode()->AddChild(camera.GetSceneNode());
     CGameObject triangle;
     CMeshRendererComponent *pMeshRenderer = triangle.AddComponent<CMeshRendererComponent>();
+    go->GetSceneNode()->AddChild(triangle.GetSceneNode());
     mesh = new CMesh();
     float vertices[] = {
      -1, -1, 0, 1, 0, 0, 1,
@@ -126,8 +127,8 @@ int esMain ( SRenderContext *esContext )
      "{                                            \n"
      "   fragColor = vec4 ( 1.0, 0.0, 0.0, 1.0 );  \n"
      "}                                            \n";
-    vertShader = new CShader(EShaderType::Vertex, vShaderStr);
-    fragShader = new CShader(EShaderType::Fragment, fShaderStr);
+    vertShader = new CShader(EShaderType::Vertex, vShaderStr, sizeof(vShaderStr));
+    fragShader = new CShader(EShaderType::Fragment, fShaderStr, sizeof(fShaderStr));
     material = new CMaterial();
     material->AddAttribute("vPosition");
     material->SetShader(vertShader->GetShaderType(), vertShader);

@@ -8,7 +8,7 @@ namespace magic
 class CShader : public IShader
 {
 public:
-    CShader(EShaderType type, const char *source);
+    CShader(EShaderType type, const char *source, int size);
     virtual ~CShader();
 
     virtual EShaderType GetShaderType() const { return m_ShaderType; }
