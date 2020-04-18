@@ -10,15 +10,26 @@ CRenderer::CRenderer()
     //Set clear color
 }
 
+CRenderer::~CRenderer()
+{
+    for (size_t i = 0; i < m_RenderPassVec.size(); ++i)
+    {
+        SAFE_DEL(m_RenderPassVec[i]);
+    }
+    m_RenderPassVec.clear();
+}
+
 void CRenderer::Render(IRenderInput *pRenderInput)
 {
 
     //call platform api to real draw
 }
 
-IRenderPass *CRenderer::CreateRenderPass()
+IRenderPass *CRenderer::GenerateRenderPass()
 {
-    return new CRenderPass(this, nullptr);
+    IRenderPass *pRenderPass = new CRenderPass(this, nullptr);
+    m_RenderPassVec.push_back(pRenderPass);
+    return pRenderPass;
 }
 IRenderTarget *CRenderer::CreateRenderTarget(int width, int height, int format)
 {

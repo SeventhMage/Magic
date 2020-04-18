@@ -36,7 +36,7 @@ inline void DebugGLError(const char *filename, int lineNum)
 		assert(0);
 	}
 }
-#ifdef _DEBUG
+#ifdef DEBUG
 #define GLDebug(Func) \
 	Func;             \
 	DebugGLError(__FILE__, __LINE__);

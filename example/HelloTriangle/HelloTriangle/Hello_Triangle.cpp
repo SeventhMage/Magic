@@ -58,6 +58,9 @@ IShader *vertShader;
 IShader *fragShader;
 IMaterial *material;
 
+CGameObject camera;
+CGameObject triangle;
+
 void update()
 {
     mc->Run();
@@ -84,18 +87,19 @@ int esMain ( SRenderContext *esContext )
     esContext->updateFunc = &update;
     esContext->shutdownFunc = &shutdown;
     renderer = mc->GetRenderer();
-    renderer->SetClearColor(1, 0, 0, 0);
     printf("Finished initalizing Engine.\n\n");
 
     printf("Loading scene ... \n");
     pSceneMgr = mc->GetSceneManager();
     IScene *pScene = pSceneMgr->LoadScene();
     IGameObject *go = pScene->GetRootGameObject();
-    CGameObject camera;
+    
     CCameraComponent *pCamera = camera.AddComponent<CCameraComponent>();
     pCamera->Initialize(renderer, CCameraComponent::Projection);
+    pCamera->SetClearColor(0, 1, 0, 0);
+    pCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
     go->GetSceneNode()->AddChild(camera.GetSceneNode());
-    CGameObject triangle;
+    
     CMeshRendererComponent *pMeshRenderer = triangle.AddComponent<CMeshRendererComponent>();
     go->GetSceneNode()->AddChild(triangle.GetSceneNode());
     mesh = new CMesh();
@@ -103,7 +107,7 @@ int esMain ( SRenderContext *esContext )
      -1, -1, 0, 1, 0, 0, 1,
      1, -1, 0, 0, 1, 0, 1,
      0, 1, 0, 0, 0, 1, 1};
-    short indices[] = {0, 1, 2};
+    unsigned short indices[] = {0, 1, 2};
     mesh->SetVertices(vertices, sizeof(vertices));
     mesh->SetVerticesStride(7 * sizeof(float));
     mesh->SetVerticesOffset(0, 0);

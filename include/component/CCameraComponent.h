@@ -21,7 +21,7 @@ public:
     virtual void Update();
 
     void Initialize(IRenderer *pRenderer, CameraType type);
-    void SetClearColor(float a, float r, float g, float b);
+    void SetClearColor(float r, float g, float b, float a);
     void SetClearBit(int bit);
 private:
     IRenderPass *m_pRenderPass;

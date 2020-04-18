@@ -25,8 +25,8 @@ public:
     virtual bool IsTransparent() const { return m_bTransparent; }
 
     virtual void SetRenderQueue(int id);
-    virtual void SetVertexAttribute(int index, int size, int stride, int offset);
-    virtual void SetVertexBuffer(void *vertexes, int size, int usage, int first, int count, int mode);
+    virtual void SetVertexAttribute(int index, int stride, int offset);
+    virtual void SetVertexBuffer(void *vertexes, int size, int first, int count, int mode, int usage);
     virtual void SetIndexBuffer(void *indices, int idsCount, int idsType, int mode, int usage);
     virtual void SetShaderProgram(IShaderProgram *pShaderProgram);
     virtual void SetTexture(int slot, ITexture *texture);

@@ -1,5 +1,6 @@
 #include "CGLES3VertexBufferObject.h"
 #include "GLESDebug.h"
+#include "GLESType.h"
 
 namespace magic
 {
@@ -8,7 +9,7 @@ CGLES3VertexBufferObject::CGLES3VertexBufferObject(void *vertexes, int size, int
 {
     GLDebug(glGenBuffers(1, &m_hVBO));
     GLDebug(glBindBuffer(GL_ARRAY_BUFFER, m_hVBO));
-    GLDebug(glBufferData(GL_ARRAY_BUFFER, size, vertexes, m_usage));
+    GLDebug(glBufferData(GL_ARRAY_BUFFER, size, vertexes, GetGLGPUBufferUsage((GPUBufferUsage)m_usage)));
 }
 
 CGLES3VertexBufferObject::~CGLES3VertexBufferObject()
@@ -19,7 +20,7 @@ CGLES3VertexBufferObject::~CGLES3VertexBufferObject()
 void CGLES3VertexBufferObject::BufferData(void *data, int size)
 {
     GLDebug(glBindBuffer(GL_ARRAY_BUFFER, m_hVBO));
-    GLDebug(glBufferData(GL_ARRAY_BUFFER, size, data, m_usage));
+    GLDebug(glBufferData(GL_ARRAY_BUFFER, size, data, GetGLGPUBufferUsage((GPUBufferUsage)m_usage)));
 }
 
 void CGLES3VertexBufferObject::BufferSubData(void *data, int size, int offset)

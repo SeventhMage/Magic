@@ -18,7 +18,7 @@ public:
     virtual bool IsEnable() const = 0;
     
     virtual void SetRenderTarget(IRenderTarget *) = 0;
-    virtual void SetClearColor(float a, float r, float g, float b) = 0;
+    virtual void SetClearColor(float r, float g, float b, float a) = 0;
     virtual void SetClearBit(int bit) = 0;
     virtual void SetViewProjectMatirx(float matrix[16]) = 0;
     virtual void SetEnable(bool) = 0;

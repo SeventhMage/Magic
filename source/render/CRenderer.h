@@ -13,8 +13,9 @@ class CRenderer : public IRenderer
 {
 public:
     CRenderer();
+    virtual ~CRenderer();
 
-    virtual IRenderPass *CreateRenderPass();
+    virtual IRenderPass *GenerateRenderPass();
     virtual void SubmitToRenderQueue(IRenderInput *pInput);
     virtual void Render();
     virtual IRenderTarget *CreateRenderTarget(int width, int height, int format);

@@ -25,6 +25,28 @@ enum VariableType
     UINT_2_10_10_10_REV,
 };
 
+enum GPUBufferUsage
+{
+    GBU_STREAM_DRAW,
+    GBU_STREAM_READ,
+    GBU_STREAM_COPY,
+    GBU_STATIC_DRAW,
+    GBU_STATIC_READ,
+    GBU_STATIC_COPY,
+    GBU_DYNAMIC_DRAW,
+    GBU_DYNAMIC_READ,
+    GBU_DYNAMIC_COPY,
+};
+
+enum GPUBufferMode
+{
+    GBM_POINTS,
+    GBM_LINES,
+    GBM_TRIANGLES,
+    GBM_TRIANGLE_FAN,
+    GBM_TRIANGLE_STKIP,
+};
+
 } // namespace magic
 
 #endif

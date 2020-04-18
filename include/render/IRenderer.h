@@ -17,7 +17,7 @@ public:
     /**
      * Each camera will create a render pass
      * **/
-    virtual IRenderPass *CreateRenderPass() = 0;
+    virtual IRenderPass *GenerateRenderPass() = 0;
     virtual void SubmitToRenderQueue(IRenderInput *pInput) = 0;
     virtual void Render() = 0;
     virtual void SetClearColor(float r, float g, float b, float a) = 0;

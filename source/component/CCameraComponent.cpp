@@ -19,8 +19,18 @@ CCameraComponent::~CCameraComponent()
 
 void CCameraComponent::Initialize(IRenderer *pRenderer, CameraType type)
 {
-    m_pRenderPass = pRenderer->CreateRenderPass();
+    m_pRenderPass = pRenderer->GenerateRenderPass();
     m_Type = type;
+}
+
+void CCameraComponent::SetClearBit(int bit)
+{
+    m_pRenderPass->SetClearBit(bit);
+}
+
+void CCameraComponent::SetClearColor(float r, float g, float b, float a)
+{
+    m_pRenderPass->SetClearColor(r, g, b, a);
 }
 
 void CCameraComponent::Update()

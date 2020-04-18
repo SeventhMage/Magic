@@ -127,7 +127,7 @@ static GLenum GetGLVariableType(VariableType vat)
 	case HALF_FLOAT:
 		return GL_HALF_FLOAT;
 	//case DOUBLE:
-		//return GL_DOUBLE;
+	//return GL_DOUBLE;
 	case INT_2_10_10_10_REV:
 		return GL_INT_2_10_10_10_REV;
 	case UINT_2_10_10_10_REV:
@@ -161,7 +161,7 @@ static int GetGLVariableSize(int vat)
 	case GL_HALF_FLOAT:
 		return 4;
 	//case GL_DOUBLE:
-		//return 8;
+	//return 8;
 	case GL_INT_2_10_10_10_REV:
 		return 4;
 	case GL_UNSIGNED_INT_2_10_10_10_REV:
@@ -204,6 +204,52 @@ static uint GetVariableSize(VariableType vat)
 		break;
 	}
 	return 4;
+}
+
+static int GetGLGPUBufferMode(GPUBufferMode mode)
+{
+	switch (mode)
+	{
+	case GBM_LINES:
+		return GL_LINES;
+	case GBM_POINTS:
+		return GL_POINTS;
+	case GBM_TRIANGLES:
+		return GL_TRIANGLES;
+	case GBM_TRIANGLE_STKIP:
+		return GL_TRIANGLE_STRIP;
+	case GBM_TRIANGLE_FAN:
+		return GL_TRIANGLE_FAN;
+	default:;
+	}
+	return GL_TRIANGLES;
+}
+
+static int GetGLGPUBufferUsage(GPUBufferUsage usage)
+{
+	switch (usage)
+	{
+	case GBU_STREAM_DRAW:
+		return GL_STREAM_DRAW;
+	case GBU_STREAM_READ:
+		return GL_STREAM_READ;
+	case GBU_STREAM_COPY:
+		return GL_STREAM_COPY;
+	case GBU_STATIC_DRAW:
+		return GL_STATIC_DRAW;
+	case GBU_STATIC_READ:
+		return GL_STATIC_READ;
+	case GBU_STATIC_COPY:
+		return GL_STATIC_COPY;
+	case GBU_DYNAMIC_DRAW:
+		return GL_DYNAMIC_DRAW;
+	case GBU_DYNAMIC_READ:
+		return GL_DYNAMIC_READ;
+	case GBU_DYNAMIC_COPY:
+		return GL_DYNAMIC_COPY;
+	default:;
+	}
+	return GL_DYNAMIC_DRAW;
 }
 
 } // namespace magic

@@ -40,10 +40,10 @@ int CMesh::GetVerticesSize(int index) const
     return 0;
 }
 
-void CMesh::SetIndices(const short *indices, int size)
+void CMesh::SetIndices(const unsigned short *indices, int size)
 {
     SAFE_DEL_ARRAY(m_Indices);
-    m_Indices = new short[size];
+    m_Indices = new unsigned short[size];
     memcpy(m_Indices, indices, size);
     m_IndicesCount = size / sizeof(short);
 }

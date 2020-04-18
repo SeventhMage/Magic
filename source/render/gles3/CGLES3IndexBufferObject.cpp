@@ -9,7 +9,7 @@ CGLES3IndexBufferObject::CGLES3IndexBufferObject(void *indices, GLsizei idsCount
 {
     GLDebug(glGenBuffers(1, &m_IBO));
     GLDebug(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO));
-    GLDebug(glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetGLVariableSize(idsType) * idsCount, indices, usage));
+    GLDebug(glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetGLVariableSize(idsType) * idsCount, indices, GetGLGPUBufferUsage((GPUBufferUsage)usage)));
 }
 
 CGLES3IndexBufferObject::~CGLES3IndexBufferObject()
@@ -20,7 +20,7 @@ CGLES3IndexBufferObject::~CGLES3IndexBufferObject()
 void CGLES3IndexBufferObject::BufferData(void *indices, int idsSize)
 {
     GLDebug(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO));
-    GLDebug(glBufferData(GL_ELEMENT_ARRAY_BUFFER, idsSize, indices, m_gpuBufferUsage));
+    GLDebug(glBufferData(GL_ELEMENT_ARRAY_BUFFER, idsSize, indices, GetGLGPUBufferUsage((GPUBufferUsage)m_gpuBufferUsage)));
 }
 
 void CGLES3IndexBufferObject::BufferSubData(void *data, int size, int offset)

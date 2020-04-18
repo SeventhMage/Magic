@@ -1,5 +1,6 @@
 #include "component/CMeshRendererComponent.h"
 #include "render/CRenderInput.h"
+#include "render/ERender.h"
 #include "base/magicType.h"
 
 namespace magic
@@ -45,10 +46,11 @@ void CMeshRendererComponent::SetMesh(IMesh *pMesh)
         if (m_pMesh)
         {
             for (int i=0; i<m_pMesh->GetVerticesAttributeCount(); ++i)
-                m_pRenderInput->SetVertexAttribute(i, m_pMesh->GetVerticesOffset(i), 
-                    m_pMesh->GetVerticesStride(), m_pMesh->GetVerticesOffset(i));
-            //m_pRenderInput->SetVertexBuffer(m_pMesh->GetVertices(), m_pMesh->GetVerticesCount() * sizeof(float));
-            //m_pRenderInput->SetIndexBuffer(pMesh->GetIndices(), m_pMesh->GetIndicesCount() * sizeof(float));
+                m_pRenderInput->SetVertexAttribute(i, m_pMesh->GetVerticesStride(), m_pMesh->GetVerticesOffset(i));
+            m_pRenderInput->SetVertexBuffer(m_pMesh->GetVertices(), m_pMesh->GetVerticesCount() * sizeof(float), 0, m_pMesh->GetVerticesCount(), GPUBufferMode::GBM_TRIANGLES, GPUBufferUsage::GBU_DYNAMIC_DRAW);
+            unsigned short *indices = pMesh->GetIndices();
+            if (indices)
+                m_pRenderInput->SetIndexBuffer(indices, m_pMesh->GetIndicesCount(), VariableType::USHORT, GPUBufferMode::GBM_TRIANGLES, GPUBufferUsage::GBU_DYNAMIC_DRAW);
         }
     }
 }

@@ -24,9 +24,9 @@ void CGLES3VertexArrayObject::UnBind()
     GLDebug(glBindVertexArray(0));
 }
 
-void CGLES3VertexArrayObject::EnableVertexAttrib(int vertexArrayIndex, int size, int vertType, int stride, int offset)
+void CGLES3VertexArrayObject::EnableVertexAttrib(int vertexArrayIndex, int vertType, int stride, int offset)
 {
     GLDebug(glEnableVertexAttribArray(vertexArrayIndex));
-    GLDebug(glVertexAttribPointer(vertexArrayIndex, size, GetGLVariableType((VariableType)vertType), false, stride, (GLvoid *)offset));
+    GLDebug(glVertexAttribPointer(vertexArrayIndex, GetGLVariableSize(vertType), GetGLVariableType((VariableType)vertType), false, stride, (GLvoid *)offset));
 }
 }

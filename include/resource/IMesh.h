@@ -15,7 +15,7 @@ public:
     virtual ~IMesh() {}
     virtual EResourceType GetType() const { return EResourceType::Mesh; }
     virtual float *GetVertices() const = 0;
-    virtual short *GetIndices() const = 0;
+    virtual unsigned short *GetIndices() const = 0;
     virtual int GetVerticesCount() const = 0;
     virtual int GetIndicesCount() const = 0;
     virtual int GetVerticesStride() const = 0;
@@ -24,7 +24,7 @@ public:
     virtual int GetVerticesAttributeCount() const = 0;
 
     virtual void SetVertices(const float *vertices, int size) = 0;
-    virtual void SetIndices(const short *indices, int size) = 0;
+    virtual void SetIndices(const unsigned short *indices, int size) = 0;
     virtual void SetVerticesStride(int stride) = 0;
     virtual void SetVerticesOffset(int index, int offset) = 0;
     virtual void SetVerticesSize(int index, int offset) = 0;

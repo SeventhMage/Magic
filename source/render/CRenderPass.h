@@ -17,7 +17,7 @@ public:
     virtual float *GetViewProjectMatrix() const { return (float *)m_vpMatrix; }
     virtual bool IsEnable() const { return m_bEnable; }
     
-    virtual void SetClearColor(float a, float r, float g, float b);
+    virtual void SetClearColor(float r, float g, float b, float a);
     virtual void SetClearBit(int bit) { m_ClearBit = bit; }
     virtual void SetViewProjectMatirx(float matrix[16]);
     virtual void SetEnable(bool enable) { m_bEnable = enable; }

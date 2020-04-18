@@ -58,14 +58,14 @@ void CRenderInput::SetShaderProgram(IShaderProgram *pShaderProgram)
     m_pShaderProgram = pShaderProgram;
 }
 
-void CRenderInput::SetVertexAttribute(int index, int size, int stride, int offset)
+void CRenderInput::SetVertexAttribute(int index, int stride, int offset)
 {
     if (!m_pVAO)
         m_pVAO = m_pRenderer->CreateVertexArrayObject();
-    ((CVertexArrayObject *)m_pVAO)->EnableVertexAttrib(index, size, VariableType::FLOAT, stride, offset);
+    ((CVertexArrayObject *)m_pVAO)->EnableVertexAttrib(index, VariableType::FLOAT, stride, offset);
 }
 
-void CRenderInput::SetVertexBuffer(void *vertexes, int size, int usage, int first, int count, int mode)
+void CRenderInput::SetVertexBuffer(void *vertexes, int size, int first, int count, int mode, int usage)
 {
     if (!m_pVBO)
         m_pVBO = m_pRenderer->CreateVertexBufferObject(vertexes, size, usage, first, count, mode);

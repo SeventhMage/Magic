@@ -27,6 +27,7 @@ void CMagic::Run()
     //if (passTime >= m_iFixDelta)
     {
         m_pSceneManager->Update();
+        m_pRenderer->Render();
         compensationTime += passTime;
         /*
         do

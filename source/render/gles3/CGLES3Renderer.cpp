@@ -19,13 +19,13 @@ namespace magic
 //    Check whether EGL_KHR_create_context extension is supported.  If so,
 //    return EGL_OPENGL_ES3_BIT_KHR instead of EGL_OPENGL_ES2_BIT
 //
-EGLint GetContextRenderableType ( EGLDisplay eglDisplay )
+EGLint GetContextRenderableType(EGLDisplay eglDisplay)
 {
 #ifdef EGL_KHR_create_context
-   const char *extensions = eglQueryString ( eglDisplay, EGL_EXTENSIONS );
+   const char *extensions = eglQueryString(eglDisplay, EGL_EXTENSIONS);
 
    // check whether EGL_KHR_create_context is in the extension string
-   if ( extensions != NULL && strstr( extensions, "EGL_KHR_create_context" ) )
+   if (extensions != NULL && strstr(extensions, "EGL_KHR_create_context"))
    {
       // extension is supported
       return EGL_OPENGL_ES3_BIT_KHR;
@@ -39,70 +39,68 @@ EGLint GetContextRenderableType ( EGLDisplay eglDisplay )
 #ifdef WIN32
 #include <Windows.h>
 #include <WinUser.h>
-LRESULT WINAPI ESWindowProc ( HWND hWnd, ::UINT uMsg, WPARAM wParam, LPARAM lParam )
+LRESULT WINAPI ESWindowProc(HWND hWnd, ::UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-   LRESULT  lRet = 1;
+   LRESULT lRet = 1;
 
-   switch ( uMsg )
+   switch (uMsg)
    {
-      case WM_CREATE:
-         break;
-
-      case WM_PAINT:
-      {
-         SRenderContext *esContext = (SRenderContext  * ) ( LONG_PTR ) GetWindowLongPtr ( hWnd, GWL_USERDATA );
-
-         if ( esContext && esContext->drawFunc )
-         {
-            esContext->drawFunc ( esContext );
-            eglSwapBuffers ( esContext->eglDisplay, esContext->eglSurface );
-         }
-
-
-         ValidateRect ( esContext->eglNativeWindow, NULL );
-      }
+   case WM_CREATE:
       break;
 
-      case WM_DESTROY:
-         PostQuitMessage ( 0 );
-         break;
+   case WM_PAINT:
+   {
+      SRenderContext *esContext = (SRenderContext *)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
 
-      case WM_CHAR:
+      if (esContext && esContext->drawFunc)
       {
-         POINT      point;
-         SRenderContext *esContext = ( SRenderContext * ) ( LONG_PTR ) GetWindowLongPtr ( hWnd, GWL_USERDATA );
-
-         GetCursorPos ( &point );
-
-         if ( esContext && esContext->keyFunc )
-            esContext->keyFunc ( esContext, ( unsigned char ) wParam,
-                                 ( int ) point.x, ( int ) point.y );
+         esContext->drawFunc(esContext);
+         eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
       }
+
+      ValidateRect(esContext->eglNativeWindow, NULL);
+   }
+   break;
+
+   case WM_DESTROY:
+      PostQuitMessage(0);
       break;
 
-      default:
-         lRet = DefWindowProc ( hWnd, uMsg, wParam, lParam );
-         break;
+   case WM_CHAR:
+   {
+      POINT point;
+      SRenderContext *esContext = (SRenderContext *)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
+
+      GetCursorPos(&point);
+
+      if (esContext && esContext->keyFunc)
+         esContext->keyFunc(esContext, (unsigned char)wParam,
+                            (int)point.x, (int)point.y);
+   }
+   break;
+
+   default:
+      lRet = DefWindowProc(hWnd, uMsg, wParam, lParam);
+      break;
    }
 
    return lRet;
 }
 
-GLboolean WinCreate ( SRenderContext *esContext, const char *title )
+GLboolean WinCreate(SRenderContext *esContext, const char *title)
 {
    WNDCLASS wndclass = {0};
-   DWORD    wStyle   = 0;
-   RECT     windowRect;
-   HINSTANCE hInstance = GetModuleHandle ( NULL );
+   DWORD wStyle = 0;
+   RECT windowRect;
+   HINSTANCE hInstance = GetModuleHandle(NULL);
 
-
-   wndclass.style         = CS_OWNDC;
-   wndclass.lpfnWndProc   = ( WNDPROC ) ESWindowProc;
-   wndclass.hInstance     = hInstance;
-   wndclass.hbrBackground = ( HBRUSH ) GetStockObject ( BLACK_BRUSH );
+   wndclass.style = CS_OWNDC;
+   wndclass.lpfnWndProc = (WNDPROC)ESWindowProc;
+   wndclass.hInstance = hInstance;
+   wndclass.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
    wndclass.lpszClassName = "";
 
-   if ( !RegisterClass ( &wndclass ) )
+   if (!RegisterClass(&wndclass))
    {
       return FALSE;
    }
@@ -116,39 +114,36 @@ GLboolean WinCreate ( SRenderContext *esContext, const char *title )
    windowRect.right = esContext->width;
    windowRect.bottom = esContext->height;
 
-   AdjustWindowRect ( &windowRect, wStyle, FALSE );
+   AdjustWindowRect(&windowRect, wStyle, FALSE);
 
-
-
-   esContext->eglNativeWindow = CreateWindow (
-                                   "",
-                                   "",
-                                   wStyle,
-                                   0,
-                                   0,
-                                   windowRect.right - windowRect.left,
-                                   windowRect.bottom - windowRect.top,
-                                   NULL,
-                                   NULL,
-                                   hInstance,
-                                   NULL );
+   esContext->eglNativeWindow = CreateWindow(
+       "",
+       "",
+       wStyle,
+       0,
+       0,
+       windowRect.right - windowRect.left,
+       windowRect.bottom - windowRect.top,
+       NULL,
+       NULL,
+       hInstance,
+       NULL);
 
    // Set the ESContext* to the GWL_USERDATA so that it is available to the
    // ESWindowProc
 #ifdef _WIN64
    //In LLP64 LONG is stll 32bit.
-   SetWindowLongPtr( esContext->eglNativeWindow, GWL_USERDATA, ( LONGLONG ) ( LONG_PTR )esContext);
+   SetWindowLongPtr(esContext->eglNativeWindow, GWL_USERDATA, (LONGLONG)(LONG_PTR)esContext);
 #else
-   SetWindowLongPtr ( esContext->eglNativeWindow, GWL_USERDATA, ( LONG ) ( LONG_PTR ) esContext );
+   SetWindowLongPtr(esContext->eglNativeWindow, GWL_USERDATA, (LONG)(LONG_PTR)esContext);
 #endif
 
-
-   if ( esContext->eglNativeWindow == NULL )
+   if (esContext->eglNativeWindow == NULL)
    {
       return GL_FALSE;
    }
 
-   ShowWindow ( esContext->eglNativeWindow, TRUE );
+   ShowWindow(esContext->eglNativeWindow, TRUE);
 
    return GL_TRUE;
 }
@@ -163,12 +158,12 @@ CGLES3Renderer::CGLES3Renderer(SRenderContext *esContext, const char *title, GLi
 
 void CGLES3Renderer::SetClearColor(float r, float g, float b, float a)
 {
-    glClearColor(r, g, b, a);
+   glClearColor(r, g, b, a);
 }
 
 void CGLES3Renderer::Clear(int flags)
 {
-    glClear(GetGLColorMask(flags));
+   glClear(GetGLColorMask(flags));
 }
 
 void CGLES3Renderer::Render(IRenderInput *pRenderInput)
@@ -184,16 +179,25 @@ void CGLES3Renderer::Render(IRenderInput *pRenderInput)
       if (pTexture)
          pTexture->Bind(i);
    }
+    CVertexBufferObject *pVBO = (CVertexBufferObject *)pRenderInput->GetVertexBufferObject();
+    pVBO->Bind();
    CIndexBufferObject *pIBO = (CIndexBufferObject *)pRenderInput->GetIndexBufferObject();
    if (pIBO)
    {
-      GLDebug(glDrawElements(pIBO->GetMode(), pIBO->GetIndicesNum(), pIBO->GetIndexType(), 0));
+       pVBO->Bind();
+       pIBO->Bind();
+      GLDebug(glDrawElements(GetGLGPUBufferMode((GPUBufferMode)pIBO->GetMode()), pIBO->GetIndicesNum(), GetGLVariableType((VariableType)pIBO->GetIndexType()), 0));
+       
+       pIBO->UnBind();
+       pVBO->UnBind();
    }
    else
    {
-      CVertexBufferObject *pVBO = (CVertexBufferObject *)pRenderInput->GetVertexBufferObject();
-      GLDebug(glDrawArrays(pVBO->GetMode(), pVBO->GetFirstIndex(), pVBO->GetVerticesCount()));
+      
+      GLDebug(glDrawArrays(GetGLGPUBufferMode((GPUBufferMode)pVBO->GetMode()), pVBO->GetFirstIndex(), pVBO->GetVerticesCount()));
+       pVBO->UnBind();
    }
+    pVAO->UnBind();
 }
 
 IRenderTarget *CGLES3Renderer::CreateRenderTarget(int width, int height, int format)
@@ -253,10 +257,10 @@ bool CGLES3Renderer::Init(SRenderContext *esContext, const char *title, GLint wi
               EGL_RED_SIZE, 5,
               EGL_GREEN_SIZE, 6,
               EGL_BLUE_SIZE, 5,
-              EGL_ALPHA_SIZE, 8 ,
+              EGL_ALPHA_SIZE, 8,
               EGL_DEPTH_SIZE, 8,
               EGL_STENCIL_SIZE, 8,
-              EGL_SAMPLE_BUFFERS,1,
+              EGL_SAMPLE_BUFFERS, 1,
               // if EGL_KHR_create_context extension is supported, then we will use
               // EGL_OPENGL_ES3_BIT_KHR instead of EGL_OPENGL_ES2_BIT in the attribute list
               EGL_RENDERABLE_TYPE, GetContextRenderableType(esContext->eglDisplay),
@@ -309,22 +313,22 @@ bool CGLES3Renderer::Init(SRenderContext *esContext, const char *title, GLint wi
    }
 
 #endif // #ifndef __APPLE__
-    return GL_TRUE;
+   return GL_TRUE;
 }
 
 IBufferObject *CGLES3Renderer::CreateVertexArrayObject()
 {
-    return new CGLES3VertexArrayObject();
+   return new CGLES3VertexArrayObject();
 }
 
 IBufferObject *CGLES3Renderer::CreateVertexBufferObject(void *vertexes, int size, int usage, int first, int count, int mode)
 {
-    return new CGLES3VertexBufferObject(vertexes, size, usage, first, count, mode);
+   return new CGLES3VertexBufferObject(vertexes, size, usage, first, count, mode);
 }
 
 IBufferObject *CGLES3Renderer::CreateIndexBufferObject(void *indices, int idsCount, int idsType, int mode, int usage)
 {
-    return new CGLES3IndexBufferObject(indices, idsCount, idsType, mode, usage);
+   return new CGLES3IndexBufferObject(indices, idsCount, idsType, mode, usage);
 }
 
 } // namespace magic
