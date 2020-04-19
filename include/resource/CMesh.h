@@ -12,28 +12,25 @@ class CMesh : public IMesh
 public:
     CMesh();
     virtual ~CMesh();
-    virtual float *GetVertices() const {return m_Vertices;}
+    virtual float *GetPositions() const { return m_Positions; }
+    virtual float *GetColors() const { return m_Colors; }
+    virtual float *GetUVs() const { return m_Uvs; }
     virtual unsigned short *GetIndices() const {return m_Indices; }
     virtual int GetVerticesCount() const {return m_VerticesCount;}
     virtual int GetIndicesCount() const {return m_IndicesCount;}
-    virtual int GetVerticesStride() const { return m_VerticesStride; }
-    virtual int GetVerticesOffset(int index) const;
-    virtual int GetVerticesSize(int index) const;
-    virtual int GetVerticesAttributeCount() const { return m_VerticesOffset.size(); }
 
-    virtual void SetVertices(const float *vertices, int size);
     virtual void SetIndices(const unsigned short *indices, int size);
-    virtual void SetVerticesStride(int stride);
-    virtual void SetVerticesOffset(int index, int offset);
-    virtual void SetVerticesSize(int index, int offset);
+    virtual void SetPositions(float positions[][3], int size);
+    virtual void SetUVs(float uvs[][2], int size);
+    virtual void SetColors(float uvs[][4], int size);
 private:
     int m_VerticesCount;
     int m_IndicesCount;
-    int m_VerticesStride;
     float *m_Vertices;
+    float *m_Positions;
+    float *m_Colors;
+    float *m_Uvs;
     unsigned short *m_Indices;
-    std::map<int, int> m_VerticesOffset;
-    std::map<int, int> m_VerticesSize;
 };
 } // namespace magic
 

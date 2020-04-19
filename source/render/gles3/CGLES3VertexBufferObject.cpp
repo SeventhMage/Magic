@@ -4,12 +4,12 @@
 
 namespace magic
 {
-CGLES3VertexBufferObject::CGLES3VertexBufferObject(void *vertexes, int size, int usage, int first, int count, int mode)
-    :CVertexBufferObject(first, count, mode), m_vertSize(size), m_usage(usage)
+CGLES3VertexBufferObject::CGLES3VertexBufferObject(void *vertices, int size, int usage)
+    :m_vertSize(size), m_usage(usage)
 {
     GLDebug(glGenBuffers(1, &m_hVBO));
     GLDebug(glBindBuffer(GL_ARRAY_BUFFER, m_hVBO));
-    GLDebug(glBufferData(GL_ARRAY_BUFFER, size, vertexes, GetGLGPUBufferUsage((GPUBufferUsage)m_usage)));
+    GLDebug(glBufferData(GL_ARRAY_BUFFER, size, vertices, GetGLGPUBufferUsage((GPUBufferUsage)m_usage)));
 }
 
 CGLES3VertexBufferObject::~CGLES3VertexBufferObject()

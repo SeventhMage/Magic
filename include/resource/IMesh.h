@@ -14,20 +14,17 @@ class IMesh : public IResource
 public:
     virtual ~IMesh() {}
     virtual EResourceType GetType() const { return EResourceType::Mesh; }
-    virtual float *GetVertices() const = 0;
+    virtual float *GetPositions() const = 0;
+    virtual float *GetColors() const = 0;
+    virtual float *GetUVs() const = 0;
     virtual unsigned short *GetIndices() const = 0;
     virtual int GetVerticesCount() const = 0;
     virtual int GetIndicesCount() const = 0;
-    virtual int GetVerticesStride() const = 0;
-    virtual int GetVerticesOffset(int index) const = 0;
-    virtual int GetVerticesSize(int index) const = 0;
-    virtual int GetVerticesAttributeCount() const = 0;
-
-    virtual void SetVertices(const float *vertices, int size) = 0;
+    
+    virtual void SetPositions(float positions[][3], int size) = 0;
+    virtual void SetUVs(float uvs[][2], int size) = 0;
+    virtual void SetColors(float colors[][4], int size) = 0;
     virtual void SetIndices(const unsigned short *indices, int size) = 0;
-    virtual void SetVerticesStride(int stride) = 0;
-    virtual void SetVerticesOffset(int index, int offset) = 0;
-    virtual void SetVerticesSize(int index, int offset) = 0;
 };
 } // namespace magic
 

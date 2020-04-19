@@ -4,6 +4,7 @@
 #include "CComponent.h"
 #include "render/IRenderPass.h"
 #include "render/IRenderer.h"
+#include "math/CMatrix4.h"
 
 namespace magic
 {
@@ -26,6 +27,8 @@ public:
 private:
     IRenderPass *m_pRenderPass;
     CameraType m_Type;
+    CMatrix4 m_vpMatrix;
+    CMatrix4 m_vMatrix;
 };
 
 } // namespace magic

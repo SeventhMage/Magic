@@ -15,7 +15,7 @@ public:
     virtual void FixedUpdate();
     CGameObject *GetGameObject() { return m_pGameObject; }
     void SetGameObject(CGameObject *pGameObject) { m_pGameObject = pGameObject; }
-private:
+protected:
     CGameObject *m_pGameObject;
 };
 } // namespace magic

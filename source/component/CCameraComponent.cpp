@@ -35,7 +35,8 @@ void CCameraComponent::SetClearColor(float r, float g, float b, float a)
 
 void CCameraComponent::Update()
 {
-   
+    ISceneNode *pNode = m_pGameObject->GetSceneNode();
+    m_pRenderPass->SetViewProjectMatirx(m_vpMatrix.m);
 }
 
 }

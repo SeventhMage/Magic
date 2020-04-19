@@ -9,7 +9,7 @@ namespace magic
 class CGLES3VertexBufferObject : public CVertexBufferObject
 {
 public:
-    CGLES3VertexBufferObject(void *vertexes, int size, int usage, int first, int count, int mode);
+    CGLES3VertexBufferObject(void *vertices, int size, int usage);
     virtual ~CGLES3VertexBufferObject();
 
     virtual void Bind();

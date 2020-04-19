@@ -4,12 +4,12 @@
 
 namespace magic
 {
-CGLES3IndexBufferObject::CGLES3IndexBufferObject(void *indices, GLsizei idsCount, GLenum idsType, GLenum mode, GLenum usage)
-    : m_gpuBufferMode(mode), m_gpuBufferUsage(usage), m_uIndicesNum(idsCount), m_idsType(idsType)
+CGLES3IndexBufferObject::CGLES3IndexBufferObject(void *indices, int size, int usage)
+: m_gpuBufferUsage(usage)
 {
     GLDebug(glGenBuffers(1, &m_IBO));
     GLDebug(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO));
-    GLDebug(glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetGLVariableSize(idsType) * idsCount, indices, GetGLGPUBufferUsage((GPUBufferUsage)usage)));
+    GLDebug(glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GetGLGPUBufferUsage((GPUBufferUsage)usage)));
 }
 
 CGLES3IndexBufferObject::~CGLES3IndexBufferObject()

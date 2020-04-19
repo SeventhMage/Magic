@@ -27,6 +27,8 @@ private:
     IRenderer *m_pRenderer;
     IRenderInput *m_pRenderInput;
     CMaterialInstance *m_pMaterialInstance;
+    int m_Mode;
+    int m_Usage;
 };
 }
 

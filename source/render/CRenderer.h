@@ -19,7 +19,7 @@ public:
     virtual void SubmitToRenderQueue(IRenderInput *pInput);
     virtual void Render();
     virtual IRenderTarget *CreateRenderTarget(int width, int height, int format);
-    virtual IRenderInput *CreateRenderInput();
+    virtual IRenderInput *CreateRenderInput(int mode, int usage);
     
 protected:
     virtual void Render(IRenderInput *pRenderInput);

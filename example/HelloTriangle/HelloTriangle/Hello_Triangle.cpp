@@ -83,7 +83,7 @@ void shutdown()
 int esMain ( SRenderContext *esContext )
 {
     printf("Start initalizing Engine ... \n");
-    mc = CreateMagic(esContext, "Test", 1280, 960);
+    mc = CreateMagic(esContext, "Triangle", 1280, 960);
     esContext->updateFunc = &update;
     esContext->shutdownFunc = &shutdown;
     renderer = mc->GetRenderer();
@@ -96,45 +96,52 @@ int esMain ( SRenderContext *esContext )
     
     CCameraComponent *pCamera = camera.AddComponent<CCameraComponent>();
     pCamera->Initialize(renderer, CCameraComponent::Projection);
-    pCamera->SetClearColor(0, 1, 0, 0);
+    pCamera->SetClearColor(0.5, 0.5, 0.5, 1);
     pCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
     go->GetSceneNode()->AddChild(camera.GetSceneNode());
     
     CMeshRendererComponent *pMeshRenderer = triangle.AddComponent<CMeshRendererComponent>();
     go->GetSceneNode()->AddChild(triangle.GetSceneNode());
     mesh = new CMesh();
-    float vertices[] = {
-     -1, -1, 0, 1, 0, 0, 1,
-     1, -1, 0, 0, 1, 0, 1,
-     0, 1, 0, 0, 0, 1, 1};
+
+    float vertices[][3] = {  0.0f,  0.5f, 0.0f,
+                             -0.5f, -0.5f, 0.0f,
+                             0.5f, -0.5f, 0.0f
+                          };
+    float colors[][4] = {
+        1.0f, 0.0f, 0.0f, 1.0f,
+        0.0f, 1.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f, 1.0f,
+    };
     unsigned short indices[] = {0, 1, 2};
-    mesh->SetVertices(vertices, sizeof(vertices));
-    mesh->SetVerticesStride(7 * sizeof(float));
-    mesh->SetVerticesOffset(0, 0);
-    mesh->SetVerticesOffset(1, sizeof(float) * 3);
-    mesh->SetVerticesSize(0, 3);
-    mesh->SetVerticesSize(1, 4);
-    mesh->SetIndices(indices, sizeof(indices));
+    mesh->SetPositions(vertices, sizeof(vertices));
+    mesh->SetColors(colors, sizeof(colors));
+    //mesh->SetIndices(indices, sizeof(indices));
     char vShaderStr[] =
      "#version 300 es                          \n"
-     "layout(location = 0) in vec4 vPosition;  \n"
+     "layout(location = 0) in vec3 vPosition;  \n"
+     "layout(location = 1) in vec4 vColor;     \n"
+     "out vec4 vOutColor;                      \n"
      "void main()                              \n"
      "{                                        \n"
-     "   gl_Position = vPosition;              \n"
+     "   vOutColor = vColor;                   \n"
+     "   gl_Position = vec4(vPosition, 1.0);   \n"
      "}                                        \n";
 
     char fShaderStr[] =
      "#version 300 es                              \n"
      "precision mediump float;                     \n"
+     "in vec4 vOutColor;                           \n"
      "out vec4 fragColor;                          \n"
      "void main()                                  \n"
      "{                                            \n"
-     "   fragColor = vec4 ( 1.0, 0.0, 0.0, 1.0 );  \n"
+     "   fragColor = vOutColor;                    \n"
      "}                                            \n";
     vertShader = new CShader(EShaderType::Vertex, vShaderStr, sizeof(vShaderStr));
     fragShader = new CShader(EShaderType::Fragment, fShaderStr, sizeof(fShaderStr));
     material = new CMaterial();
     material->AddAttribute("vPosition");
+    material->AddAttribute("vColor");
     material->SetShader(vertShader->GetShaderType(), vertShader);
     material->SetShader(fragShader->GetShaderType(), fragShader);
     pMeshRenderer->Initialize(mc->GetRenderer(), material, mesh);

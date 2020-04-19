@@ -13,7 +13,7 @@ public:
     virtual ~CGLES3VertexArrayObject();
     virtual void Bind();
     virtual void UnBind();
-    virtual void EnableVertexAttrib(int vertexArrayIndex, int vertType, int stride, int offset);
+    virtual void EnableVertexAttrib(int vertexArrayIndex, int size, int vertType, int stride, int offset);
 
 private:
     GLuint m_hVAO;

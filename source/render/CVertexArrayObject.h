@@ -10,7 +10,7 @@ class CVertexArrayObject : public IBufferObject
 public:
     CVertexArrayObject() {}
     virtual ~CVertexArrayObject() {}
-    virtual void EnableVertexAttrib(int vertexArrayIndex, int vertType, int stride, int offset) {}
+    virtual void EnableVertexAttrib(int vertexArrayIndex, int size, int vertType, int stride, int offset) {}
 };
 } // namespace magic
 

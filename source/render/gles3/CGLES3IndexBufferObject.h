@@ -9,7 +9,7 @@ namespace magic
 class CGLES3IndexBufferObject : public CIndexBufferObject
 {
 public:
-    CGLES3IndexBufferObject(void *indices, GLsizei idsCount, GLenum idsType, GLenum mode, GLenum usage);
+    CGLES3IndexBufferObject(void *indices, int size, int usage);
     virtual ~CGLES3IndexBufferObject();
 
     virtual void Bind();
@@ -17,18 +17,9 @@ public:
 
     virtual void BufferData(void *indices, int idsSize);
     virtual void BufferSubData(void *data, int size, int offset);
-
-    //GPUBufferType GetBufferType(){ return GBT_INDEX; };
-    int GetMode() { return m_gpuBufferMode; }
-    int GetIndicesNum() { return m_uIndicesNum; }
-    int GetIndexType() { return m_idsType; }
-
 private:
     GLuint m_IBO;
-    GLenum m_gpuBufferMode;
     GLenum m_gpuBufferUsage;
-    GLenum m_idsType;
-    GLsizei m_uIndicesNum;
 };
 } // namespace magic
 

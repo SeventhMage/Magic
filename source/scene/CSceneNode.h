@@ -16,9 +16,14 @@ public:
     virtual void Update();
     virtual void AddChild(ISceneNode *pChild);
     virtual void AddParent(ISceneNode *pParent);
+    virtual CMatrix4 &GetAbsoluteTransform() { return m_AbsoluteTransform; }
+    virtual CMatrix4 &GetRelativeTransform() { return m_RelativeTransform; }
 private:
     IGameObject *m_pGameObject;
     std::vector<ISceneNode *> m_SceneNodeList;
+    CMatrix4 m_AbsoluteTransform;
+    CMatrix4 m_RelativeTransform;
+    
 };
 } // namespace magic
 

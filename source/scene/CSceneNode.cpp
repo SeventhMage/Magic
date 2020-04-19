@@ -6,6 +6,7 @@ namespace magic
 CSceneNode::CSceneNode(IGameObject *pGameObject)
 :m_pGameObject(pGameObject)
 {
+    
 }
 CSceneNode::~CSceneNode()
 {

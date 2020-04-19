@@ -23,11 +23,11 @@ public:
     virtual void SetClearColor(float r, float g, float b, float a) = 0;
     virtual void Clear(int flags) = 0;
     virtual IRenderTarget *CreateRenderTarget(int width, int height, int format) = 0;
-    virtual IRenderInput *CreateRenderInput() = 0;
+    virtual IRenderInput *CreateRenderInput(int mode, int usage) = 0;
     virtual IShaderProgram *CreateShaderProgram() = 0;
     virtual IBufferObject *CreateVertexArrayObject() = 0;
-    virtual IBufferObject *CreateVertexBufferObject(void *vertexes, int size, int usage, int first, int count, int mode) = 0;
-    virtual IBufferObject *CreateIndexBufferObject(void *indices, int idsCount, int idsType, int mode, int usage) = 0;
+    virtual IBufferObject *CreateVertexBufferObject(void *vertexes, int size, int usage) = 0;
+    virtual IBufferObject *CreateIndexBufferObject(void *indices, int size, int usage) = 0;
 };
 } // namespace magic
 

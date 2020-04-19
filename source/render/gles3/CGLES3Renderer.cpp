@@ -151,6 +151,7 @@ GLboolean WinCreate(SRenderContext *esContext, const char *title)
 #endif
 
 CGLES3Renderer::CGLES3Renderer(SRenderContext *esContext, const char *title, GLint width, GLint height)
+:m_esContext(esContext)
 {
    if (Init(esContext, title, width, height))
       LogError("Initialize GLES3Renderer failed");
@@ -166,39 +167,6 @@ void CGLES3Renderer::Clear(int flags)
    glClear(GetGLColorMask(flags));
 }
 
-void CGLES3Renderer::Render(IRenderInput *pRenderInput)
-{
-   CVertexArrayObject *pVAO = (CVertexArrayObject *)pRenderInput->GetVertexArrayObject();
-   pVAO->Bind();
-   IShaderProgram *pProgram = pRenderInput->GetShaderProgram();
-   if (pProgram)
-      pProgram->Bind();
-   for (int i = 0; i < pRenderInput->GetTextureCount(); ++i)
-   {
-      ITexture *pTexture = pRenderInput->GetTexture(i);
-      if (pTexture)
-         pTexture->Bind(i);
-   }
-    CVertexBufferObject *pVBO = (CVertexBufferObject *)pRenderInput->GetVertexBufferObject();
-    pVBO->Bind();
-   CIndexBufferObject *pIBO = (CIndexBufferObject *)pRenderInput->GetIndexBufferObject();
-   if (pIBO)
-   {
-       pVBO->Bind();
-       pIBO->Bind();
-      GLDebug(glDrawElements(GetGLGPUBufferMode((GPUBufferMode)pIBO->GetMode()), pIBO->GetIndicesNum(), GetGLVariableType((VariableType)pIBO->GetIndexType()), 0));
-       
-       pIBO->UnBind();
-       pVBO->UnBind();
-   }
-   else
-   {
-      
-      GLDebug(glDrawArrays(GetGLGPUBufferMode((GPUBufferMode)pVBO->GetMode()), pVBO->GetFirstIndex(), pVBO->GetVerticesCount()));
-       pVBO->UnBind();
-   }
-    pVAO->UnBind();
-}
 
 IRenderTarget *CGLES3Renderer::CreateRenderTarget(int width, int height, int format)
 {
@@ -321,14 +289,46 @@ IBufferObject *CGLES3Renderer::CreateVertexArrayObject()
    return new CGLES3VertexArrayObject();
 }
 
-IBufferObject *CGLES3Renderer::CreateVertexBufferObject(void *vertexes, int size, int usage, int first, int count, int mode)
+IBufferObject *CGLES3Renderer::CreateVertexBufferObject(void *vertices, int size, int usage)
 {
-   return new CGLES3VertexBufferObject(vertexes, size, usage, first, count, mode);
+   return new CGLES3VertexBufferObject(vertices, size, usage);
 }
 
-IBufferObject *CGLES3Renderer::CreateIndexBufferObject(void *indices, int idsCount, int idsType, int mode, int usage)
+IBufferObject *CGLES3Renderer::CreateIndexBufferObject(void *indices, int size, int usage)
 {
-   return new CGLES3IndexBufferObject(indices, idsCount, idsType, mode, usage);
+   return new CGLES3IndexBufferObject(indices, size, usage);
 }
+
+void CGLES3Renderer::Render(IRenderInput *pRenderInput)
+{
+    //glViewport ( 0, 0, m_esContext->width, m_esContext->height );
+    
+    CVertexArrayObject *pVAO = (CVertexArrayObject *)pRenderInput->GetVertexArrayObject();
+    pVAO->Bind();
+    IShaderProgram *pProgram = pRenderInput->GetShaderProgram();
+    pProgram->Bind();
+    for (int i = 0; i < pRenderInput->GetTextureCount(); ++i)
+    {
+        ITexture *pTexture = pRenderInput->GetTexture(i);
+        if (pTexture)
+            pTexture->Bind(i);
+    }
+    
+    CIndexBufferObject *pIBO = (CIndexBufferObject *)pRenderInput->GetIndexBufferObject();
+    if (pIBO)
+    {
+        pIBO->Bind();
+        GLDebug(glDrawElements(GetGLGPUBufferMode((GPUBufferMode)pRenderInput->GetMode()), pRenderInput->GetVerticesCount(), GetGLVariableType((VariableType)pRenderInput->GetIndexType()), 0));
+        pIBO->UnBind();
+       
+    }
+    else
+    {
+        GLDebug(glDrawArrays(GetGLGPUBufferMode((GPUBufferMode)pRenderInput->GetMode()), pRenderInput->GetFirst(), pRenderInput->GetVerticesCount()));
+        
+    }
+    pVAO->UnBind();
+}
+
 
 } // namespace magic

@@ -36,9 +36,9 @@ IRenderTarget *CRenderer::CreateRenderTarget(int width, int height, int format)
     return nullptr;
 }
 
-IRenderInput *CRenderer::CreateRenderInput()
+IRenderInput *CRenderer::CreateRenderInput(int mode, int usage)
 {
-    return new CRenderInput(this);
+    return new CRenderInput(this, mode, usage);
 }
 
 void CRenderer::Render()
