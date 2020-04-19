@@ -1,7 +1,6 @@
 #ifndef _MAGIC_SCENE_CSCENE_H_
 #define _MAGIC_SCENE_CSCENE_H_
 
-#include "scene/IGameObject.h"
 #include "scene/IScene.h"
 
 #include <map>
@@ -13,12 +12,12 @@ class CScene : public IScene
 public:
     CScene();
     ~CScene();
-    virtual OID GetID() const {return m_SceneID; }
+    virtual OID GetID() const { return m_SceneID; }
     virtual void Update();
-    virtual IGameObject *GetRootGameObject() const { return m_RootObject; }
+    virtual ISceneNode *GetRootNode() const { return m_pRootNode; }
 
 private:
-    IGameObject *m_RootObject;
+    ISceneNode *m_pRootNode;
     OID m_SceneID;
 };
 } // namespace magic

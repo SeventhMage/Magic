@@ -7,6 +7,9 @@
         "unordered_map": "cpp",
         "vector": "cpp",
         "new": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "__bit_reference": "cpp",
+        "__string": "cpp",
+        "string_view": "cpp"
     }
 }

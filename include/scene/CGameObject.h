@@ -8,12 +8,13 @@ namespace magic
 class CGameObject : public IGameObject
 {
 public:
-    CGameObject();
+    CGameObject(ISceneNode *pNode = nullptr);
     ~CGameObject();
 
     virtual OID GetID() const { return m_OID; }
+    virtual void SetSceneNode(ISceneNode *pSceneNode);
     virtual ISceneNode *GetSceneNode() const { return m_pSceneNode; }
-
+    virtual void OnTransformChanged();
     void Update();
 private:
     ISceneNode *m_pSceneNode;

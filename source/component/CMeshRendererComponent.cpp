@@ -40,15 +40,28 @@ void CMeshRendererComponent::Update()
     m_pRenderer->SubmitToRenderQueue(m_pRenderInput);
 }
 
+void CMeshRendererComponent::OnTransformChanged(const CMatrix4 &worldMat)
+{
+    float *positions = m_pMesh->GetPositions();
+    int vertCount = m_pMesh->GetVerticesCount();
+    for (int i=0; i<vertCount; ++i)
+    {
+        CVector3 out;
+        worldMat.TransformVect(out, CVector3(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]));
+        positions[i * 3] = out.x;
+        positions[i * 3 + 1] = out.y;
+        positions[i * 3 + 2] = out.z;
+    }
+    SetMesh(m_pMesh);
+}
+
 void CMeshRendererComponent::SetMesh(IMesh *pMesh)
 {
     //if (m_pMesh != pMesh)
     {
         m_pMesh = pMesh;
         if (m_pMesh)
-        {
-            
-            
+        {                        
             int positionsSize = 0;
             int uvsSize = 0;
             int colorsSize = 0;
@@ -104,11 +117,6 @@ void CMeshRendererComponent::SetMaterial(IMaterial *pMaterial)
             m_pRenderInput->SetShaderProgram(m_pMaterialInstance->GetShaderProgram());
         }
     }
-}
-
-void CMeshRendererComponent::SubmitRenderInput()
-{
-    m_pRenderer->SubmitToRenderQueue(m_pRenderInput);
 }
 
 }

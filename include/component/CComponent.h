@@ -2,7 +2,6 @@
 #define _MAGIC_C_COMPONENT_H_
 
 #include "IComponent.h"
-#include "scene/CGameObject.h"
 
 namespace magic
 {
@@ -13,10 +12,11 @@ public:
     virtual ~CComponent(){}
     virtual void Update();
     virtual void FixedUpdate();
-    CGameObject *GetGameObject() { return m_pGameObject; }
-    void SetGameObject(CGameObject *pGameObject) { m_pGameObject = pGameObject; }
+    virtual IGameObject *GetGameObject() const { return m_pGameObject; }
+    virtual void SetGameObject(IGameObject *pGameObject) { m_pGameObject = pGameObject; }
+    virtual void OnTransformChanged(const CMatrix4 &absMat) {}
 protected:
-    CGameObject *m_pGameObject;
+    IGameObject *m_pGameObject;
 };
 } // namespace magic
 

@@ -16,11 +16,10 @@ public:
     virtual~ CMeshRendererComponent();
     
     virtual void Update();
+    virtual void OnTransformChanged(const CMatrix4 &worldMat);
     void Initialize(IRenderer *pRenderer, IMaterial *pMaterial, IMesh *pMesh);
     void SetMesh(IMesh *pMesh);
     void SetMaterial(IMaterial *pMaterial);
-private:
-    void SubmitRenderInput();
 private:
     IMesh *m_pMesh;
     IMaterial *m_pMaterial;

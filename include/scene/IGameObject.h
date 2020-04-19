@@ -26,6 +26,7 @@ public:
     T *AddComponent()
     {
         T *com = new T();
+        com->SetGameObject(this);
         m_ComponetMap.insert(std::pair<int, IComponent *>(com->GetID(), com));
         return com;
     }
@@ -51,8 +52,6 @@ public:
         return nullptr;
     }
 
-    virtual ISceneNode *GetSceneNode() const = 0;
-
     virtual void Update()
     {
         for (auto comIt : m_ComponetMap)
@@ -62,7 +61,10 @@ public:
         }
     }
 
-private:
+    virtual void SetSceneNode(ISceneNode *pSceneNode) = 0;
+    virtual ISceneNode *GetSceneNode() const = 0;
+    virtual void OnTransformChanged() = 0;
+protected:
     std::map<int, IComponent *> m_ComponetMap;
 };
 }

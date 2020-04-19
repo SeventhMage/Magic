@@ -26,7 +26,6 @@ public:
 private:
     int m_VerticesCount;
     int m_IndicesCount;
-    float *m_Vertices;
     float *m_Positions;
     float *m_Colors;
     float *m_Uvs;

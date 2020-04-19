@@ -61,9 +61,28 @@ IMaterial *material;
 CGameObject camera;
 CGameObject triangle;
 
+float vertices[][3] = {  0.0f,  0.5f, 0.0f,
+                         -0.5f, -0.5f, 0.0f,
+                         0.5f, -0.5f, 0.0f
+                      };
+float colors[][4] = {
+    1.0f, 0.0f, 0.0f, 1.0f,
+    0.0f, 1.0f, 0.0f, 1.0f,
+    0.0f, 0.0f, 1.0f, 1.0f,
+};
+
+unsigned short indices[] = {0, 1, 2};
+
+CVector3 pos;
+float flag = 0.001f;
+
 void update()
 {
     mc->Run();
+    triangle.GetSceneNode()->SetPosition(pos);
+    if (pos.x > 0.02f || pos.x < -0.02f)
+        flag = -flag;
+    pos.x += flag;
 }
 
 void shutdown()
@@ -92,28 +111,19 @@ int esMain ( SRenderContext *esContext )
     printf("Loading scene ... \n");
     pSceneMgr = mc->GetSceneManager();
     IScene *pScene = pSceneMgr->LoadScene();
-    IGameObject *go = pScene->GetRootGameObject();
-    
+    ISceneNode *pRootNode = pScene->GetRootNode();
+    camera.SetSceneNode(pRootNode);
+    triangle.SetSceneNode(pRootNode);
     CCameraComponent *pCamera = camera.AddComponent<CCameraComponent>();
     pCamera->Initialize(renderer, CCameraComponent::Projection);
     pCamera->SetClearColor(0.5, 0.5, 0.5, 1);
     pCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
-    go->GetSceneNode()->AddChild(camera.GetSceneNode());
     
     CMeshRendererComponent *pMeshRenderer = triangle.AddComponent<CMeshRendererComponent>();
-    go->GetSceneNode()->AddChild(triangle.GetSceneNode());
+    
     mesh = new CMesh();
 
-    float vertices[][3] = {  0.0f,  0.5f, 0.0f,
-                             -0.5f, -0.5f, 0.0f,
-                             0.5f, -0.5f, 0.0f
-                          };
-    float colors[][4] = {
-        1.0f, 0.0f, 0.0f, 1.0f,
-        0.0f, 1.0f, 0.0f, 1.0f,
-        0.0f, 0.0f, 1.0f, 1.0f,
-    };
-    unsigned short indices[] = {0, 1, 2};
+    
     mesh->SetPositions(vertices, sizeof(vertices));
     mesh->SetColors(colors, sizeof(colors));
     //mesh->SetIndices(indices, sizeof(indices));
@@ -145,7 +155,7 @@ int esMain ( SRenderContext *esContext )
     material->SetShader(vertShader->GetShaderType(), vertShader);
     material->SetShader(fragShader->GetShaderType(), fragShader);
     pMeshRenderer->Initialize(mc->GetRenderer(), material, mesh);
-    go->GetSceneNode()->AddChild(triangle.GetSceneNode());
+    
     printf("Finished loading scene. \n\n");
 
     printf("Start Application ... \n");

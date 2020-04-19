@@ -8,7 +8,6 @@ namespace magic
 CMesh::CMesh()
 :m_VerticesCount(0)
 ,m_IndicesCount(0)
-,m_Vertices(nullptr)
 ,m_Positions(nullptr)
 ,m_Colors(nullptr)
 ,m_Uvs(nullptr)
@@ -18,8 +17,10 @@ CMesh::CMesh()
 }
 CMesh::~CMesh()
 {
-    SAFE_DEL_ARRAY(m_Vertices);
     SAFE_DEL_ARRAY(m_Indices);
+    SAFE_DEL_ARRAY(m_Positions);
+    SAFE_DEL_ARRAY(m_Colors);
+    SAFE_DEL_ARRAY(m_Uvs);
 }
 
 void CMesh::SetIndices(const unsigned short *indices, int size)

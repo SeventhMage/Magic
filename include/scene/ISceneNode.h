@@ -5,15 +5,31 @@
 
 namespace magic
 {
+class IGameObject;
 class ISceneNode
 {
 public:
     virtual ~ISceneNode() {}
     virtual void Update() = 0;
     virtual void AddChild(ISceneNode *) = 0;
-    virtual void AddParent(ISceneNode *) = 0;
-    virtual CMatrix4 &GetAbsoluteTransform() = 0;
-    virtual CMatrix4 &GetRelativeTransform() = 0;
+    virtual void AddToParent(ISceneNode *) = 0;
+    virtual void SetParent(ISceneNode *) = 0;
+    virtual void RemoveNode(ISceneNode *) = 0;
+    virtual void RemoveFromNode(ISceneNode *) = 0;
+    virtual void AddGameObject(IGameObject *) = 0;
+    virtual void RemoveGameObject(IGameObject *) = 0;
+    virtual void SetPosition(const CVector3 &position) = 0;
+    virtual void SetRotation(const CVector3 &rotation) = 0;
+    virtual void SetScale(const CVector3 &scale) = 0;
+    virtual ISceneNode *GetParent() const = 0;
+    virtual const CVector3 &GetPosition() const = 0;
+    virtual CVector3 GetAbslutePosition() const = 0;
+    virtual const CVector3 &GetRotation() const = 0;
+    virtual const CVector3 &GetScale() const = 0;
+    virtual const CMatrix4 &GetAbsluateTransform() const = 0;
+    virtual CMatrix4 GetRelativeTransform() const = 0;
+    virtual void UpdateAbsluateTransform() = 0;
+    virtual void SetNeedUpdateTransform(bool bNeed) = 0;
 };
 } // namespace magic
 
