@@ -5,6 +5,7 @@
 #include "render/IRenderPass.h"
 #include "render/IRenderer.h"
 #include "math/CMatrix4.h"
+#include "math/CFrustum.h"
 
 namespace magic
 {
@@ -20,15 +21,26 @@ public:
     ~CCameraComponent();
 
     virtual void Update();
+    virtual void OnTransformChanged(const CMatrix4 &wordMat);
 
-    void Initialize(IRenderer *pRenderer, CameraType type);
+    void Initialize(IRenderer *pRenderer, CameraType type, float fov, float aspect, float near, float far);
     void SetClearColor(float r, float g, float b, float a);
     void SetClearBit(int bit);
 private:
     IRenderPass *m_pRenderPass;
     CameraType m_Type;
     CMatrix4 m_vpMatrix;
-    CMatrix4 m_vMatrix;
+    CMatrix4 m_viewMatrix;
+    CMatrix4 m_projMatrix;
+    CFrustum m_frustum;
+    
+    uint m_Width;
+    uint m_Height;
+    
+    float m_FarClip;
+    float m_NearClip;
+    float m_Fov;
+    float m_Aspect;
 };
 
 } // namespace magic

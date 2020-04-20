@@ -132,10 +132,11 @@ int esMain ( SRenderContext *esContext )
      "layout(location = 0) in vec3 vPosition;  \n"
      "layout(location = 1) in vec4 vColor;     \n"
      "out vec4 vOutColor;                      \n"
+     "uniform mat4 mvpMatrix;                  \n"
      "void main()                              \n"
      "{                                        \n"
      "   vOutColor = vColor;                   \n"
-     "   gl_Position = vec4(vPosition, 1.0);   \n"
+     "   gl_Position = mvpMatrix * vec4(vPosition, 1.0);   \n"
      "}                                        \n";
 
     char fShaderStr[] =

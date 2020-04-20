@@ -9,6 +9,7 @@ CComponent::CComponent()
 
 void CComponent::Update()
 {
+    
 }
 
 void CComponent::FixedUpdate()
