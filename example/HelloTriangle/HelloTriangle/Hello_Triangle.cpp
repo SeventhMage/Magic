@@ -115,7 +115,7 @@ int esMain ( SRenderContext *esContext )
     camera.SetSceneNode(pRootNode);
     triangle.SetSceneNode(pRootNode);
     CCameraComponent *pCamera = camera.AddComponent<CCameraComponent>();
-    pCamera->Initialize(renderer, CCameraComponent::Projection);
+    pCamera->Initialize(renderer, CCameraComponent::Projection, 1.f, 1.f, -100.f, 100.f);
     pCamera->SetClearColor(0.5, 0.5, 0.5, 1);
     pCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
     

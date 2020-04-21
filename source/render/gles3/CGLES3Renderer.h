@@ -26,7 +26,7 @@ public:
     virtual IBufferObject *CreateVertexBufferObject(void *vertexes, int size, int usage);
     virtual IBufferObject *CreateIndexBufferObject(void *indices, int size, int usage);
 protected:
-    virtual void Render(IRenderInput *pRenderInput);
+    virtual void Render(IRenderInput *pRenderInput, IRenderPass *pRenderPass);
 private:
     bool Init(SRenderContext *esContext, const char *title, GLint width, GLint height);
 private:

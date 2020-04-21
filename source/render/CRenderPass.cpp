@@ -34,9 +34,29 @@ void CRenderPass::SetClearColor(float r, float g, float b, float a)
     m_ClearColor[3] = a;
 }
 
-void CRenderPass::SetViewProjectMatirx(float *matrix)
+void CRenderPass::SetShaderParam(const char *name, void *value, int size)
 {
-    memcpy(m_vpMatrix, matrix, sizeof(m_vpMatrix));
+    auto it = m_ShaderParams.find(name);
+    if (it == m_ShaderParams.end())
+    {
+        SShaderParam *param = new SShaderParam(name, value, size);
+        m_ShaderParams[name] = param;
+    }
+    else
+    {
+        m_ShaderParams[name]->SetValue(value, size);
+    }
+}
+
+SShaderParam *CRenderPass::GetShaderParam(int index) const
+{
+    if (index >=0 && index < m_ShaderParams.size())
+    {
+        auto it = m_ShaderParams.begin();
+        for (int i=0; i<index; ++it);
+        return it->second;
+    }
+    return nullptr;
 }
 
 }

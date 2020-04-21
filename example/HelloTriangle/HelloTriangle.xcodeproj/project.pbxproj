@@ -27,6 +27,7 @@
 		742A7EDC2434406C00D45F20 /* CShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 742A7EDB2434406C00D45F20 /* CShader.cpp */; };
 		742A7EDF2439E71900D45F20 /* CMaterialInstance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 742A7EDD2439E71900D45F20 /* CMaterialInstance.cpp */; };
 		742A7EE2243ACA2800D45F20 /* CShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 742A7EE0243ACA2800D45F20 /* CShaderProgram.cpp */; };
+		7485B4A4244E6FD300FB9711 /* CRenderQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7485B4A2244E6FD300FB9711 /* CRenderQueue.cpp */; };
 		74C230FE242760260041B1AC /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74C230FD242760260041B1AC /* AppDelegate.mm */; };
 		74C23104242760260041B1AC /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74C23103242760260041B1AC /* ViewController.mm */; };
 		74C23107242760260041B1AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74C23105242760260041B1AC /* Main.storyboard */; };
@@ -136,6 +137,8 @@
 		742A7EDE2439E71900D45F20 /* CMaterialInstance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMaterialInstance.h; sourceTree = "<group>"; };
 		742A7EE0243ACA2800D45F20 /* CShaderProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CShaderProgram.cpp; sourceTree = "<group>"; };
 		742A7EE4243AD40900D45F20 /* Log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
+		7485B4A2244E6FD300FB9711 /* CRenderQueue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CRenderQueue.cpp; sourceTree = "<group>"; };
+		7485B4A3244E6FD300FB9711 /* CRenderQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRenderQueue.h; sourceTree = "<group>"; };
 		74C230F9242760260041B1AC /* HelloTriangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTriangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74C230FC242760260041B1AC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		74C230FD242760260041B1AC /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -299,6 +302,8 @@
 				74DECBD4244689C90069223C /* CIndexBufferObject.h */,
 				74DECBD6244689E00069223C /* CVertexArrayObject.cpp */,
 				74DECBD7244689E00069223C /* CVertexArrayObject.h */,
+				7485B4A2244E6FD300FB9711 /* CRenderQueue.cpp */,
+				7485B4A3244E6FD300FB9711 /* CRenderQueue.h */,
 			);
 			path = render;
 			sourceTree = "<group>";
@@ -593,6 +598,7 @@
 				742A7EDF2439E71900D45F20 /* CMaterialInstance.cpp in Sources */,
 				74DECBC8243E98990069223C /* CGLES3Texture.cpp in Sources */,
 				74DECBBC243D4F8F0069223C /* CGLES3VertexArrayObject.cpp in Sources */,
+				7485B4A4244E6FD300FB9711 /* CRenderQueue.cpp in Sources */,
 				742A7EDA2434405700D45F20 /* CMaterial.cpp in Sources */,
 				74C230FE242760260041B1AC /* AppDelegate.mm in Sources */,
 			);

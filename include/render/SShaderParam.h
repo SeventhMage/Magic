@@ -53,11 +53,22 @@ struct SShaderParam
         if (paramData)
             free(paramData);
     }
+    
+    void SetValue(void *data, int size)
+    {
+        if (paramSize != size)
+        {
+            paramData = realloc(paramData, size);
+            paramSize = size;
+        }
+        memcpy(paramData, data, size);
+    }
+    
     static const int MAX_PATH = 256;
     char paramName[MAX_PATH];
     void *paramData;
     int paramSize;
-    int paramType;
+    int  ;
 };
 
 }

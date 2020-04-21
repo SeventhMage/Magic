@@ -16,6 +16,8 @@ CCameraComponent::CCameraComponent()
 ,m_FarClip(1000.f)
 ,m_Fov(1.046f)
 ,m_Aspect(1.f)
+,m_bNeedUpdateView(true)
+,m_bNeedUpdateProj(true)
 {
     
 }
@@ -41,6 +43,8 @@ void CCameraComponent::Initialize(IRenderer *pRenderer, CameraType type, float f
     }
     m_NearClip = near;
     m_FarClip = far;
+    m_bNeedUpdateView = true;
+    m_bNeedUpdateProj = true;
 }
 
 void CCameraComponent::SetClearBit(int bit)
@@ -55,16 +59,38 @@ void CCameraComponent::SetClearColor(float r, float g, float b, float a)
 
 void CCameraComponent::Update()
 {
-    ISceneNode *pNode = m_pGameObject->GetSceneNode();
-    m_pRenderPass->SetViewProjectMatirx(m_vpMatrix.m);
+    if (m_bNeedUpdateView)
+    {
+        ISceneNode *pSceneNode = m_pGameObject->GetSceneNode();
+        const CMatrix4 &transform = pSceneNode->GetAbsluateTransform();
+        CVector3 dir(0, 0, -1.f);
+        CVector3 up(0, 1.f, 0);
+        transform.TransformVect(dir);
+        dir.normalize();
+        transform.TransformVect(up);
+        up.normalize();
+        m_viewMatrix.BuildCameraLookAtMatrix(pSceneNode->GetAbslutePosition(), dir, up);
+    }
+    if (m_bNeedUpdateProj)
+    {
+        if (m_Type == CameraType::Ortho)
+            m_projMatrix.BuildProjectionMatrixOrthoRH(m_Width, m_Height, m_NearClip, m_FarClip);
+        else
+            m_projMatrix.BuildProjectionMatrixPerspectiveFovRH(m_Fov, m_Aspect, m_NearClip, m_FarClip);
+    }
+    
+    if (m_bNeedUpdateView || m_bNeedUpdateProj)
+    {
+        m_vpMatrix = m_viewMatrix * m_projMatrix;
+        m_pRenderPass->SetShaderParam("vpMatrix", m_vpMatrix.m, sizeof(m_vpMatrix.m));
+        m_bNeedUpdateView = false;
+        m_bNeedUpdateProj = false;
+    }
 }
 
 void CCameraComponent::OnTransformChanged(const CMatrix4 &wordMat)
 {
-    if (m_Type == CameraType::Ortho)
-    {
-        m_viewMatrix.BuildProjectionMatrixOrthoRH(m_Width, m_Height, m_NearClip, m_FarClip);
-    }
+    m_bNeedUpdateView = true;
 }
 
 }

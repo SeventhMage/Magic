@@ -22,7 +22,7 @@ public:
     virtual IRenderInput *CreateRenderInput(int mode, int usage);
     
 protected:
-    virtual void Render(IRenderInput *pRenderInput);
+    virtual void Render(IRenderInput *pRenderInput, IRenderPass *pRenderPass);
 private:
     typedef std::map<int, std::vector<IRenderInput*> > RenderQueueGroup;
     RenderQueueGroup m_OpaqueRenderQueueGroup;

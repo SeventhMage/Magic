@@ -3,6 +3,10 @@
 
 #include "render/IRenderPass.h"
 #include "render/IRenderer.h"
+#include "render/SShaderParam.h"
+
+#include <map>
+#include <string>
 
 namespace magic
 {
@@ -14,19 +18,20 @@ public:
     virtual void BeginRenderTarget();
     virtual void SetRenderTarget(IRenderTarget *pRenderTarget) { m_pRenderTarget = pRenderTarget; }
     virtual IRenderTarget *GetRenderTarget() { return m_pRenderTarget; }
-    virtual float *GetViewProjectMatrix() const { return (float *)m_vpMatrix; }
+    virtual SShaderParam *GetShaderParam(int index) const;
+    virtual int GetShaderParamCount() const { return (int)m_ShaderParams.size(); }
     virtual bool IsEnable() const { return m_bEnable; }
     
     virtual void SetClearColor(float r, float g, float b, float a);
     virtual void SetClearBit(int bit) { m_ClearBit = bit; }
-    virtual void SetViewProjectMatirx(float matrix[16]);
+    virtual void SetShaderParam(const char *name, void *value, int size);
     virtual void SetEnable(bool enable) { m_bEnable = enable; }
 private:
     IRenderer *m_pRenderer;
     IRenderTarget *m_pRenderTarget;
     int m_ClearBit;
     float m_ClearColor[4];
-    float m_vpMatrix[16];
+    std::map<std::string, SShaderParam *> m_ShaderParams;
     bool m_bEnable;
 };
 } // namespace magic

@@ -299,13 +299,14 @@ IBufferObject *CGLES3Renderer::CreateIndexBufferObject(void *indices, int size, 
    return new CGLES3IndexBufferObject(indices, size, usage);
 }
 
-void CGLES3Renderer::Render(IRenderInput *pRenderInput)
+void CGLES3Renderer::Render(IRenderInput *pRenderInput, IRenderPass *pRenderPass)
 {
     //glViewport ( 0, 0, m_esContext->width, m_esContext->height );
-    
     CVertexArrayObject *pVAO = (CVertexArrayObject *)pRenderInput->GetVertexArrayObject();
     pVAO->Bind();
     IShaderProgram *pProgram = pRenderInput->GetShaderProgram();
+    for (int i=0; i<pRenderPass->GetShaderParamCount(); ++i)
+        pProgram->SetUniform(pRenderPass->GetShaderParam(i)->paramName, pRenderPass->GetShaderParam(i)->paramData);
     pProgram->Bind();
     for (int i = 0; i < pRenderInput->GetTextureCount(); ++i)
     {

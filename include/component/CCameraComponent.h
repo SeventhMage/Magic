@@ -41,6 +41,9 @@ private:
     float m_NearClip;
     float m_Fov;
     float m_Aspect;
+    
+    bool m_bNeedUpdateView;
+    bool m_bNeedUpdateProj;
 };
 
 } // namespace magic

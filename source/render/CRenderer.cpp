@@ -19,7 +19,7 @@ CRenderer::~CRenderer()
     m_RenderPassVec.clear();
 }
 
-void CRenderer::Render(IRenderInput *pRenderInput)
+void CRenderer::Render(IRenderInput *pRenderInput, IRenderPass *pRenderPass)
 {
 
     //call platform api to real draw
@@ -53,14 +53,14 @@ void CRenderer::Render()
             {
                 for (auto input : queIt.second)
                 {
-                    Render(input);
+                    Render(input, pass);
                 }
             }
             for (auto queIt : m_TransparentRenderQueueGroup)
             {
                 for (auto input : queIt.second)
                 {
-                    Render(input);
+                    Render(input, pass);
                 }
             }
         }
