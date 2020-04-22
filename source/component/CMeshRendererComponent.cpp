@@ -31,7 +31,6 @@ void CMeshRendererComponent::Initialize(IRenderer *pRenderer, IMaterial *pMateri
     if (m_pRenderer)
     {
         m_pRenderInput = pRenderer->CreateRenderInput(m_Mode, m_Usage);
-        m_pMaterialInstance->Initialize(m_pRenderer, pMaterial);
         SetMaterial(pMaterial);
         SetMesh(pMesh);
     }
@@ -44,6 +43,7 @@ void CMeshRendererComponent::Update()
 
 void CMeshRendererComponent::OnTransformChanged(const CMatrix4 &worldMat)
 {
+    /*
     float *positions = m_pMesh->GetPositions();
     int vertCount = m_pMesh->GetVerticesCount();
     for (int i=0; i<vertCount; ++i)
@@ -55,11 +55,12 @@ void CMeshRendererComponent::OnTransformChanged(const CMatrix4 &worldMat)
         positions[i * 3 + 2] = out.z;
     }
     SetMesh(m_pMesh);
+     */
     IShaderProgram *pShaderProgram = m_pMaterialInstance->GetShaderProgram();
     if (pShaderProgram)
     {
         ISceneNode *pNode = m_pGameObject->GetSceneNode();
-        const CMatrix4 &mat = pNode->GetRelativeTransform();
+        const CMatrix4 &mat = pNode->GetAbsluateTransform();
         pShaderProgram->SetUniform("mMatrix", (void *)mat.m);
     }
 }

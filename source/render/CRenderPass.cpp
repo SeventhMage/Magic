@@ -15,7 +15,10 @@ CRenderPass::CRenderPass(IRenderer *pRenderer, IRenderTarget *pRenderTarget)
 
 CRenderPass::~CRenderPass()
 {
-
+    for (auto it : m_ShaderParams)
+    {
+        delete it.second;
+    }
 }
 
 void CRenderPass::BeginRenderTarget()

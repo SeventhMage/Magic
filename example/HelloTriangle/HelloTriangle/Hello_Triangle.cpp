@@ -74,15 +74,21 @@ float colors[][4] = {
 unsigned short indices[] = {0, 1, 2};
 
 CVector3 pos;
-float flag = 0.001f;
+float flag = 0.01f;
+float rot = 0;
 
 void update()
 {
     mc->Run();
-    camera.GetSceneNode()->SetPosition(pos);
-    if (pos.x > 0.02f || pos.x < -0.02f)
+    //camera.GetSceneNode()->SetPosition(pos);
+    if (pos.x > 0.2f || pos.x < -0.2f)
         flag = -flag;
     pos.x += flag;
+    
+    triangle.GetSceneNode()->SetRotation(CVector3(0, 0, rot));
+    
+    //triangle.GetSceneNode()->SetPosition(pos);
+    rot += flag;
 }
 
 void shutdown()
@@ -113,11 +119,13 @@ int esMain ( SRenderContext *esContext )
     IScene *pScene = pSceneMgr->LoadScene();
     ISceneNode *pRootNode = pScene->GetRootNode();
     ISceneNode *cameraNode = pRootNode->CreateChildNode();
+    ISceneNode *triangleNode = pRootNode->CreateChildNode();
     camera.SetSceneNode(cameraNode);
-    triangle.SetSceneNode(pRootNode);
+    triangle.SetSceneNode(triangleNode);
+    cameraNode->SetPosition(CVector3(0, 0, 0));
     CCameraComponent *pCamera = camera.AddComponent<CCameraComponent>();
     pCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f, -100.f, 100.f);
-    //pCamera->Initialize(renderer, CCameraComponent::Projection, 0.333 * 3.14, 1.f, 1.f, 100.f);
+    //pCamera->Initialize(renderer, CCameraComponent::Projection, 0.333 * 3.14, 1.f, 1.f, 1000.f);
     pCamera->SetClearColor(0.5, 0.5, 0.5, 1);
     pCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
     
@@ -134,8 +142,8 @@ int esMain ( SRenderContext *esContext )
      "layout(location = 0) in vec3 vPosition;  \n"
      "layout(location = 1) in vec4 vColor;     \n"
      "out vec4 vOutColor;                      \n"
-     "uniform mat4 mMatrix;                    \n"
      "uniform mat4 vpMatrix;                   \n"
+     "uniform mat4 mMatrix;                    \n"
      "void main()                              \n"
      "{                                        \n"
      "   vOutColor = vColor;                   \n"

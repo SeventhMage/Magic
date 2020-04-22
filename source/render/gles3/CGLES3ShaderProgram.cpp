@@ -360,10 +360,9 @@ void CGLES3ShaderProgram::GetShaderUniform()
         GLint maxLength;
         GLDebug(glGetProgramiv(m_hProgram, GL_ACTIVE_UNIFORM_MAX_LENGTH, &maxLength));
         char *name = new char[maxLength];
-        int locationAppend = 0;
+        
         for (int i = 0; i < uniformsNum; ++i)
         {
-
             Uniform uniform;
 
             GLenum type;
@@ -374,10 +373,7 @@ void CGLES3ShaderProgram::GetShaderUniform()
             strncpy(uniform.m_name, sname.c_str(), MAX_FILE_NAME - 1);
             uniform.m_size = GetUniformTypeSize(uniform.m_format) * uniform.m_count;
 
-            uniform.m_location = i + locationAppend;
-
-            if (uniform.m_count > 1)
-                locationAppend += uniform.m_count - 1;
+            uniform.m_location = glGetUniformLocation(m_hProgram, uniform.m_name);
 
             m_uniforms[uniform.m_location] = uniform;
         }
