@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "base/magicType.h"
 
 namespace magic
 {
@@ -20,7 +21,7 @@ struct SShaderParam
     SShaderParam(const char *name, void *data, int size)
     {
         strncpy(paramName, name, MAX_PATH * sizeof(char));
-        paramData = malloc(size);
+        paramData = (byte *)malloc(size);
         memcpy(paramData, data, size);
         paramSize = size;
     }
@@ -29,7 +30,7 @@ struct SShaderParam
     {
         strncpy(paramName, param.paramName, MAX_PATH * sizeof(char));
         paramSize = param.paramSize;
-        paramData = malloc(paramSize);
+        paramData = (byte *)malloc(paramSize);
         memcpy(paramData, param.paramData, paramSize);
     }
 
@@ -39,7 +40,7 @@ struct SShaderParam
         {
             if (param.paramSize != paramSize)
             {
-                paramData = realloc(paramData, paramSize);
+                paramData = (byte *)realloc(paramData, paramSize);
                 paramSize = param.paramSize;
             }
             memcpy(paramData, param.paramData, paramSize);
@@ -58,7 +59,7 @@ struct SShaderParam
     {
         if (paramSize != size)
         {
-            paramData = realloc(paramData, size);
+            paramData = (byte *)realloc(paramData, size);
             paramSize = size;
         }
         memcpy(paramData, data, size);
@@ -66,7 +67,7 @@ struct SShaderParam
     
     static const int MAX_PATH = 256;
     char paramName[MAX_PATH];
-    void *paramData;
+    byte *paramData;
     int paramSize;
     int  ;
 };

@@ -13,11 +13,15 @@ public:
     CSceneNode();
     virtual ~CSceneNode();
     virtual void Update();
+    virtual ISceneNode *CreateChildNode();
+    virtual void DestroyChildNode(ISceneNode *pNode);
+    /*
     virtual void AddChild(ISceneNode *pChild);
     virtual void AddToParent(ISceneNode *pParent);
     virtual void SetParent(ISceneNode *pParent);
     virtual void RemoveNode(ISceneNode *pNode);
     virtual void RemoveFromNode(ISceneNode *pNode);
+     */
     virtual void AddGameObject(IGameObject *pGameObject);
     virtual void RemoveGameObject(IGameObject *);
     virtual void SetPosition(const CVector3 &position);

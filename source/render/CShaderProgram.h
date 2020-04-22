@@ -29,7 +29,8 @@ public:
         }
         ~Uniform()
         {
-            SAFE_DEL(m_value);
+            if (m_value)
+                free(m_value);
         }
 
         void SetValue(const void *value)
@@ -38,7 +39,7 @@ public:
             {
                 if (!m_value)
                 {
-                    m_value = new byte[m_size];
+                    m_value = (byte *)malloc(m_size);
                 }
                 memcpy(m_value, value, m_size);
                 Dirty(true);

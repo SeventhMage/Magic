@@ -61,9 +61,9 @@ IMaterial *material;
 CGameObject camera;
 CGameObject triangle;
 
-float vertices[][3] = {  0.0f,  0.5f, 0.0f,
-                         -0.5f, -0.5f, 0.0f,
-                         0.5f, -0.5f, 0.0f
+float vertices[][3] = {  0.0f,  0.5f, -2.0f,
+                         -0.5f, -0.5f, -2.0f,
+                         0.5f, -0.5f, -2.0f
                       };
 float colors[][4] = {
     1.0f, 0.0f, 0.0f, 1.0f,
@@ -79,7 +79,7 @@ float flag = 0.001f;
 void update()
 {
     mc->Run();
-    triangle.GetSceneNode()->SetPosition(pos);
+    camera.GetSceneNode()->SetPosition(pos);
     if (pos.x > 0.02f || pos.x < -0.02f)
         flag = -flag;
     pos.x += flag;
@@ -112,10 +112,12 @@ int esMain ( SRenderContext *esContext )
     pSceneMgr = mc->GetSceneManager();
     IScene *pScene = pSceneMgr->LoadScene();
     ISceneNode *pRootNode = pScene->GetRootNode();
-    camera.SetSceneNode(pRootNode);
+    ISceneNode *cameraNode = pRootNode->CreateChildNode();
+    camera.SetSceneNode(cameraNode);
     triangle.SetSceneNode(pRootNode);
     CCameraComponent *pCamera = camera.AddComponent<CCameraComponent>();
-    pCamera->Initialize(renderer, CCameraComponent::Projection, 1.f, 1.f, -100.f, 100.f);
+    pCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f, -100.f, 100.f);
+    //pCamera->Initialize(renderer, CCameraComponent::Projection, 0.333 * 3.14, 1.f, 1.f, 100.f);
     pCamera->SetClearColor(0.5, 0.5, 0.5, 1);
     pCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
     
@@ -132,11 +134,12 @@ int esMain ( SRenderContext *esContext )
      "layout(location = 0) in vec3 vPosition;  \n"
      "layout(location = 1) in vec4 vColor;     \n"
      "out vec4 vOutColor;                      \n"
-     "uniform mat4 mvpMatrix;                  \n"
+     "uniform mat4 mMatrix;                    \n"
+     "uniform mat4 vpMatrix;                   \n"
      "void main()                              \n"
      "{                                        \n"
      "   vOutColor = vColor;                   \n"
-     "   gl_Position = mvpMatrix * vec4(vPosition, 1.0);   \n"
+     "   gl_Position = vpMatrix * mMatrix * vec4(vPosition, 1.0);   \n"
      "}                                        \n";
 
     char fShaderStr[] =

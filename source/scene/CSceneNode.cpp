@@ -13,7 +13,8 @@ CSceneNode::CSceneNode()
 }
 CSceneNode::~CSceneNode()
 {
-    
+    for (size_t i=0; i<m_SceneNodeList.size(); ++i)
+        delete m_SceneNodeList[i];
 }
 void CSceneNode::Update()
 {
@@ -29,6 +30,28 @@ void CSceneNode::Update()
     }
 }
 
+ISceneNode *CSceneNode::CreateChildNode()
+{
+    CSceneNode *pNode = new CSceneNode();
+    pNode->m_pParentNode = this;
+    m_SceneNodeList.push_back(pNode);
+    return pNode;
+}
+
+void CSceneNode::DestroyChildNode(ISceneNode *pNode)
+{
+    for (auto it = m_SceneNodeList.begin(); it != m_SceneNodeList.end(); ++it)
+    {
+        if (pNode == *it)
+        {
+            m_SceneNodeList.erase(it);
+            delete pNode;
+            break;
+        }
+    }
+}
+
+/*
 void CSceneNode::AddChild(ISceneNode *pChild)
 {
     if (std::find(m_SceneNodeList.begin(), m_SceneNodeList.end(), pChild) == m_SceneNodeList.end())
@@ -63,7 +86,7 @@ void CSceneNode::RemoveFromNode(ISceneNode *pNode)
     if (m_pParentNode)
         m_pParentNode->RemoveNode(this);
 }
-
+*/
 void CSceneNode::AddGameObject(IGameObject *pGameObject)
 {
     if (std::find(m_GameObjectList.begin(), m_GameObjectList.end(), pGameObject) == m_GameObjectList.end())

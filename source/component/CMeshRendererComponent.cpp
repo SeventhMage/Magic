@@ -2,6 +2,8 @@
 #include "render/CRenderInput.h"
 #include "render/ERender.h"
 #include "base/magicType.h"
+#include "scene/ISceneNode.h"
+#include "scene/IGameObject.h"
 
 namespace magic
 {
@@ -53,6 +55,13 @@ void CMeshRendererComponent::OnTransformChanged(const CMatrix4 &worldMat)
         positions[i * 3 + 2] = out.z;
     }
     SetMesh(m_pMesh);
+    IShaderProgram *pShaderProgram = m_pMaterialInstance->GetShaderProgram();
+    if (pShaderProgram)
+    {
+        ISceneNode *pNode = m_pGameObject->GetSceneNode();
+        const CMatrix4 &mat = pNode->GetRelativeTransform();
+        pShaderProgram->SetUniform("mMatrix", (void *)mat.m);
+    }
 }
 
 void CMeshRendererComponent::SetMesh(IMesh *pMesh)
