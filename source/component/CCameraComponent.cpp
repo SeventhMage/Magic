@@ -62,7 +62,8 @@ void CCameraComponent::Update()
     if (m_bNeedUpdateView)
     {
         ISceneNode *pSceneNode = m_pGameObject->GetSceneNode();
-        const CMatrix4 &transform = pSceneNode->GetAbsluateTransform();
+        CMatrix4 transform = pSceneNode->GetAbsluateTransform();
+        transform.SetTranslation(CVector3(0, 0, 0));
         CVector3 dir(0, 0, -1.f);
         CVector3 up(0, 1.f, 0);
         transform.TransformVect(dir);
@@ -81,7 +82,7 @@ void CCameraComponent::Update()
     
     if (m_bNeedUpdateView || m_bNeedUpdateProj)
     {
-        m_vpMatrix = m_projMatrix * m_viewMatrix;
+        m_vpMatrix = m_viewMatrix * m_projMatrix;
         m_pRenderPass->SetShaderParam("vpMatrix", m_vpMatrix.m, sizeof(m_vpMatrix.m));
         m_bNeedUpdateView = false;
         m_bNeedUpdateProj = false;

@@ -45,6 +45,8 @@ struct SRenderContext
     void ( *shutdownFunc ) ();
     void ( *keyFunc ) ( SRenderContext *, unsigned char, int, int );
     void ( *updateFunc ) ();
+    
+    bool bInitalize;
 };
 } // namespace magic
 

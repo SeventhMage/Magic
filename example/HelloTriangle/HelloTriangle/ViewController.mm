@@ -41,7 +41,7 @@ extern void esMain( magic::SRenderContext *esContext );
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
-    [self setupGL];
+    
 }
 
 - (void)dealloc
@@ -76,8 +76,6 @@ extern void esMain( magic::SRenderContext *esContext );
     [EAGLContext setCurrentContext:self.context];
     
     memset( &_esContext, 0, sizeof( _esContext ) );
-  
-    esMain( &_esContext );
 }
 
 - (void)tearDownGL
@@ -103,7 +101,11 @@ extern void esMain( magic::SRenderContext *esContext );
 {
     _esContext.width = view.drawableWidth;
     _esContext.height = view.drawableHeight;
-    
+    if (!_esContext.bInitalize)
+    {
+        esMain( &_esContext );
+        _esContext.bInitalize = true;
+    }
     if ( _esContext.drawFunc )
     {
         _esContext.drawFunc( &_esContext );

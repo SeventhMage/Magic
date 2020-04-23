@@ -61,9 +61,9 @@ IMaterial *material;
 CGameObject camera;
 CGameObject triangle;
 
-float vertices[][3] = {  0.0f,  0.5f, -2.0f,
-                         -0.5f, -0.5f, -2.0f,
-                         0.5f, -0.5f, -2.0f
+float vertices[][3] = {  0.0f,  0.5f, 0.0f,
+                         -0.5f, -0.5f, 0.0f,
+                         0.5f, -0.5f, 0.0f
                       };
 float colors[][4] = {
     1.0f, 0.0f, 0.0f, 1.0f,
@@ -74,7 +74,7 @@ float colors[][4] = {
 unsigned short indices[] = {0, 1, 2};
 
 CVector3 pos;
-float flag = 0.01f;
+float flag = 0.05f;
 float rot = 0;
 
 void update()
@@ -82,10 +82,10 @@ void update()
     mc->Run();
     //camera.GetSceneNode()->SetPosition(pos);
     if (pos.x > 0.2f || pos.x < -0.2f)
-        flag = -flag;
+        ;//flag = -flag;
     pos.x += flag;
     
-    triangle.GetSceneNode()->SetRotation(CVector3(0, 0, rot));
+    triangle.GetSceneNode()->SetRotation(CVector3(0, rot, 0));
     
     //triangle.GetSceneNode()->SetPosition(pos);
     rot += flag;
@@ -122,10 +122,11 @@ int esMain ( SRenderContext *esContext )
     ISceneNode *triangleNode = pRootNode->CreateChildNode();
     camera.SetSceneNode(cameraNode);
     triangle.SetSceneNode(triangleNode);
-    cameraNode->SetPosition(CVector3(0, 0, 0));
+    cameraNode->SetPosition(CVector3(0, 0, 2));
     CCameraComponent *pCamera = camera.AddComponent<CCameraComponent>();
-    pCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f, -100.f, 100.f);
-    //pCamera->Initialize(renderer, CCameraComponent::Projection, 0.333 * 3.14, 1.f, 1.f, 1000.f);
+    float aspect = 1.f * esContext->width / esContext->height;
+    //pCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
+    pCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, 1.f * esContext->width / esContext->height, 1.f, 1000.f);
     pCamera->SetClearColor(0.5, 0.5, 0.5, 1);
     pCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
     
