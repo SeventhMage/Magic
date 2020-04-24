@@ -13,6 +13,7 @@ public:
     virtual IScene *LoadScene(const char *fileName) = 0;
     virtual void UnloadScene() = 0;
     virtual void Update() = 0;
+    virtual void FixedUpdate() = 0;
 };
 }
 

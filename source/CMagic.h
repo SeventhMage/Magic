@@ -5,6 +5,7 @@
 #include "base/CSingleton.h"
 #include "CApplication.h"
 #include "render/SRenderContext.h"
+#include "CTime.h"
 
 namespace magic
 {
@@ -20,6 +21,7 @@ public:
 
     virtual ISceneManager *GetSceneManager() const { return m_pSceneManager; }
     virtual IRenderer *GetRenderer() const { return m_pRenderer; }
+    virtual ITime *GetTime() const { return m_pTime; }
 private:
     CApplication *m_pApplication;
     int m_iFPS;
@@ -27,6 +29,7 @@ private:
 
     ISceneManager *m_pSceneManager;
     IRenderer *m_pRenderer;
+    CTime *m_pTime;
 };
 }
 

@@ -14,6 +14,7 @@ public:
     virtual IScene *LoadScene(const char *fileName);
     virtual void UnloadScene();
     virtual void Update();
+    virtual void FixedUpdate();
 private:
     IScene *m_pScene;
 };

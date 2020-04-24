@@ -89,6 +89,7 @@ void update()
     
     //triangle.GetSceneNode()->SetPosition(pos);
     rot += flag;
+    printf("Delta:%lu\n", mc->GetTime()->GetDeltaTime());
 }
 
 void shutdown()

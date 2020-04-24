@@ -39,4 +39,9 @@ void CSceneManager::Update()
         m_pScene->Update();
 }
 
+void CSceneManager::FixedUpdate()
+{
+    
+}
+
 }
