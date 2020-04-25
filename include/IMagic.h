@@ -3,6 +3,7 @@
 
 #include "scene/ISceneManager.h"
 #include "render/IRenderer.h"
+#include "resource/IResourceManager.h"
 #include "ITime.h"
 
 namespace magic
@@ -16,6 +17,7 @@ public:
     virtual int GetFPS() const = 0;
     virtual ISceneManager *GetSceneManager() const = 0;
     virtual IRenderer *GetRenderer() const = 0;
+    virtual IResourceManager *GetResourceManager() const = 0;
     virtual ITime *GetTime() const = 0;
 };
 }

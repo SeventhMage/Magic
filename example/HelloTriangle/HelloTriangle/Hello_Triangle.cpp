@@ -40,6 +40,7 @@
 #include "resource/CMesh.h"
 #include "resource/CMaterial.h"
 #include "resource/CShader.h"
+#include "resource/IImage.h"
 #include "ERender.h"
 #include "component/CCameraComponent.h"
 #include "component/CMeshRendererComponent.h"
@@ -66,9 +67,15 @@ float vertices[][3] = {  0.0f,  0.5f, 0.0f,
                          0.5f, -0.5f, 0.0f
                       };
 float colors[][4] = {
-    1.0f, 0.0f, 0.0f, 1.0f,
-    0.0f, 1.0f, 0.0f, 1.0f,
-    0.0f, 0.0f, 1.0f, 1.0f,
+    1.0f, 0.8f, 0.8f, 1.0f,
+    0.8f, 1.0f, 0.8f, 1.0f,
+    .8f, .8f, 1.0f, 1.0f,
+};
+
+float texCoords[][2] = {
+    0.5f, 1.f,
+    0.f, 0.f,
+    1.f, 0.f,
 };
 
 unsigned short indices[] = {0, 1, 2};
@@ -89,7 +96,7 @@ void update()
     
     //triangle.GetSceneNode()->SetPosition(pos);
     rot += flag;
-    printf("Delta:%lu\n", mc->GetTime()->GetDeltaTime());
+    //printf("Delta:%lu\n", mc->GetTime()->GetDeltaTime());
 }
 
 void shutdown()
@@ -110,9 +117,11 @@ int esMain ( SRenderContext *esContext )
 {
     printf("Start initalizing Engine ... \n");
     mc = CreateMagic(esContext, "Triangle", 1280, 960);
+    mc->SetFPS(60);
     esContext->updateFunc = &update;
     esContext->shutdownFunc = &shutdown;
     renderer = mc->GetRenderer();
+    IResourceManager *resourceMgr = mc->GetResourceManager();
     printf("Finished initalizing Engine.\n\n");
 
     printf("Loading scene ... \n");
@@ -127,7 +136,7 @@ int esMain ( SRenderContext *esContext )
     CCameraComponent *pCamera = camera.AddComponent<CCameraComponent>();
     float aspect = 1.f * esContext->width / esContext->height;
     //pCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
-    pCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, 1.f * esContext->width / esContext->height, 1.f, 1000.f);
+    pCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
     pCamera->SetClearColor(0.5, 0.5, 0.5, 1);
     pCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
     
@@ -138,37 +147,44 @@ int esMain ( SRenderContext *esContext )
     
     mesh->SetPositions(vertices, sizeof(vertices));
     mesh->SetColors(colors, sizeof(colors));
-    //mesh->SetIndices(indices, sizeof(indices));
+    mesh->SetUVs(texCoords, sizeof(texCoords));
+    mesh->SetIndices(indices, sizeof(indices));
     char vShaderStr[] =
      "#version 300 es                          \n"
      "layout(location = 0) in vec3 vPosition;  \n"
-     "layout(location = 1) in vec4 vColor;     \n"
+    "layout(location = 1) in vec2 vTexCoord;  \n"
+     "layout(location = 2) in vec4 vColor;     \n"
      "out vec4 vOutColor;                      \n"
+     "out vec2 vTex;                           \n"
      "uniform mat4 vpMatrix;                   \n"
      "uniform mat4 mMatrix;                    \n"
      "void main()                              \n"
      "{                                        \n"
      "   vOutColor = vColor;                   \n"
+     "   vTex = vTexCoord;                     \n"
      "   gl_Position = vpMatrix * mMatrix * vec4(vPosition, 1.0);   \n"
      "}                                        \n";
 
     char fShaderStr[] =
      "#version 300 es                              \n"
      "precision mediump float;                     \n"
+     "uniform sampler2D textureUnit;               \n"
      "in vec4 vOutColor;                           \n"
+     "in vec2 vTex;                                \n"
      "out vec4 fragColor;                          \n"
      "void main()                                  \n"
      "{                                            \n"
-     "   fragColor = vOutColor;                    \n"
+     "   fragColor = vOutColor * texture(textureUnit, vTex);   \n"
      "}                                            \n";
     vertShader = new CShader(EShaderType::Vertex, vShaderStr, sizeof(vShaderStr));
     fragShader = new CShader(EShaderType::Fragment, fShaderStr, sizeof(fShaderStr));
     material = new CMaterial();
-    material->AddAttribute("vPosition");
-    material->AddAttribute("vColor");
     material->SetShader(vertShader->GetShaderType(), vertShader);
     material->SetShader(fragShader->GetShaderType(), fragShader);
-    pMeshRenderer->Initialize(mc->GetRenderer(), material, mesh);
+    
+    IImage *pImage = (IImage *)resourceMgr->LoadResource("crate.tga", EResourceType::Image);
+    
+    pMeshRenderer->Initialize(mc->GetRenderer(), mesh, material, pImage);
     
     printf("Finished loading scene. \n\n");
 

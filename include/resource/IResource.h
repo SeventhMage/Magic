@@ -11,6 +11,7 @@ enum EResourceType
     Material,
     Model,
     Shader,
+    Image,
 };
 class IResource : public IObject
 {

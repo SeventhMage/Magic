@@ -25,6 +25,7 @@ public:
     virtual IBufferObject *CreateVertexArrayObject();
     virtual IBufferObject *CreateVertexBufferObject(void *vertexes, int size, int usage);
     virtual IBufferObject *CreateIndexBufferObject(void *indices, int size, int usage);
+    virtual ITexture *CreateTexture(EColorFormat internalformat, int width, int height, EColorFormat format, EPixelType type, void *data);
 protected:
     virtual void Render(IRenderInput *pRenderInput, IRenderPass *pRenderPass);
 private:

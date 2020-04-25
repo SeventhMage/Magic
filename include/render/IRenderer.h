@@ -6,6 +6,7 @@
 #include "IRenderPass.h"
 #include "IShaderProgram.h"
 #include "IBufferObject.h"
+#include "ERender.h"
 #include "math/CMatrix4.h"
 
 namespace magic
@@ -28,6 +29,7 @@ public:
     virtual IBufferObject *CreateVertexArrayObject() = 0;
     virtual IBufferObject *CreateVertexBufferObject(void *vertexes, int size, int usage) = 0;
     virtual IBufferObject *CreateIndexBufferObject(void *indices, int size, int usage) = 0;
+    virtual ITexture *CreateTexture(EColorFormat internalformat, int width, int height, EColorFormat format, EPixelType type, void *data) = 0;
 };
 } // namespace magic
 

@@ -97,6 +97,10 @@ void CRenderInput::SetTexture(int slot, ITexture *pTexture)
 {
     if (slot >=0 && slot < MAX_TEXTURE_NUM)
     {
+        if (m_TextureArray[slot] == nullptr && pTexture)
+            ++m_TextureCount;
+        else if (m_TextureArray[slot] != nullptr && !pTexture)
+            --m_TextureCount;
         m_TextureArray[slot] = pTexture;
     }
 }

@@ -10,6 +10,8 @@ namespace magic
 CMeshRendererComponent::CMeshRendererComponent()
 :m_pMesh(nullptr)
 ,m_pMaterial(nullptr)
+,m_pImage(nullptr)
+,m_pTexture(nullptr)
 ,m_pRenderer(nullptr)
 ,m_pRenderInput(nullptr)
 ,m_pMaterialInstance(new CMaterialInstance())
@@ -22,16 +24,17 @@ CMeshRendererComponent::~ CMeshRendererComponent()
 {
     SAFE_DEL(m_pRenderInput);
     SAFE_DEL(m_pMaterialInstance);
+    SAFE_DEL(m_pTexture);
     
 }
 
-void CMeshRendererComponent::Initialize(IRenderer *pRenderer, IMaterial *pMaterial, IMesh *pMesh)
+void CMeshRendererComponent::Initialize(IRenderer *pRenderer, IMesh *pMesh, IMaterial *pMaterial, IImage *pImage)
 {
     m_pRenderer = pRenderer;
     if (m_pRenderer)
     {
         m_pRenderInput = pRenderer->CreateRenderInput(m_Mode, m_Usage);
-        SetMaterial(pMaterial);
+        SetMaterial(pMaterial, pImage);
         SetMesh(pMesh);
     }
 }
@@ -115,7 +118,7 @@ void CMeshRendererComponent::SetMesh(IMesh *pMesh)
     }
 }
 
-void CMeshRendererComponent::SetMaterial(IMaterial *pMaterial)
+void CMeshRendererComponent::SetMaterial(IMaterial *pMaterial, IImage *pImage)
 {
     if (m_pMaterial != pMaterial)
     {
@@ -125,6 +128,16 @@ void CMeshRendererComponent::SetMaterial(IMaterial *pMaterial)
             m_pMaterialInstance->Initialize(m_pRenderer, m_pMaterial);
             m_pRenderInput->SetRenderQueue(m_pMaterial->GetID());
             m_pRenderInput->SetShaderProgram(m_pMaterialInstance->GetShaderProgram());
+        }
+    }
+    if (m_pImage != pImage)
+    {
+        m_pImage = pImage;
+        SAFE_DEL(m_pTexture);
+        if (m_pImage)
+        {
+            m_pTexture = m_pRenderer->CreateTexture(pImage->GetComponents(), pImage->GetWidth(), pImage->GetHeight(), pImage->GetFormat(), pImage->GetPixelType(), pImage->GetData());
+            m_pRenderInput->SetTexture(0, m_pTexture);
         }
     }
 }

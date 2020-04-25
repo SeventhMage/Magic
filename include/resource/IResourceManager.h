@@ -8,7 +8,8 @@ namespace magic
 class IResourceManager
 {
 public:
-    virtual IResource *LoadResource(const char *fileName);
+    virtual ~IResourceManager() {}
+    virtual IResource *LoadResource(const char *fileName, EResourceType type) = 0;
 };
 }
 

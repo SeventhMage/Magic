@@ -21,6 +21,7 @@ public:
 
     virtual ISceneManager *GetSceneManager() const { return m_pSceneManager; }
     virtual IRenderer *GetRenderer() const { return m_pRenderer; }
+    virtual IResourceManager *GetResourceManager() const { return m_pResourceManager; }
     virtual ITime *GetTime() const { return m_pTime; }
 private:
     CApplication *m_pApplication;
@@ -29,6 +30,7 @@ private:
 
     ISceneManager *m_pSceneManager;
     IRenderer *m_pRenderer;
+    IResourceManager *m_pResourceManager;
     CTime *m_pTime;
 };
 }

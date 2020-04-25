@@ -2,7 +2,6 @@
 #define _MX_RENDER_OPENGL_TYPE_H_
 
 #include "resource/IShader.h"
-#include "render/ITexture.h"
 #include "render/ERender.h"
 #include "base/magicType.h"
 #include "gl3.h"

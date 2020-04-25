@@ -29,6 +29,13 @@
 		742A7EE2243ACA2800D45F20 /* CShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 742A7EE0243ACA2800D45F20 /* CShaderProgram.cpp */; };
 		7485B4A4244E6FD300FB9711 /* CRenderQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7485B4A2244E6FD300FB9711 /* CRenderQueue.cpp */; };
 		7485B4A7245260C700FB9711 /* CTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7485B4A6245260C700FB9711 /* CTime.cpp */; };
+		7485B4AB2453E1DA00FB9711 /* CResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7485B4A92453E1DA00FB9711 /* CResourceManager.cpp */; };
+		7485B4B72453EA7800FB9711 /* crate.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7485B4B62453EA7800FB9711 /* crate.tga */; };
+		7485B4B9245409CC00FB9711 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7485B4B8245409CC00FB9711 /* OpenGLES.framework */; };
+		7485B4BB245409D600FB9711 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7485B4BA245409D600FB9711 /* Foundation.framework */; };
+		7485B4BD24540A3400FB9711 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7485B4BC24540A3400FB9711 /* UIKit.framework */; };
+		7485B4BF24540A3D00FB9711 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7485B4BE24540A3D00FB9711 /* CoreGraphics.framework */; };
+		7485B4C224540D6300FB9711 /* FileWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7485B4C124540D6300FB9711 /* FileWrapper.mm */; };
 		74C230FE242760260041B1AC /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74C230FD242760260041B1AC /* AppDelegate.mm */; };
 		74C23104242760260041B1AC /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74C23103242760260041B1AC /* ViewController.mm */; };
 		74C23107242760260041B1AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74C23105242760260041B1AC /* Main.storyboard */; };
@@ -143,6 +150,15 @@
 		7485B4A52452609500FB9711 /* ITime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ITime.h; sourceTree = "<group>"; };
 		7485B4A6245260C700FB9711 /* CTime.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CTime.cpp; sourceTree = "<group>"; };
 		7485B4A82452616200FB9711 /* CTime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTime.h; sourceTree = "<group>"; };
+		7485B4A92453E1DA00FB9711 /* CResourceManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CResourceManager.cpp; sourceTree = "<group>"; };
+		7485B4AA2453E1DA00FB9711 /* CResourceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CResourceManager.h; sourceTree = "<group>"; };
+		7485B4B62453EA7800FB9711 /* crate.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = crate.tga; sourceTree = "<group>"; };
+		7485B4B8245409CC00FB9711 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		7485B4BA245409D600FB9711 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7485B4BC24540A3400FB9711 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7485B4BE24540A3D00FB9711 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7485B4C024540D6300FB9711 /* FileWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileWrapper.h; sourceTree = "<group>"; };
+		7485B4C124540D6300FB9711 /* FileWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FileWrapper.mm; sourceTree = "<group>"; };
 		74C230F9242760260041B1AC /* HelloTriangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTriangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74C230FC242760260041B1AC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		74C230FD242760260041B1AC /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -188,6 +204,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7485B4BF24540A3D00FB9711 /* CoreGraphics.framework in Frameworks */,
+				7485B4BD24540A3400FB9711 /* UIKit.framework in Frameworks */,
+				7485B4BB245409D600FB9711 /* Foundation.framework in Frameworks */,
+				7485B4B9245409CC00FB9711 /* OpenGLES.framework in Frameworks */,
 				74C2318E242772F10041B1AC /* GLKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,10 +392,14 @@
 			isa = PBXGroup;
 			children = (
 				742A7ED72434404300D45F20 /* CMesh.cpp */,
+				7485B4C024540D6300FB9711 /* FileWrapper.h */,
+				7485B4C124540D6300FB9711 /* FileWrapper.mm */,
 				74DECBCA243EA02A0069223C /* CTGAImage.cpp */,
 				74DECBCB243EA02A0069223C /* CTGAImage.h */,
 				742A7ED92434405700D45F20 /* CMaterial.cpp */,
 				742A7EDB2434406C00D45F20 /* CShader.cpp */,
+				7485B4A92453E1DA00FB9711 /* CResourceManager.cpp */,
+				7485B4AA2453E1DA00FB9711 /* CResourceManager.h */,
 			);
 			path = resource;
 			sourceTree = "<group>";
@@ -470,6 +494,7 @@
 				74C230FD242760260041B1AC /* AppDelegate.mm */,
 				74C23119242760CF0041B1AC /* SceneDelegate.h */,
 				74C23118242760CF0041B1AC /* SceneDelegate.mm */,
+				7485B4B62453EA7800FB9711 /* crate.tga */,
 				74C231282427627C0041B1AC /* Hello_Triangle.cpp */,
 				74C23102242760260041B1AC /* ViewController.h */,
 				74C23103242760260041B1AC /* ViewController.mm */,
@@ -486,6 +511,10 @@
 		74C23130242769B50041B1AC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7485B4BE24540A3D00FB9711 /* CoreGraphics.framework */,
+				7485B4BC24540A3400FB9711 /* UIKit.framework */,
+				7485B4BA245409D600FB9711 /* Foundation.framework */,
+				7485B4B8245409CC00FB9711 /* OpenGLES.framework */,
 				74C2318D242772F10041B1AC /* GLKit.framework */,
 				74C2318B242772E30041B1AC /* CoreMotion.framework */,
 			);
@@ -560,6 +589,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74C2310F2427602A0041B1AC /* LaunchScreen.storyboard in Resources */,
+				7485B4B72453EA7800FB9711 /* crate.tga in Resources */,
 				74C2310C2427602A0041B1AC /* Assets.xcassets in Resources */,
 				74C23107242760260041B1AC /* Main.storyboard in Resources */,
 			);
@@ -581,6 +611,7 @@
 				74DECBD5244689C90069223C /* CIndexBufferObject.cpp in Sources */,
 				74DECBC5243E97DA0069223C /* CGLES3RenderTarget.cpp in Sources */,
 				742A7EB82434246600D45F20 /* CApplication.cpp in Sources */,
+				7485B4AB2453E1DA00FB9711 /* CResourceManager.cpp in Sources */,
 				74DECBCC243EA02A0069223C /* CTGAImage.cpp in Sources */,
 				742A7EB72434246600D45F20 /* CComponent.cpp in Sources */,
 				742A7ED82434404300D45F20 /* CMesh.cpp in Sources */,
@@ -607,6 +638,7 @@
 				74DECBC8243E98990069223C /* CGLES3Texture.cpp in Sources */,
 				74DECBBC243D4F8F0069223C /* CGLES3VertexArrayObject.cpp in Sources */,
 				7485B4A4244E6FD300FB9711 /* CRenderQueue.cpp in Sources */,
+				7485B4C224540D6300FB9711 /* FileWrapper.mm in Sources */,
 				742A7EDA2434405700D45F20 /* CMaterial.cpp in Sources */,
 				74C230FE242760260041B1AC /* AppDelegate.mm in Sources */,
 			);
@@ -750,6 +782,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 58DXM3G7FU;
+				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = HelloTriangle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -772,6 +805,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 58DXM3G7FU;
+				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = HelloTriangle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

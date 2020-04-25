@@ -151,7 +151,7 @@ GLboolean WinCreate(SRenderContext *esContext, const char *title)
 #endif
 
 CGLES3Renderer::CGLES3Renderer(SRenderContext *esContext, const char *title, GLint width, GLint height)
-:m_esContext(esContext)
+    : m_esContext(esContext)
 {
    if (Init(esContext, title, width, height))
       LogError("Initialize GLES3Renderer failed");
@@ -166,7 +166,6 @@ void CGLES3Renderer::Clear(int flags)
 {
    glClear(GetGLColorMask(flags));
 }
-
 
 IRenderTarget *CGLES3Renderer::CreateRenderTarget(int width, int height, int format)
 {
@@ -301,35 +300,39 @@ IBufferObject *CGLES3Renderer::CreateIndexBufferObject(void *indices, int size, 
 
 void CGLES3Renderer::Render(IRenderInput *pRenderInput, IRenderPass *pRenderPass)
 {
-    //glViewport ( 0, 0, m_esContext->width, m_esContext->height );
-    CVertexArrayObject *pVAO = (CVertexArrayObject *)pRenderInput->GetVertexArrayObject();
-    pVAO->Bind();
-    IShaderProgram *pProgram = pRenderInput->GetShaderProgram();
-    for (int i=0; i<pRenderPass->GetShaderParamCount(); ++i)
-        pProgram->SetUniform(pRenderPass->GetShaderParam(i)->paramName, pRenderPass->GetShaderParam(i)->paramData);
-    pProgram->Bind();
-    for (int i = 0; i < pRenderInput->GetTextureCount(); ++i)
-    {
-        ITexture *pTexture = pRenderInput->GetTexture(i);
-        if (pTexture)
-            pTexture->Bind(i);
-    }
-    
-    CIndexBufferObject *pIBO = (CIndexBufferObject *)pRenderInput->GetIndexBufferObject();
-    if (pIBO)
-    {
-        pIBO->Bind();
-        GLDebug(glDrawElements(GetGLGPUBufferMode((GPUBufferMode)pRenderInput->GetMode()), pRenderInput->GetVerticesCount(), GetGLVariableType((VariableType)pRenderInput->GetIndexType()), 0));
-        pIBO->UnBind();
-       
-    }
-    else
-    {
-        GLDebug(glDrawArrays(GetGLGPUBufferMode((GPUBufferMode)pRenderInput->GetMode()), pRenderInput->GetFirst(), pRenderInput->GetVerticesCount()));
-        
-    }
-    pVAO->UnBind();
+   //glViewport ( 0, 0, m_esContext->width, m_esContext->height );
+   CVertexArrayObject *pVAO = (CVertexArrayObject *)pRenderInput->GetVertexArrayObject();
+   pVAO->Bind();
+   IShaderProgram *pProgram = pRenderInput->GetShaderProgram();
+   for (int i = 0; i < pRenderPass->GetShaderParamCount(); ++i)
+      pProgram->SetUniform(pRenderPass->GetShaderParam(i)->paramName, pRenderPass->GetShaderParam(i)->paramData);
+   pProgram->Bind();
+   for (int i = 0; i < pRenderInput->GetTextureCount(); ++i)
+   {
+      ITexture *pTexture = pRenderInput->GetTexture(i);
+      if (pTexture)
+         pTexture->Bind(i);
+   }
+
+   CIndexBufferObject *pIBO = (CIndexBufferObject *)pRenderInput->GetIndexBufferObject();
+   if (pIBO)
+   {
+      pIBO->Bind();
+      GLDebug(glDrawElements(GetGLGPUBufferMode((GPUBufferMode)pRenderInput->GetMode()), pRenderInput->GetVerticesCount(), GetGLVariableType((VariableType)pRenderInput->GetIndexType()), 0));
+      pIBO->UnBind();
+   }
+   else
+   {
+      GLDebug(glDrawArrays(GetGLGPUBufferMode((GPUBufferMode)pRenderInput->GetMode()), pRenderInput->GetFirst(), pRenderInput->GetVerticesCount()));
+   }
+   pVAO->UnBind();
 }
 
+ITexture *CGLES3Renderer::CreateTexture(EColorFormat internalformat, int width, int height, EColorFormat format, EPixelType type, void *data)
+{
+    ITexture *pTexture = new CGLES3Texture();
+    pTexture->Create2D(internalformat, width, height, format, type, data);
+    return pTexture;
+}
 
 } // namespace magic

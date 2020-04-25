@@ -83,35 +83,37 @@ ubyte *CTGAImage::Load(const char *filename)
 	// Set OpenGL format expected
 	switch (sDepth)
 	{
-#ifndef OPENGL_ES
 	case 3: // Most likely case
-		m_uFormat = BGR;
+		m_uFormat = RGB;
 		m_iComponents = RGB;
+         
+        for (int i = 0; i < m_lImageSize; i += 3)
+        {
+            ubyte temp = m_pData[i];
+            m_pData[i] = m_pData[i + 2];
+            m_pData[i + 2] = temp;
+        }
+          
 		break;
-#endif
 	case 4:
-		m_uFormat = BGRA;
+		m_uFormat = RGBA;
 		m_iComponents = RGBA;
+        for (int i = 0; i < m_lImageSize; i += 4)
+        {
+            ubyte temp = m_pData[i];
+            m_pData[i] = m_pData[i + 2];
+            m_pData[i + 2] = temp;
+        }
+
 		break;
 	case 1:
 		m_uFormat = LUMINANCE;
 		m_iComponents = LUMINANCE;
 		break;
-	default: // RGB
-			 // If on the iPhone, TGA's are BGR, and the iPhone does not
-			 // support BGR without alpha, but it does support RGB,
-			 // so a simple swizzle of the red and blue bytes will suffice.
-			 // For faster iPhone loads however, save your TGA's with an Alpha!
-#ifdef OPENGL_ES
-		for (int i = 0; i < lImageSize; i += 3)
-		{
-			GLbyte temp = pBits[i];
-			pBits[i] = pBits[i + 2];
-			pBits[i + 2] = temp;
-		}
-#endif
-		break;
+	default:
+        break;
 	}
+
 
 	// Done with File
 	fclose(pFile);

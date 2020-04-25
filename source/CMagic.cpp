@@ -1,6 +1,8 @@
 #include "CMagic.h"
 #include "scene/CSceneManager.h"
 #include "render/gles3/CGLES3Renderer.h"
+#include "resource/CResourceManager.h"
+#include "base/magicDef.h"
 
 namespace magic
 {
@@ -11,15 +13,16 @@ CMagic::CMagic(SRenderContext *context, const char *title, int width, int height
 {
     m_pSceneManager = new CSceneManager();
     m_pRenderer = new CGLES3Renderer(context, title, width, height);
+    m_pResourceManager = new CResourceManager();
     m_pTime = new CTime();
 }
 
 CMagic::~CMagic()
 {
-    if (m_pApplication)
-        delete m_pApplication;
-    if (m_pRenderer)
-        delete m_pRenderer;
+    SAFE_DEL(m_pResourceManager);
+    SAFE_DEL(m_pRenderer);
+    SAFE_DEL(m_pSceneManager);
+    SAFE_DEL(m_pApplication);
 }
 
 void CMagic::Run()
