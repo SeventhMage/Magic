@@ -10,54 +10,54 @@
 
 namespace magic
 {
+struct SPropertyData : public IMaterialProperty
+{
+    SPropertyData(const char *name, void *data, int size)
+    {
+        pData = malloc(size);
+        memcpy(pData, data, size);
+        dataSize = size;
+        propertyName = name;
+    }
+    ~SPropertyData()
+    {
+        free(pData);
+    }
+
+    virtual const char *GetName() const { return propertyName.c_str(); }
+    virtual int GetSize() const { return dataSize; }
+    virtual void *GetData() const { return pData; }
+    
+    void SetData(const char *name, void *data, int size)
+    {
+        if (dataSize != size)
+        {
+            free(pData);
+            pData = malloc(size);
+        }
+        memcpy(pData, data, size);
+        propertyName = name;
+    }
+    std::string propertyName;
+    void *pData;
+    int dataSize;
+};
+
 class CMaterial : public IMaterial
 {
 public:
-    struct SPropertyData
-    {
-        SPropertyData(void *data, int size)
-        {
-            pData = malloc(size); 
-            memcpy(pData, data, size);
-            dataSize = size;
-        }
-        ~SPropertyData()
-        {
-            free(pData);
-        }
-
-        void SetData(void *data, int size)
-        {
-            if (dataSize != size)
-            { 
-                free(pData);
-                pData = malloc(size);
-            }
-            memcpy(pData, data, size);
-        }
-
-        void *pData;
-        int dataSize;
-    };
-
-    struct SVertexAttribute
-    {
-        std::string name;
-    };
-
     CMaterial();
     virtual ~CMaterial();
     virtual void SetShader(EShaderType type, IShader *shader);
     virtual IShader *GetShader(EShaderType) const;
     virtual void SetProperty(const char *propertyName, void *data, int size);
     virtual void *GetPropertyValue(const char *propertyName, int &size);
-    virtual int GetAttributeCount() const { return m_VertexAttribute.size(); }
-    virtual const char *GetAttributeName(int index) const;
-    virtual void AddAttribute(const char *name);
+    virtual IMaterialProperty *GetFirstProperty();
+    virtual IMaterialProperty *GetNextProperty();
 private:
     IShader *m_Shaders[EShaderType::Count];
     std::map<std::string, SPropertyData *> m_PropertyValue;
-    std::vector<SVertexAttribute> m_VertexAttribute;
+    std::map<std::string, SPropertyData *>::iterator m_PropertyIterator;
 };
 }
 

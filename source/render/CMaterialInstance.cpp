@@ -21,12 +21,21 @@ void CMaterialInstance::Initialize(IRenderer *pRenderer, IMaterial *pMaterial)
         if (pShader)
             m_pShaderProgram->Attach(pShader);
     }
-
+    
+    /*
     for (int i=0; i< pMaterial->GetAttributeCount(); ++i)
     {
         m_pShaderProgram->BindAttributeLocation(i, pMaterial->GetAttributeName(i));
     }
+     */
     m_pShaderProgram->Link();
+    
+    IMaterialProperty *matProperty = pMaterial->GetFirstProperty();
+    while (matProperty)
+    {
+        m_pShaderProgram->SetUniform(matProperty->GetName(), matProperty->GetData());
+        matProperty = pMaterial->GetNextProperty();
+    }
 }
 
 

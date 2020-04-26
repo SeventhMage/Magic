@@ -15,9 +15,9 @@ CRenderPass::CRenderPass(IRenderer *pRenderer, IRenderTarget *pRenderTarget)
 
 CRenderPass::~CRenderPass()
 {
-    for (auto it : m_ShaderParams)
+    for (auto &param : m_ShaderParams)
     {
-        delete it.second;
+        delete param;
     }
 }
 
@@ -39,15 +39,16 @@ void CRenderPass::SetClearColor(float r, float g, float b, float a)
 
 void CRenderPass::SetShaderParam(const char *name, void *value, int size)
 {
-    auto it = m_ShaderParams.find(name);
+    auto it = std::find_if(m_ShaderParams.begin(), m_ShaderParams.end(), [=](SShaderParam* param){return !strcmp(param->paramName, name);});
     if (it == m_ShaderParams.end())
     {
         SShaderParam *param = new SShaderParam(name, value, size);
-        m_ShaderParams[name] = param;
+        m_ShaderParams.push_back(param);
+        
     }
     else
     {
-        m_ShaderParams[name]->SetValue(value, size);
+        (*it)->SetValue(value, size);
     }
 }
 
@@ -55,9 +56,7 @@ SShaderParam *CRenderPass::GetShaderParam(int index) const
 {
     if (index >=0 && index < m_ShaderParams.size())
     {
-        auto it = m_ShaderParams.begin();
-        for (int i=0; i<index; ++it);
-        return it->second;
+        return m_ShaderParams[index];
     }
     return nullptr;
 }

@@ -80,6 +80,35 @@ float texCoords[][2] = {
 
 unsigned short indices[] = {0, 1, 2};
 
+char vShaderStr[] =
+ "#version 300 es                          \n"
+ "layout(location = 0) in vec3 vPosition;  \n"
+"layout(location = 1) in vec2 vTexCoord;  \n"
+ "layout(location = 2) in vec4 vColor;     \n"
+ "out vec4 vOutColor;                      \n"
+ "out vec2 vTex;                           \n"
+ "uniform mat4 vpMatrix;                   \n"
+ "uniform mat4 mMatrix;                    \n"
+ "void main()                              \n"
+ "{                                        \n"
+ "   vOutColor = vColor;                   \n"
+ "   vTex = vTexCoord;                     \n"
+ "   gl_Position = vpMatrix * mMatrix * vec4(vPosition, 1.0);   \n"
+ "}                                        \n";
+
+char fShaderStr[] =
+ "#version 300 es                              \n"
+ "precision mediump float;                     \n"
+ "uniform sampler2D textureUnit;               \n"
+ "uniform vec4 color;               \n"
+ "in vec4 vOutColor;                           \n"
+ "in vec2 vTex;                                \n"
+ "out vec4 fragColor;                          \n"
+ "void main()                                  \n"
+ "{                                            \n"
+ "   fragColor = color * vOutColor * texture(textureUnit, vTex);   \n"
+ "}                                            \n";
+
 CVector3 pos;
 float flag = 0.05f;
 float rot = 0;
@@ -143,48 +172,25 @@ int esMain ( SRenderContext *esContext )
     CMeshRendererComponent *pMeshRenderer = triangle.AddComponent<CMeshRendererComponent>();
     
     mesh = new CMesh();
-
     
     mesh->SetPositions(vertices, sizeof(vertices));
     mesh->SetColors(colors, sizeof(colors));
     mesh->SetUVs(texCoords, sizeof(texCoords));
     mesh->SetIndices(indices, sizeof(indices));
-    char vShaderStr[] =
-     "#version 300 es                          \n"
-     "layout(location = 0) in vec3 vPosition;  \n"
-    "layout(location = 1) in vec2 vTexCoord;  \n"
-     "layout(location = 2) in vec4 vColor;     \n"
-     "out vec4 vOutColor;                      \n"
-     "out vec2 vTex;                           \n"
-     "uniform mat4 vpMatrix;                   \n"
-     "uniform mat4 mMatrix;                    \n"
-     "void main()                              \n"
-     "{                                        \n"
-     "   vOutColor = vColor;                   \n"
-     "   vTex = vTexCoord;                     \n"
-     "   gl_Position = vpMatrix * mMatrix * vec4(vPosition, 1.0);   \n"
-     "}                                        \n";
 
-    char fShaderStr[] =
-     "#version 300 es                              \n"
-     "precision mediump float;                     \n"
-     "uniform sampler2D textureUnit;               \n"
-     "in vec4 vOutColor;                           \n"
-     "in vec2 vTex;                                \n"
-     "out vec4 fragColor;                          \n"
-     "void main()                                  \n"
-     "{                                            \n"
-     "   fragColor = vOutColor * texture(textureUnit, vTex);   \n"
-     "}                                            \n";
-    vertShader = new CShader(EShaderType::Vertex, vShaderStr, sizeof(vShaderStr));
-    fragShader = new CShader(EShaderType::Fragment, fShaderStr, sizeof(fShaderStr));
+    //vertShader = new CShader(EShaderType::Vertex, vShaderStr, sizeof(vShaderStr));
+    //fragShader = new CShader(EShaderType::Fragment, fShaderStr, sizeof(fShaderStr));
+    vertShader = (CShader *)resourceMgr->LoadResource("common.vert", EResourceType::Shader);
+    fragShader = (CShader *)resourceMgr->LoadResource("common.frag", EResourceType::Shader);
     material = new CMaterial();
     material->SetShader(vertShader->GetShaderType(), vertShader);
     material->SetShader(fragShader->GetShaderType(), fragShader);
-    
+    float colorProperty[] = {0.5f, 0.5f, 0.5f, 1.0f};
+    material->SetProperty("color", colorProperty, sizeof(colorProperty));
     IImage *pImage = (IImage *)resourceMgr->LoadResource("crate.tga", EResourceType::Image);
     
     pMeshRenderer->Initialize(mc->GetRenderer(), mesh, material, pImage);
+    resourceMgr->UnloadResource(pImage);
     
     printf("Finished loading scene. \n\n");
 

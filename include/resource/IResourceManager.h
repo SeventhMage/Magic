@@ -10,6 +10,7 @@ class IResourceManager
 public:
     virtual ~IResourceManager() {}
     virtual IResource *LoadResource(const char *fileName, EResourceType type) = 0;
+    virtual void UnloadResource(IResource *) = 0;
 };
 }
 

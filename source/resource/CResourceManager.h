@@ -9,8 +9,10 @@ class CResourceManager : public IResourceManager
 {
 public:
     virtual IResource *LoadResource(const char *fileName, EResourceType type);
+    virtual void UnloadResource(IResource *pResource);
 private:
     IResource *LoadImage(const char *fileName);
+    IResource *LoadShader(const char *fileName);
 };
 
 }

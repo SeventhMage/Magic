@@ -32,11 +32,11 @@ void CMaterial::SetProperty(const char *propertyName, void *data, int size)
     auto it = m_PropertyValue.find(propertyName);
     if (it != m_PropertyValue.end())
     {
-        it->second->SetData(data, size);
+        it->second->SetData(propertyName, data, size);
     }
     else
     {
-        m_PropertyValue[propertyName] = new SPropertyData(data, size);
+        m_PropertyValue[propertyName] = new SPropertyData(propertyName, data, size);
     }
 }
 
@@ -52,19 +52,22 @@ void *CMaterial::GetPropertyValue(const char *propertyName, int &size)
     return nullptr;
 }
 
-const char *CMaterial::GetAttributeName(int index) const
+IMaterialProperty *CMaterial::GetFirstProperty()
 {
-    if (index >=0 && index < m_VertexAttribute.size())
+    if (m_PropertyValue.size() > 0)
     {
-        return m_VertexAttribute[index].name.c_str();
+        m_PropertyIterator = m_PropertyValue.begin();
+        return m_PropertyIterator->second;
     }
-    return "";
+    return nullptr;
 }
 
-void CMaterial::AddAttribute(const char *name)
+IMaterialProperty *CMaterial::GetNextProperty()
 {
-    SVertexAttribute attribute = {name};
-    m_VertexAttribute.push_back(attribute);
+    if (++m_PropertyIterator != m_PropertyValue.end())
+    {
+        return m_PropertyIterator->second;
+    }
+    return nullptr;
 }
-
 }

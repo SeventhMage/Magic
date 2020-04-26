@@ -5,7 +5,7 @@
 #include "render/IRenderer.h"
 #include "render/SShaderParam.h"
 
-#include <map>
+#include <vector>
 #include <string>
 
 namespace magic
@@ -31,7 +31,7 @@ private:
     IRenderTarget *m_pRenderTarget;
     int m_ClearBit;
     float m_ClearColor[4];
-    std::map<std::string, SShaderParam *> m_ShaderParams;
+    std::vector<SShaderParam *> m_ShaderParams;
     bool m_bEnable;
 };
 } // namespace magic
