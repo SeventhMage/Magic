@@ -78,6 +78,12 @@ float texCoords[][2] = {
     1.f, 0.f,
 };
 
+float normals[][3] = {
+    0.f, 0.f, 1.f,
+    0.f, 0.f, 1.f,
+    0.f, 0.f, 1.f,
+};
+
 unsigned short indices[] = {0, 1, 2};
 
 char vShaderStr[] =
@@ -109,16 +115,21 @@ char fShaderStr[] =
  "   fragColor = color * vOutColor * texture(textureUnit, vTex);   \n"
  "}                                            \n";
 
+float ambientLightColor[] = {0.2f, 0.2f, 0.2f};
+float directionalLightDir[] = {1.f, 1.f, 1.f};
+float directionalLightColor[] = {0.8f, 0.8f, 0.8f};
+float specCoefficient = 10;
+
 CVector3 pos;
-float flag = 0.05f;
+float flag = 0.02f;
 float rot = 0;
 
 void update()
 {
     mc->Run();
     //camera.GetSceneNode()->SetPosition(pos);
-    if (pos.x > 0.2f || pos.x < -0.2f)
-        ;//flag = -flag;
+    if (pos.x > 0.6f || pos.x < -0.6f)
+        flag = -flag;
     pos.x += flag;
     
     triangle.GetSceneNode()->SetRotation(CVector3(0, rot, 0));
@@ -177,6 +188,7 @@ int esMain ( SRenderContext *esContext )
     mesh->SetColors(colors, sizeof(colors));
     mesh->SetUVs(texCoords, sizeof(texCoords));
     mesh->SetIndices(indices, sizeof(indices));
+    mesh->SetNormals(normals, sizeof(normals));
 
     //vertShader = new CShader(EShaderType::Vertex, vShaderStr, sizeof(vShaderStr));
     //fragShader = new CShader(EShaderType::Fragment, fShaderStr, sizeof(fShaderStr));
@@ -187,6 +199,15 @@ int esMain ( SRenderContext *esContext )
     material->SetShader(fragShader->GetShaderType(), fragShader);
     float colorProperty[] = {0.5f, 0.5f, 0.5f, 1.0f};
     material->SetProperty("color", colorProperty, sizeof(colorProperty));
+    material->SetProperty("ambientLightColor", ambientLightColor, sizeof(ambientLightColor));
+    material->SetProperty("directionalLightDir", directionalLightDir, sizeof(directionalLightDir));
+    material->SetProperty("directionalLightColor", directionalLightColor, sizeof(directionalLightColor));
+    material->SetProperty("specCoefficient", &specCoefficient, sizeof(specCoefficient));
+    CMatrix4 transform = camera.GetSceneNode()->GetAbsluateTransform();
+    transform.SetTranslation(CVector3(0, 0, 0));
+    CVector3 viewDir(0, 0, 1.f);
+    transform.TransformVect(viewDir);
+    material->SetProperty("viewDir", viewDir.v, sizeof(viewDir));
     IImage *pImage = (IImage *)resourceMgr->LoadResource("crate.tga", EResourceType::Image);
     
     pMeshRenderer->Initialize(mc->GetRenderer(), mesh, material, pImage);

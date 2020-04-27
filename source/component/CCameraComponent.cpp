@@ -83,7 +83,8 @@ void CCameraComponent::Update()
     if (m_bNeedUpdateView || m_bNeedUpdateProj)
     {
         m_vpMatrix = m_viewMatrix * m_projMatrix;
-        m_pRenderPass->SetShaderParam("vpMatrix", m_vpMatrix.m, sizeof(m_vpMatrix.m));
+        m_pRenderPass->SetShaderParam("viewMatrix", m_viewMatrix.m, sizeof(m_viewMatrix.m));
+        m_pRenderPass->SetShaderParam("projMatrix", m_projMatrix.m, sizeof(m_projMatrix.m));
         m_bNeedUpdateView = false;
         m_bNeedUpdateProj = false;
     }

@@ -11,6 +11,7 @@ CMesh::CMesh()
 ,m_Positions(nullptr)
 ,m_Colors(nullptr)
 ,m_Uvs(nullptr)
+,m_Normals(nullptr)
 ,m_Indices(nullptr)
 {
 
@@ -51,6 +52,13 @@ void CMesh::SetColors(float colors[][4], int size)
     SAFE_DEL_ARRAY(m_Colors);
     m_Colors = new float[size / sizeof(float)];
     memcpy(m_Colors, colors, size);
+}
+
+void CMesh::SetNormals(float (*normals)[3], int size)
+{
+    SAFE_DEL_ARRAY(m_Normals);
+    m_Normals = new float[size / sizeof(float)];
+    memcpy(m_Normals, normals, size);
 }
 
 }

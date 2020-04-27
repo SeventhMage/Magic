@@ -64,7 +64,7 @@ void CMeshRendererComponent::OnTransformChanged(const CMatrix4 &worldMat)
     {
         ISceneNode *pNode = m_pGameObject->GetSceneNode();
         const CMatrix4 &mat = pNode->GetAbsluateTransform();
-        pShaderProgram->SetUniform("mMatrix", (void *)mat.m);
+        pShaderProgram->SetUniform("modelMatrix", (void *)mat.m);
     }
 }
 
@@ -78,10 +78,12 @@ void CMeshRendererComponent::SetMesh(IMesh *pMesh)
             int positionsSize = 0;
             int uvsSize = 0;
             int colorsSize = 0;
+            int normalSize = 0;
             int vertCount = m_pMesh->GetVerticesCount();
             float *positions = m_pMesh->GetPositions();
             float *uvs = m_pMesh->GetUVs();
             float *colors = m_pMesh->GetColors();
+            float *normals = m_pMesh->GetNormals();
             
             m_pRenderInput->BeginInput(0, vertCount);
             
@@ -91,13 +93,17 @@ void CMeshRendererComponent::SetMesh(IMesh *pMesh)
                 uvsSize = vertCount * sizeof(float) * 2;
             if (colors)
                 colorsSize = vertCount * sizeof(float) * 4;
-            m_pRenderInput->CreateVertexBufferObject(nullptr, positionsSize + colorsSize + uvsSize, m_Usage);
+            if (normals)
+                normalSize = vertCount * sizeof(float) * 3;
+            m_pRenderInput->CreateVertexBufferObject(nullptr, positionsSize + colorsSize + uvsSize + normalSize, m_Usage);
             if (positions)
                 m_pRenderInput->SetVertexBuffer(positions, positionsSize, 0);
             if (uvs)
                 m_pRenderInput->SetVertexBuffer(uvs, uvsSize, positionsSize);
             if (colors)
                 m_pRenderInput->SetVertexBuffer(colors, colorsSize, positionsSize + uvsSize);
+            if (normals)
+                m_pRenderInput->SetVertexBuffer(normals, normalSize, positionsSize + uvsSize + colorsSize);
             
             unsigned short *indices = pMesh->GetIndices();
             if (indices)
@@ -112,6 +118,8 @@ void CMeshRendererComponent::SetMesh(IMesh *pMesh)
                 m_pRenderInput->SetVertexAttribute(index++, 2, 0, positionsSize);
             if (colorsSize > 0)
                 m_pRenderInput->SetVertexAttribute(index++, 4, 0, positionsSize + uvsSize);
+            if (normalSize > 0)
+                m_pRenderInput->SetVertexAttribute(index++, 3, 0, positionsSize + uvsSize + colorsSize);
 
             m_pRenderInput->EndInput();
         }
