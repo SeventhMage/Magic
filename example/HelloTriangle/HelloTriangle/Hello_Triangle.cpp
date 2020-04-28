@@ -58,9 +58,11 @@ IMesh *mesh = nullptr;
 IShader *vertShader;
 IShader *fragShader;
 IMaterial *material;
+//IRenderTarget *renderTarget;
 
-CGameObject camera;
-CGameObject triangle;
+//需要手动控件销毁顺序，保证在引擎销毁前删除
+CGameObject *camera = new CGameObject();
+CGameObject *triangle = new CGameObject();
 
 float vertices[][3] = {  0.0f,  0.5f, 0.0f,
                          -0.5f, -0.5f, 0.0f,
@@ -132,7 +134,7 @@ void update()
         flag = -flag;
     pos.x += flag;
     
-    triangle.GetSceneNode()->SetRotation(CVector3(0, rot, 0));
+    triangle->GetSceneNode()->SetRotation(CVector3(0, rot, 0));
     
     //triangle.GetSceneNode()->SetPosition(pos);
     rot += flag;
@@ -149,6 +151,9 @@ void shutdown()
     delete fragShader;
     delete vertShader;
     delete mesh;
+    delete camera;
+    delete triangle;
+    //delete renderTarget;
     Clean();
     printf("Finish clean.\n\n");
 }
@@ -162,6 +167,7 @@ int esMain ( SRenderContext *esContext )
     esContext->shutdownFunc = &shutdown;
     renderer = mc->GetRenderer();
     IResourceManager *resourceMgr = mc->GetResourceManager();
+    //renderTarget = renderer->CreateRenderTarget(800, 600);
     printf("Finished initalizing Engine.\n\n");
 
     printf("Loading scene ... \n");
@@ -170,17 +176,18 @@ int esMain ( SRenderContext *esContext )
     ISceneNode *pRootNode = pScene->GetRootNode();
     ISceneNode *cameraNode = pRootNode->CreateChildNode();
     ISceneNode *triangleNode = pRootNode->CreateChildNode();
-    camera.SetSceneNode(cameraNode);
-    triangle.SetSceneNode(triangleNode);
+    camera->SetSceneNode(cameraNode);
+    triangle->SetSceneNode(triangleNode);
     cameraNode->SetPosition(CVector3(0, 0, 2));
-    CCameraComponent *pCamera = camera.AddComponent<CCameraComponent>();
+    CCameraComponent *pCamera = camera->AddComponent<CCameraComponent>();
     float aspect = 1.f * esContext->width / esContext->height;
     //pCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
     pCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
     pCamera->SetClearColor(0.5, 0.5, 0.5, 1);
     pCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
+    //pCamera->SetRenderTarget(renderTarget);
     
-    CMeshRendererComponent *pMeshRenderer = triangle.AddComponent<CMeshRendererComponent>();
+    CMeshRendererComponent *pMeshRenderer = triangle->AddComponent<CMeshRendererComponent>();
     
     mesh = new CMesh();
     
@@ -203,7 +210,7 @@ int esMain ( SRenderContext *esContext )
     material->SetProperty("directionalLightDir", directionalLightDir, sizeof(directionalLightDir));
     material->SetProperty("directionalLightColor", directionalLightColor, sizeof(directionalLightColor));
     material->SetProperty("specCoefficient", &specCoefficient, sizeof(specCoefficient));
-    CMatrix4 transform = camera.GetSceneNode()->GetAbsluateTransform();
+    CMatrix4 transform = camera->GetSceneNode()->GetAbsluateTransform();
     transform.SetTranslation(CVector3(0, 0, 0));
     CVector3 viewDir(0, 0, 1.f);
     transform.TransformVect(viewDir);

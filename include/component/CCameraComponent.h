@@ -4,6 +4,7 @@
 #include "CComponent.h"
 #include "render/IRenderPass.h"
 #include "render/IRenderer.h"
+#include "render/IRenderTarget.h"
 #include "math/CMatrix4.h"
 #include "math/CFrustum.h"
 
@@ -26,8 +27,10 @@ public:
     void Initialize(IRenderer *pRenderer, CameraType type, float fov, float aspect, float near, float far);
     void SetClearColor(float r, float g, float b, float a);
     void SetClearBit(int bit);
+    void SetRenderTarget(IRenderTarget *target);
 private:
     IRenderPass *m_pRenderPass;
+    IRenderer *m_pRenderer;
     CameraType m_Type;
     CMatrix4 m_vpMatrix;
     CMatrix4 m_viewMatrix;

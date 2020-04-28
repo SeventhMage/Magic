@@ -12,16 +12,17 @@ CMagic::CMagic(SRenderContext *context, const char *title, int width, int height
 ,m_iFixDelta(33.3f)
 {
     m_pSceneManager = new CSceneManager();
-    m_pRenderer = new CGLES3Renderer(context, title, width, height);
     m_pResourceManager = new CResourceManager();
+    m_pRenderer = new CGLES3Renderer(context, title, width, height);
     m_pTime = new CTime();
 }
 
 CMagic::~CMagic()
 {
     SAFE_DEL(m_pResourceManager);
-    SAFE_DEL(m_pRenderer);
     SAFE_DEL(m_pSceneManager);
+    SAFE_DEL(m_pRenderer);
+    SAFE_DEL(m_pTime);
     SAFE_DEL(m_pApplication);
 }
 

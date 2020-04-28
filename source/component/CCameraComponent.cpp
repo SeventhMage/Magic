@@ -9,6 +9,7 @@ namespace magic
 {
 CCameraComponent::CCameraComponent()
 :m_pRenderPass(nullptr)
+,m_pRenderer(nullptr)
 ,m_Type(CameraType::Projection)
 ,m_Width(1)
 ,m_Height(1)
@@ -24,12 +25,13 @@ CCameraComponent::CCameraComponent()
 
 CCameraComponent::~CCameraComponent()
 {
-    SAFE_DEL(m_pRenderPass);
+    m_pRenderer->DestroyRenderPass(m_pRenderPass);
 }
 
 void CCameraComponent::Initialize(IRenderer *pRenderer, CameraType type, float fov, float aspect, float near, float far)
 {
     m_pRenderPass = pRenderer->GenerateRenderPass();
+    m_pRenderer = pRenderer;
     m_Type = type;
     if (m_Type == CameraType::Projection)
     {
@@ -55,6 +57,11 @@ void CCameraComponent::SetClearBit(int bit)
 void CCameraComponent::SetClearColor(float r, float g, float b, float a)
 {
     m_pRenderPass->SetClearColor(r, g, b, a);
+}
+
+void CCameraComponent::SetRenderTarget(IRenderTarget *target)
+{
+    m_pRenderPass->SetRenderTarget(target);
 }
 
 void CCameraComponent::Update()

@@ -30,7 +30,10 @@ IScene *CSceneManager::LoadScene()
 void CSceneManager::UnloadScene()
 {
     if (m_pScene)
+    {
         delete m_pScene;
+        m_pScene = nullptr;
+    }
 }
 
 void CSceneManager::Update()

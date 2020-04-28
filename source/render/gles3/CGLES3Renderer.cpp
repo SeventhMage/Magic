@@ -167,9 +167,9 @@ void CGLES3Renderer::Clear(int flags)
    glClear(GetGLColorMask(flags));
 }
 
-IRenderTarget *CGLES3Renderer::CreateRenderTarget(int width, int height, int format)
+IRenderTarget *CGLES3Renderer::CreateRenderTarget(int width, int height, bool haveDepth, int textureCount)
 {
-   return new CGLES3RenderTarget(1, width, height, false);
+   return new CGLES3RenderTarget(textureCount, width, height, haveDepth);
 }
 
 IShaderProgram *CGLES3Renderer::CreateShaderProgram()

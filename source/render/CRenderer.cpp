@@ -12,11 +12,6 @@ CRenderer::CRenderer()
 
 CRenderer::~CRenderer()
 {
-    for (size_t i = 0; i < m_RenderPassVec.size(); ++i)
-    {
-        SAFE_DEL(m_RenderPassVec[i]);
-    }
-    m_RenderPassVec.clear();
 }
 
 void CRenderer::Render(IRenderInput *pRenderInput, IRenderPass *pRenderPass)
@@ -31,9 +26,18 @@ IRenderPass *CRenderer::GenerateRenderPass()
     m_RenderPassVec.push_back(pRenderPass);
     return pRenderPass;
 }
-IRenderTarget *CRenderer::CreateRenderTarget(int width, int height, int format)
+
+void CRenderer::DestroyRenderPass(IRenderPass *pass)
 {
-    return nullptr;
+    if (pass)
+    {
+        auto it = std::find(m_RenderPassVec.begin(), m_RenderPassVec.end(), pass);
+        if (it != m_RenderPassVec.end())
+        {
+            m_RenderPassVec.erase(it);
+        }
+        delete pass;
+    }
 }
 
 IRenderInput *CRenderer::CreateRenderInput(int mode, int usage)
