@@ -10,8 +10,6 @@ namespace magic
 CMeshRendererComponent::CMeshRendererComponent()
 :m_pMesh(nullptr)
 ,m_pMaterial(nullptr)
-,m_pImage(nullptr)
-,m_pTexture(nullptr)
 ,m_pRenderer(nullptr)
 ,m_pRenderInput(nullptr)
 ,m_pMaterialInstance(new CMaterialInstance())
@@ -24,18 +22,19 @@ CMeshRendererComponent::~ CMeshRendererComponent()
 {
     SAFE_DEL(m_pRenderInput);
     SAFE_DEL(m_pMaterialInstance);
-    SAFE_DEL(m_pTexture);
-    
 }
 
-void CMeshRendererComponent::Initialize(IRenderer *pRenderer, IMesh *pMesh, IMaterial *pMaterial, IImage *pImage)
+void CMeshRendererComponent::Initialize(IRenderer *pRenderer, uint cameraFlag, IMesh *pMesh, IMaterial *pMaterial, ITexture *pTexture)
 {
     m_pRenderer = pRenderer;
     if (m_pRenderer)
     {
         m_pRenderInput = pRenderer->CreateRenderInput(m_Mode, m_Usage);
-        SetMaterial(pMaterial, pImage);
-        SetMesh(pMesh);
+        m_pRenderInput->SetRenderFlag(cameraFlag);
+        if (pMaterial)
+            SetMaterial(pMaterial, pTexture);
+        if (pMesh)
+            SetMesh(pMesh);
     }
 }
 
@@ -80,12 +79,13 @@ void CMeshRendererComponent::SetMesh(IMesh *pMesh)
             int colorsSize = 0;
             int normalSize = 0;
             int vertCount = m_pMesh->GetVerticesCount();
+            int indicesCount = m_pMesh->GetIndicesCount();
             float *positions = m_pMesh->GetPositions();
             float *uvs = m_pMesh->GetUVs();
             float *colors = m_pMesh->GetColors();
             float *normals = m_pMesh->GetNormals();
             
-            m_pRenderInput->BeginInput(0, vertCount);
+            m_pRenderInput->BeginInput(0, vertCount, indicesCount);
             
             if (positions)
                 positionsSize = vertCount * sizeof(float) * 3;
@@ -108,7 +108,7 @@ void CMeshRendererComponent::SetMesh(IMesh *pMesh)
             unsigned short *indices = pMesh->GetIndices();
             if (indices)
             {
-                m_pRenderInput->CreateIndexBufferObject(indices, pMesh->GetIndicesCount() * sizeof(unsigned short), m_Usage);
+                m_pRenderInput->CreateIndexBufferObject(indices, indicesCount * sizeof(unsigned short), m_Usage);
             }
             
             int index = 0;
@@ -126,7 +126,7 @@ void CMeshRendererComponent::SetMesh(IMesh *pMesh)
     }
 }
 
-void CMeshRendererComponent::SetMaterial(IMaterial *pMaterial, IImage *pImage)
+void CMeshRendererComponent::SetMaterial(IMaterial *pMaterial, ITexture *pTexture)
 {
     if (m_pMaterial != pMaterial)
     {
@@ -138,16 +138,8 @@ void CMeshRendererComponent::SetMaterial(IMaterial *pMaterial, IImage *pImage)
             m_pRenderInput->SetShaderProgram(m_pMaterialInstance->GetShaderProgram());
         }
     }
-    if (m_pImage != pImage)
-    {
-        m_pImage = pImage;
-        SAFE_DEL(m_pTexture);
-        if (m_pImage)
-        {
-            m_pTexture = m_pRenderer->CreateTexture(pImage->GetComponents(), pImage->GetWidth(), pImage->GetHeight(), pImage->GetFormat(), pImage->GetPixelType(), pImage->GetData());
-            m_pRenderInput->SetTexture(0, m_pTexture);
-        }
-    }
+    if (pTexture)
+        m_pRenderInput->SetTexture(0, pTexture);
 }
 
 }

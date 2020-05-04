@@ -26,6 +26,7 @@ public:
     virtual int GetFirst() const { return m_First; }
     virtual int GetIndexType() const { return m_IndexType; }
     virtual int GetVerticesCount() const { return m_VerticesCount; }
+    virtual int GetIndicesCount() const { return m_IndicesCount; }
     virtual bool IsTransparent() const { return m_bTransparent; }
 
     virtual void SetRenderQueue(int id);
@@ -37,8 +38,10 @@ public:
     virtual void SetShaderProgram(IShaderProgram *pShaderProgram);
     virtual void SetTexture(int slot, ITexture *texture);
     virtual void SetTransparent(bool transparent) { m_bTransparent = transparent; }
-    virtual void BeginInput(int first, int vertCount);
+    virtual void BeginInput(int first, int vertCount, int indicesCount);
     virtual void EndInput();
+    virtual void SetRenderFlag(uint flag) { m_RenderFlag = flag; }
+    virtual uint GetRenderFlag() { return m_RenderFlag; }
 private:
     IRenderer *m_pRenderer;
     ITexture *m_TextureArray[MAX_TEXTURE_NUM];
@@ -52,7 +55,9 @@ private:
     int m_Usage;
     int m_First;
     int m_VerticesCount;
+    int m_IndicesCount;
     int m_IndexType;
+    uint m_RenderFlag;
     bool m_bTransparent;
 };
 }

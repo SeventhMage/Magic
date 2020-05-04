@@ -7,6 +7,7 @@
 #include "render/IRenderTarget.h"
 #include "math/CMatrix4.h"
 #include "math/CFrustum.h"
+#include "base/magicType.h"
 
 namespace magic
 {
@@ -28,6 +29,7 @@ public:
     void SetClearColor(float r, float g, float b, float a);
     void SetClearBit(int bit);
     void SetRenderTarget(IRenderTarget *target);
+    uint GetFlag() { return m_Flag; }
 private:
     IRenderPass *m_pRenderPass;
     IRenderer *m_pRenderer;
@@ -47,6 +49,9 @@ private:
     
     bool m_bNeedUpdateView;
     bool m_bNeedUpdateProj;
+    
+    static uint s_FlagCount;
+    uint m_Flag;
 };
 
 } // namespace magic

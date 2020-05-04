@@ -33,7 +33,7 @@ inline void DebugGLError(const char *filename, int lineNum)
 			printf("File Line Number[%s:%d] unknown error\n", filename, lineNum);
 			break;
 		}
-		assert(0);
+        assert(0);
 	}
 }
 #ifdef DEBUG
@@ -46,7 +46,7 @@ inline void DebugGLError(const char *filename, int lineNum)
 
 inline void CheckGLFBOStatus(const char *filename, int lineNum, GLenum target)
 {
-	GLenum fboStatus = glCheckFramebufferStatus(target);
+	GLenum fboStatus = GLDebug(glCheckFramebufferStatus(target));
 	if (fboStatus != GL_FRAMEBUFFER_COMPLETE)
 	{
 		switch (fboStatus)
@@ -86,7 +86,7 @@ inline void CheckGLFBOStatus(const char *filename, int lineNum, GLenum target)
 		assert(0);
 	}
 }
-#ifdef _DEBUG
+#ifdef DEBUG
 #define GLCheckFBOStatus(target) CheckGLFBOStatus(__FILE__, __LINE__, (target));
 #else
 #define GLCheckFBOStatus

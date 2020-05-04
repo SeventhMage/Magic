@@ -17,6 +17,7 @@ public:
     virtual int GetRenderQueue() const = 0;
     virtual ITexture *GetTexture(int slot) const = 0;
     virtual int GetTextureCount() const = 0;
+    virtual int GetIndicesCount() const = 0;
     virtual IBufferObject *GetVertexArrayObject() const = 0;
     virtual IBufferObject *GetVertexBufferObject() const = 0;
     virtual IBufferObject *GetIndexBufferObject() const = 0;
@@ -34,8 +35,10 @@ public:
     virtual void SetShaderProgram(IShaderProgram *pShaderProgram) = 0;
     virtual void SetTexture(int slot, ITexture *texture) = 0;
     virtual void SetTransparent(bool transparent) = 0;
-    virtual void BeginInput(int first, int vertCount) = 0;
+    virtual void BeginInput(int first, int vertCount, int indicesCount) = 0;
     virtual void EndInput() = 0;
+    virtual void SetRenderFlag(uint flag) = 0;
+    virtual uint GetRenderFlag() = 0;
     
 };
 }

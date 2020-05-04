@@ -78,14 +78,16 @@ static GLenum GetGLPixelType(EPixelType type)
 {
 	switch (type)
 	{
-	case EPixelType::UNSIGNED_BYTE:
+    case EPixelType::PIXEL_UNSIGNED_BYTE:
 		return GL_UNSIGNED_BYTE;
-	case EPixelType::UNSIGNED_SHORT_5_6_5:
+	case EPixelType::PIXEL_UNSIGNED_SHORT_5_6_5:
 		return GL_UNSIGNED_SHORT_5_6_5;
-	case EPixelType::UNSIGNED_SHORT_4_4_4_4:
+	case EPixelType::PIXEL_UNSIGNED_SHORT_4_4_4_4:
 		return GL_UNSIGNED_SHORT_4_4_4_4;
-	case EPixelType::UNSIGNED_SHORT_5_5_5_1:
+	case EPixelType::PIXEL_UNSIGNED_SHORT_5_5_5_1:
 		return GL_UNSIGNED_SHORT_5_5_5_1;
+    case EPixelType::PIXEL_FLOAT:
+        return GL_FLOAT;
 	default:
 		return GL_UNSIGNED_BYTE;
 	}

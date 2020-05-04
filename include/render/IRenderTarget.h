@@ -10,7 +10,7 @@ class IRenderTarget
 {
 public:
     virtual ~IRenderTarget(){}
-    virtual int GetWindow() const = 0;
+    virtual int GetWidth() const = 0;
     virtual int GetHeight() const = 0;
     virtual void BeginTarget() = 0;
 	virtual void EndTarget() = 0;

@@ -57,16 +57,20 @@ void CRenderer::Render()
             {
                 for (auto input : queIt.second)
                 {
-                    Render(input, pass);
+                    if (input->GetRenderFlag() & pass->GetRenderFlag())
+                        Render(input, pass);
                 }
             }
             for (auto queIt : m_TransparentRenderQueueGroup)
             {
                 for (auto input : queIt.second)
                 {
-                    Render(input, pass);
+                    if (input->GetRenderFlag() & pass->GetRenderFlag())
+                        Render(input, pass);
                 }
             }
+            
+            pass->EndRenderTarget();
         }
     }
     m_OpaqueRenderQueueGroup.clear();

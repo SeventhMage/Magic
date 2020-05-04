@@ -153,18 +153,18 @@ GLboolean WinCreate(SRenderContext *esContext, const char *title)
 CGLES3Renderer::CGLES3Renderer(SRenderContext *esContext, const char *title, GLint width, GLint height)
     : m_esContext(esContext)
 {
-   if (Init(esContext, title, width, height))
-      LogError("Initialize GLES3Renderer failed");
+   if (!Init(esContext, title, width, height))
+      LogError("Initialize GLES3Renderer failed\n");
 }
 
 void CGLES3Renderer::SetClearColor(float r, float g, float b, float a)
 {
-   glClearColor(r, g, b, a);
+   GLDebug(glClearColor(r, g, b, a));
 }
 
 void CGLES3Renderer::Clear(int flags)
 {
-   glClear(GetGLColorMask(flags));
+   GLDebug(glClear(GetGLColorMask(flags)));
 }
 
 IRenderTarget *CGLES3Renderer::CreateRenderTarget(int width, int height, bool haveDepth, int textureCount)
@@ -318,7 +318,7 @@ void CGLES3Renderer::Render(IRenderInput *pRenderInput, IRenderPass *pRenderPass
    if (pIBO)
    {
       pIBO->Bind();
-      GLDebug(glDrawElements(GetGLGPUBufferMode((GPUBufferMode)pRenderInput->GetMode()), pRenderInput->GetVerticesCount(), GetGLVariableType((VariableType)pRenderInput->GetIndexType()), 0));
+      GLDebug(glDrawElements(GetGLGPUBufferMode((GPUBufferMode)pRenderInput->GetMode()), pRenderInput->GetIndicesCount(), GetGLVariableType((VariableType)pRenderInput->GetIndexType()), 0));
       pIBO->UnBind();
    }
    else
@@ -333,6 +333,11 @@ ITexture *CGLES3Renderer::CreateTexture(EColorFormat internalformat, int width, 
     ITexture *pTexture = new CGLES3Texture();
     pTexture->Create2D(internalformat, width, height, format, type, data);
     return pTexture;
+}
+
+void CGLES3Renderer::Viewport(int x, int y, int width, int height)
+{
+    GLDebug(glViewport(x, y, width, height));
 }
 
 } // namespace magic

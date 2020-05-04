@@ -271,7 +271,7 @@ bool CGLES3ShaderProgram::AttachSource(const char *shaderSrc, EShaderType shader
     m_hShaders[shaderType] = GLDebug(glCreateShader(GetGLShaderType(shaderType)));
     GLchar *fsStringPtr[1];
     fsStringPtr[0] = (GLchar *)shaderSrc;
-    glShaderSource(m_hShaders[shaderType], 1, (const GLchar **)fsStringPtr, NULL);
+    GLDebug(glShaderSource(m_hShaders[shaderType], 1, (const GLchar **)fsStringPtr, NULL));
 
     GLint testVal;
     GLDebug(glCompileShader(m_hShaders[shaderType]));

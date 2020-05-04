@@ -22,7 +22,7 @@ public:
 
 private:
 	uint m_hTexture;
-	GLenum m_target; //��ǰ����Ŀ��
+	GLenum m_target;
 };
 } // namespace mx
 

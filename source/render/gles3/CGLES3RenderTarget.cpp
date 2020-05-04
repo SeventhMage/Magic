@@ -12,7 +12,7 @@ static const int MAX_TEXTURE_COUNT = 16;
 CGLES3RenderTarget::CGLES3RenderTarget(int textureCount, int width, int height, bool bHaveDepth)
 	: m_iWidth(width), m_iHeight(height), m_fbo(0), m_textureCount(textureCount), m_depthTexture(nullptr)
 {
-
+    GLDebug(glGetIntegerv(GL_FRAMEBUFFER_BINDING, &m_defaultFrameBuffer));
 	GLenum drawBuffers[MAX_TEXTURE_COUNT] = {0};
 	if (textureCount > 0 || bHaveDepth)
 	{
@@ -21,7 +21,7 @@ CGLES3RenderTarget::CGLES3RenderTarget(int textureCount, int width, int height, 
 		for (int i = 0; i < textureCount; ++i)
 		{
 			ITexture *pTexture = new CGLES3Texture();
-			pTexture->Create2D(RGBA16F, m_iWidth, m_iHeight, RGBA, UNSIGNED_BYTE, nullptr);
+			pTexture->Create2D(RGBA16F, m_iWidth, m_iHeight, RGBA, PIXEL_FLOAT, nullptr);
 			pTexture->Bind(0);
 			GLDebug(glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, pTexture->GetHandle(), 0));
 			pTexture->UnBind();
@@ -39,15 +39,15 @@ CGLES3RenderTarget::CGLES3RenderTarget(int textureCount, int width, int height, 
 
 	if (textureCount > 0)
 	{
-		glDrawBuffers(textureCount, drawBuffers);
+		GLDebug(glDrawBuffers(textureCount, drawBuffers));
 
 		GLCheckFBOStatus(GL_FRAMEBUFFER);
-
-		GLDebug(glBindFramebuffer(GL_FRAMEBUFFER, 0));
+        GLDebug(glBindFramebuffer(GL_FRAMEBUFFER, m_defaultFrameBuffer));
 	}
 	else if (textureCount == 0 && bHaveDepth)
 	{
-		glDrawBuffers(1, drawBuffers);
+		GLDebug(glDrawBuffers(1, drawBuffers));
+        GLDebug(glBindFramebuffer(GL_FRAMEBUFFER, m_defaultFrameBuffer));
 	}
 }
 CGLES3RenderTarget::~CGLES3RenderTarget()
@@ -58,14 +58,12 @@ CGLES3RenderTarget::~CGLES3RenderTarget()
 	}
 	SAFE_DEL(m_depthTexture);
 
-	glDeleteFramebuffers(1, &m_fbo);
+	GLDebug(glDeleteFramebuffers(1, &m_fbo));
 }
 void CGLES3RenderTarget::BeginTarget()
 {
-	GLDebug(glBindFramebuffer(GL_FRAMEBUFFER, m_fbo));
-	GLDebug(glViewport(0, 0, m_iWidth, m_iHeight));
-	GLDebug(glClearDepthf(1.0f));
-	GLDebug(glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
+    GLDebug(glBindFramebuffer(GL_FRAMEBUFFER, m_fbo));
+	//GLDebug(glClearDepthf(1.0f));
 	if (m_textureCount == 0 && m_depthTexture != nullptr)
 	{
 		GLDebug(glEnable(GL_POLYGON_OFFSET_FILL));
@@ -74,11 +72,12 @@ void CGLES3RenderTarget::BeginTarget()
 }
 void CGLES3RenderTarget::EndTarget()
 {
-	GLDebug(glBindFramebuffer(GL_FRAMEBUFFER, 0));
+	GLDebug(glBindFramebuffer(GL_FRAMEBUFFER, m_defaultFrameBuffer));
 	if (m_textureCount == 0 && m_depthTexture != nullptr)
 	{
 		GLDebug(glDisable(GL_POLYGON_OFFSET_FILL));
 	}
+    GLDebug();
 }
 ITexture *CGLES3RenderTarget::GetBindTexture(int index) const
 {

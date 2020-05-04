@@ -58,11 +58,20 @@ IMesh *mesh = nullptr;
 IShader *vertShader;
 IShader *fragShader;
 IMaterial *material;
-//IRenderTarget *renderTarget;
+IRenderTarget *renderTarget;
+ITexture *texture;
 
 //需要手动控件销毁顺序，保证在引擎销毁前删除
 CGameObject *camera = new CGameObject();
 CGameObject *triangle = new CGameObject();
+
+
+IMesh *meshQuad = nullptr;
+IShader *vertShaderQuad;
+IShader *fragShaderQuad;
+IMaterial *materialQuad;
+CGameObject *mainCamera = new CGameObject();
+CGameObject *screenAlignedQuad = new CGameObject();
 
 float vertices[][3] = {  0.0f,  0.5f, 0.0f,
                          -0.5f, -0.5f, 0.0f,
@@ -88,33 +97,43 @@ float normals[][3] = {
 
 unsigned short indices[] = {0, 1, 2};
 
+float verticesQuad[][3] = {
+    -1.f, -1.f, 0.f,
+    1.f, -1.f, 0.f,
+    1.f, 1.f, 0.f,
+    -1.f, 1.f, 0.f,
+};
+
+float texCoordsQuad[][2] = {
+    0.f, 0.f,
+    1.f, 0.f,
+    1.f, 1.f,
+    0.f, 1.f,
+};
+
+unsigned short indicesQuad[] = {0, 1, 2, 0, 2, 3};
+
 char vShaderStr[] =
  "#version 300 es                          \n"
  "layout(location = 0) in vec3 vPosition;  \n"
-"layout(location = 1) in vec2 vTexCoord;  \n"
- "layout(location = 2) in vec4 vColor;     \n"
- "out vec4 vOutColor;                      \n"
+ "layout(location = 1) in vec2 vTexCoord;  \n"
+ "uniform mat4 viewProjMatrix;             \n"
  "out vec2 vTex;                           \n"
- "uniform mat4 vpMatrix;                   \n"
- "uniform mat4 mMatrix;                    \n"
  "void main()                              \n"
  "{                                        \n"
- "   vOutColor = vColor;                   \n"
  "   vTex = vTexCoord;                     \n"
- "   gl_Position = vpMatrix * mMatrix * vec4(vPosition, 1.0);   \n"
+ "   gl_Position = vec4(vPosition, 1.0);   \n"
  "}                                        \n";
 
 char fShaderStr[] =
  "#version 300 es                              \n"
  "precision mediump float;                     \n"
- "uniform sampler2D textureUnit;               \n"
- "uniform vec4 color;               \n"
- "in vec4 vOutColor;                           \n"
+ "uniform sampler2D screenAlignedTexture;      \n"
  "in vec2 vTex;                                \n"
  "out vec4 fragColor;                          \n"
  "void main()                                  \n"
  "{                                            \n"
- "   fragColor = color * vOutColor * texture(textureUnit, vTex);   \n"
+ "   fragColor = texture(screenAlignedTexture, vTex);   \n"
  "}                                            \n";
 
 float ambientLightColor[] = {0.2f, 0.2f, 0.2f};
@@ -126,10 +145,10 @@ CVector3 pos;
 float flag = 0.02f;
 float rot = 0;
 
-void update()
+void update(SRenderContext *)
 {
     mc->Run();
-    //camera.GetSceneNode()->SetPosition(pos);
+    
     if (pos.x > 0.6f || pos.x < -0.6f)
         flag = -flag;
     pos.x += flag;
@@ -153,7 +172,14 @@ void shutdown()
     delete mesh;
     delete camera;
     delete triangle;
-    //delete renderTarget;
+    delete mainCamera;
+    delete screenAlignedQuad;
+    delete meshQuad;
+    delete materialQuad;
+    delete vertShaderQuad;
+    delete fragShaderQuad;
+    delete renderTarget;
+    delete texture;
     Clean();
     printf("Finish clean.\n\n");
 }
@@ -163,11 +189,13 @@ int esMain ( SRenderContext *esContext )
     printf("Start initalizing Engine ... \n");
     mc = CreateMagic(esContext, "Triangle", 1280, 960);
     mc->SetFPS(60);
-    esContext->updateFunc = &update;
+    //esContext->updateFunc = &update;
+    esContext->drawFunc = &update;
     esContext->shutdownFunc = &shutdown;
     renderer = mc->GetRenderer();
+    float aspect = 1.f * esContext->width / esContext->height;
     IResourceManager *resourceMgr = mc->GetResourceManager();
-    //renderTarget = renderer->CreateRenderTarget(800, 600);
+    renderTarget = renderer->CreateRenderTarget(1024, 1024 / aspect, false, 1);
     printf("Finished initalizing Engine.\n\n");
 
     printf("Loading scene ... \n");
@@ -180,12 +208,12 @@ int esMain ( SRenderContext *esContext )
     triangle->SetSceneNode(triangleNode);
     cameraNode->SetPosition(CVector3(0, 0, 2));
     CCameraComponent *pCamera = camera->AddComponent<CCameraComponent>();
-    float aspect = 1.f * esContext->width / esContext->height;
+    
     //pCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
     pCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
-    pCamera->SetClearColor(0.5, 0.5, 0.5, 1);
-    pCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
-    //pCamera->SetRenderTarget(renderTarget);
+    pCamera->SetClearColor(1.0f, 1.0f, 1.0f, 1.f);
+    pCamera->SetClearBit(MAGIC_COLOR_BUFFER_BIT);
+    pCamera->SetRenderTarget(renderTarget);
     
     CMeshRendererComponent *pMeshRenderer = triangle->AddComponent<CMeshRendererComponent>();
     
@@ -197,8 +225,6 @@ int esMain ( SRenderContext *esContext )
     mesh->SetIndices(indices, sizeof(indices));
     mesh->SetNormals(normals, sizeof(normals));
 
-    //vertShader = new CShader(EShaderType::Vertex, vShaderStr, sizeof(vShaderStr));
-    //fragShader = new CShader(EShaderType::Fragment, fShaderStr, sizeof(fShaderStr));
     vertShader = (CShader *)resourceMgr->LoadResource("common.vert", EResourceType::Shader);
     fragShader = (CShader *)resourceMgr->LoadResource("common.frag", EResourceType::Shader);
     material = new CMaterial();
@@ -210,6 +236,9 @@ int esMain ( SRenderContext *esContext )
     material->SetProperty("directionalLightDir", directionalLightDir, sizeof(directionalLightDir));
     material->SetProperty("directionalLightColor", directionalLightColor, sizeof(directionalLightColor));
     material->SetProperty("specCoefficient", &specCoefficient, sizeof(specCoefficient));
+    uint textureUnit = 0;
+    material->SetProperty("textureUnit", &textureUnit, sizeof(textureUnit));
+    
     CMatrix4 transform = camera->GetSceneNode()->GetAbsluateTransform();
     transform.SetTranslation(CVector3(0, 0, 0));
     CVector3 viewDir(0, 0, 1.f);
@@ -217,9 +246,44 @@ int esMain ( SRenderContext *esContext )
     material->SetProperty("viewDir", viewDir.v, sizeof(viewDir));
     IImage *pImage = (IImage *)resourceMgr->LoadResource("crate.tga", EResourceType::Image);
     
-    pMeshRenderer->Initialize(mc->GetRenderer(), mesh, material, pImage);
-    resourceMgr->UnloadResource(pImage);
+    if (pImage)
+    {
+        texture = renderer->CreateTexture(pImage->GetComponents(), pImage->GetWidth(), pImage->GetHeight(), pImage->GetFormat(), pImage->GetPixelType(), pImage->GetData());
+    }
     
+    pMeshRenderer->Initialize(mc->GetRenderer(), pCamera->GetFlag(), mesh, material, texture);
+    
+    //screen aligned quad
+    mainCamera->SetSceneNode(pRootNode);
+    CCameraComponent *pMainCamera = mainCamera->AddComponent<CCameraComponent>();
+    pMainCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
+    //pMainCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
+    pMainCamera->SetClearColor(.0f, .0f, .0f, .0f);
+    pMainCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
+    CMeshRendererComponent *pSAQMeshRenderer = screenAlignedQuad->AddComponent<CMeshRendererComponent>();
+    screenAlignedQuad->SetSceneNode(pRootNode);
+    meshQuad = new CMesh();
+     
+    meshQuad->SetPositions(verticesQuad, sizeof(verticesQuad));
+    meshQuad->SetUVs(texCoordsQuad, sizeof(texCoordsQuad));
+    meshQuad->SetIndices(indicesQuad, sizeof(indicesQuad));
+
+    vertShaderQuad = new CShader(EShaderType::Vertex, vShaderStr, sizeof(vShaderStr));
+    fragShaderQuad = new CShader(EShaderType::Fragment, fShaderStr, sizeof(fShaderStr));
+    
+    materialQuad = new CMaterial();
+    
+    if (renderTarget)
+    {
+        materialQuad->SetShader(vertShaderQuad->GetShaderType(), vertShaderQuad);
+        materialQuad->SetShader(fragShaderQuad->GetShaderType(), fragShaderQuad);
+        ITexture *renderTexture = renderTarget->GetBindTexture(0);
+        uint textureQuad = 0;
+        materialQuad->SetProperty("screenAlignedTexture", &textureQuad, sizeof(textureQuad));
+        pSAQMeshRenderer->Initialize(renderer, pMainCamera->GetFlag(), meshQuad, materialQuad, renderTexture);
+    }
+     
+    resourceMgr->UnloadResource(pImage);
     printf("Finished loading scene. \n\n");
 
     printf("Start Application ... \n");

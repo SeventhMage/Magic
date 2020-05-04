@@ -38,7 +38,7 @@ public:
 	virtual EColorFormat GetComponents() const { return m_iComponents; }
 	virtual int GetWidth() const { return m_iWidth; }
 	virtual int GetHeight() const { return m_iHeight; }
-	virtual EPixelType GetPixelType() const { return UNSIGNED_BYTE; }
+	virtual EPixelType GetPixelType() const { return PIXEL_UNSIGNED_BYTE; }
 
 private:
 	char m_filename[256];

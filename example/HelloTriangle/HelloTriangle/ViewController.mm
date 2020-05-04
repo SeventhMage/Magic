@@ -106,6 +106,7 @@ extern void esMain( magic::SRenderContext *esContext );
         esMain( &_esContext );
         _esContext.bInitalize = true;
     }
+    
     if ( _esContext.drawFunc )
     {
         _esContext.drawFunc( &_esContext );

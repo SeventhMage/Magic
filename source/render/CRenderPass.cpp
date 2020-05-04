@@ -1,6 +1,7 @@
 #include "CRenderPass.h"
 
 #include <string.h>
+#include <OpenGLES/ES3/gl.h>
 
 namespace magic
 {
@@ -8,6 +9,7 @@ CRenderPass::CRenderPass(IRenderer *pRenderer, IRenderTarget *pRenderTarget)
 :m_pRenderer(pRenderer)
 ,m_pRenderTarget(pRenderTarget)
 ,m_ClearBit(0)
+,m_RenderFlag(0)
 ,m_bEnable(true)
 {
     memset(m_ClearColor, 0, sizeof(m_ClearColor));
@@ -24,9 +26,23 @@ CRenderPass::~CRenderPass()
 void CRenderPass::BeginRenderTarget()
 {
     if (m_pRenderTarget)
+    {
         m_pRenderTarget->BeginTarget();
+        m_pRenderer->Viewport(0, 0, m_pRenderTarget->GetWidth(), m_pRenderTarget->GetHeight());
+    }
+    else
+    {
+        m_pRenderer->Viewport(0, 0, m_pRenderer->GetWindowWidth(), m_pRenderer->GetWindowHeight());
+    }
+    
     m_pRenderer->SetClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
     m_pRenderer->Clear(m_ClearBit);
+}
+
+void CRenderPass::EndRenderTarget()
+{
+    if (m_pRenderTarget)
+        m_pRenderTarget->EndTarget();
 }
 
 void CRenderPass::SetClearColor(float r, float g, float b, float a)

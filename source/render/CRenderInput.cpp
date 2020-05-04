@@ -20,6 +20,7 @@ CRenderInput::CRenderInput(IRenderer *pRenderer, int mode, int usage)
 ,m_VerticesCount(0)
 ,m_IndexType(VariableType::USHORT)
 ,m_bTransparent(false)
+,m_RenderFlag(0)
 {
     memset(m_TextureArray, 0, sizeof(ITexture *) * MAX_TEXTURE_NUM);
     m_pVAO = m_pRenderer->CreateVertexArrayObject();
@@ -105,10 +106,11 @@ void CRenderInput::SetTexture(int slot, ITexture *pTexture)
     }
 }
 
-void CRenderInput::BeginInput(int first, int vertCount)
+void CRenderInput::BeginInput(int first, int vertCount, int indicesCount)
 {
     m_First = first;
     m_VerticesCount = vertCount;
+    m_IndicesCount = indicesCount;
     m_pVAO->Bind();
 }
 

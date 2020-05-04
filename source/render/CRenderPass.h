@@ -16,6 +16,7 @@ public:
     CRenderPass(IRenderer *pRenderer, IRenderTarget *pRenderTarget = nullptr);
     virtual ~CRenderPass();
     virtual void BeginRenderTarget();
+    virtual void EndRenderTarget();
     virtual void SetRenderTarget(IRenderTarget *pRenderTarget) { m_pRenderTarget = pRenderTarget; }
     virtual IRenderTarget *GetRenderTarget() { return m_pRenderTarget; }
     virtual SShaderParam *GetShaderParam(int index) const;
@@ -26,12 +27,15 @@ public:
     virtual void SetClearBit(int bit) { m_ClearBit = bit; }
     virtual void SetShaderParam(const char *name, void *value, int size);
     virtual void SetEnable(bool enable) { m_bEnable = enable; }
+    virtual void SetRenderFlag(uint flag) { m_RenderFlag = flag; }
+    virtual uint GetRenderFlag() { return m_RenderFlag; }
 private:
     IRenderer *m_pRenderer;
     IRenderTarget *m_pRenderTarget;
     int m_ClearBit;
     float m_ClearColor[4];
     std::vector<SShaderParam *> m_ShaderParams;
+    uint m_RenderFlag;
     bool m_bEnable;
 };
 } // namespace magic

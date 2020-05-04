@@ -7,6 +7,7 @@
 
 namespace magic
 {
+uint CCameraComponent::s_FlagCount = 1;
 CCameraComponent::CCameraComponent()
 :m_pRenderPass(nullptr)
 ,m_pRenderer(nullptr)
@@ -19,8 +20,9 @@ CCameraComponent::CCameraComponent()
 ,m_Aspect(1.f)
 ,m_bNeedUpdateView(true)
 ,m_bNeedUpdateProj(true)
+,m_Flag(s_FlagCount)
 {
-    
+    s_FlagCount <<= 1;
 }
 
 CCameraComponent::~CCameraComponent()
@@ -31,6 +33,7 @@ CCameraComponent::~CCameraComponent()
 void CCameraComponent::Initialize(IRenderer *pRenderer, CameraType type, float fov, float aspect, float near, float far)
 {
     m_pRenderPass = pRenderer->GenerateRenderPass();
+    m_pRenderPass->SetRenderFlag(m_Flag);
     m_pRenderer = pRenderer;
     m_Type = type;
     if (m_Type == CameraType::Projection)
@@ -92,6 +95,7 @@ void CCameraComponent::Update()
         m_vpMatrix = m_viewMatrix * m_projMatrix;
         m_pRenderPass->SetShaderParam("viewMatrix", m_viewMatrix.m, sizeof(m_viewMatrix.m));
         m_pRenderPass->SetShaderParam("projMatrix", m_projMatrix.m, sizeof(m_projMatrix.m));
+        m_pRenderPass->SetShaderParam("viewProjMatrix", m_vpMatrix.m, sizeof(m_vpMatrix.m));
         m_bNeedUpdateView = false;
         m_bNeedUpdateProj = false;
     }

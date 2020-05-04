@@ -26,6 +26,9 @@ public:
     virtual IBufferObject *CreateVertexBufferObject(void *vertexes, int size, int usage);
     virtual IBufferObject *CreateIndexBufferObject(void *indices, int size, int usage);
     virtual ITexture *CreateTexture(EColorFormat internalformat, int width, int height, EColorFormat format, EPixelType type, void *data);
+    virtual void Viewport(int x, int y, int width, int height);
+    virtual int GetWindowWidth() const { return m_esContext->width; }
+    virtual int GetWindowHeight() const { return m_esContext->height; }
 protected:
     virtual void Render(IRenderInput *pRenderInput, IRenderPass *pRenderPass);
 private:
