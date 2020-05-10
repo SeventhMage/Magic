@@ -18,9 +18,10 @@ public:
     
     virtual void Update();
     virtual void OnTransformChanged(const CMatrix4 &worldMat);
-    void Initialize(IRenderer *pRenderer, uint cameraFlag, IMesh *pMesh = nullptr, IMaterial *pMaterial = nullptr, ITexture *pTexture = nullptr);
+    void Initialize(IRenderer *pRenderer, uint cameraFlag, IMesh *pMesh = nullptr, IMaterial *pMaterial = nullptr);
     void SetMesh(IMesh *pMesh);
-    void SetMaterial(IMaterial *pMaterial, ITexture *pTexture = nullptr);
+    void SetMaterial(IMaterial *pMaterial);
+    void SetTexture(int slot, ITexture *pTexture);
 private:
     IMesh *m_pMesh;
     IMaterial *m_pMaterial;

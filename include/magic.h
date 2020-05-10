@@ -3,6 +3,14 @@
 
 #include "IMagic.h"
 #include "render/SRenderContext.h"
+#include "render/ERender.h"
+#include "scene/CGameObject.h"
+#include "resource/CMesh.h"
+#include "resource/CMaterial.h"
+#include "resource/CShader.h"
+#include "resource/IImage.h"
+#include "component/CCameraComponent.h"
+#include "component/CMeshRendererComponent.h"
 
 namespace magic
 {

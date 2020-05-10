@@ -8,8 +8,8 @@ uniform vec3 directionalLightColor;
 uniform vec3 viewDir;
 uniform float specCoefficient;
 
-in vec4 vOutColor;
-in vec2 vTex;
+in vec4 vertColor;
+in vec2 texCoord;
 in vec3 normal;
 out vec4 fragColor;
 
@@ -21,5 +21,5 @@ void main()
     lightColor += max(dot(dir, _normal), 0.0) * directionalLightColor;
     vec3 reflectDir = reflect(-dir, _normal);
     lightColor += pow(max(dot(viewDir, reflectDir), 0.0), specCoefficient) * directionalLightColor;
-    fragColor = color * vOutColor * vec4(lightColor, 1.0) * texture(textureUnit, vTex);
+    fragColor = color * vertColor * vec4(lightColor, 1.0) * texture(textureUnit, texCoord);
 }

@@ -9,6 +9,8 @@
 #include <EGL/eglext.h>
 #endif
 
+#include <functional>
+
 namespace magic
 {
 struct SRenderContext
@@ -41,10 +43,15 @@ struct SRenderContext
     /// EGL surface
     EGLSurface eglSurface;
 #endif
-    void ( *drawFunc ) ( SRenderContext * );
-    void ( *shutdownFunc ) ();
-    void ( *keyFunc ) ( SRenderContext *, unsigned char, int, int );
-    void ( *updateFunc ) ();
+//    void ( *drawFunc ) ( SRenderContext * );
+//    void ( *shutdownFunc ) ();
+//    void ( *keyFunc ) ( SRenderContext *, unsigned char, int, int );
+//    void ( *updateFunc ) ();
+    
+    std::function<void()> drawFunc;
+    std::function<void()> updateFunc;
+    std::function<void(unsigned char, int, int)> keyFunc;
+    std::function<void()> shutdownFunc;
     
     bool bInitalize;
 };

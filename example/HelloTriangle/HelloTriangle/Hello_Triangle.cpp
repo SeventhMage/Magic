@@ -36,21 +36,12 @@
 //    example is to demonstrate the basic concepts of
 //    OpenGL ES 3.0 rendering.
 #include "magic.h"
-#include "scene/CGameObject.h"
-#include "resource/CMesh.h"
-#include "resource/CMaterial.h"
-#include "resource/CShader.h"
-#include "resource/IImage.h"
-#include "ERender.h"
-#include "component/CCameraComponent.h"
-#include "component/CMeshRendererComponent.h"
 
 #include <stdio.h>
 
-#include <OpenGLES/ES3/gl.h>
 
 using namespace magic;
-
+/*
 IMagic *mc = nullptr;
 IRenderer *renderer;
 ISceneManager *pSceneMgr = nullptr;
@@ -145,7 +136,7 @@ CVector3 pos;
 float flag = 0.02f;
 float rot = 0;
 
-void update(SRenderContext *)
+void update()
 {
     mc->Run();
     
@@ -190,7 +181,7 @@ int esMain ( SRenderContext *esContext )
     mc = CreateMagic(esContext, "Triangle", 1280, 960);
     mc->SetFPS(60);
     //esContext->updateFunc = &update;
-    esContext->drawFunc = &update;
+    esContext->drawFunc = update;
     esContext->shutdownFunc = &shutdown;
     renderer = mc->GetRenderer();
     float aspect = 1.f * esContext->width / esContext->height;
@@ -290,3 +281,4 @@ int esMain ( SRenderContext *esContext )
 
     return 1;
 }
+ */

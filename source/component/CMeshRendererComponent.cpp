@@ -24,7 +24,7 @@ CMeshRendererComponent::~ CMeshRendererComponent()
     SAFE_DEL(m_pMaterialInstance);
 }
 
-void CMeshRendererComponent::Initialize(IRenderer *pRenderer, uint cameraFlag, IMesh *pMesh, IMaterial *pMaterial, ITexture *pTexture)
+void CMeshRendererComponent::Initialize(IRenderer *pRenderer, uint cameraFlag, IMesh *pMesh, IMaterial *pMaterial)
 {
     m_pRenderer = pRenderer;
     if (m_pRenderer)
@@ -32,7 +32,7 @@ void CMeshRendererComponent::Initialize(IRenderer *pRenderer, uint cameraFlag, I
         m_pRenderInput = pRenderer->CreateRenderInput(m_Mode, m_Usage);
         m_pRenderInput->SetRenderFlag(cameraFlag);
         if (pMaterial)
-            SetMaterial(pMaterial, pTexture);
+            SetMaterial(pMaterial);
         if (pMesh)
             SetMesh(pMesh);
     }
@@ -126,7 +126,7 @@ void CMeshRendererComponent::SetMesh(IMesh *pMesh)
     }
 }
 
-void CMeshRendererComponent::SetMaterial(IMaterial *pMaterial, ITexture *pTexture)
+void CMeshRendererComponent::SetMaterial(IMaterial *pMaterial)
 {
     if (m_pMaterial != pMaterial)
     {
@@ -138,8 +138,11 @@ void CMeshRendererComponent::SetMaterial(IMaterial *pMaterial, ITexture *pTextur
             m_pRenderInput->SetShaderProgram(m_pMaterialInstance->GetShaderProgram());
         }
     }
-    if (pTexture)
-        m_pRenderInput->SetTexture(0, pTexture);
+}
+
+void CMeshRendererComponent::SetTexture(int slot, ITexture *pTexture)
+{
+    m_pRenderInput->SetTexture(slot, pTexture);
 }
 
 }

@@ -4,6 +4,7 @@
 #include "resource/IShader.h"
 #include "render/ERender.h"
 #include "base/magicType.h"
+#include "base/Log.h"
 #include "gl3.h"
 
 namespace magic
@@ -26,7 +27,7 @@ static GLenum GetGLShaderType(EShaderType shaderType)
 
 static int GetUniformTypeSize(GLenum type)
 {
-	switch (type)
+ 	switch (type)
 	{
 	case GL_INT:
 		return 4;
@@ -42,8 +43,13 @@ static int GetUniformTypeSize(GLenum type)
 		return 64;
 	case GL_TEXTURE:
 		return 4;
+    case GL_SAMPLER_2D:
+        return 4;
+    case GL_SAMPLER_CUBE:
+        return 4;
 	default:;
 	}
+    LogError("GetUniformTypeSize type not find : %x\n", type);
 	return 0;
 }
 

@@ -19,6 +19,7 @@ public:
 	virtual void BeginTarget();
 	virtual void EndTarget();
 	virtual ITexture *GetBindTexture(int index) const;
+    virtual uint GetBindTextureCount() const { return m_bindTexture.size(); }
 	virtual ITexture *GetDepthTexture() const;
 
 private:

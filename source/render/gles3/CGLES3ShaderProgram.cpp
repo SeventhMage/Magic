@@ -280,7 +280,7 @@ bool CGLES3ShaderProgram::AttachSource(const char *shaderSrc, EShaderType shader
     {
         char infoLog[1024];
         GLDebug(glGetShaderInfoLog(m_hShaders[shaderType], 1024, NULL, infoLog));
-        LogError("The Shader failed to compile with the following error:%s\n", infoLog);
+        LogError("The Shader failed to compile with the following error:%s\n, shader source:\n%s\n", infoLog, shaderSrc);
         return false;
     }
     GLDebug(glAttachShader(m_hProgram, m_hShaders[shaderType]));
@@ -326,6 +326,8 @@ void CGLES3ShaderProgram::Bind()
                 GLDebug(glUniform1fv(uniform.m_location, uniform.m_count, (GLfloat *)uniform.m_value));
                 break;
             case GL_INT:
+            case GL_SAMPLER_2D:
+            case GL_SAMPLER_CUBE:
                 GLDebug(glUniform1iv(uniform.m_location, uniform.m_count, (GLint *)uniform.m_value));
                 break;
             case GL_FLOAT_VEC2:
@@ -344,6 +346,7 @@ void CGLES3ShaderProgram::Bind()
                 GLDebug(glUniformMatrix4fv(uniform.m_location, uniform.m_count, GL_FALSE, (GLfloat *)uniform.m_value));
                 break;
             default:
+                LogError("CGLES3ShaderProgram::Bind() not find format:%s, %x\n", uniform.m_name, uniform.m_format);
                 break;
             }
             uniform.Dirty(false);

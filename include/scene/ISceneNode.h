@@ -13,11 +13,6 @@ public:
     virtual void Update() = 0;
     virtual ISceneNode *CreateChildNode() = 0;
     virtual void DestroyChildNode(ISceneNode *) = 0;
-    //virtual void AddChild(ISceneNode *) = 0;
-    //virtual void AddToParent(ISceneNode *) = 0;
-    //virtual void SetParent(ISceneNode *) = 0;
-    //virtual void RemoveNode(ISceneNode *) = 0;
-    //virtual void RemoveFromNode(ISceneNode *) = 0;
     virtual void AddGameObject(IGameObject *) = 0;
     virtual void RemoveGameObject(IGameObject *) = 0;
     virtual void SetPosition(const CVector3 &position) = 0;

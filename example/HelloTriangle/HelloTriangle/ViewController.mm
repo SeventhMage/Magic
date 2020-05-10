@@ -8,17 +8,15 @@
 
 #import "ViewController.h"
 #import "SRenderContext.h"
-
-extern void esMain( magic::SRenderContext *esContext );
-
+#import "HelloTriangle.h"
 
 @interface ViewController ()
 {
     
     magic::SRenderContext _esContext;
+    HelloTriangle *helloTriangle;
 }
 @property (strong, nonatomic) EAGLContext *context;
-
 
 - (void)setupGL;
 - (void)tearDownGL;
@@ -40,8 +38,6 @@ extern void esMain( magic::SRenderContext *esContext );
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
-    
-    
 }
 
 - (void)dealloc
@@ -51,6 +47,8 @@ extern void esMain( magic::SRenderContext *esContext );
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
     }
+    
+    delete helloTriangle;
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,6 +74,7 @@ extern void esMain( magic::SRenderContext *esContext );
     [EAGLContext setCurrentContext:self.context];
     
     memset( &_esContext, 0, sizeof( _esContext ) );
+    
 }
 
 - (void)tearDownGL
@@ -103,13 +102,13 @@ extern void esMain( magic::SRenderContext *esContext );
     _esContext.height = view.drawableHeight;
     if (!_esContext.bInitalize)
     {
-        esMain( &_esContext );
+        helloTriangle = new HelloTriangle(&_esContext);
         _esContext.bInitalize = true;
     }
     
     if ( _esContext.drawFunc )
     {
-        _esContext.drawFunc( &_esContext );
+        _esContext.drawFunc();
     }
 }
 
