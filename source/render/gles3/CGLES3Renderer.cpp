@@ -301,6 +301,7 @@ namespace magic
    void CGLES3Renderer::Render(IRenderInput *pRenderInput, IRenderPass *pRenderPass)
    {
       //glViewport ( 0, 0, m_esContext->width, m_esContext->height );
+      glEnable(GL_DEPTH_TEST);
       CVertexArrayObject *pVAO = (CVertexArrayObject *)pRenderInput->GetVertexArrayObject();
       pVAO->Bind();
       for (int i = 0; i < pRenderInput->GetTextureCount(); ++i)

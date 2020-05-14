@@ -1,0 +1,6 @@
+<Material>
+    <Shader vert="mulTarget.vert" frag="mulTarget.frag"/>
+    <Texture path="crate.tga" />
+    <Property name="textureUnit" value="0" />
+</Material>
+

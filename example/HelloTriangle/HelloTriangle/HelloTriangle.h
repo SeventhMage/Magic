@@ -18,19 +18,16 @@ private:
     
     //triangle
     IMesh *triangleMesh;
-    IShader *triangleVertShader;
-    IShader *triangleFragShader;
     IMaterial *triangleMaterial;
     ITexture *triangleTexture;
     IRenderTarget *renderTarget;
     //需要手动控件销毁顺序，保证在引擎销毁前删除
     CGameObject *triangle;
     CGameObject *triangleCamera;
+    
 
     //deferred shade
     IMesh *deferredMesh;
-    IShader *deferredVertShader;
-    IShader *deferredFragShader;
     IMaterial *deferredMaterial;
     CGameObject *deferredCamera;
     CGameObject *deferredObject;
@@ -38,8 +35,6 @@ private:
     
     //screen aligned quad;
     IMesh *quadMesh;
-    IShader *quadVertShader;
-    IShader *quadFragShader;
     IMaterial *quadMaterial;
     CGameObject *quadCamera;
     CGameObject *screenAlignedQuad;

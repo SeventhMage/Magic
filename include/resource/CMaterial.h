@@ -46,15 +46,19 @@ struct SPropertyData : public IMaterialProperty
 class CMaterial : public IMaterial
 {
 public:
-    CMaterial();
+    CMaterial(const char *fileName = "");
     virtual ~CMaterial();
-    virtual void SetShader(EShaderType type, IShader *shader);
+    virtual void SetShader(EShaderType type, const char *shaderName);
+    virtual void SetShader(EShaderType type, const char *shaderSource, int size);
     virtual IShader *GetShader(EShaderType) const;
     virtual void SetProperty(const char *propertyName, void *data, int size);
     virtual void *GetPropertyValue(const char *propertyName, int &size);
     virtual IMaterialProperty *GetFirstProperty();
     virtual IMaterialProperty *GetNextProperty();
 private:
+    void LoadFromFile(const char *fileName);
+private:
+    std::string m_FileName;
     IShader *m_Shaders[EShaderType::Count];
     std::map<std::string, SPropertyData *> m_PropertyValue;
     std::map<std::string, SPropertyData *>::iterator m_PropertyIterator;

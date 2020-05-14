@@ -1,0 +1,4 @@
+<Material>
+    <Shader vert="common.vert" frag="common.frag"/>
+    <Texture path="crate.tga" property="textureUnit"/>
+</Material>

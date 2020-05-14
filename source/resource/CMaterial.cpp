@@ -1,13 +1,23 @@
 #include "resource/CMaterial.h"
+#include "base/magicDef.h"
+#include "CShader.h"
+#include "rapidxml.hpp"
 
 #include <string.h>
+#include <fstream>
 
 namespace magic
 {
-CMaterial::CMaterial()
+CMaterial::CMaterial(const char *fileName)
+:m_FileName(fileName)
 {
     memset(m_Shaders, 0, sizeof(IShader *) * EShaderType::Count);
+    if (!strcmp(fileName, ""))
+    {
+        LoadFromFile(fileName);
+    }
 }
+
 CMaterial::~CMaterial()
 {
     for (auto it = m_PropertyValue.begin(); it != m_PropertyValue.end(); ++it)
@@ -15,11 +25,20 @@ CMaterial::~CMaterial()
         delete it->second;
     }
     m_PropertyValue.clear();
+    for (int i=0; i<EShaderType::Count; ++i)
+    {
+        SAFE_DEL(m_Shaders[i]);
+    }
 }
 
-void CMaterial::SetShader(EShaderType type, IShader *shader)
+void CMaterial::SetShader(EShaderType type, const char *shaderName)
 {
-    m_Shaders[type] = shader;
+    m_Shaders[type] = new CShader(type, shaderName);
+}
+
+void CMaterial::SetShader(EShaderType type, const char *shaderSource, int size)
+{
+    m_Shaders[type] = new CShader(type, shaderSource, size);
 }
 
 IShader *CMaterial::GetShader(EShaderType type) const
@@ -70,4 +89,42 @@ IMaterialProperty *CMaterial::GetNextProperty()
     }
     return nullptr;
 }
+
+void CMaterial::LoadFromFile(const char *fileName)
+{
+    char buf[2048] = { 0 };
+    
+    std::ifstream infile(fileName, std::ios::in);
+    if (!infile)
+    {
+        return;
+    }
+    infile.read(buf, sizeof(buf));
+    rapidxml::xml_document<> doc;
+    doc.parse<0>(buf);
+
+
+    rapidxml::xml_node<> *rootNode = doc.first_node("Material");
+    if (rootNode)
+    {
+        rapidxml::xml_node<> * shadernode = rootNode->first_node("Shader");
+        if (shadernode)
+        {
+            const char *vertShader = shadernode->first_attribute("vert")->value();
+            const char *fragShader = shadernode->first_attribute("frag")->value();
+            SetShader(EShaderType::Vertex, vertShader);
+            SetShader(EShaderType::Fragment, fragShader);
+        }
+        
+        int textureUnit = 0;
+        for (rapidxml::xml_node<> * texturenode = rootNode->first_node("Texture"); texturenode; texturenode = texturenode->next_sibling())
+        {
+            const char *path  = texturenode->first_attribute("path")->value();
+            const char *property  = texturenode->first_attribute("path")->value();
+            SetProperty(property, &textureUnit, sizeof(textureUnit));
+            ++textureUnit;
+        }
+    }
+}
+
 }

@@ -20,7 +20,8 @@ class IMaterial : public IResource
 public:
     virtual ~IMaterial(){}
     virtual EResourceType GetType() const { return EResourceType::Material; }
-    virtual void SetShader(EShaderType, IShader *) = 0;
+    virtual void SetShader(EShaderType type, const char *shaderName) = 0;
+    virtual void SetShader(EShaderType type, const char *shaderSource, int size) = 0;
     virtual IShader *GetShader(EShaderType) const = 0;
     virtual void SetProperty(const char *propertyName, void *data, int size) = 0;
     virtual void *GetPropertyValue(const char *propertyName, int &size) = 0;

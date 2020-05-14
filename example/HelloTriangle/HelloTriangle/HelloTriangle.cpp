@@ -84,9 +84,13 @@ HelloTriangle::~HelloTriangle()
 
     printf("Cleaning ... \n");
     delete quadMaterial;
-    delete  quadFragShader;
-    delete  quadVertShader;
     delete quadMesh;
+    
+    delete screenTarget;
+    delete  deferredObject;
+    delete deferredCamera;
+    delete deferredMaterial;
+    delete deferredMesh;
     
     delete  screenAlignedQuad;
     delete quadCamera;
@@ -95,8 +99,6 @@ HelloTriangle::~HelloTriangle()
     delete renderTarget;
     delete triangleTexture;
     delete triangleMaterial;
-    delete triangleFragShader;
-    delete triangleVertShader;
     delete triangleMesh;
     sceneMgr->UnloadScene();
     
@@ -157,11 +159,9 @@ void HelloTriangle::Init(SRenderContext *esContext)
     triangleMesh->SetIndices(triangleIndices, sizeof(triangleIndices));
     triangleMesh->SetNormals(triangleNormals, sizeof(triangleNormals));
 
-    triangleVertShader = (CShader *)resourceMgr->LoadResource("common.vert", EResourceType::Shader);
-    triangleFragShader = (CShader *)resourceMgr->LoadResource("common.frag", EResourceType::Shader);
     triangleMaterial = new CMaterial();
-    triangleMaterial->SetShader(triangleVertShader->GetShaderType(), triangleVertShader);
-    triangleMaterial->SetShader(triangleFragShader->GetShaderType(), triangleFragShader);
+    triangleMaterial->SetShader(EShaderType::Vertex, "common.vert");
+    triangleMaterial->SetShader(EShaderType::Fragment, "common.frag");
     float colorProperty[] = {0.5f, 0.5f, 0.5f, 1.0f};
     triangleMaterial->SetProperty("color", colorProperty, sizeof(colorProperty));
     triangleMaterial->SetProperty("ambientLightColor", ambientLightColor, sizeof(ambientLightColor));
@@ -200,16 +200,13 @@ void HelloTriangle::Init(SRenderContext *esContext)
     quadMesh->SetPositions(quadVertices, sizeof(quadVertices));
     quadMesh->SetUVs(quadTexCoords, sizeof(quadTexCoords));
     quadMesh->SetIndices(quadIndices, sizeof(quadIndices));
-
-    quadVertShader = new CShader(EShaderType::Vertex, vQuadShaderStr, sizeof(vQuadShaderStr));
-    quadFragShader = new CShader(EShaderType::Fragment, fQuadShaderStr, sizeof(fQuadShaderStr));
     
     quadMaterial = new CMaterial();
     
     if (renderTarget)
     {
-        quadMaterial->SetShader(quadVertShader->GetShaderType(), quadVertShader);
-        quadMaterial->SetShader(quadFragShader->GetShaderType(), quadFragShader);
+        quadMaterial->SetShader(EShaderType::Vertex, vQuadShaderStr, sizeof(vQuadShaderStr));
+        quadMaterial->SetShader(EShaderType::Fragment, fQuadShaderStr, sizeof(fQuadShaderStr));
         ITexture *renderTexture = renderTarget->GetBindTexture(0);
         uint textureQuad = 0;
         quadMaterial->SetProperty("screenAlignedTexture", &textureQuad, sizeof(textureQuad));
@@ -232,10 +229,10 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
         mc->Run();
         
         if (pos.x > 0.6f || pos.x < -0.6f)
-            flag = -flag;
+            ;//flag = -flag;
         pos.x += flag;
         
-        triangle->GetSceneNode()->SetRotation(CVector3(0, rot, 0));
+        triangle->GetSceneNode()->SetRotation(CVector3(0, rot, rot));
         
         //triangle.GetSceneNode()->SetPosition(pos);
         rot += flag;
@@ -257,31 +254,29 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     triangleCamera = new CGameObject(cameraNode);
     triangle = new CGameObject(triangleNode);
     
-    cameraNode->SetPosition(CVector3(0, 0, 2));
+    cameraNode->SetPosition(CVector3(0, 0, 5));
     CCameraComponent *pTriangleCamera = triangleCamera->AddComponent<CCameraComponent>();
     
     pTriangleCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
     pTriangleCamera->SetClearColor(1.0f, 1.0f, 1.0f, 1.f);
     pTriangleCamera->SetClearBit(MAGIC_COLOR_BUFFER_BIT | MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT);
-    renderTarget = renderer->CreateRenderTarget(1024, 1024 / aspect, true, 3);
+    renderTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 3);
     pTriangleCamera->SetRenderTarget(renderTarget);
     
     CMeshRendererComponent *pMeshRenderer = triangle->AddComponent<CMeshRendererComponent>();
-    
+    /*
     triangleMesh = new CMesh();
-    
     triangleMesh->SetPositions(triangleVertices, sizeof(triangleVertices));
     triangleMesh->SetColors(triangleColors, sizeof(triangleColors));
     triangleMesh->SetUVs(triangleTexCoords, sizeof(triangleTexCoords));
     triangleMesh->SetIndices(triangleIndices, sizeof(triangleIndices));
     triangleMesh->SetNormals(triangleNormals, sizeof(triangleNormals));
+    */
+    triangleMesh = (IMesh *)resourceMgr->LoadResource("cube.mesh.xml", EResourceType::Mesh);
 
-    triangleVertShader = (CShader *)resourceMgr->LoadResource("multTarget.vert", EResourceType::Shader);
-    triangleFragShader = (CShader *)resourceMgr->LoadResource("multTarget.frag", EResourceType::Shader);
     triangleMaterial = new CMaterial();
-    triangleMaterial->SetShader(triangleVertShader->GetShaderType(), triangleVertShader);
-    triangleMaterial->SetShader(triangleFragShader->GetShaderType(), triangleFragShader);
-    float colorProperty[] = {0.5f, 0.5f, 0.5f, 1.0f};
+    triangleMaterial->SetShader(EShaderType::Vertex, "multTarget.vert");
+    triangleMaterial->SetShader(EShaderType::Fragment, "multTarget.frag");
     static uint textureUnit = 0;
     triangleMaterial->SetProperty("textureUnit", &textureUnit, sizeof(textureUnit));
     
@@ -303,7 +298,7 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     pDeferredCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
     pDeferredCamera->SetClearColor(.0f, .0f, .0f, .0f);
     pDeferredCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
-    screenTarget = renderer->CreateRenderTarget(1024, 1024 / aspect, true, 1);
+    screenTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 1);
     pDeferredCamera->SetRenderTarget(screenTarget);
     CMeshRendererComponent *pDeferredRenderer = deferredObject->AddComponent<CMeshRendererComponent>();
     deferredObject->SetSceneNode(pRootNode);
@@ -312,16 +307,13 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     deferredMesh->SetPositions(quadVertices, sizeof(quadVertices));
     deferredMesh->SetUVs(quadTexCoords, sizeof(quadTexCoords));
     deferredMesh->SetIndices(quadIndices, sizeof(quadIndices));
-
-    deferredVertShader = (CShader *)resourceMgr->LoadResource("deferredShade.vert", EResourceType::Shader);
-    deferredFragShader = (CShader *)resourceMgr->LoadResource("deferredShade.frag", EResourceType::Shader);
     
     deferredMaterial = new CMaterial();
     
     if (renderTarget)
     {
-        deferredMaterial->SetShader(deferredVertShader->GetShaderType(), deferredVertShader);
-        deferredMaterial->SetShader(deferredFragShader->GetShaderType(), deferredFragShader);
+        deferredMaterial->SetShader(EShaderType::Vertex, "deferredShade.vert");
+        deferredMaterial->SetShader(EShaderType::Fragment, "deferredShade.frag");
         static uint texturePosition = 0;
         static uint textureNormal = 1;
         static uint textureColor = 2;
@@ -347,7 +339,7 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     CCameraComponent *pQuadCamera = quadCamera->AddComponent<CCameraComponent>();
     pQuadCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
     pQuadCamera->SetClearColor(.0f, .0f, .0f, .0f);
-    pQuadCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
+    pQuadCamera->SetClearBit(MAGIC_COLOR_BUFFER_BIT | MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT);
     CMeshRendererComponent *pSAQMeshRenderer = screenAlignedQuad->AddComponent<CMeshRendererComponent>();
     screenAlignedQuad->SetSceneNode(pRootNode);
     quadMesh = new CMesh();
@@ -355,16 +347,13 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     quadMesh->SetPositions(quadVertices, sizeof(quadVertices));
     quadMesh->SetUVs(quadTexCoords, sizeof(quadTexCoords));
     quadMesh->SetIndices(quadIndices, sizeof(quadIndices));
-
-    quadVertShader = new CShader(EShaderType::Vertex, vQuadShaderStr, sizeof(vQuadShaderStr));
-    quadFragShader = new CShader(EShaderType::Fragment, fQuadShaderStr, sizeof(fQuadShaderStr));
     
     quadMaterial = new CMaterial();
     
     if (screenTarget)
     {
-        quadMaterial->SetShader(quadVertShader->GetShaderType(), quadVertShader);
-        quadMaterial->SetShader(quadFragShader->GetShaderType(), quadFragShader);
+        quadMaterial->SetShader(EShaderType::Vertex, vQuadShaderStr, sizeof(vQuadShaderStr));
+        quadMaterial->SetShader(EShaderType::Fragment, fQuadShaderStr, sizeof(fQuadShaderStr));
         ITexture *renderTexture = screenTarget->GetBindTexture(0);
         static uint textureQuad = 0;
         quadMaterial->SetProperty("screenAlignedTexture", &textureQuad, sizeof(textureQuad));
@@ -376,5 +365,7 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     printf("Finished loading scene. \n\n");
 
     printf("Start Application ... \n");
+    
+    
 }
 

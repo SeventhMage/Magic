@@ -4,13 +4,14 @@
 #include "IMesh.h"
 
 #include <map>
+#include <string>
 
 namespace magic
 {
 class CMesh : public IMesh
 {
 public:
-    CMesh();
+    CMesh(const char *fileName = "");
     virtual ~CMesh();
     virtual float *GetPositions() const { return m_Positions; }
     virtual float *GetColors() const { return m_Colors; }
@@ -25,7 +26,11 @@ public:
     virtual void SetUVs(float uvs[][2], int size);
     virtual void SetColors(float uvs[][4], int size);
     virtual void SetNormals(float normals[][3], int size);
+    
 private:
+    void LoadFromFile(const char *fileName);
+private:
+    std::string m_FileName;
     int m_VerticesCount;
     int m_IndicesCount;
     float *m_Positions;

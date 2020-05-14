@@ -1,0 +1,4 @@
+<Material>
+    <Shader vert="common.vert" frag="common.frag"/>
+</Material>
+

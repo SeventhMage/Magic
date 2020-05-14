@@ -1,7 +1,9 @@
 #include "CResourceManager.h"
 #include "base/StringHelper.h"
 #include "CTGAImage.h"
-#include "CShader.h"
+#include "resource/CShader.h"
+#include "resource/CMesh.h"
+#include "resource/CMaterial.h"
 
 #include "FileWrapper.h"
 
@@ -19,6 +21,12 @@ IResource *CResourceManager::LoadResource(const char *fileName, EResourceType ty
         return LoadImage(fileName);
     case EResourceType::Shader:
         return LoadShader(fileName);
+    case EResourceType::Material:
+        return LoadMaterial(fileName);
+    case EResourceType::Mesh:
+        return LoadMesh(fileName);
+    case EResourceType::Model:
+        return LoadModel(fileName);
     default:
         break;
     }
@@ -54,6 +62,21 @@ IResource *CResourceManager::LoadShader(const char *fileName)
     {
         return new CShader(EShaderType::Fragment, fileName);
     }
+    return nullptr;
+}
+
+IResource *CResourceManager::LoadMaterial(const char *fileName)
+{
+    return new CMaterial(fileName);
+}
+
+IResource *CResourceManager::LoadMesh(const char *fileName)
+{
+    return new CMesh(fileName);
+}
+
+IResource *CResourceManager::LoadModel(const char *fileName)
+{
     return nullptr;
 }
 
