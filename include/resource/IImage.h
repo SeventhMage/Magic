@@ -3,7 +3,7 @@
 
 #include "IResource.h"
 #include "base/magicType.h"
-#include "ERender.h"
+#include "render/ERender.h"
 
 namespace magic
 {

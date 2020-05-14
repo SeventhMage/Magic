@@ -54,7 +54,7 @@ namespace magic
 
          if (esContext && esContext->drawFunc)
          {
-            esContext->drawFunc(esContext);
+            esContext->drawFunc();
             eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
          }
 
@@ -74,7 +74,7 @@ namespace magic
          GetCursorPos(&point);
 
          if (esContext && esContext->keyFunc)
-            esContext->keyFunc(esContext, (unsigned char)wParam,
+            esContext->keyFunc((unsigned char)wParam,
                                (int)point.x, (int)point.y);
       }
       break;
@@ -97,11 +97,12 @@ namespace magic
       wndclass.style = CS_OWNDC;
       wndclass.lpfnWndProc = (WNDPROC)ESWindowProc;
       wndclass.hInstance = hInstance;
-      wndclass.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
-      wndclass.lpszClassName = "";
+      wndclass.hbrBackground = NULL; 
+      wndclass.lpszClassName = "GLES3Window";
 
       if (!RegisterClass(&wndclass))
       {
+         LogError("RegisterClass failed.\n");
          return FALSE;
       }
 
@@ -117,8 +118,8 @@ namespace magic
       AdjustWindowRect(&windowRect, wStyle, FALSE);
 
       esContext->eglNativeWindow = CreateWindow(
-          "",
-          "",
+          "GLES3Window",
+          "GLES3Window",
           wStyle,
           0,
           0,
@@ -140,6 +141,7 @@ namespace magic
 
       if (esContext->eglNativeWindow == NULL)
       {
+         LogError("esContext->eglNativeWindow == NULL.\n");
          return GL_FALSE;
       }
 
@@ -153,8 +155,8 @@ namespace magic
    CGLES3Renderer::CGLES3Renderer(SRenderContext *esContext, const char *title, GLint width, GLint height)
        : m_esContext(esContext)
    {
-      if (!Init(esContext, title, width, height))
-         LogError("Initialize GLES3Renderer failed\n");
+       if (!Init(esContext, title, width, height))
+          LogError("Initialize GLES3Renderer failed\n");
    }
 
    void CGLES3Renderer::SetClearColor(float r, float g, float b, float a)
@@ -202,6 +204,7 @@ namespace magic
 
       if (!WinCreate(esContext, title))
       {
+         LogError("WinCreate failed.\n");
          return GL_FALSE;
       }
 
@@ -279,6 +282,7 @@ namespace magic
          return GL_FALSE;
       }
 
+      
 #endif // #ifndef __APPLE__
       return GL_TRUE;
    }

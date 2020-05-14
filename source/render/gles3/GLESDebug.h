@@ -3,7 +3,14 @@
 
 #include <stdio.h>
 #include <assert.h>
-#include "gl3.h"
+
+#ifdef __APPLE__
+#include <OpenGLES/ES3/gl.h>
+#else
+#include <GLES3/gl3.h>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+#endif
 
 namespace magic
 {

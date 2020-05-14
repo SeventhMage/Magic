@@ -5,7 +5,14 @@
 #include "render/ERender.h"
 #include "base/magicType.h"
 #include "base/Log.h"
-#include "gl3.h"
+
+#ifdef __APPLE__
+#include <OpenGLES/ES3/gl.h>
+#else
+#include <GLES3/gl3.h>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+#endif
 
 namespace magic
 {
@@ -27,7 +34,7 @@ static GLenum GetGLShaderType(EShaderType shaderType)
 
 static int GetUniformTypeSize(GLenum type)
 {
- 	switch (type)
+	switch (type)
 	{
 	case GL_INT:
 		return 4;

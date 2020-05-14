@@ -7,12 +7,14 @@ include config.mk
 .PHONY: all clean
 
 CPPFLAGS := -Wall -g -std=c++11 -Wunused-function #-Qunused-arguments -stdlib=libc++
-INCLUDES := -Iinclude -Icommon -Idependency/gl
-LIBS := -lm
+INCLUDES := -Iinclude -Icommon -Idependencies/gl -Idependencies/rapidxml-1.13
+LDFLAGS := -Lbuild/bin
+LIBS := -lm 
+STATIC_LIBS := lib/libEGL.lib lib/libGLESv2.lib 
 
 OBJDIR := build/obj/magic
 BINDIR := build/bin
-SRCDIRS := . source source/render source/render/gles3 source/scene source/component source/resource common
+SRCDIRS :=  source source/render source/render/gles3 source/scene source/component source/resource common
 vpath %.cpp $(SRCDIRS)
 SRC_CPP = $(foreach dir, $(SRCDIRS), $(wildcard $(dir)/*.cpp))
 OBJ_CPP = $(addprefix $(OBJDIR)/,$(patsubst %.cpp, %.o,$(notdir $(SRC_CPP))))
@@ -26,7 +28,7 @@ dir_create:
 	@$(call CRT_DIR,$(BINDIR))
 
 $(TARGET) : $(OBJS)
-	$(CPP) $(CPPFLAGS) $() $(EXTRA_LFLAGS) $(INCLUDES) $(LIBS) $^ -o $@
+	$(CPP) $(CPPFLAGS) $() $(EXTRA_LFLAGS) $(INCLUDES) $(LDFLAGS)  $^ -shared -o $@ $(STATIC_LIBS) $(LIBS)
 	mv $(TARGET) $(BINDIR)
 $(OBJDIR)/%.o : %.cpp
 	$(CPP) $(CPPFLAGS) $(EXTRA_LFLAGS) $(INCLUDES) $< -c -o $@

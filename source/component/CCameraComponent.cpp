@@ -1,7 +1,7 @@
 #include "component/CCameraComponent.h"
 #include "base/magicDef.h"
-#include "ISceneNode.h"
-#include "IGameObject.h"
+#include "scene/ISceneNode.h"
+#include "scene/IGameObject.h"
 
 #include <string.h>
 

@@ -1,7 +1,7 @@
 #include "CRenderPass.h"
 
 #include <string.h>
-#include <OpenGLES/ES3/gl.h>
+#include <algorithm>
 
 namespace magic
 {

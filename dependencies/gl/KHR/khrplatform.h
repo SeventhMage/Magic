@@ -98,11 +98,15 @@
  * This precedes the return type of the function in the function prototype.
  */
 #if defined(_WIN32) && !defined(__SCITECH_SNAP__)
-#   define KHRONOS_APICALL __declspec(dllimport)
+#   if defined (_DLL_EXPORTS)
+#       define KHRONOS_APICALL __declspec(dllexport)
+#   else
+#       define KHRONOS_APICALL __declspec(dllimport)
+#   endif
 #elif defined (__SYMBIAN32__)
 #   define KHRONOS_APICALL IMPORT_C
 #else
-#   define KHRONOS_APICALL
+#   define KHRONOS_APICALL __attribute__ ((visibility ("default")))
 #endif
 
 /*-------------------------------------------------------------------------
@@ -228,16 +232,19 @@ typedef unsigned short int     khronos_uint16_t;
  * to be the only LLP64 architecture in current use.
  */
 #ifdef _WIN64
-typedef signed   long long int khronos_intptr_t;
 typedef unsigned long long int khronos_uintptr_t;
-typedef signed   long long int khronos_ssize_t;
 typedef unsigned long long int khronos_usize_t;
 #else
-typedef signed   long  int     khronos_intptr_t;
 typedef unsigned long  int     khronos_uintptr_t;
-typedef signed   long  int     khronos_ssize_t;
 typedef unsigned long  int     khronos_usize_t;
 #endif
+
+/*
+ * Modified to be in line with GL/glcorearb.h
+ */
+#include <stddef.h>
+typedef ptrdiff_t              khronos_intptr_t;
+typedef ptrdiff_t              khronos_ssize_t;
 
 #if KHRONOS_SUPPORT_FLOAT
 /*

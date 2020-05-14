@@ -1,5 +1,7 @@
 #include "CSceneNode.h"
-#include "IGameObject.h"
+#include "scene/IGameObject.h"
+
+#include <algorithm>
 
 namespace magic
 {

@@ -3,6 +3,7 @@
 #include "rapidxml.hpp"
 
 #include <fstream>
+#include <functional>
 
 namespace magic
 {

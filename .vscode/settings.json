@@ -11,6 +11,7 @@
         "__bit_reference": "cpp",
         "__string": "cpp",
         "string_view": "cpp",
-        "cstddef": "cpp"
+        "cstddef": "cpp",
+        "functional": "cpp"
     }
 }

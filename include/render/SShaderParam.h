@@ -69,7 +69,6 @@ struct SShaderParam
     char paramName[MAX_PATH];
     byte *paramData;
     int paramSize;
-    int  ;
 };
 
 }

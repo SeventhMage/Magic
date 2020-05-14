@@ -4,10 +4,10 @@ include ../config.mk
 .SUFFIXES:
 .PHONY: all clean
 
-CPPFLAGS := -Wall -g -std=c++11 
-INCLUDES := -I../include -I../common
+CPPFLAGS := -Wall -g -std=c++11 -Wunused-function #-Qunused-arguments -stdlib=libc++
+INCLUDES := -I../include -I../common -I../dependencies/gl -I../dependencies/rapidxml-1.13
 LDFLAGS := -L../build/bin
-LIBS    := -lm -lmagic
+LIBS    := -lm -lmagic -lEGL -lGLESv2
 TARGET := main
 
 

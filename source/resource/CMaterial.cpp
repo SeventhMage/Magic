@@ -1,6 +1,6 @@
 #include "resource/CMaterial.h"
+#include "resource/CShader.h"
 #include "base/magicDef.h"
-#include "CShader.h"
 #include "rapidxml.hpp"
 
 #include <string.h>

@@ -2,6 +2,8 @@
 #include "CRenderPass.h"
 #include "render/CRenderInput.h"
 
+#include <algorithm>
+
 namespace magic
 {
 CRenderer::CRenderer()
