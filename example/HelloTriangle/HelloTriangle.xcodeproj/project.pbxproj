@@ -48,7 +48,7 @@
 		748A94C62468CBCF001BB2B7 /* cube.mesh.xml in Resources */ = {isa = PBXBuildFile; fileRef = 748A94C52468CBCF001BB2B7 /* cube.mesh.xml */; };
 		748A94C82468CBFA001BB2B7 /* triangle.mesh.xml in Resources */ = {isa = PBXBuildFile; fileRef = 748A94C72468CBFA001BB2B7 /* triangle.mesh.xml */; };
 		748A94CA2468CC26001BB2B7 /* common.mat.xml in Resources */ = {isa = PBXBuildFile; fileRef = 748A94C92468CC26001BB2B7 /* common.mat.xml */; };
-		748A94CC2468CC4A001BB2B7 /* multtaregt.mat.xml in Resources */ = {isa = PBXBuildFile; fileRef = 748A94CB2468CC4A001BB2B7 /* multtaregt.mat.xml */; };
+		748A94CC2468CC4A001BB2B7 /* multarget.mat.xml in Resources */ = {isa = PBXBuildFile; fileRef = 748A94CB2468CC4A001BB2B7 /* multarget.mat.xml */; };
 		748A94CE2468CC68001BB2B7 /* deferredshade.mat.xml in Resources */ = {isa = PBXBuildFile; fileRef = 748A94CD2468CC68001BB2B7 /* deferredshade.mat.xml */; };
 		74C230FE242760260041B1AC /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74C230FD242760260041B1AC /* AppDelegate.mm */; };
 		74C23104242760260041B1AC /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74C23103242760260041B1AC /* ViewController.mm */; };
@@ -191,7 +191,7 @@
 		748A94C52468CBCF001BB2B7 /* cube.mesh.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = cube.mesh.xml; sourceTree = "<group>"; };
 		748A94C72468CBFA001BB2B7 /* triangle.mesh.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = triangle.mesh.xml; sourceTree = "<group>"; };
 		748A94C92468CC26001BB2B7 /* common.mat.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = common.mat.xml; sourceTree = "<group>"; };
-		748A94CB2468CC4A001BB2B7 /* multtaregt.mat.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = multtaregt.mat.xml; sourceTree = "<group>"; };
+		748A94CB2468CC4A001BB2B7 /* multarget.mat.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = multarget.mat.xml; sourceTree = "<group>"; };
 		748A94CD2468CC68001BB2B7 /* deferredshade.mat.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = deferredshade.mat.xml; sourceTree = "<group>"; };
 		74C230F9242760260041B1AC /* HelloTriangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTriangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74C230FC242760260041B1AC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -572,7 +572,7 @@
 				748A94C52468CBCF001BB2B7 /* cube.mesh.xml */,
 				748A94C72468CBFA001BB2B7 /* triangle.mesh.xml */,
 				748A94C92468CC26001BB2B7 /* common.mat.xml */,
-				748A94CB2468CC4A001BB2B7 /* multtaregt.mat.xml */,
+				748A94CB2468CC4A001BB2B7 /* multarget.mat.xml */,
 				748A94CD2468CC68001BB2B7 /* deferredshade.mat.xml */,
 			);
 			path = HelloTriangle;
@@ -670,7 +670,7 @@
 				748A94CE2468CC68001BB2B7 /* deferredshade.mat.xml in Resources */,
 				7485B4C72455D5F400FB9711 /* common.frag in Resources */,
 				748A94A32460EA50001BB2B7 /* multTarget.frag in Resources */,
-				748A94CC2468CC4A001BB2B7 /* multtaregt.mat.xml in Resources */,
+				748A94CC2468CC4A001BB2B7 /* multarget.mat.xml in Resources */,
 				748A94C42468C820001BB2B7 /* manual.html in Resources */,
 				748A94A72460EDEB001BB2B7 /* deferredShade.vert in Resources */,
 				7485B4C52455D2F400FB9711 /* common.vert in Resources */,

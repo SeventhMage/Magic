@@ -67,7 +67,7 @@ IResource *CResourceManager::LoadShader(const char *fileName)
 
 IResource *CResourceManager::LoadMaterial(const char *fileName)
 {
-    return new CMaterial(fileName);
+    return new CMaterial(this, fileName);
 }
 
 IResource *CResourceManager::LoadMesh(const char *fileName)

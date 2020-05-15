@@ -8,11 +8,12 @@
 
 namespace magic
 {
-CMaterial::CMaterial(const char *fileName)
-:m_FileName(fileName)
+CMaterial::CMaterial(IResourceManager *pResourceMgr, const char *fileName)
+: m_ResourceMgr(pResourceMgr)
+, m_FileName(fileName)
 {
     memset(m_Shaders, 0, sizeof(IShader *) * EShaderType::Count);
-    if (!strcmp(fileName, ""))
+    if (strcmp(fileName, ""))
     {
         LoadFromFile(fileName);
     }
@@ -33,7 +34,7 @@ CMaterial::~CMaterial()
 
 void CMaterial::SetShader(EShaderType type, const char *shaderName)
 {
-    m_Shaders[type] = new CShader(type, shaderName);
+    m_Shaders[type] = (IShader *)m_ResourceMgr->LoadResource(shaderName, EResourceType::Shader);
 }
 
 void CMaterial::SetShader(EShaderType type, const char *shaderSource, int size)
@@ -90,6 +91,15 @@ IMaterialProperty *CMaterial::GetNextProperty()
     return nullptr;
 }
 
+IImage *CMaterial::GetImage(int index) const
+{
+    if (index >=0 && index < m_ImageVec.size())
+    {
+        return m_ImageVec[index];
+    }
+    return nullptr;
+}
+
 void CMaterial::LoadFromFile(const char *fileName)
 {
     char buf[2048] = { 0 };
@@ -120,7 +130,8 @@ void CMaterial::LoadFromFile(const char *fileName)
         for (rapidxml::xml_node<> * texturenode = rootNode->first_node("Texture"); texturenode; texturenode = texturenode->next_sibling())
         {
             const char *path  = texturenode->first_attribute("path")->value();
-            const char *property  = texturenode->first_attribute("path")->value();
+            m_ImageVec.push_back((IImage *)m_ResourceMgr->LoadResource(path, EResourceType::Image));
+            const char *property  = texturenode->first_attribute("property")->value();
             SetProperty(property, &textureUnit, sizeof(textureUnit));
             ++textureUnit;
         }

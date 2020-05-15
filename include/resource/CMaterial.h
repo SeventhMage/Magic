@@ -2,6 +2,7 @@
 #define _MAGIC_C_MATERIAL_H_
 
 #include "IMaterial.h"
+#include "IResourceManager.h"
 
 #include <map>
 #include <vector>
@@ -46,7 +47,7 @@ struct SPropertyData : public IMaterialProperty
 class CMaterial : public IMaterial
 {
 public:
-    CMaterial(const char *fileName = "");
+    CMaterial(IResourceManager *pResourceMgr, const char *fileName = "");
     virtual ~CMaterial();
     virtual void SetShader(EShaderType type, const char *shaderName);
     virtual void SetShader(EShaderType type, const char *shaderSource, int size);
@@ -55,13 +56,17 @@ public:
     virtual void *GetPropertyValue(const char *propertyName, int &size);
     virtual IMaterialProperty *GetFirstProperty();
     virtual IMaterialProperty *GetNextProperty();
+    virtual int GetImageCount() const { return (int)m_ImageVec.size(); }
+    virtual IImage *GetImage(int index) const;
 private:
     void LoadFromFile(const char *fileName);
 private:
+    IResourceManager *m_ResourceMgr;
     std::string m_FileName;
     IShader *m_Shaders[EShaderType::Count];
     std::map<std::string, SPropertyData *> m_PropertyValue;
     std::map<std::string, SPropertyData *>::iterator m_PropertyIterator;
+    std::vector<IImage *> m_ImageVec;
 };
 }
 

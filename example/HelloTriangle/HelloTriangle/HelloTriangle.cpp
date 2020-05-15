@@ -159,7 +159,7 @@ void HelloTriangle::Init(SRenderContext *esContext)
     triangleMesh->SetIndices(triangleIndices, sizeof(triangleIndices));
     triangleMesh->SetNormals(triangleNormals, sizeof(triangleNormals));
 
-    triangleMaterial = new CMaterial();
+    triangleMaterial = new CMaterial(resourceMgr);
     triangleMaterial->SetShader(EShaderType::Vertex, "common.vert");
     triangleMaterial->SetShader(EShaderType::Fragment, "common.frag");
     float colorProperty[] = {0.5f, 0.5f, 0.5f, 1.0f};
@@ -201,7 +201,7 @@ void HelloTriangle::Init(SRenderContext *esContext)
     quadMesh->SetUVs(quadTexCoords, sizeof(quadTexCoords));
     quadMesh->SetIndices(quadIndices, sizeof(quadIndices));
     
-    quadMaterial = new CMaterial();
+    quadMaterial = new CMaterial(resourceMgr);
     
     if (renderTarget)
     {
@@ -274,7 +274,8 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     */
     triangleMesh = (IMesh *)resourceMgr->LoadResource("cube.mesh.xml", EResourceType::Mesh);
 
-    triangleMaterial = new CMaterial();
+    /*
+    triangleMaterial = new CMaterial(resourceMgr);
     triangleMaterial->SetShader(EShaderType::Vertex, "multTarget.vert");
     triangleMaterial->SetShader(EShaderType::Fragment, "multTarget.frag");
     static uint textureUnit = 0;
@@ -287,9 +288,19 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     {
         triangleTexture = renderer->CreateTexture(pImage->GetComponents(), pImage->GetWidth(), pImage->GetHeight(), pImage->GetFormat(), pImage->GetPixelType(), pImage->GetData());
     }
+     */
     
+    triangleMaterial = (IMaterial *)resourceMgr->LoadResource("multarget.mat.xml", EResourceType::Material);
     pMeshRenderer->Initialize(mc->GetRenderer(), pTriangleCamera->GetFlag(), triangleMesh, triangleMaterial);
-    pMeshRenderer->SetTexture(0, triangleTexture);
+    for (int i=0; i<triangleMaterial->GetImageCount(); ++i)
+    {
+        IImage *pImage = triangleMaterial->GetImage(i);
+        if (pImage)
+        {
+            triangleTexture = renderer->CreateTexture(pImage->GetComponents(), pImage->GetWidth(), pImage->GetHeight(), pImage->GetFormat(), pImage->GetPixelType(), pImage->GetData());
+        }
+        pMeshRenderer->SetTexture(i, triangleTexture);
+    }
     
     //deferred shade
     deferredCamera = new CGameObject(pRootNode);
@@ -308,7 +319,7 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     deferredMesh->SetUVs(quadTexCoords, sizeof(quadTexCoords));
     deferredMesh->SetIndices(quadIndices, sizeof(quadIndices));
     
-    deferredMaterial = new CMaterial();
+    deferredMaterial = new CMaterial(resourceMgr);
     
     if (renderTarget)
     {
@@ -348,7 +359,7 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     quadMesh->SetUVs(quadTexCoords, sizeof(quadTexCoords));
     quadMesh->SetIndices(quadIndices, sizeof(quadIndices));
     
-    quadMaterial = new CMaterial();
+    quadMaterial = new CMaterial(resourceMgr);
     
     if (screenTarget)
     {
@@ -361,7 +372,6 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
         pSAQMeshRenderer->SetTexture(0, renderTexture);
     }
      
-    resourceMgr->UnloadResource(pImage);
     printf("Finished loading scene. \n\n");
 
     printf("Start Application ... \n");

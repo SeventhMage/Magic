@@ -3,6 +3,7 @@
 
 #include "IResource.h"
 #include "IShader.h"
+#include "IImage.h"
 
 namespace magic
 {
@@ -27,6 +28,8 @@ public:
     virtual void *GetPropertyValue(const char *propertyName, int &size) = 0;
     virtual IMaterialProperty *GetFirstProperty() = 0;
     virtual IMaterialProperty *GetNextProperty() = 0;
+    virtual int GetImageCount() const = 0;
+    virtual IImage *GetImage(int index) const = 0;
 };
 } // namespace magic
 
