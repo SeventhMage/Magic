@@ -18,6 +18,7 @@ class CGLES3Renderer : public CRenderer
 {
 public:
     CGLES3Renderer(SRenderContext *esContext, const char *title, GLint width, GLint height);
+    virtual ~CGLES3Renderer();
     virtual void SetClearColor(float r, float g, float b, float a);
     virtual void Clear(int flags);
     virtual IRenderTarget *CreateRenderTarget(int width, int height, bool haveDepth = false, int textureCout = 1);

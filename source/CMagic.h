@@ -15,7 +15,7 @@ public:
     CMagic(SRenderContext *context, const char *title, int width, int height);
     ~CMagic();
     
-    virtual void Run();
+    virtual void Run(std::function<void()> fcall = nullptr);
     virtual void SetFPS(int fps);
     virtual int GetFPS() const {return m_iFPS;}
 

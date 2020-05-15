@@ -5,7 +5,7 @@ include ../config.mk
 .PHONY: all clean
 
 CPPFLAGS := -Wall -g -std=c++11 -Wunused-function #-Qunused-arguments -stdlib=libc++
-INCLUDES := -I../include -I../common -I../dependencies/gl -I../dependencies/rapidxml-1.13
+INCLUDES := -I../include -I../common -I../dependencies/gl -I../dependencies/rapidxml-1.13 -IHelloTriangle/HelloTriangle
 LDFLAGS := -L../build/bin
 LIBS    := -lm -lmagic -lEGL -lGLESv2
 TARGET := main
@@ -13,7 +13,7 @@ TARGET := main
 
 BINDIR := ../build/bin
 OBJDIR := ../build/obj/example
-SRCDIRS := .
+SRCDIRS := . ./HelloTriangle/HelloTriangle
 vpath %.cpp $(SRCDIRS)
 SRC_CPP = $(foreach dir, $(SRCDIRS), $(wildcard $(dir)/*.cpp))
 OBJ_CPP = $(addprefix $(OBJDIR)/,$(patsubst %.cpp, %.o,$(notdir $(SRC_CPP))))

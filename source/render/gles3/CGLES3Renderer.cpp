@@ -54,11 +54,12 @@ namespace magic
 
          if (esContext && esContext->drawFunc)
          {
-            esContext->drawFunc();
+            if (esContext->drawFunc)
+               esContext->drawFunc();
             eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
          }
 
-         ValidateRect(esContext->eglNativeWindow, NULL);
+         //ValidateRect(hWnd, NULL);
       }
       break;
 
@@ -97,8 +98,8 @@ namespace magic
       wndclass.style = CS_OWNDC;
       wndclass.lpfnWndProc = (WNDPROC)ESWindowProc;
       wndclass.hInstance = hInstance;
-      wndclass.hbrBackground = NULL; 
-      wndclass.lpszClassName = "GLES3Window";
+      wndclass.hbrBackground = NULL;
+      wndclass.lpszClassName = title;
 
       if (!RegisterClass(&wndclass))
       {
@@ -118,8 +119,8 @@ namespace magic
       AdjustWindowRect(&windowRect, wStyle, FALSE);
 
       esContext->eglNativeWindow = CreateWindow(
-          "GLES3Window",
-          "GLES3Window",
+          title,
+          title,
           wStyle,
           0,
           0,
@@ -146,6 +147,7 @@ namespace magic
       }
 
       ShowWindow(esContext->eglNativeWindow, TRUE);
+      esContext->eglNativeDisplay = GetDC(esContext->eglNativeWindow);
 
       return GL_TRUE;
    }
@@ -155,8 +157,15 @@ namespace magic
    CGLES3Renderer::CGLES3Renderer(SRenderContext *esContext, const char *title, GLint width, GLint height)
        : m_esContext(esContext)
    {
-       if (!Init(esContext, title, width, height))
-          LogError("Initialize GLES3Renderer failed\n");
+      if (!Init(esContext, title, width, height))
+         LogError("Initialize GLES3Renderer failed\n");
+   }
+
+   CGLES3Renderer::~CGLES3Renderer()
+   {
+#ifdef WIN32
+      ReleaseDC(m_esContext->eglNativeWindow, m_esContext->eglNativeDisplay);
+#endif
    }
 
    void CGLES3Renderer::SetClearColor(float r, float g, float b, float a)
@@ -189,6 +198,7 @@ namespace magic
 
       if (esContext == NULL)
       {
+         LogError("CGLES3Renderer::Init SRenderContext is null.\n");
          return GL_FALSE;
       }
 
@@ -211,12 +221,14 @@ namespace magic
       esContext->eglDisplay = eglGetDisplay(esContext->eglNativeDisplay);
       if (esContext->eglDisplay == EGL_NO_DISPLAY)
       {
+         LogError("eglDisplay == EGL_NO_DISPLAY.\n");
          return GL_FALSE;
       }
 
       // Initialize EGL
       if (!eglInitialize(esContext->eglDisplay, &majorVersion, &minorVersion))
       {
+         LogError("eglInitialize failed.\n");
          return GL_FALSE;
       }
 
@@ -239,11 +251,13 @@ namespace magic
          // Choose config
          if (!eglChooseConfig(esContext->eglDisplay, attribList, &config, 1, &numConfigs))
          {
+            LogError("eglChooseConfig failed.\n");
             return GL_FALSE;
          }
 
          if (numConfigs < 1)
          {
+            LogError("eglChooseConfig numConfigs < 1.\n");
             return GL_FALSE;
          }
       }
@@ -272,6 +286,7 @@ namespace magic
 
       if (esContext->eglContext == EGL_NO_CONTEXT)
       {
+         LogError("eglContext == EGL_NO_CONTEXT\n");
          return GL_FALSE;
       }
 
@@ -279,10 +294,10 @@ namespace magic
       if (!eglMakeCurrent(esContext->eglDisplay, esContext->eglSurface,
                           esContext->eglSurface, esContext->eglContext))
       {
+         LogError("eglMakeCurrent failed.\n");
          return GL_FALSE;
       }
 
-      
 #endif // #ifndef __APPLE__
       return GL_TRUE;
    }

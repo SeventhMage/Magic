@@ -1,5 +1,6 @@
 #include "resource/CMesh.h"
 #include "base/magicDef.h"
+#include "base/Log.h"
 #include "rapidxml.hpp"
 
 #include <fstream>
@@ -83,17 +84,22 @@ void parseValue(char *textValue, std::function<void(T *, int)> fcall)
 
 void CMesh::LoadFromFile(const char *fileName)
 {
-    char buf[2048] = { 0 };
-    
     std::ifstream infile(fileName, std::ios::in);
-    if (!infile)
+    if (!infile.is_open())
     {
+        LogError("Load Mesh failed:%s\n", fileName);
         return;
     }
-    infile.read(buf, sizeof(buf));
+    infile.seekg(0, std::ios::end);
+    int length = infile.tellg();
+    infile.seekg(0, std::ios::beg);
+    char *buf = new char[length];
+    memset(buf, 0, sizeof(char) * length);
+
+    infile.read(buf, sizeof(char) * length);
+    infile.close();
     rapidxml::xml_document<> doc;
     doc.parse<0>(buf);
-
 
     rapidxml::xml_node<> *rootNode = doc.first_node("Mesh");
     if (rootNode)
@@ -118,6 +124,7 @@ void CMesh::LoadFromFile(const char *fileName)
         if (indexnode)
             parseValue<unsigned short>(indexnode->value(),[this](unsigned short *value, int size){ SetIndices(value, size); });
     }
+    delete[]buf;
 }
 
 }

@@ -2,6 +2,7 @@
 #define _MAGIC_H_
 
 #include "IMagic.h"
+#include "base/Log.h"
 #include "render/SRenderContext.h"
 #include "render/ERender.h"
 #include "scene/CGameObject.h"

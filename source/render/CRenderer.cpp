@@ -75,6 +75,8 @@ void CRenderer::Render()
             pass->EndRenderTarget();
         }
     }
+
+
     m_OpaqueRenderQueueGroup.clear();
     m_TransparentRenderQueueGroup.clear();
 }

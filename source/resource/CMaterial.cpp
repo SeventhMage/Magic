@@ -1,6 +1,7 @@
 #include "resource/CMaterial.h"
 #include "resource/CShader.h"
 #include "base/magicDef.h"
+#include "base/Log.h"
 #include "rapidxml.hpp"
 
 #include <string.h>
@@ -102,14 +103,20 @@ IImage *CMaterial::GetImage(int index) const
 
 void CMaterial::LoadFromFile(const char *fileName)
 {
-    char buf[2048] = { 0 };
-    
     std::ifstream infile(fileName, std::ios::in);
     if (!infile)
     {
+        LogError("Load Material failed %s\n", fileName);
         return;
     }
-    infile.read(buf, sizeof(buf));
+    infile.seekg(0, std::ios::end);
+    int length = infile.tellg();
+    infile.seekg(0, std::ios::beg);
+    char *buf = new char[length];
+    memset(buf, 0, sizeof(char) * length);
+    infile.read(buf, sizeof(char) * length);
+    infile.close();
+
     rapidxml::xml_document<> doc;
     doc.parse<0>(buf);
 
@@ -136,6 +143,7 @@ void CMaterial::LoadFromFile(const char *fileName)
             ++textureUnit;
         }
     }
+    delete[]buf;
 }
 
 }

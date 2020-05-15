@@ -111,22 +111,26 @@ void HelloTriangle::Init(SRenderContext *esContext)
     printf("Start initalizing Engine ... \n");
     mc = CreateMagic(esContext, "Triangle", 1280, 960);
     mc->SetFPS(60);
+    renderer = mc->GetRenderer();
     esContext->drawFunc = [=](){
-        mc->Run();
-        
-        if (pos.x > 0.6f || pos.x < -0.6f)
-            flag = -flag;
-        pos.x += flag;
-        
-        triangle->GetSceneNode()->SetRotation(CVector3(0, rot, 0));
-        
-        //triangle.GetSceneNode()->SetPosition(pos);
-        rot += flag;
+
     };
+    esContext->updateFunc = [=]() {
+        mc->Run([=]() {
+            if (pos.x > 0.6f || pos.x < -0.6f)
+                flag = -flag;
+            pos.x += flag;
+
+            triangle->GetSceneNode()->SetRotation(CVector3(0, rot, 0));
+
+            //triangle.GetSceneNode()->SetPosition(pos);
+            rot += flag;
+        });
+    };
+
     esContext->shutdownFunc = [=](){
         
     };
-    renderer = mc->GetRenderer();
     float aspect = 1.f * esContext->width / esContext->height;
     IResourceManager *resourceMgr = mc->GetResourceManager();
     printf("Finished initalizing Engine.\n\n");
@@ -223,20 +227,24 @@ void HelloTriangle::Init(SRenderContext *esContext)
 void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
 {
     printf("Start initalizing Engine ... \n");
-    mc = CreateMagic(esContext, "Triangle", 1280, 960);
+    mc = CreateMagic(esContext, "Triangle", 300, 200);
     mc->SetFPS(60);
     esContext->drawFunc = [=](){
-        mc->Run();
-        
-        if (pos.x > 0.6f || pos.x < -0.6f)
-            ;//flag = -flag;
-        pos.x += flag;
-        
-        triangle->GetSceneNode()->SetRotation(CVector3(0, rot, rot));
-        
-        //triangle.GetSceneNode()->SetPosition(pos);
-        rot += flag;
     };
+
+    esContext->updateFunc = [=]() {
+        mc->Run([=]() {
+            if (pos.x > 0.6f || pos.x < -0.6f)
+                ;//flag = -flag;
+            pos.x += flag;
+            
+            triangle->GetSceneNode()->SetRotation(CVector3(0, rot, rot));
+            
+            //triangle.GetSceneNode()->SetPosition(pos);
+            rot += flag;
+        });
+    };
+
     esContext->shutdownFunc = [=](){
         
     };
@@ -319,12 +327,10 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     deferredMesh->SetUVs(quadTexCoords, sizeof(quadTexCoords));
     deferredMesh->SetIndices(quadIndices, sizeof(quadIndices));
     
-    deferredMaterial = new CMaterial(resourceMgr);
+    deferredMaterial = (IMaterial *)resourceMgr->LoadResource("deferredShade.mat.xml", EResourceType::Material);
     
     if (renderTarget)
     {
-        deferredMaterial->SetShader(EShaderType::Vertex, "deferredShade.vert");
-        deferredMaterial->SetShader(EShaderType::Fragment, "deferredShade.frag");
         static uint texturePosition = 0;
         static uint textureNormal = 1;
         static uint textureColor = 2;

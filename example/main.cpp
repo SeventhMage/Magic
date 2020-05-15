@@ -1,4 +1,4 @@
-#include "magic.h"
+#include "HelloTriangle.h"
 
 #include <stdio.h>
 //#include <Windows.h>
@@ -8,17 +8,9 @@ int main(int argc, char *argv[])
 //int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
     SRenderContext content;
-    printf("Start initalizing Engine ... \n");
-    IMagic *mc = CreateMagic(&content, "Test", 1280, 960);
-    printf("Finished initalizing Engine.\n\n");
 
-    printf("Loading scene ... \n");
-    ISceneManager *pSceneMgr = mc->GetSceneManager();
-    IScene *pScene = pSceneMgr->LoadScene();
-   
-    printf("Finished loading scene. \n\n");
+    HelloTriangle triangle(&content);
 
-    printf("Start Application ... \n");
     while (true)
     {
         MSG msg;
@@ -30,15 +22,11 @@ int main(int argc, char *argv[])
             if (msg.message == WM_QUIT)
                 break;
         }
-        Sleep(100);
+        
+        if (content.updateFunc)
+            content.updateFunc();
+        //Sleep(100);
     }
 
-    printf("Application end.\n\n");
-
-    printf("Cleaning ... \n");
-    pSceneMgr->UnloadScene();
-;
-    Clean();
-    printf("Finish clean.\n\n");
     return 0;
 }

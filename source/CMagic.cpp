@@ -26,13 +26,15 @@ CMagic::~CMagic()
     SAFE_DEL(m_pApplication);
 }
 
-void CMagic::Run()
+void CMagic::Run(std::function<void()> fcall)
 {
     static long lastTime = m_pTime->GetRunTime();
     static long compensationTime = 0;
     long passTime = m_pTime->GetRunTime() - lastTime;
     if (passTime >= m_iFixDelta)
     {
+        if (fcall)
+            fcall();
         m_pRenderer->Render();
         m_pSceneManager->Update();
         

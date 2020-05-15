@@ -1,4 +1,3 @@
 <Material>
     <Shader vert="deferredShade.vert" frag="deferredShade.frag"/>
 </Material>
-

@@ -12,6 +12,10 @@
         "__string": "cpp",
         "string_view": "cpp",
         "cstddef": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "iosfwd": "cpp",
+        "fstream": "cpp",
+        "xiosbase": "cpp",
+        "istream": "cpp"
     }
 }
