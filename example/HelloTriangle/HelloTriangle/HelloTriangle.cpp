@@ -149,7 +149,7 @@ void HelloTriangle::Init(SRenderContext *esContext)
     
     pTriangleCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
     pTriangleCamera->SetClearColor(1.0f, 1.0f, 1.0f, 1.f);
-    pTriangleCamera->SetClearBit(MAGIC_COLOR_BUFFER_BIT);
+    pTriangleCamera->SetClearBit(MAGIC_COLOR_BUFFER_BIT | MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT);
     renderTarget = renderer->CreateRenderTarget(1024, 1024 / aspect, false, 1);
     pTriangleCamera->SetRenderTarget(renderTarget);
     
@@ -164,8 +164,8 @@ void HelloTriangle::Init(SRenderContext *esContext)
     triangleMesh->SetNormals(triangleNormals, sizeof(triangleNormals));
 
     triangleMaterial = new CMaterial(resourceMgr);
-    triangleMaterial->SetShader(EShaderType::Vertex, "common.vert");
-    triangleMaterial->SetShader(EShaderType::Fragment, "common.frag");
+    triangleMaterial->SetShader(EShaderType::Vertex, "resource/shader/common.vert");
+    triangleMaterial->SetShader(EShaderType::Fragment, "resource/shader/common.frag");
     float colorProperty[] = {0.5f, 0.5f, 0.5f, 1.0f};
     triangleMaterial->SetProperty("color", colorProperty, sizeof(colorProperty));
     triangleMaterial->SetProperty("ambientLightColor", ambientLightColor, sizeof(ambientLightColor));
@@ -180,7 +180,7 @@ void HelloTriangle::Init(SRenderContext *esContext)
     CVector3 viewDir(0, 0, 1.f);
     transform.TransformVect(viewDir);
     triangleMaterial->SetProperty("viewDir", viewDir.v, sizeof(viewDir));
-    IImage *pImage = (IImage *)resourceMgr->LoadResource("crate.tga", EResourceType::Image);
+    IImage *pImage = (IImage *)resourceMgr->LoadResource("resource/texture/crate.tga", EResourceType::Image);
     
     if (pImage)
     {
@@ -227,6 +227,7 @@ void HelloTriangle::Init(SRenderContext *esContext)
 void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
 {
     printf("Start initalizing Engine ... \n");
+    esContext->screenResolutionRatio = 512.f / esContext->width;
     mc = CreateMagic(esContext, "Triangle", 300, 200);
     mc->SetFPS(60);
     esContext->drawFunc = [=](){
@@ -272,33 +273,9 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     pTriangleCamera->SetRenderTarget(renderTarget);
     
     CMeshRendererComponent *pMeshRenderer = triangle->AddComponent<CMeshRendererComponent>();
-    /*
-    triangleMesh = new CMesh();
-    triangleMesh->SetPositions(triangleVertices, sizeof(triangleVertices));
-    triangleMesh->SetColors(triangleColors, sizeof(triangleColors));
-    triangleMesh->SetUVs(triangleTexCoords, sizeof(triangleTexCoords));
-    triangleMesh->SetIndices(triangleIndices, sizeof(triangleIndices));
-    triangleMesh->SetNormals(triangleNormals, sizeof(triangleNormals));
-    */
-    triangleMesh = (IMesh *)resourceMgr->LoadResource("cube.mesh.xml", EResourceType::Mesh);
-
-    /*
-    triangleMaterial = new CMaterial(resourceMgr);
-    triangleMaterial->SetShader(EShaderType::Vertex, "multTarget.vert");
-    triangleMaterial->SetShader(EShaderType::Fragment, "multTarget.frag");
-    static uint textureUnit = 0;
-    triangleMaterial->SetProperty("textureUnit", &textureUnit, sizeof(textureUnit));
+    triangleMesh = (IMesh *)resourceMgr->LoadResource("resource/mesh/triangle.mesh.xml", EResourceType::Mesh);
     
-
-    IImage *pImage = (IImage *)resourceMgr->LoadResource("crate.tga", EResourceType::Image);
-    
-    if (pImage)
-    {
-        triangleTexture = renderer->CreateTexture(pImage->GetComponents(), pImage->GetWidth(), pImage->GetHeight(), pImage->GetFormat(), pImage->GetPixelType(), pImage->GetData());
-    }
-     */
-    
-    triangleMaterial = (IMaterial *)resourceMgr->LoadResource("multarget.mat.xml", EResourceType::Material);
+    triangleMaterial = (IMaterial *)resourceMgr->LoadResource("resource/material/multarget.mat.xml", EResourceType::Material);
     pMeshRenderer->Initialize(mc->GetRenderer(), pTriangleCamera->GetFlag(), triangleMesh, triangleMaterial);
     for (int i=0; i<triangleMaterial->GetImageCount(); ++i)
     {
@@ -317,8 +294,6 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     pDeferredCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
     pDeferredCamera->SetClearColor(.0f, .0f, .0f, .0f);
     pDeferredCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
-    screenTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 1);
-    pDeferredCamera->SetRenderTarget(screenTarget);
     CMeshRendererComponent *pDeferredRenderer = deferredObject->AddComponent<CMeshRendererComponent>();
     deferredObject->SetSceneNode(pRootNode);
     deferredMesh = new CMesh();
@@ -327,7 +302,7 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     deferredMesh->SetUVs(quadTexCoords, sizeof(quadTexCoords));
     deferredMesh->SetIndices(quadIndices, sizeof(quadIndices));
     
-    deferredMaterial = (IMaterial *)resourceMgr->LoadResource("deferredShade.mat.xml", EResourceType::Material);
+    deferredMaterial = (IMaterial *)resourceMgr->LoadResource("resource/material/deferredShade.mat.xml", EResourceType::Material);
     
     if (renderTarget)
     {
@@ -347,35 +322,6 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
         {
             pDeferredRenderer->SetTexture(i, renderTarget->GetBindTexture(i));
         }
-    }
-    
-    
-    //screen aligned quad
-    quadCamera = new CGameObject(pRootNode);
-    screenAlignedQuad = new CGameObject(pRootNode);
-    CCameraComponent *pQuadCamera = quadCamera->AddComponent<CCameraComponent>();
-    pQuadCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
-    pQuadCamera->SetClearColor(.0f, .0f, .0f, .0f);
-    pQuadCamera->SetClearBit(MAGIC_COLOR_BUFFER_BIT | MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT);
-    CMeshRendererComponent *pSAQMeshRenderer = screenAlignedQuad->AddComponent<CMeshRendererComponent>();
-    screenAlignedQuad->SetSceneNode(pRootNode);
-    quadMesh = new CMesh();
-     
-    quadMesh->SetPositions(quadVertices, sizeof(quadVertices));
-    quadMesh->SetUVs(quadTexCoords, sizeof(quadTexCoords));
-    quadMesh->SetIndices(quadIndices, sizeof(quadIndices));
-    
-    quadMaterial = new CMaterial(resourceMgr);
-    
-    if (screenTarget)
-    {
-        quadMaterial->SetShader(EShaderType::Vertex, vQuadShaderStr, sizeof(vQuadShaderStr));
-        quadMaterial->SetShader(EShaderType::Fragment, fQuadShaderStr, sizeof(fQuadShaderStr));
-        ITexture *renderTexture = screenTarget->GetBindTexture(0);
-        static uint textureQuad = 0;
-        quadMaterial->SetProperty("screenAlignedTexture", &textureQuad, sizeof(textureQuad));
-        pSAQMeshRenderer->Initialize(renderer, pQuadCamera->GetFlag(), quadMesh, quadMaterial);
-        pSAQMeshRenderer->SetTexture(0, renderTexture);
     }
      
     printf("Finished loading scene. \n\n");

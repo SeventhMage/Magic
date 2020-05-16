@@ -10,5 +10,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "magic::CMesh::LoadFromFile(char const*):CMesh.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "sizeof(char)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

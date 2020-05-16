@@ -13,6 +13,7 @@ namespace magic
 IResource *CResourceManager::LoadResource(const char *fileName, EResourceType type)
 {
 #ifdef __APPLE__
+    fileName = GetFileName(fileName).c_str();
     fileName = GetBundleFileName(fileName);
 #endif
     switch (type)

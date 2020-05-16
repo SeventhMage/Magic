@@ -30,12 +30,17 @@ public:
     virtual void Viewport(int x, int y, int width, int height);
     virtual int GetWindowWidth() const { return m_esContext->width; }
     virtual int GetWindowHeight() const { return m_esContext->height; }
+    virtual void BeginFinalRenderTarget();
+    virtual void EndFinalRenderTarget();
 protected:
     virtual void Render(IRenderInput *pRenderInput, IRenderPass *pRenderPass);
+    virtual void FinalRender();
 private:
     bool Init(SRenderContext *esContext, const char *title, GLint width, GLint height);
 private:
     SRenderContext *m_esContext;
+    IRenderTarget *m_FinalRenderTarget;
+    GLint m_defaultFrameBuffer;
 };
 } // namespace magic
 

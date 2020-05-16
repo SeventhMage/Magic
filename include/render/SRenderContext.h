@@ -26,7 +26,9 @@ struct SRenderContext
 
     /// Window height
     int height;
-
+    
+    /// Screen resolution ratio
+    float screenResolutionRatio;
 #ifndef __APPLE__
     /// Display handle
     EGLNativeDisplayType eglNativeDisplay;

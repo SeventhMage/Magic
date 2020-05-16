@@ -32,7 +32,7 @@ void CRenderPass::BeginRenderTarget()
     }
     else
     {
-        m_pRenderer->Viewport(0, 0, m_pRenderer->GetWindowWidth(), m_pRenderer->GetWindowHeight());
+        m_pRenderer->BeginFinalRenderTarget();
     }
     
     m_pRenderer->SetClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
@@ -43,6 +43,8 @@ void CRenderPass::EndRenderTarget()
 {
     if (m_pRenderTarget)
         m_pRenderTarget->EndTarget();
+    else
+        m_pRenderer->EndFinalRenderTarget();
 }
 
 void CRenderPass::SetClearColor(float r, float g, float b, float a)

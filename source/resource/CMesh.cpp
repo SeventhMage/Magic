@@ -91,7 +91,7 @@ void CMesh::LoadFromFile(const char *fileName)
         return;
     }
     infile.seekg(0, std::ios::end);
-    int length = infile.tellg();
+    long long length = infile.tellg();
     infile.seekg(0, std::ios::beg);
     char *buf = new char[length];
     memset(buf, 0, sizeof(char) * length);

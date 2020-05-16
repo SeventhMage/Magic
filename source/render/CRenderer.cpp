@@ -8,8 +8,6 @@ namespace magic
 {
 CRenderer::CRenderer()
 {
-    //Init Renderer
-    //Set clear color
 }
 
 CRenderer::~CRenderer()
@@ -76,6 +74,7 @@ void CRenderer::Render()
         }
     }
 
+    FinalRender();
 
     m_OpaqueRenderQueueGroup.clear();
     m_TransparentRenderQueueGroup.clear();

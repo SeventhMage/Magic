@@ -17,6 +17,16 @@ static std::string GetFileExtName(const char *filename)
     return "";
 }
 
+static std::string GetFileName(const char *fullPath)
+{
+    const char *pLastSlash = strrchr(fullPath, '/');
+    if (pLastSlash)
+    {
+        return std::string(pLastSlash + 1);
+    }
+    return fullPath;
+}
+
 static StringArray Split(const std::string &str, const std::string &delims)
 {
     StringArray strRet;

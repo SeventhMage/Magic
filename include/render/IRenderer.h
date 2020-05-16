@@ -34,6 +34,8 @@ public:
     virtual ITexture *CreateTexture(EColorFormat internalformat, int width, int height, EColorFormat format, EPixelType type, void *data) = 0;
     virtual int GetWindowWidth() const = 0;
     virtual int GetWindowHeight() const = 0;
+    virtual void BeginFinalRenderTarget() = 0;
+    virtual void EndFinalRenderTarget() = 0;
 };
 } // namespace magic
 

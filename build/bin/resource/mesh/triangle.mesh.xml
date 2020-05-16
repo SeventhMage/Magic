@@ -1,0 +1,7 @@
+<Mesh>
+    <Position>-1 -1 0 1 -1 0 0 1 0</Position>
+    <Color>1 1 1 1 1 1 1 1 1 1 1 1</Color>
+    <Normal>0 0 1 0 0 1 0 0 1</Normal>
+    <UV>0 0 1 0 0.5 1</UV>
+    <Index>0 1 2</Index>
+</Mesh>

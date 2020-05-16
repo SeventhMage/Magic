@@ -21,7 +21,7 @@ public:
 	virtual ITexture *GetBindTexture(int index) const;
     virtual uint GetBindTextureCount() const { return m_bindTexture.size(); }
 	virtual ITexture *GetDepthTexture() const;
-
+    virtual uint GetFrameBufferObject() const { return m_fbo; }
 private:
 	std::vector<ITexture *> m_bindTexture;
 	ITexture *m_depthTexture;

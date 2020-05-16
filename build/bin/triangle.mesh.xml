@@ -1,6 +1,0 @@
-<Mesh>
-    <Position>-1, -1, 0, 1, -1, 0, 0, 1, 0</Position>
-    <Normal>0, 0, 1, 0, 0, 1, 0, 0, 1</Normal>
-    <TexCoord>0, 0, 1, 0, 0.5, 1</TexCoord>
-    <Index>0, 1, 2</Index>
-</Mesh>

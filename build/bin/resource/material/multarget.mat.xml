@@ -1,0 +1,4 @@
+<Material>
+    <Shader vert="resource/shader/multTarget.vert" frag="resource/shader/multTarget.frag" />
+    <Texture path="resource/texture/crate.tga" property="textureUnit" />
+</Material>
