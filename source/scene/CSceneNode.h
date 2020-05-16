@@ -16,6 +16,7 @@ public:
     virtual ISceneNode *CreateChildNode();
     virtual void DestroyChildNode(ISceneNode *pNode);
     virtual void AddGameObject(IGameObject *pGameObject);
+    virtual IGameObject *AddGameObject();
     virtual void RemoveGameObject(IGameObject *);
     virtual void SetPosition(const CVector3 &position);
 

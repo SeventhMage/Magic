@@ -29,7 +29,7 @@ public:
     
 private:
     void LoadFromFile(const char *fileName);
-private:
+protected:
     std::string m_FileName;
     int m_VerticesCount;
     int m_IndicesCount;

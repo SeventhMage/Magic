@@ -27,5 +27,5 @@ void main()
     lightColor += max(dot(lightDir, _normal), 0.0) * directionalLightColor;
     vec3 reflectDir = reflect(-lightDir, _normal);
     lightColor += pow(max(dot(vec3(0.0, 0.0, -1.0), reflectDir), 0.0), specCoefficient) * directionalLightColor;
-    fragColor = baseColor * vec4(lightColor, 1.0);
+    fragColor = baseColor;// * vec4(lightColor, 1.0);
 }

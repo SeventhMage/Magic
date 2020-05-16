@@ -21,23 +21,14 @@ private:
     IMaterial *triangleMaterial;
     ITexture *triangleTexture;
     IRenderTarget *renderTarget;
-    //需要手动控件销毁顺序，保证在引擎销毁前删除
-    CGameObject *triangle;
-    CGameObject *triangleCamera;
-    
 
     //deferred shade
     IMesh *deferredMesh;
     IMaterial *deferredMaterial;
-    CGameObject *deferredCamera;
-    CGameObject *deferredObject;
-    IRenderTarget *screenTarget;
     
     //screen aligned quad;
     IMesh *quadMesh;
     IMaterial *quadMaterial;
-    CGameObject *quadCamera;
-    CGameObject *screenAlignedQuad;
 };
 
 #endif /* HelloTriangle_h */

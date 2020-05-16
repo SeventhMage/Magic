@@ -63,7 +63,7 @@ char fQuadShaderStr[] =
  "   fragColor = texture(screenAlignedTexture, vTex);   \n"
  "}                                            \n";
 
-float ambientLightColor[] = {0.2f, 0.2f, 0.2f};
+float ambientLightColor[] = {0.1f, 0.1f, 0.1f};
 float directionalLightDir[] = {1.f, 1.f, 1.f};
 float directionalLightColor[] = {0.8f, 0.8f, 0.8f};
 float specCoefficient = 10;
@@ -86,23 +86,16 @@ HelloTriangle::~HelloTriangle()
     delete quadMaterial;
     delete quadMesh;
     
-    delete screenTarget;
-    delete  deferredObject;
-    delete deferredCamera;
     delete deferredMaterial;
     delete deferredMesh;
     
-    delete  screenAlignedQuad;
-    delete quadCamera;
-    delete triangleCamera;
-    delete triangle;
     delete renderTarget;
     delete triangleTexture;
     delete triangleMaterial;
     delete triangleMesh;
     sceneMgr->UnloadScene();
     
-    Clean();
+    CleanMagic();
     printf("Finish clean.\n\n");
 }
 
@@ -112,25 +105,7 @@ void HelloTriangle::Init(SRenderContext *esContext)
     mc = CreateMagic(esContext, "Triangle", 1280, 960);
     mc->SetFPS(60);
     renderer = mc->GetRenderer();
-    esContext->drawFunc = [=](){
-
-    };
-    esContext->updateFunc = [=]() {
-        mc->Run([=]() {
-            if (pos.x > 0.6f || pos.x < -0.6f)
-                flag = -flag;
-            pos.x += flag;
-
-            triangle->GetSceneNode()->SetRotation(CVector3(0, rot, 0));
-
-            //triangle.GetSceneNode()->SetPosition(pos);
-            rot += flag;
-        });
-    };
-
-    esContext->shutdownFunc = [=](){
-        
-    };
+   
     float aspect = 1.f * esContext->width / esContext->height;
     IResourceManager *resourceMgr = mc->GetResourceManager();
     printf("Finished initalizing Engine.\n\n");
@@ -141,8 +116,8 @@ void HelloTriangle::Init(SRenderContext *esContext)
     ISceneNode *pRootNode = pScene->GetRootNode();
     ISceneNode *cameraNode = pRootNode->CreateChildNode();
     ISceneNode *triangleNode = pRootNode->CreateChildNode();
-    triangleCamera = new CGameObject(cameraNode);
-    triangle = new CGameObject(triangleNode);
+    IGameObject *triangleCamera = cameraNode->AddGameObject();
+    IGameObject *triangle = triangleNode->AddGameObject();
     
     cameraNode->SetPosition(CVector3(0, 0, 2));
     CCameraComponent *pTriangleCamera = triangleCamera->AddComponent<CCameraComponent>();
@@ -191,8 +166,8 @@ void HelloTriangle::Init(SRenderContext *esContext)
     pMeshRenderer->SetTexture(0, triangleTexture);
     
     //screen aligned quad
-    quadCamera = new CGameObject(pRootNode);
-    screenAlignedQuad = new CGameObject(pRootNode);
+    IGameObject *quadCamera = pRootNode->AddGameObject();
+    IGameObject *screenAlignedQuad = pRootNode->AddGameObject();
     CCameraComponent *pQuadCamera = quadCamera->AddComponent<CCameraComponent>();
     pQuadCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
     pQuadCamera->SetClearColor(.0f, .0f, .0f, .0f);
@@ -222,6 +197,25 @@ void HelloTriangle::Init(SRenderContext *esContext)
     printf("Finished loading scene. \n\n");
 
     printf("Start Application ... \n");
+    esContext->drawFunc = [=](){
+
+    };
+    esContext->updateFunc = [=]() {
+       mc->Run([=]() {
+           if (pos.x > 0.6f || pos.x < -0.6f)
+               flag = -flag;
+           pos.x += flag;
+
+           triangle->GetSceneNode()->SetRotation(CVector3(0, rot, 0));
+
+           //triangle.GetSceneNode()->SetPosition(pos);
+           rot += flag;
+       });
+    };
+
+       esContext->shutdownFunc = [=](){
+           
+       };
 }
 
 void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
@@ -230,25 +224,7 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     esContext->screenResolutionRatio = 512.f / esContext->width;
     mc = CreateMagic(esContext, "Triangle", 300, 200);
     mc->SetFPS(60);
-    esContext->drawFunc = [=](){
-    };
 
-    esContext->updateFunc = [=]() {
-        mc->Run([=]() {
-            if (pos.x > 0.6f || pos.x < -0.6f)
-                ;//flag = -flag;
-            pos.x += flag;
-            
-            triangle->GetSceneNode()->SetRotation(CVector3(0, rot, rot));
-            
-            //triangle.GetSceneNode()->SetPosition(pos);
-            rot += flag;
-        });
-    };
-
-    esContext->shutdownFunc = [=](){
-        
-    };
     renderer = mc->GetRenderer();
     float aspect = 1.f * esContext->width / esContext->height;
     IResourceManager *resourceMgr = mc->GetResourceManager();
@@ -260,8 +236,8 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     ISceneNode *pRootNode = pScene->GetRootNode();
     ISceneNode *cameraNode = pRootNode->CreateChildNode();
     ISceneNode *triangleNode = pRootNode->CreateChildNode();
-    triangleCamera = new CGameObject(cameraNode);
-    triangle = new CGameObject(triangleNode);
+    IGameObject *triangleCamera = cameraNode->AddGameObject();
+    IGameObject *triangle = triangleNode->AddGameObject();
     
     cameraNode->SetPosition(CVector3(0, 0, 5));
     CCameraComponent *pTriangleCamera = triangleCamera->AddComponent<CCameraComponent>();
@@ -273,7 +249,7 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     pTriangleCamera->SetRenderTarget(renderTarget);
     
     CMeshRendererComponent *pMeshRenderer = triangle->AddComponent<CMeshRendererComponent>();
-    triangleMesh = (IMesh *)resourceMgr->LoadResource("resource/mesh/triangle.mesh.xml", EResourceType::Mesh);
+    triangleMesh = (IMesh *)resourceMgr->LoadResource("resource/mesh/cube.mesh.xml", EResourceType::Mesh);
     
     triangleMaterial = (IMaterial *)resourceMgr->LoadResource("resource/material/multarget.mat.xml", EResourceType::Material);
     pMeshRenderer->Initialize(mc->GetRenderer(), pTriangleCamera->GetFlag(), triangleMesh, triangleMaterial);
@@ -288,8 +264,8 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     }
     
     //deferred shade
-    deferredCamera = new CGameObject(pRootNode);
-    deferredObject = new CGameObject(pRootNode);
+    IGameObject *deferredCamera = pRootNode->AddGameObject();
+    IGameObject *deferredObject = pRootNode->AddGameObject();
     CCameraComponent *pDeferredCamera = deferredCamera->AddComponent<CCameraComponent>();
     pDeferredCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
     pDeferredCamera->SetClearColor(.0f, .0f, .0f, .0f);
@@ -327,7 +303,25 @@ void HelloTriangle::InitDeferredShade(SRenderContext *esContext)
     printf("Finished loading scene. \n\n");
 
     printf("Start Application ... \n");
-    
-    
+    esContext->drawFunc = [=](){
+    };
+
+    esContext->updateFunc = [=]() {
+        mc->Run([=]() {
+            if (pos.x > 0.6f || pos.x < -0.6f)
+                ;//flag = -flag;
+            pos.x += flag;
+            
+            triangle->GetSceneNode()->SetRotation(CVector3(0, rot, rot));
+            
+            //triangle.GetSceneNode()->SetPosition(pos);
+            rot += flag;
+        });
+    };
+
+    esContext->shutdownFunc = [=](){
+        
+    };
+
 }
 

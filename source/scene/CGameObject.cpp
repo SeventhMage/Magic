@@ -8,8 +8,6 @@ CGameObject::CGameObject(ISceneNode *pSceneNode)
 : m_pSceneNode(pSceneNode)
 , m_OID(++s_OIDCount)
 {
-    if (m_pSceneNode)
-        m_pSceneNode->AddGameObject(this);
 }
 
 CGameObject::~CGameObject()

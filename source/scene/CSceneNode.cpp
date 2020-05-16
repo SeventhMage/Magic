@@ -1,5 +1,5 @@
 #include "CSceneNode.h"
-#include "scene/IGameObject.h"
+#include "scene/CGameObject.h"
 
 #include <algorithm>
 
@@ -17,6 +17,8 @@ CSceneNode::~CSceneNode()
 {
     for (size_t i=0; i<m_SceneNodeList.size(); ++i)
         delete m_SceneNodeList[i];
+    for (size_t i=0; i<m_GameObjectList.size(); ++i)
+        delete m_GameObjectList[i];
 }
 void CSceneNode::Update()
 {
@@ -62,6 +64,13 @@ void CSceneNode::AddGameObject(IGameObject *pGameObject)
             pSrcNode->RemoveGameObject(pGameObject);
         m_GameObjectList.push_back(pGameObject);
     }
+}
+
+IGameObject *CSceneNode::AddGameObject()
+{
+    IGameObject *pGameObject = new CGameObject(this);
+    m_GameObjectList.push_back(pGameObject);
+    return pGameObject;
 }
 
 void CSceneNode::RemoveGameObject(IGameObject *pGameObject)

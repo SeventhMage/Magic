@@ -16,7 +16,7 @@
 namespace magic
 {
 IMagic *CreateMagic(SRenderContext *context, const char *title, int width, int height);
-void Clean();
+void CleanMagic();
 }
 
 #endif

@@ -10,7 +10,7 @@ IMagic *CreateMagic(SRenderContext *context, const char *title, int width, int h
     return s_magic;
 }
 
-void Clean()
+void CleanMagic()
 {
     if (s_magic)
         delete s_magic;

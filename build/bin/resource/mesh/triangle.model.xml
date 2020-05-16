@@ -1,0 +1,4 @@
+<Model>
+    <Mesh path="resource/mesh/triangle.mesh.xml"/>
+    <Material path="resource/material/multarget.mat.xml"/>
+</Model>
