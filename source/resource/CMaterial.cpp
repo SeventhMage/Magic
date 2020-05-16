@@ -112,9 +112,10 @@ void CMaterial::LoadFromFile(const char *fileName)
     infile.seekg(0, std::ios::end);
     int length = infile.tellg();
     infile.seekg(0, std::ios::beg);
-    char *buf = new char[length];
-    memset(buf, 0, sizeof(char) * length);
+    char *buf = new char[length + 1];
+    memset(buf, 0, sizeof(char) * (length + 1));
     infile.read(buf, sizeof(char) * length);
+    buf[length] = 0;
     infile.close();
 
     rapidxml::xml_document<> doc;
