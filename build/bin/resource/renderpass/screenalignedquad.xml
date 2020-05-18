@@ -1,0 +1,14 @@
+<RenderPhase>
+	<RenderTarget texture="0" depth="0"/>
+	<RenderQueue materialid="5" materialname="material/screenalignedquad.xml" for="ScreenAlignedQuad">
+		<PhaseQuote id="3">
+			<TextureUniform name="tSceneMapColor" slot="0" index="0"/>
+		</PhaseQuote>
+		<PhaseQuote id="4">
+			<TextureUniform name="tDirectLightMap" slot="1" index="0"/>
+		</PhaseQuote>
+		<PhaseQuote id="7">
+			<TextureUniform name="tIndirectLightMap" slot="2" index="0"/>
+		</PhaseQuote>
+	</RenderQueue>
+</RenderPhase>

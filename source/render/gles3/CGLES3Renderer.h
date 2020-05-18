@@ -32,6 +32,7 @@ public:
     virtual int GetWindowHeight() const { return m_esContext->height; }
     virtual void BeginFinalRenderTarget();
     virtual void EndFinalRenderTarget();
+    virtual IRenderTarget *GetFinalRenderTarget() { return m_FinalRenderTarget; }
 protected:
     virtual void Render(IRenderInput *pRenderInput, IRenderPass *pRenderPass);
     virtual void FinalRender();

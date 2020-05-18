@@ -1,0 +1,10 @@
+<RenderPhase>
+	<Pass id="1" phase="renderphase/val.xml"/>
+	<Pass id="2" phase="renderphase/shadowmap.xml"/>
+	<Pass id="3" phase="renderphase/scenegbuffer.xml"/>
+	<Pass id="4" phase="renderphase/directlightmap.xml"/>
+	<Pass id="5" phase="renderphase/indirectlightmap.xml"/>
+	<Pass id="6" phase="renderphase/gaussianhblur.xml"/>
+	<Pass id="7" phase="renderphase/gaussianvblur.xml"/>
+	<Pass id="8" phase="renderphase/screenalignedquad.xml"/>
+</RenderPhase>

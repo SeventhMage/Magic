@@ -1,0 +1,5 @@
+<RenderPhase>
+	<RenderTarget texture="3" depth="1" scale="0.5"/>
+	<RenderQueue materialid="1" materialname="material/val.xml"/>
+	<RenderQueue materialid="10" materialname="material/val_c.xml"/>
+</RenderPhase>

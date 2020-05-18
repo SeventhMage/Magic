@@ -36,6 +36,7 @@ public:
     virtual int GetWindowHeight() const = 0;
     virtual void BeginFinalRenderTarget() = 0;
     virtual void EndFinalRenderTarget() = 0;
+    virtual IRenderTarget *GetFinalRenderTarget() = 0;
 };
 } // namespace magic
 

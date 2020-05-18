@@ -18,6 +18,8 @@ private:
     ISceneManager *sceneMgr;
     
     IRenderTarget *renderTarget;
+    IRenderTarget *vplTarget;
+    IRenderTarget *indirectTarget;
     
     //box
     IMesh *boxMesh;
@@ -29,9 +31,17 @@ private:
     IMaterial *sphereMaterial;
     ITexture *sphereTexture;
     
+    //virtual point light generate
+    IMesh *vplMesh;
+    IMesh *vplMaterial;
+    
     //deferred shade
     IMesh *deferredMesh;
     IMaterial *deferredMaterial;
+    
+    //indirect light
+    IMesh *indirectMesh;
+    IMaterial *indirectMaterial;
 };
 }
 

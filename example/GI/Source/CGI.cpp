@@ -18,6 +18,9 @@ CGI::CGI()
 CGI::~CGI()
 {
     printf("Clean ...\n");
+    SAFE_DEL(indirectMaterial);
+    SAFE_DEL(indirectMesh);
+    
     SAFE_DEL(deferredMaterial);
     SAFE_DEL(deferredMesh);
     
@@ -71,6 +74,11 @@ void CGI::Init(SRenderContext *esContext)
     IScene *pScene = sceneMgr->LoadScene();
     ISceneNode *pRootNode = pScene->GetRootNode();
     
+    //render target
+    renderTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 3);
+    vplTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 3);
+    indirectTarget = renderer->CreateRenderTarget(512, 512 / aspect, false, 1);
+    
     //camera init
     ISceneNode *cameraNode = pRootNode->CreateChildNode();
     IGameObject *cameraObject = cameraNode->AddGameObject();
@@ -79,8 +87,17 @@ void CGI::Init(SRenderContext *esContext)
     pCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
     pCamera->SetClearColor(1.0f, 1.0f, 1.0f, 1.f);
     pCamera->SetClearBit(MAGIC_COLOR_BUFFER_BIT | MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT);
-    renderTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 3);
     pCamera->SetRenderTarget(renderTarget);
+    
+    ISceneNode *vplCameraNode = pRootNode->CreateChildNode();
+    IGameObject *vplCameraObject = vplCameraNode->AddGameObject();
+    vplCameraNode->SetPosition(CVector3(1, 1, 1));
+    CCameraComponent *vplCamera = vplCameraObject->AddComponent<CCameraComponent>();
+    vplCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
+    vplCamera->SetClearColor(0.0f, 0.0f, 0.0f, 0.f);
+    vplCamera->SetClearBit(MAGIC_COLOR_BUFFER_BIT | MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT);
+    vplCamera->SetRenderTarget(vplTarget);
+    
     
     //box init
     ISceneNode *boxNode = pRootNode->CreateChildNode();
@@ -89,7 +106,13 @@ void CGI::Init(SRenderContext *esContext)
     boxMesh = (IMesh *)resourceMgr->LoadResource("resource/mesh/cube.mesh.xml", EResourceType::Mesh);
     
     boxMaterial = (IMaterial *)resourceMgr->LoadResource("resource/material/multarget.mat.xml", EResourceType::Material);
-    pMeshRenderer->Initialize(mc->GetRenderer(), pCamera->GetFlag(), boxMesh, boxMaterial);
+    uint textureUnit = 0;
+    boxMaterial->SetProperty("textureUnit", &textureUnit, sizeof(textureUnit));
+    boxMaterial->SetProperty("ambientLightColor", ambientLightColor, sizeof(ambientLightColor));
+    boxMaterial->SetProperty("directionalLightDir", directionalLightDir, sizeof(directionalLightDir));
+    boxMaterial->SetProperty("directionalLightColor", directionalLightColor, sizeof(directionalLightColor));
+    boxMaterial->SetProperty("specCoefficient", &specCoefficient, sizeof(specCoefficient));
+    pMeshRenderer->Initialize(mc->GetRenderer(), pCamera->GetFlag() | vplCamera->GetFlag(), boxMesh, boxMaterial);
     for (int i=0; i<boxMaterial->GetImageCount(); ++i)
     {
         IImage *pImage = boxMaterial->GetImage(i);
@@ -105,8 +128,13 @@ void CGI::Init(SRenderContext *esContext)
     IGameObject *sphereObject = sphereNode->AddGameObject();
     sphereMesh = new CSphere(0.5, 20, 20);
     sphereMaterial = (IMaterial *)resourceMgr->LoadResource("resource/material/multarget.mat.xml", EResourceType::Material);
+    sphereMaterial->SetProperty("textureUnit", &textureUnit, sizeof(textureUnit));
+    sphereMaterial->SetProperty("ambientLightColor", ambientLightColor, sizeof(ambientLightColor));
+    sphereMaterial->SetProperty("directionalLightDir", directionalLightDir, sizeof(directionalLightDir));
+    sphereMaterial->SetProperty("directionalLightColor", directionalLightColor, sizeof(directionalLightColor));
+    sphereMaterial->SetProperty("specCoefficient", &specCoefficient, sizeof(specCoefficient));
     CMeshRendererComponent *pSphereMeshRenderer = sphereObject->AddComponent<CMeshRendererComponent>();
-    pSphereMeshRenderer->Initialize(mc->GetRenderer(), pCamera->GetFlag(), sphereMesh, sphereMaterial);
+    pSphereMeshRenderer->Initialize(mc->GetRenderer(), pCamera->GetFlag() | vplCamera->GetFlag(), sphereMesh, sphereMaterial);
     for (int i=0; i<sphereMaterial->GetImageCount(); ++i)
     {
         IImage *pImage = sphereMaterial->GetImage(i);
@@ -117,6 +145,50 @@ void CGI::Init(SRenderContext *esContext)
         pSphereMeshRenderer->SetTexture(i, sphereTexture);
     }
     
+    //Indirect light
+    IGameObject *indirectCamera = pRootNode->AddGameObject();
+    IGameObject *indirectObject = pRootNode->AddGameObject();
+    CCameraComponent *pIndirectCamera = indirectCamera->AddComponent<CCameraComponent>();
+    pIndirectCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
+    pIndirectCamera->SetClearColor(.0f, .0f, .0f, .0f);
+    pIndirectCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
+    pIndirectCamera->SetRenderTarget(indirectTarget);
+    CMeshRendererComponent *pIndirectRenderer = indirectObject->AddComponent<CMeshRendererComponent>();
+    indirectObject->SetSceneNode(pRootNode);
+    indirectMesh = new CMesh();
+     
+    indirectMesh->SetPositions(quadVertices, sizeof(quadVertices));
+    indirectMesh->SetUVs(quadTexCoords, sizeof(quadTexCoords));
+    indirectMesh->SetIndices(quadIndices, sizeof(quadIndices));
+    
+    indirectMaterial = (IMaterial *)resourceMgr->LoadResource("resource/material/indirectLight.mat.xml", EResourceType::Material);
+    
+    if (renderTarget && vplTarget)
+    {
+        uint textureUnit = 0;
+        indirectMaterial->SetProperty("tGPosition", &textureUnit, sizeof(textureUnit));++textureUnit;
+        indirectMaterial->SetProperty("tGNormal", &textureUnit, sizeof(textureUnit));++textureUnit;
+        indirectMaterial->SetProperty("tGColor", &textureUnit, sizeof(textureUnit));++textureUnit;
+        indirectMaterial->SetProperty("tRSMFlux", &textureUnit, sizeof(textureUnit));++textureUnit;
+        indirectMaterial->SetProperty("tRSMPosition", &textureUnit, sizeof(textureUnit));++textureUnit;
+        indirectMaterial->SetProperty("tRSMNormal", &textureUnit, sizeof(textureUnit));++textureUnit;
+        
+        indirectMaterial->SetProperty("lightDir", directionalLightDir, sizeof(directionalLightDir));
+        indirectMaterial->SetProperty("lightColor", directionalLightColor, sizeof(directionalLightColor));
+        int samplingColCount = 64;
+        indirectMaterial->SetProperty("samplingColCount", &samplingColCount, sizeof(samplingColCount));
+        
+        pIndirectRenderer->Initialize(renderer, pIndirectCamera->GetFlag(), deferredMesh, indirectMaterial);
+        for (int i=0; i<renderTarget->GetBindTextureCount(); ++i)
+        {
+            pIndirectRenderer->SetTexture(i, renderTarget->GetBindTexture(i));
+        }
+        for (int i=0; i<vplTarget->GetBindTextureCount(); ++i)
+        {
+            pIndirectRenderer->SetTexture(i + renderTarget->GetBindTextureCount(), vplTarget->GetBindTexture(i));
+        }
+    }
+
     
     //deferred shade
     IGameObject *deferredCamera = pRootNode->AddGameObject();
@@ -135,14 +207,16 @@ void CGI::Init(SRenderContext *esContext)
     
     deferredMaterial = (IMaterial *)resourceMgr->LoadResource("resource/material/deferredShade.mat.xml", EResourceType::Material);
     
-    if (renderTarget)
+    if (renderTarget && indirectTarget)
     {
-        static uint texturePosition = 0;
-        static uint textureNormal = 1;
-        static uint textureColor = 2;
+        uint texturePosition = 0;
+        uint textureNormal = 1;
+        uint textureColor = 2;
+        uint indirectLight = 3;
         deferredMaterial->SetProperty("positionTexture", &texturePosition, sizeof(texturePosition));
         deferredMaterial->SetProperty("normalTexture", &textureNormal, sizeof(textureNormal));
         deferredMaterial->SetProperty("colorTexture", &textureColor, sizeof(textureColor));
+        deferredMaterial->SetProperty("indirectLightColor", &indirectLight, sizeof(indirectLight));
         
         deferredMaterial->SetProperty("ambientLightColor", ambientLightColor, sizeof(ambientLightColor));
         deferredMaterial->SetProperty("directionalLightDir", directionalLightDir, sizeof(directionalLightDir));
@@ -153,7 +227,11 @@ void CGI::Init(SRenderContext *esContext)
         {
             pDeferredRenderer->SetTexture(i, renderTarget->GetBindTexture(i));
         }
+        
+        pDeferredRenderer->SetTexture(renderTarget->GetBindTextureCount(), indirectTarget->GetBindTexture(0));
     }
+    
+
      
     printf("Finished loading scene. \n\n");
 

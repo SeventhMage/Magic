@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		748545602470E34E00268577 /* indirectlightmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 7485455F2470E34E00268577 /* indirectlightmap.frag */; };
+		748545622472090500268577 /* indirectLight.mat.xml in Resources */ = {isa = PBXBuildFile; fileRef = 748545612472090500268577 /* indirectLight.mat.xml */; };
 		748A9566246FB8B0001BB2B7 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 748A9565246FB8B0001BB2B7 /* AppDelegate.mm */; };
 		748A9569246FB8B0001BB2B7 /* SceneDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 748A9568246FB8B0001BB2B7 /* SceneDelegate.mm */; };
 		748A956C246FB8B0001BB2B7 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 748A956B246FB8B0001BB2B7 /* ViewController.mm */; };
@@ -74,6 +76,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7485455F2470E34E00268577 /* indirectlightmap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = indirectlightmap.frag; sourceTree = "<group>"; };
+		748545612472090500268577 /* indirectLight.mat.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = indirectLight.mat.xml; sourceTree = "<group>"; };
 		748A9561246FB8B0001BB2B7 /* gi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		748A9564246FB8B0001BB2B7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		748A9565246FB8B0001BB2B7 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -706,6 +710,7 @@
 			isa = PBXGroup;
 			children = (
 				748A989B246FCC1D001BB2B7 /* multTarget.frag */,
+				7485455F2470E34E00268577 /* indirectlightmap.frag */,
 				748A989C246FCC1D001BB2B7 /* deferredShade.vert */,
 				748A989D246FCC1D001BB2B7 /* common.frag */,
 				748A989E246FCC1D001BB2B7 /* multTarget.vert */,
@@ -721,6 +726,7 @@
 				748A98A2246FCC1D001BB2B7 /* deferredShade.mat.xml */,
 				748A98A3246FCC1D001BB2B7 /* common.mat.xml */,
 				748A98A4246FCC1D001BB2B7 /* multarget.mat.xml */,
+				748545612472090500268577 /* indirectLight.mat.xml */,
 			);
 			path = material;
 			sourceTree = "<group>";
@@ -785,6 +791,7 @@
 				748A98AC246FCC1D001BB2B7 /* multTarget.vert in Resources */,
 				748A98B1246FCC1D001BB2B7 /* multarget.mat.xml in Resources */,
 				748A98A8246FCC1D001BB2B7 /* crate.tga in Resources */,
+				748545602470E34E00268577 /* indirectlightmap.frag in Resources */,
 				748A98A5246FCC1D001BB2B7 /* cube.mesh.xml in Resources */,
 				748A986D246FC812001BB2B7 /* manual.html in Resources */,
 				748A986C246FC812001BB2B7 /* license.txt in Resources */,
@@ -799,6 +806,7 @@
 				748A98AE246FCC1D001BB2B7 /* deferredShade.frag in Resources */,
 				748A98AB246FCC1D001BB2B7 /* common.frag in Resources */,
 				748A956F246FB8B0001BB2B7 /* Main.storyboard in Resources */,
+				748545622472090500268577 /* indirectLight.mat.xml in Resources */,
 				748A98B0246FCC1D001BB2B7 /* common.mat.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

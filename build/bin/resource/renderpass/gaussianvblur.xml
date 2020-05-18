@@ -1,0 +1,8 @@
+<RenderPhase>
+	<RenderTarget texture="1" depth="0" scale="0.25"/>
+	<RenderQueue materialid="7" materialname="material/gaussianblur.xml" for="GaussianVBlur">
+		<PhaseQuote id="6">
+			<TextureUniform name="textureColor" slot="0" index="0"/>
+		</PhaseQuote>
+	</RenderQueue>
+</RenderPhase>

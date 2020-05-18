@@ -1,7 +1,6 @@
 #version 300 es
 precision mediump float;
 uniform sampler2D textureUnit;
-uniform vec4 color;
 uniform vec3 ambientLightColor;
 uniform vec3 directionalLightDir;
 uniform vec3 directionalLightColor;
@@ -21,5 +20,5 @@ void main()
     lightColor += max(dot(dir, _normal), 0.0) * directionalLightColor;
     vec3 reflectDir = reflect(-dir, _normal);
     lightColor += pow(max(dot(viewDir, reflectDir), 0.0), specCoefficient) * directionalLightColor;
-    fragColor = color * vertColor * vec4(lightColor, 1.0) * texture(textureUnit, texCoord);
+    fragColor = vertColor * vec4(lightColor, 1.0) * texture(textureUnit, texCoord);
 }

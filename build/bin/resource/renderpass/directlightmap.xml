@@ -1,0 +1,16 @@
+<RenderPhase>
+	<RenderTarget texture="1" depth="0"/>
+	<RenderQueue materialid="8" materialname="material/directlightmap.xml" for="DirectLightMap">
+		<PhaseQuote id="3">
+			<TextureUniform name="tGColor" slot="0" index="0"/>
+			<TextureUniform name="tGPosition" slot="1" index="1"/>
+			<TextureUniform name="tGNormal" slot="2" index="2"/>
+		</PhaseQuote>
+		
+		<!--
+		<PhaseQuote id="2">
+			<TextureUniform name="tDepthTexture" slot="3" index="-1"/>
+		</PhaseQuote>
+	-->
+	</RenderQueue>
+</RenderPhase>

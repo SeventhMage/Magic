@@ -162,7 +162,7 @@ CGLES3Renderer::CGLES3Renderer(SRenderContext *esContext, const char *title, GLi
         LogError("Initialize GLES3Renderer failed\n");
     GLDebug(glGetIntegerv(GL_FRAMEBUFFER_BINDING, &m_defaultFrameBuffer));
     float ratio = esContext->screenResolutionRatio > 0 ? esContext->screenResolutionRatio : 1.f;
-    m_FinalRenderTarget = CreateRenderTarget(esContext->width * ratio, esContext->height * ratio);
+    m_FinalRenderTarget = CreateRenderTarget(esContext->width * ratio, esContext->height * ratio, true);
 }
 
 CGLES3Renderer::~CGLES3Renderer()
@@ -196,115 +196,115 @@ IShaderProgram *CGLES3Renderer::CreateShaderProgram()
 bool CGLES3Renderer::Init(SRenderContext *esContext, const char *title, GLint width, GLint height)
 {
 #ifndef __APPLE__
-  EGLConfig config;
-  EGLint majorVersion;
-  EGLint minorVersion;
-  EGLint contextAttribs[] = {EGL_CONTEXT_CLIENT_VERSION, 3, EGL_NONE};
+    EGLConfig config;
+    EGLint majorVersion;
+    EGLint minorVersion;
+    EGLint contextAttribs[] = {EGL_CONTEXT_CLIENT_VERSION, 3, EGL_NONE};
 
-  if (esContext == NULL)
-  {
-     LogError("CGLES3Renderer::Init SRenderContext is null.\n");
-     return GL_FALSE;
-  }
+    if (esContext == NULL)
+    {
+      LogError("CGLES3Renderer::Init SRenderContext is null.\n");
+      return GL_FALSE;
+    }
 
 #ifdef ANDROID
-  // For Android, get the width/height from the window rather than what the
-  // application requested.
-  esContext->width = ANativeWindow_getWidth(esContext->eglNativeWindow);
-  esContext->height = ANativeWindow_getHeight(esContext->eglNativeWindow);
+    // For Android, get the width/height from the window rather than what the
+    // application requested.
+    esContext->width = ANativeWindow_getWidth(esContext->eglNativeWindow);
+    esContext->height = ANativeWindow_getHeight(esContext->eglNativeWindow);
 #else
-  esContext->width = width;
-  esContext->height = height;
+    esContext->width = width;
+    esContext->height = height;
 #endif
 
-  if (!WinCreate(esContext, title))
-  {
-     LogError("WinCreate failed.\n");
-     return GL_FALSE;
-  }
+    if (!WinCreate(esContext, title))
+    {
+        LogError("WinCreate failed.\n");
+        return GL_FALSE;
+    }
 
-  esContext->eglDisplay = eglGetDisplay(esContext->eglNativeDisplay);
-  if (esContext->eglDisplay == EGL_NO_DISPLAY)
-  {
-     LogError("eglDisplay == EGL_NO_DISPLAY.\n");
-     return GL_FALSE;
-  }
+    esContext->eglDisplay = eglGetDisplay(esContext->eglNativeDisplay);
+    if (esContext->eglDisplay == EGL_NO_DISPLAY)
+    {
+        LogError("eglDisplay == EGL_NO_DISPLAY.\n");
+        return GL_FALSE;
+    }
 
-  // Initialize EGL
-  if (!eglInitialize(esContext->eglDisplay, &majorVersion, &minorVersion))
-  {
-     LogError("eglInitialize failed.\n");
-     return GL_FALSE;
-  }
+    // Initialize EGL
+    if (!eglInitialize(esContext->eglDisplay, &majorVersion, &minorVersion))
+    {
+        LogError("eglInitialize failed.\n");
+        return GL_FALSE;
+    }
 
-  {
-     EGLint numConfigs = 0;
-     EGLint attribList[] =
-         {
-             EGL_RED_SIZE, 5,
-             EGL_GREEN_SIZE, 6,
-             EGL_BLUE_SIZE, 5,
-             EGL_ALPHA_SIZE, 8,
-             EGL_DEPTH_SIZE, 8,
-             EGL_STENCIL_SIZE, 8,
-             EGL_SAMPLE_BUFFERS, 1,
+    {
+        EGLint numConfigs = 0;
+        EGLint attribList[] =
+        {
+            EGL_RED_SIZE, 5,
+            EGL_GREEN_SIZE, 6,
+            EGL_BLUE_SIZE, 5,
+            EGL_ALPHA_SIZE, 8,
+            EGL_DEPTH_SIZE, 8,
+            EGL_STENCIL_SIZE, 8,
+            EGL_SAMPLE_BUFFERS, 1,
              // if EGL_KHR_create_context extension is supported, then we will use
              // EGL_OPENGL_ES3_BIT_KHR instead of EGL_OPENGL_ES2_BIT in the attribute list
-             EGL_RENDERABLE_TYPE, GetContextRenderableType(esContext->eglDisplay),
-             EGL_NONE};
+            EGL_RENDERABLE_TYPE, GetContextRenderableType(esContext->eglDisplay),
+            EGL_NONE};
 
-     // Choose config
-     if (!eglChooseConfig(esContext->eglDisplay, attribList, &config, 1, &numConfigs))
-     {
-        LogError("eglChooseConfig failed.\n");
-        return GL_FALSE;
-     }
+        // Choose config
+        if (!eglChooseConfig(esContext->eglDisplay, attribList, &config, 1, &numConfigs))
+        {
+            LogError("eglChooseConfig failed.\n");
+            return GL_FALSE;
+        }
 
-     if (numConfigs < 1)
-     {
-        LogError("eglChooseConfig numConfigs < 1.\n");
-        return GL_FALSE;
-     }
-  }
+        if (numConfigs < 1)
+        {
+            LogError("eglChooseConfig numConfigs < 1.\n");
+            return GL_FALSE;
+        }
+    }
 
 #ifdef ANDROID
   // For Android, need to get the EGL_NATIVE_VISUAL_ID and set it using ANativeWindow_setBuffersGeometry
-  {
-     EGLint format = 0;
-     eglGetConfigAttrib(esContext->eglDisplay, config, EGL_NATIVE_VISUAL_ID, &format);
-     ANativeWindow_setBuffersGeometry(esContext->eglNativeWindow, 0, 0, format);
-  }
+    {
+        EGLint format = 0;
+        eglGetConfigAttrib(esContext->eglDisplay, config, EGL_NATIVE_VISUAL_ID, &format);
+        ANativeWindow_setBuffersGeometry(esContext->eglNativeWindow, 0, 0, format);
+    }
 #endif // ANDROID
 
-  // Create a surface
-  esContext->eglSurface = eglCreateWindowSurface(esContext->eglDisplay, config,
+    // Create a surface
+    esContext->eglSurface = eglCreateWindowSurface(esContext->eglDisplay, config,
                                                  esContext->eglNativeWindow, NULL);
 
-  if (esContext->eglSurface == EGL_NO_SURFACE)
-  {
-     return GL_FALSE;
-  }
+    if (esContext->eglSurface == EGL_NO_SURFACE)
+    {
+        return GL_FALSE;
+    }
 
-  // Create a GL context
-  esContext->eglContext = eglCreateContext(esContext->eglDisplay, config,
+    // Create a GL context
+    esContext->eglContext = eglCreateContext(esContext->eglDisplay, config,
                                            EGL_NO_CONTEXT, contextAttribs);
 
-  if (esContext->eglContext == EGL_NO_CONTEXT)
-  {
-     LogError("eglContext == EGL_NO_CONTEXT\n");
-     return GL_FALSE;
-  }
+    if (esContext->eglContext == EGL_NO_CONTEXT)
+    {
+        LogError("eglContext == EGL_NO_CONTEXT\n");
+        return GL_FALSE;
+    }
 
-  // Make the context current
-  if (!eglMakeCurrent(esContext->eglDisplay, esContext->eglSurface,
+    // Make the context current
+    if (!eglMakeCurrent(esContext->eglDisplay, esContext->eglSurface,
                       esContext->eglSurface, esContext->eglContext))
-  {
-     LogError("eglMakeCurrent failed.\n");
-     return GL_FALSE;
-  }
+    {
+        LogError("eglMakeCurrent failed.\n");
+        return GL_FALSE;
+    }
 
 #endif // #ifndef __APPLE__
-  return GL_TRUE;
+    return GL_TRUE;
 }
 
 IBufferObject *CGLES3Renderer::CreateVertexArrayObject()

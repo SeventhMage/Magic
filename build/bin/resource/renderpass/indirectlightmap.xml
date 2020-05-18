@@ -1,0 +1,14 @@
+<RenderPhase>
+	<RenderTarget texture="1" depth="0" scale="0.5"/>
+	<RenderQueue materialid="6" materialname="material/indirectlightmap.xml" for="IndirectLightMap">
+		<PhaseQuote id="1">
+			<TextureUniform name="tRSMFlux" slot="3" index="0"/>
+			<TextureUniform name="tRSMPosition" slot="4" index="1"/>
+			<TextureUniform name="tRSMNormal" slot="5" index="2"/>
+		</PhaseQuote>
+		<PhaseQuote id="3">
+			<TextureUniform name="tGPosition" slot="1" index="1"/>
+			<TextureUniform name="tGNormal" slot="2" index="2"/>
+		</PhaseQuote>
+	</RenderQueue>
+</RenderPhase>
