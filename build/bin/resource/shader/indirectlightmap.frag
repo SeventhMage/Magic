@@ -80,4 +80,5 @@ void main()
 
 	shelter /= max(float(samplingTotalNum), 1.0);
 	fragColor = vec4(indirectLC, 1.0 - shelter);
+    fragColor = vec4(1.0, 0.0, 1.0, 1.0);
 }
