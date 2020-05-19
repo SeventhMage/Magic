@@ -77,7 +77,7 @@ void CGI::Init(SRenderContext *esContext)
     //render target
     renderTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 3);
     vplTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 3);
-    indirectTarget = renderer->CreateRenderTarget(512, 512 / aspect, false, 1);
+    indirectTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 1);
     
     //camera init
     ISceneNode *cameraNode = pRootNode->CreateChildNode();
@@ -91,9 +91,12 @@ void CGI::Init(SRenderContext *esContext)
     
     ISceneNode *vplCameraNode = pRootNode->CreateChildNode();
     IGameObject *vplCameraObject = vplCameraNode->AddGameObject();
-    vplCameraNode->SetPosition(CVector3(1, 1, 1));
+    vplCameraNode->SetPosition(CVector3(10, 10, 10));
+    //vplCameraNode->SetRotation(CVector3(DEG_TO_RAD(45.f), DEG_TO_RAD(45.f), 0.f));
+    vplCameraNode->Update();
     CCameraComponent *vplCamera = vplCameraObject->AddComponent<CCameraComponent>();
     vplCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
+    //vplCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
     vplCamera->SetClearColor(0.0f, 0.0f, 0.0f, 0.f);
     vplCamera->SetClearBit(MAGIC_COLOR_BUFFER_BIT | MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT);
     vplCamera->SetRenderTarget(vplTarget);
@@ -216,7 +219,7 @@ void CGI::Init(SRenderContext *esContext)
         deferredMaterial->SetProperty("positionTexture", &texturePosition, sizeof(texturePosition));
         deferredMaterial->SetProperty("normalTexture", &textureNormal, sizeof(textureNormal));
         deferredMaterial->SetProperty("colorTexture", &textureColor, sizeof(textureColor));
-        deferredMaterial->SetProperty("indirectLightColor", &indirectLight, sizeof(indirectLight));
+        deferredMaterial->SetProperty("indirectLightTexture", &indirectLight, sizeof(indirectLight));
         
         deferredMaterial->SetProperty("ambientLightColor", ambientLightColor, sizeof(ambientLightColor));
         deferredMaterial->SetProperty("directionalLightDir", directionalLightDir, sizeof(directionalLightDir));
