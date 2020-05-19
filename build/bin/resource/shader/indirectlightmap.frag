@@ -1,4 +1,4 @@
-#version 300 core
+#version 300 es
 precision mediump float;
 
 //uniform sampler2D tRandNum;
