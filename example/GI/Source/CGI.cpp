@@ -7,7 +7,7 @@ namespace magic
 {
 
 CVector3 pos;
-float flag = 0.04f;
+float flag = 0.02f;
 float rot = 0;
 
 CGI::CGI()
@@ -40,8 +40,8 @@ CGI::~CGI()
 void CGI::Init(SRenderContext *esContext)
 {
     printf("Start initalizing Engine ... \n");
-    esContext->screenResolutionRatio = 512.f / esContext->width;
-    mc = CreateMagic(esContext, "gi", 300, 200);
+    esContext->screenResolutionRatio = 0.5f;
+    mc = CreateMagic(esContext, "gi", 200, 100);
     mc->SetFPS(60);
     
     float quadVertices[][3] = {
@@ -77,7 +77,7 @@ void CGI::Init(SRenderContext *esContext)
     //render target
     renderTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 3);
     vplTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 3);
-    indirectTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 1);
+    indirectTarget = renderer->CreateRenderTarget(512, 512 / aspect, false, 1);
     
     //camera init
     ISceneNode *cameraNode = pRootNode->CreateChildNode();
@@ -85,18 +85,18 @@ void CGI::Init(SRenderContext *esContext)
     cameraNode->SetPosition(CVector3(0, 0, 5));
     CCameraComponent *pCamera = cameraObject->AddComponent<CCameraComponent>();
     pCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
-    pCamera->SetClearColor(1.0f, 1.0f, 1.0f, 1.f);
+    pCamera->SetClearColor(0.0f, 0.0f, 0.0f, 0.f);
     pCamera->SetClearBit(MAGIC_COLOR_BUFFER_BIT | MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT);
     pCamera->SetRenderTarget(renderTarget);
     
     ISceneNode *vplCameraNode = pRootNode->CreateChildNode();
     IGameObject *vplCameraObject = vplCameraNode->AddGameObject();
-    vplCameraNode->SetPosition(CVector3(10, 10, 10));
-    //vplCameraNode->SetRotation(CVector3(DEG_TO_RAD(45.f), DEG_TO_RAD(45.f), 0.f));
+    vplCameraNode->SetPosition(CVector3(5, 5, 5));
+    vplCameraNode->SetRotation(CVector3(DEG_TO_RAD(-45.f), DEG_TO_RAD(45.f), 0.f));
     vplCameraNode->Update();
     CCameraComponent *vplCamera = vplCameraObject->AddComponent<CCameraComponent>();
     vplCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
-    //vplCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
+    //vplCamera->Initialize(renderer, CCameraComponent::Ortho, 10.f, 10.f / aspect, -100.f, 100.f);
     vplCamera->SetClearColor(0.0f, 0.0f, 0.0f, 0.f);
     vplCamera->SetClearBit(MAGIC_COLOR_BUFFER_BIT | MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT);
     vplCamera->SetRenderTarget(vplTarget);
@@ -104,6 +104,7 @@ void CGI::Init(SRenderContext *esContext)
     
     //box init
     ISceneNode *boxNode = pRootNode->CreateChildNode();
+    boxNode->SetPosition(CVector3(-1.f, 0, 0));
     IGameObject *boxObject = boxNode->AddGameObject();
     CMeshRendererComponent *pMeshRenderer = boxObject->AddComponent<CMeshRendererComponent>();
     boxMesh = (IMesh *)resourceMgr->LoadResource("resource/mesh/cube.mesh.xml", EResourceType::Mesh);
@@ -128,6 +129,7 @@ void CGI::Init(SRenderContext *esContext)
     
     //sphere init
     ISceneNode *sphereNode = pRootNode->CreateChildNode();
+    sphereNode->SetPosition(CVector3(.5f, 0, 0));
     IGameObject *sphereObject = sphereNode->AddGameObject();
     sphereMesh = new CSphere(0.5, 20, 20);
     sphereMaterial = (IMaterial *)resourceMgr->LoadResource("resource/material/multarget.mat.xml", EResourceType::Material);
@@ -153,7 +155,7 @@ void CGI::Init(SRenderContext *esContext)
     IGameObject *indirectObject = pRootNode->AddGameObject();
     CCameraComponent *pIndirectCamera = indirectCamera->AddComponent<CCameraComponent>();
     pIndirectCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
-    pIndirectCamera->SetClearColor(.0f, .0f, .0f, .0f);
+    pIndirectCamera->SetClearColor(.0f, .0f, .0f, 0.0f);
     pIndirectCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
     pIndirectCamera->SetRenderTarget(indirectTarget);
     CMeshRendererComponent *pIndirectRenderer = indirectObject->AddComponent<CMeshRendererComponent>();
@@ -172,16 +174,16 @@ void CGI::Init(SRenderContext *esContext)
         indirectMaterial->SetProperty("tGPosition", &textureUnit, sizeof(textureUnit));++textureUnit;
         indirectMaterial->SetProperty("tGNormal", &textureUnit, sizeof(textureUnit));++textureUnit;
         indirectMaterial->SetProperty("tGColor", &textureUnit, sizeof(textureUnit));++textureUnit;
-        indirectMaterial->SetProperty("tRSMFlux", &textureUnit, sizeof(textureUnit));++textureUnit;
         indirectMaterial->SetProperty("tRSMPosition", &textureUnit, sizeof(textureUnit));++textureUnit;
         indirectMaterial->SetProperty("tRSMNormal", &textureUnit, sizeof(textureUnit));++textureUnit;
+        indirectMaterial->SetProperty("tRSMFlux", &textureUnit, sizeof(textureUnit));++textureUnit;
         
         indirectMaterial->SetProperty("lightDir", directionalLightDir, sizeof(directionalLightDir));
         indirectMaterial->SetProperty("lightColor", directionalLightColor, sizeof(directionalLightColor));
-        int samplingColCount = 64;
+        int samplingColCount = 16;
         indirectMaterial->SetProperty("samplingColCount", &samplingColCount, sizeof(samplingColCount));
         
-        pIndirectRenderer->Initialize(renderer, pIndirectCamera->GetFlag(), deferredMesh, indirectMaterial);
+        pIndirectRenderer->Initialize(renderer, pIndirectCamera->GetFlag(), indirectMesh, indirectMaterial);
         for (int i=0; i<renderTarget->GetBindTextureCount(); ++i)
         {
             pIndirectRenderer->SetTexture(i, renderTarget->GetBindTexture(i));
@@ -198,7 +200,7 @@ void CGI::Init(SRenderContext *esContext)
     IGameObject *deferredObject = pRootNode->AddGameObject();
     CCameraComponent *pDeferredCamera = deferredCamera->AddComponent<CCameraComponent>();
     pDeferredCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
-    pDeferredCamera->SetClearColor(.0f, .0f, .0f, .0f);
+    pDeferredCamera->SetClearColor(.0f, 0.0f, .0f, 0.0f);
     pDeferredCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
     CMeshRendererComponent *pDeferredRenderer = deferredObject->AddComponent<CMeshRendererComponent>();
     deferredObject->SetSceneNode(pRootNode);
@@ -249,11 +251,43 @@ void CGI::Init(SRenderContext *esContext)
                 ;//flag = -flag;
             pos.x += flag;
             
-            boxObject->GetSceneNode()->SetRotation(CVector3(0, rot, rot));
+            boxObject->GetSceneNode()->SetRotation(CVector3(0, DEG_TO_RAD(-45), 0));
             sphereObject->GetSceneNode()->SetRotation(CVector3(0, rot, 0));
             
-            rot += flag;
+            //rot += flag;
         });
+    };
+
+    esContext->keyFunc = [=](unsigned char key, int x, int y){
+        CVector3 spherePosition = sphereNode->GetPosition();
+        float flag = 0.1f;
+        switch(key)
+        {
+        case 'W':
+        case 'w':
+            spherePosition.z -= 0.1f;
+            break;
+        case 'S':
+        case 's':
+            spherePosition.z += 0.1f;
+            break;
+        case 'A':
+        case 'a':
+            spherePosition.x -= 0.1f;
+            break;
+        case 'D':
+        case 'd':
+            spherePosition.x += 0.1f;
+            break;
+        case 32:
+            spherePosition.y += 0.1f;
+            break;
+        case 'Z':
+        case 'z':
+            spherePosition.y -= 0.1f;
+            break;
+        }
+        sphereNode->SetPosition(spherePosition);
     };
 
     esContext->shutdownFunc = [=](){

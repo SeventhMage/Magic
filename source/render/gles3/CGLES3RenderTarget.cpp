@@ -77,7 +77,6 @@ void CGLES3RenderTarget::EndTarget()
 	{
 		GLDebug(glDisable(GL_POLYGON_OFFSET_FILL));
 	}
-    GLDebug();
 }
 ITexture *CGLES3RenderTarget::GetBindTexture(int index) const
 {

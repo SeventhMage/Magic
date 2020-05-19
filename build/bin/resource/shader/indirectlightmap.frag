@@ -35,14 +35,15 @@ void calcIndirectLight(int i, vec2 texCoordInValBegin, float stepRate, float sam
 	vec4 valC = texture(tRSMFlux, tex);
 	vec4 valP = texture(tRSMPosition, tex);
 	vec4 valN = texture(tRSMNormal, tex);
-	float valRate = max(dot(-lightDir, valN.xyz), 0.0);
+	vec3 mainLightDir = vec3(0.0, 0.0, 1.0);//normalize(lightDir);
+	float valRate = max(dot(mainLightDir, valN.xyz), 0.0);
 	
 	vec3 shootDir = normalize(gPosition - valP.xyz);
 	
 	vec3 shootColor = valC.rgb * valRate * max(dot(shootDir, valN.xyz), 0.0) / 3.14;
 	
 	float dis = max(distance(valP.xyz, gPosition), 1.0);
-	vec3 irradiance = shootColor * max(dot(gNormal, -shootDir), 0.0) / (pow(dis, 4.0));// + 2.0 * pow(dis, 2.0) + 3.0 * dis + 4.0);
+	vec3 irradiance = shootColor * max(dot(gNormal, -shootDir), 0.0) / dis;// (pow(dis, 4.0));// + 2.0 * pow(dis, 2.0) + 3.0 * dis + 4.0);
 	
 	indirectLC += irradiance;
 	
@@ -53,14 +54,14 @@ void calcIndirectLight(int i, vec2 texCoordInValBegin, float stepRate, float sam
 
 void main()
 {
-	vec4 gPosition = texture(tGPosition, texCoord);
-	vec4 gNormal = texture(tGNormal, texCoord);
+	vec4 gPosition = viewMatrix * texture(tGPosition, texCoord);
+	vec3 gNormal = texture(tGNormal, texCoord).xyz;
+
+    mat3 normalMat = mat3(transpose(inverse(viewMatrix)));
+	gNormal = normalMat * gNormal;
 
 	float dataflag = step(0.001, dot(gNormal.xyz, gNormal.xyz));
 
-	
-	vec3 mainLightDir = -normalize(lightDir);//normalize(lightPosition - position.xyz);
-	
 	vec4 posInValMap = viewMatrix * gPosition;
 	vec2 texCoordInValMap = posInValMap.xy / posInValMap.w;
 
@@ -80,5 +81,7 @@ void main()
 
 	shelter /= max(float(samplingTotalNum), 1.0);
 	fragColor = vec4(indirectLC, 1.0 - shelter);
-    fragColor = vec4(1.0, 0.0, 1.0, 1.0);
+	//fragColor.rgb = texture(tRSMFlux, texCoord).rgb;
+	//fragColor.rgb = texture(tRSMNormal, texCoord).rgb;
+	//fragColor.rgb = texture(tRSMPosition, texCoord).rgb;
 }

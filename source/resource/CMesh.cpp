@@ -5,6 +5,7 @@
 
 #include <fstream>
 #include <functional>
+#include <sys/stat.h>
 
 namespace magic
 {
@@ -84,6 +85,7 @@ void parseValue(char *textValue, std::function<void(T *, int)> fcall)
 
 void CMesh::LoadFromFile(const char *fileName)
 {
+    /*
     std::ifstream infile(fileName, std::ios::in);
     if (!infile.is_open())
     {
@@ -96,9 +98,38 @@ void CMesh::LoadFromFile(const char *fileName)
     char *buf = new char[length + 1];
     infile.read(buf, sizeof(char) * length);
     buf[length] = 0;
-    infile.close();
     rapidxml::xml_document<> doc;
     doc.parse<0>(buf);
+    infile.close();
+    */
+
+    rapidxml::xml_document<> doc;
+    char *buf = nullptr;
+    struct stat tagStat;
+    int ret = stat(fileName, &tagStat);
+    if (ret == 0)
+    {
+        FILE *pFile = fopen(fileName, "rb");
+        if (pFile)
+        {
+            long long size = tagStat.st_size + 1;
+            buf = (char *)malloc(size);
+            fread(buf, size, 1, pFile);
+            buf[size - 1] = 0;
+            doc.parse<0>(buf);
+            fclose(pFile);
+        }
+        else
+        {
+            LogError("CMesh::LoadFromFile Open file %s failed", fileName);
+            return;
+        }
+    }
+    else
+    {
+        LogError("CMesh::LoadFromFile stat failed:%s", fileName);
+        return;
+    }
 
     rapidxml::xml_node<> *rootNode = doc.first_node("Mesh");
     if (rootNode)

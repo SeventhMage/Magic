@@ -5,6 +5,7 @@
 #include "rapidxml.hpp"
 
 #include <string.h>
+#include <sys/stat.h>
 #include <fstream>
 
 namespace magic
@@ -103,6 +104,7 @@ IImage *CMaterial::GetImage(int index) const
 
 void CMaterial::LoadFromFile(const char *fileName)
 {
+    /*
     std::ifstream infile(fileName, std::ios::in);
     if (!infile)
     {
@@ -110,16 +112,47 @@ void CMaterial::LoadFromFile(const char *fileName)
         return;
     }
     infile.seekg(0, std::ios::end);
-    int length = infile.tellg();
+    int length = (int)infile.tellg() + 1;
     infile.seekg(0, std::ios::beg);
-    char *buf = new char[length + 1];
-    memset(buf, 0, sizeof(char) * (length + 1));
+    char *buf = new char[length];
+    memset(buf, 0, sizeof(char) * (length));
     infile.read(buf, sizeof(char) * length);
-    buf[length] = 0;
+    buf[length - 1] = 0;
     infile.close();
 
     rapidxml::xml_document<> doc;
     doc.parse<0>(buf);
+    */
+
+    rapidxml::xml_document<> doc;
+    char *buf = nullptr;
+    struct stat tagStat;
+    int ret = stat(fileName, &tagStat);
+    if (ret == 0)
+    {
+        FILE *pFile = fopen(fileName, "rb");
+        if (pFile)
+        {
+            long long size = tagStat.st_size + 1;
+            buf = (char *)malloc(size);
+            fread(buf, size, 1, pFile);
+            buf[size - 1] = 0;
+            doc.parse<0>(buf);
+            fclose(pFile);
+        }
+        else
+        {
+            LogError("CMaterial::LoadFromFile Open file %s failed", fileName);
+            return;
+        }
+    }
+    else
+    {
+        LogError("CMaterial::LoadFromFile stat failed:%s", fileName);
+        return;
+    }
+
+
 
 
     rapidxml::xml_node<> *rootNode = doc.first_node("Material");

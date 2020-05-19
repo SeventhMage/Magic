@@ -1,4 +1,5 @@
-#include "HelloTriangle.h"
+//#include "HelloTriangle.h"
+#include "CGI.h"
 
 #include <stdio.h>
 //#include <Windows.h>
@@ -9,8 +10,9 @@ int main(int argc, char *argv[])
 {
     SRenderContext content;
 
-    HelloTriangle triangle(&content);
-
+    //HelloTriangle triangle(&content);
+    CGI gi;
+    gi.Init(&content);
     while (true)
     {
         MSG msg;
@@ -23,9 +25,8 @@ int main(int argc, char *argv[])
                 break;
         }
         
-        if (content.updateFunc)
-            content.updateFunc();
-        //Sleep(100);
+         if (content.updateFunc)
+             content.updateFunc();
     }
 
     return 0;

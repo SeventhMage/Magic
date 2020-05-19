@@ -56,7 +56,7 @@ LRESULT WINAPI ESWindowProc(HWND hWnd, ::UINT uMsg, WPARAM wParam, LPARAM lParam
      {
         if (esContext->drawFunc)
            esContext->drawFunc();
-        eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
+        //eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
      }
 
      //ValidateRect(hWnd, NULL);
@@ -162,7 +162,7 @@ CGLES3Renderer::CGLES3Renderer(SRenderContext *esContext, const char *title, GLi
         LogError("Initialize GLES3Renderer failed\n");
     GLDebug(glGetIntegerv(GL_FRAMEBUFFER_BINDING, &m_defaultFrameBuffer));
     float ratio = esContext->screenResolutionRatio > 0 ? esContext->screenResolutionRatio : 1.f;
-    m_FinalRenderTarget = CreateRenderTarget(esContext->width * ratio, esContext->height * ratio, true);
+    //m_FinalRenderTarget = CreateRenderTarget(esContext->width * ratio, esContext->height * ratio, true);
 }
 
 CGLES3Renderer::~CGLES3Renderer()
@@ -375,6 +375,8 @@ void CGLES3Renderer::FinalRender()
         //GLDebug(glReadBuffer(GL_COLOR_ATTACHMENT0));
         GLDebug(glBlitFramebuffer(0, 0, m_FinalRenderTarget->GetWidth(), m_FinalRenderTarget->GetHeight(), 0, 0, m_esContext->width, m_esContext->height, GL_COLOR_BUFFER_BIT, GL_LINEAR));
     }
+    
+    eglSwapBuffers(m_esContext->eglDisplay, m_esContext->eglSurface);
 }
 
 void CGLES3Renderer::Viewport(int x, int y, int width, int height)
@@ -391,6 +393,7 @@ void CGLES3Renderer::BeginFinalRenderTarget()
     }
     else
     {
+        GLDebug(glBindFramebuffer(GL_FRAMEBUFFER, m_defaultFrameBuffer));
         Viewport(0, 0, m_esContext->width, m_esContext->height);
     }
 }
