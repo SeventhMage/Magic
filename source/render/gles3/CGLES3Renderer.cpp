@@ -375,8 +375,9 @@ void CGLES3Renderer::FinalRender()
         //GLDebug(glReadBuffer(GL_COLOR_ATTACHMENT0));
         GLDebug(glBlitFramebuffer(0, 0, m_FinalRenderTarget->GetWidth(), m_FinalRenderTarget->GetHeight(), 0, 0, m_esContext->width, m_esContext->height, GL_COLOR_BUFFER_BIT, GL_LINEAR));
     }
-    
+#ifndef __APPLE__
     eglSwapBuffers(m_esContext->eglDisplay, m_esContext->eglSurface);
+#endif
 }
 
 void CGLES3Renderer::Viewport(int x, int y, int width, int height)

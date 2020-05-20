@@ -180,7 +180,7 @@ void CGI::Init(SRenderContext *esContext)
         
         indirectMaterial->SetProperty("lightDir", directionalLightDir, sizeof(directionalLightDir));
         indirectMaterial->SetProperty("lightColor", directionalLightColor, sizeof(directionalLightColor));
-        int samplingColCount = 16;
+        int samplingColCount = 8;
         indirectMaterial->SetProperty("samplingColCount", &samplingColCount, sizeof(samplingColCount));
         
         pIndirectRenderer->Initialize(renderer, pIndirectCamera->GetFlag(), indirectMesh, indirectMaterial);
@@ -286,6 +286,22 @@ void CGI::Init(SRenderContext *esContext)
         case 'z':
             spherePosition.y -= 0.1f;
             break;
+        }
+        sphereNode->SetPosition(spherePosition);
+    };
+    
+    esContext->touchMoveFunc = [=](int index, int dx, int dy, int count){
+        CVector3 spherePosition = sphereNode->GetPosition();
+        float flag = 0.1f;
+        if (count == 1)
+        {
+            spherePosition.x += dx > 0 ? flag : -flag;
+            spherePosition.y -= dy > 0 ? flag : -flag;
+        }
+        else
+        {
+            spherePosition.x += dx > 0 ? flag : -flag;
+            spherePosition.z += dy > 0 ? flag : -flag;
         }
         sphereNode->SetPosition(spherePosition);
     };

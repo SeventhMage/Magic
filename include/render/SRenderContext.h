@@ -52,8 +52,10 @@ struct SRenderContext
     
     std::function<void()> drawFunc;
     std::function<void()> updateFunc;
-    std::function<void(unsigned char, int, int)> keyFunc;
     std::function<void()> shutdownFunc;
+    std::function<void(unsigned char, int, int)> keyFunc;
+    std::function<void(int index, int x, int y, int count)> touchFunc;
+    std::function<void(int index, int x, int y, int count)> touchMoveFunc;
     
     bool bInitalize;
 };

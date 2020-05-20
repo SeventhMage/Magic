@@ -46,6 +46,7 @@
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+    [view setMultipleTouchEnabled:YES];
 }
 
 - (void)dealloc
@@ -118,7 +119,52 @@
     {
         _esContext.drawFunc();
     }
+    
+    //[self.context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    NSLog(@"UIViewController start touch...");
+    UITouch *touch=[touches anyObject];
+    NSSet *allTouches = [event allTouches];
+    int i = 0;
+    if (_esContext.touchFunc)
+    {
+        for (UITouch *touch in touches){
+            float dx = [touch locationInView:[touch view]].x;
+            float dy = [touch locationInView:[touch view]].y;
+            _esContext.touchFunc(i, dx, dy, allTouches.count);
+            ++i;
+        }
+    }
+    
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+    //取得一个触摸对象（对于多点触摸可能有多个对象）
+    UITouch *touch=[touches anyObject];
+
+    if (_esContext.touchMoveFunc)
+    {
+        NSSet *allTouches = [event allTouches];
+        int i = 0;
+        for (UITouch *touch in touches){
+            //取得当前位置
+            CGPoint current=[touch locationInView:self.view];
+            //取得前一个位置
+            CGPoint previous=[touch previousLocationInView:self.view];
+            _esContext.touchMoveFunc(i, current.x - previous.x, current.y - previous.y , allTouches.count);
+            ++i;
+        }
+
+    }
+
+    NSLog(@"UIViewController moving...");
+
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    NSLog(@"UIViewController touch end.");
+}
 
 @end
