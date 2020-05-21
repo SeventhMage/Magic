@@ -28,9 +28,9 @@ CMagic::~CMagic()
 
 void CMagic::Run(std::function<void()> fcall)
 {
-    static long lastTime = m_pTime->GetRunTime();
+    static long lastTime = m_pTime->GetSystemTime();
     static long compensationTime = 0;
-    long passTime = m_pTime->GetRunTime() - lastTime;
+    long passTime = m_pTime->GetSystemTime() - lastTime;
     if (passTime >= m_iFixDelta)
     {
         if (fcall)
@@ -47,7 +47,7 @@ void CMagic::Run(std::function<void()> fcall)
             m_pSceneManager->FixedUpdate();
             compensationTime -= m_iFixDelta;
         } while (compensationTime > m_iFixDelta);
-        lastTime = m_pTime->GetRunTime();
+        lastTime = m_pTime->GetSystemTime();
     }
 }
 

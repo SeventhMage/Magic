@@ -46,7 +46,7 @@
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
-    [view setMultipleTouchEnabled:YES];
+    [view setMultipleTouchEnabled:true];
 }
 
 - (void)dealloc
@@ -137,7 +137,7 @@
             ++i;
         }
     }
-    
+
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -158,9 +158,6 @@
         }
 
     }
-
-    NSLog(@"UIViewController moving...");
-
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{

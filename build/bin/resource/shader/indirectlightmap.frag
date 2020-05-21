@@ -43,7 +43,7 @@ void calcIndirectLight(int i, vec2 texCoordInValBegin, float stepRate, float sam
 	vec3 shootColor = valC.rgb * valRate * max(dot(shootDir, valN.xyz), 0.0) / 3.14;
 	
 	float dis = max(distance(valP.xyz, gPosition), 1.0);
-	vec3 irradiance = shootColor * max(dot(gNormal, -shootDir), 0.0) / dis;// (pow(dis, 4.0));// + 2.0 * pow(dis, 2.0) + 3.0 * dis + 4.0);
+	vec3 irradiance = shootColor * max(dot(gNormal, -shootDir), 0.0) / (pow(dis, 4.0));// + 2.0 * pow(dis, 2.0) + 3.0 * dis + 4.0);
 	
 	indirectLC += irradiance;
 	
@@ -76,12 +76,12 @@ void main()
 	float shelter = 0.0;
 	for (int i = 0; i< samplingTotalNum; ++i)
 	{
-		calcIndirectLight(i, texCoordInValBegin, samplingRate, float(samplingColCount), gPosition.xyz, gNormal.xyz, indirectLC, shelter);
+		calcIndirectLight(i, texCoordInValBegin, stepRate, float(samplingColCount), gPosition.xyz, gNormal.xyz, indirectLC, shelter);
 	}
 
 	shelter /= max(float(samplingTotalNum), 1.0);
 	fragColor = vec4(indirectLC, 1.0 - shelter);
-	//fragColor.rgb = texture(tRSMFlux, texCoord).rgb;
+    //fragColor.rgb = texture(tRSMFlux, texCoord).rgb;
 	//fragColor.rgb = texture(tRSMNormal, texCoord).rgb;
 	//fragColor.rgb = texture(tRSMPosition, texCoord).rgb;
 }

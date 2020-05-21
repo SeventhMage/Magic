@@ -1,6 +1,7 @@
 #include "CTime.h"
 
 #include <time.h>
+#include <sys/time.h>
 
 namespace magic
 {
@@ -17,7 +18,9 @@ ulong CTime::GetRunTime() const
 
 ulong CTime::GetSystemTime() const
 {
-    return time(0);
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return tv.tv_sec * 1000 + tv.tv_usec * 0.001;
 }
 
 void CTime::SetDeltaTime(ulong time)

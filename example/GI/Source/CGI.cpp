@@ -60,8 +60,8 @@ void CGI::Init(SRenderContext *esContext)
 
     unsigned short quadIndices[] = {0, 1, 2, 0, 2, 3};
     float ambientLightColor[] = {0.1f, 0.1f, 0.1f};
-    float directionalLightDir[] = {1.f, 1.f, 1.f};
-    float directionalLightColor[] = {0.8f, 0.8f, 0.8f};
+    float directionalLightDir[] = {0.f, 0.f, -1.f};
+    float directionalLightColor[] = {.6f, 0.6f, 0.6f};
     float specCoefficient = 10;
     
     renderer = mc->GetRenderer();
@@ -75,9 +75,9 @@ void CGI::Init(SRenderContext *esContext)
     ISceneNode *pRootNode = pScene->GetRootNode();
     
     //render target
-    renderTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 3);
+    renderTarget = renderer->CreateRenderTarget(esContext->width, esContext->height, true, 3);
     vplTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 3);
-    indirectTarget = renderer->CreateRenderTarget(512, 512 / aspect, false, 1);
+    indirectTarget = renderer->CreateRenderTarget(esContext->width * 0.2f, esContext->height * 0.2f, false, 1);
     
     //camera init
     ISceneNode *cameraNode = pRootNode->CreateChildNode();
@@ -91,12 +91,12 @@ void CGI::Init(SRenderContext *esContext)
     
     ISceneNode *vplCameraNode = pRootNode->CreateChildNode();
     IGameObject *vplCameraObject = vplCameraNode->AddGameObject();
-    vplCameraNode->SetPosition(CVector3(5, 5, 5));
-    vplCameraNode->SetRotation(CVector3(DEG_TO_RAD(-45.f), DEG_TO_RAD(45.f), 0.f));
+    vplCameraNode->SetPosition(CVector3(0, 0, 5));
+    //vplCameraNode->SetRotation(CVector3(DEG_TO_RAD(-45.f), DEG_TO_RAD(45.f), 0.f));
     vplCameraNode->Update();
     CCameraComponent *vplCamera = vplCameraObject->AddComponent<CCameraComponent>();
-    vplCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
-    //vplCamera->Initialize(renderer, CCameraComponent::Ortho, 10.f, 10.f / aspect, -100.f, 100.f);
+    //vplCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
+    vplCamera->Initialize(renderer, CCameraComponent::Ortho, 10.f, 10.f / aspect, -100.f, 100.f);
     vplCamera->SetClearColor(0.0f, 0.0f, 0.0f, 0.f);
     vplCamera->SetClearBit(MAGIC_COLOR_BUFFER_BIT | MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT);
     vplCamera->SetRenderTarget(vplTarget);
@@ -108,7 +108,7 @@ void CGI::Init(SRenderContext *esContext)
     IGameObject *boxObject = boxNode->AddGameObject();
     CMeshRendererComponent *pMeshRenderer = boxObject->AddComponent<CMeshRendererComponent>();
     boxMesh = (IMesh *)resourceMgr->LoadResource("resource/mesh/cube.mesh.xml", EResourceType::Mesh);
-    
+    //boxMesh = new CSphere(1.5, 20, 20);
     boxMaterial = (IMaterial *)resourceMgr->LoadResource("resource/material/multarget.mat.xml", EResourceType::Material);
     uint textureUnit = 0;
     boxMaterial->SetProperty("textureUnit", &textureUnit, sizeof(textureUnit));
@@ -180,7 +180,7 @@ void CGI::Init(SRenderContext *esContext)
         
         indirectMaterial->SetProperty("lightDir", directionalLightDir, sizeof(directionalLightDir));
         indirectMaterial->SetProperty("lightColor", directionalLightColor, sizeof(directionalLightColor));
-        int samplingColCount = 8;
+        int samplingColCount = 16;
         indirectMaterial->SetProperty("samplingColCount", &samplingColCount, sizeof(samplingColCount));
         
         pIndirectRenderer->Initialize(renderer, pIndirectCamera->GetFlag(), indirectMesh, indirectMaterial);
@@ -243,19 +243,20 @@ void CGI::Init(SRenderContext *esContext)
     printf("Start Application ... \n");
     
     esContext->drawFunc = [=](){
-    };
-
-    esContext->updateFunc = [=]() {
         mc->Run([=]() {
             if (pos.x > 0.6f || pos.x < -0.6f)
                 ;//flag = -flag;
             pos.x += flag;
             
-            boxObject->GetSceneNode()->SetRotation(CVector3(0, DEG_TO_RAD(-45), 0));
+            boxObject->GetSceneNode()->SetRotation(CVector3(0, rot, 0));
             sphereObject->GetSceneNode()->SetRotation(CVector3(0, rot, 0));
             
-            //rot += flag;
+            rot += flag;
         });
+    };
+
+    esContext->updateFunc = [=]() {
+
     };
 
     esContext->keyFunc = [=](unsigned char key, int x, int y){
