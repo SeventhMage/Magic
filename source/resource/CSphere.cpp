@@ -132,7 +132,8 @@ CSphere::CSphere(float fRadius, int iSlices, int iStacks)
     SetNormals((float (*)[3])normals[0].v, sizeof(CVector3) * m_VerticesCount);
     SetUVs((float (*)[2])uvs, sizeof(CVector2) * m_VerticesCount);
     float *colors = new float[m_VerticesCount * 4];
-    for (int i = 0; i<m_VerticesCount * 4; ++i)
+    memset(colors, 0, sizeof(float) * m_VerticesCount * 4);
+    for (int i = 0; i<m_VerticesCount * 4; i += 4)
         colors[i] = 1.f;
     SetColors((float (*)[4])colors, sizeof(float) * m_VerticesCount * 4);
     

@@ -44,7 +44,7 @@ void calcIndirectLight(int i, vec2 texCoordInValBegin, float stepRate, float sam
     vec3 shootColor = valC.rgb * valRate * max(dot(shootDir, valN.xyz), 0.0) / 3.14;
 	
 	float dis = max(distance(valP.xyz, gPosition), 1.0);
-    vec3 irradiance = shootColor * max(dot(gNormal, -shootDir), 0.0) / (pow(dis, 4.0));// + 2.0 * pow(dis, 2.0) + 3.0 * dis + 4.0);
+    vec3 irradiance = shootColor * max(dot(gNormal, -shootDir), 0.0) / (pow(dis, 4.0) + 2.0 * pow(dis, 2.0) + 2.0 * dis + 1.0);
 	
 	indirectLC += irradiance;
 	
@@ -61,7 +61,7 @@ void main()
 	float dataflag = step(0.001, dot(gNormal.xyz, gNormal.xyz));
     
 	vec4 posInValMap = projMatrix * viewMatrix *  gPosition;
-    vec2 texCoordInValMap = 0.5 * (posInValMap.xy + 1.0) / posInValMap.w;
+    vec2 texCoordInValMap = (0.5 * posInValMap.xy + 0.5) / posInValMap.w;
 
 	float samplingRate = 0.1;
 

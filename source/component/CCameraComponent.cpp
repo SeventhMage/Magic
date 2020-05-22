@@ -67,6 +67,21 @@ void CCameraComponent::SetRenderTarget(IRenderTarget *target)
     m_pRenderPass->SetRenderTarget(target);
 }
 
+void CCameraComponent::SetEnable(bool bEnable)
+{
+    m_pRenderPass->BeginRenderTarget();
+    if (m_pRenderPass)
+        m_pRenderPass->SetEnable(bEnable);
+    m_pRenderPass->EndRenderTarget();
+}
+
+bool CCameraComponent::IsEnable()
+{
+    if (m_pRenderPass)
+        return m_pRenderPass->IsEnable();
+    return false;
+}
+
 void CCameraComponent::Update()
 {
     if (m_bNeedUpdateView)

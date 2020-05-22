@@ -30,6 +30,8 @@ public:
     void SetClearBit(int bit);
     void SetRenderTarget(IRenderTarget *target);
     uint GetFlag() { return m_Flag; }
+    void SetEnable(bool bEnable);
+    bool IsEnable();
 private:
     IRenderPass *m_pRenderPass;
     IRenderer *m_pRenderer;

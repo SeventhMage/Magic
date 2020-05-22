@@ -40,9 +40,9 @@ CGI::~CGI()
 void CGI::Init(SRenderContext *esContext)
 {
     printf("Start initalizing Engine ... \n");
-    esContext->screenResolutionRatio = 0.5f;
-    mc = CreateMagic(esContext, "gi", 200, 100);
-    mc->SetFPS(60);
+    esContext->screenResolutionRatio = 1.0f;
+    mc = CreateMagic(esContext, "gi", 800, 600);
+    mc->SetFPS(120);
     
     float quadVertices[][3] = {
         -1.f, -1.f, 0.f,
@@ -78,9 +78,9 @@ void CGI::Init(SRenderContext *esContext)
     ISceneNode *pRootNode = pScene->GetRootNode();
     
     //render target
-    renderTarget = renderer->CreateRenderTarget(esContext->width * 0.5f, esContext->height * 0.5f, true, 3);
+    renderTarget = renderer->CreateRenderTarget(esContext->width, esContext->height, true, 3);
     vplTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 3);
-    indirectTarget = renderer->CreateRenderTarget(esContext->width * 0.2f, esContext->height * 0.2f, false, 1);
+    indirectTarget = renderer->CreateRenderTarget(esContext->width * 0.5f, esContext->height * 0.5f, false, 1);
     
     //camera init
     ISceneNode *cameraNode = pRootNode->CreateChildNode();
@@ -156,7 +156,7 @@ void CGI::Init(SRenderContext *esContext)
     }
     
     //Indirect light
-    static const int RAND_WIDTH = 16;
+    static const int RAND_WIDTH = 12;
     static const int RAND_NUM = RAND_WIDTH * RAND_WIDTH;
     byte vRandNum[RAND_NUM * 3] = { 0 };
     for (int i = 0; i < RAND_NUM; ++i)
@@ -174,7 +174,7 @@ void CGI::Init(SRenderContext *esContext)
     IGameObject *indirectCamera = vplCameraNode->AddGameObject();
     IGameObject *indirectObject = pRootNode->AddGameObject();
     CCameraComponent *pIndirectCamera = indirectCamera->AddComponent<CCameraComponent>();
-    pIndirectCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
+    pIndirectCamera->Initialize(renderer, CCameraComponent::Ortho, 10.f, 10.f / aspect, -100.f, 100.f);
     //pIndirectCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
     pIndirectCamera->SetClearColor(.0f, .0f, .0f, 0.0f);
     pIndirectCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
@@ -201,7 +201,7 @@ void CGI::Init(SRenderContext *esContext)
         
         indirectMaterial->SetProperty("lightDir", directionalLightDir, sizeof(directionalLightDir));
         indirectMaterial->SetProperty("lightColor", directionalLightColor, sizeof(directionalLightColor));
-        int samplingColCount = 16;
+        int samplingColCount = RAND_WIDTH;
         indirectMaterial->SetProperty("samplingColCount", &samplingColCount, sizeof(samplingColCount));
         
         pIndirectRenderer->Initialize(renderer, pIndirectCamera->GetFlag(), indirectMesh, indirectMaterial);
@@ -308,6 +308,14 @@ void CGI::Init(SRenderContext *esContext)
         case 'Z':
         case 'z':
             spherePosition.y -= 0.1f;
+            break;
+        case 'I':
+        case 'i':
+            pIndirectCamera->SetEnable(!pIndirectCamera->IsEnable());
+            break;
+        case 'P':
+        case 'p':
+            printf("-------%d\n", int(1000.f / mc->GetTime()->GetDeltaTime()));
             break;
         }
         sphereNode->SetPosition(spherePosition);
