@@ -73,6 +73,9 @@
 		748A98B0246FCC1D001BB2B7 /* common.mat.xml in Resources */ = {isa = PBXBuildFile; fileRef = 748A98A3246FCC1D001BB2B7 /* common.mat.xml */; };
 		748A98B1246FCC1D001BB2B7 /* multarget.mat.xml in Resources */ = {isa = PBXBuildFile; fileRef = 748A98A4246FCC1D001BB2B7 /* multarget.mat.xml */; };
 		748A98B7246FE526001BB2B7 /* CSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 748A98B6246FE526001BB2B7 /* CSphere.cpp */; };
+		748B74BC2476D4A500C8B9FD /* genvpl.mat.xml in Resources */ = {isa = PBXBuildFile; fileRef = 748B74BB2476D4A500C8B9FD /* genvpl.mat.xml */; };
+		748B74BF2476D4D700C8B9FD /* genvpl.frag in Resources */ = {isa = PBXBuildFile; fileRef = 748B74BD2476D4D600C8B9FD /* genvpl.frag */; };
+		748B74C02476D4D700C8B9FD /* genvpl.vert in Resources */ = {isa = PBXBuildFile; fileRef = 748B74BE2476D4D700C8B9FD /* genvpl.vert */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -244,6 +247,9 @@
 		748A98A4246FCC1D001BB2B7 /* multarget.mat.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = multarget.mat.xml; sourceTree = "<group>"; };
 		748A98B5246FE4DB001BB2B7 /* CSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSphere.h; sourceTree = "<group>"; };
 		748A98B6246FE526001BB2B7 /* CSphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CSphere.cpp; sourceTree = "<group>"; };
+		748B74BB2476D4A500C8B9FD /* genvpl.mat.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = genvpl.mat.xml; sourceTree = "<group>"; };
+		748B74BD2476D4D600C8B9FD /* genvpl.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = genvpl.frag; sourceTree = "<group>"; };
+		748B74BE2476D4D700C8B9FD /* genvpl.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = genvpl.vert; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -711,6 +717,8 @@
 			children = (
 				748A989B246FCC1D001BB2B7 /* multTarget.frag */,
 				7485455F2470E34E00268577 /* indirectlightmap.frag */,
+				748B74BD2476D4D600C8B9FD /* genvpl.frag */,
+				748B74BE2476D4D700C8B9FD /* genvpl.vert */,
 				748A989C246FCC1D001BB2B7 /* deferredShade.vert */,
 				748A989D246FCC1D001BB2B7 /* common.frag */,
 				748A989E246FCC1D001BB2B7 /* multTarget.vert */,
@@ -727,6 +735,7 @@
 				748A98A3246FCC1D001BB2B7 /* common.mat.xml */,
 				748A98A4246FCC1D001BB2B7 /* multarget.mat.xml */,
 				748545612472090500268577 /* indirectLight.mat.xml */,
+				748B74BB2476D4A500C8B9FD /* genvpl.mat.xml */,
 			);
 			path = material;
 			sourceTree = "<group>";
@@ -793,7 +802,9 @@
 				748A98A8246FCC1D001BB2B7 /* crate.tga in Resources */,
 				748545602470E34E00268577 /* indirectlightmap.frag in Resources */,
 				748A98A5246FCC1D001BB2B7 /* cube.mesh.xml in Resources */,
+				748B74BF2476D4D700C8B9FD /* genvpl.frag in Resources */,
 				748A986D246FC812001BB2B7 /* manual.html in Resources */,
+				748B74C02476D4D700C8B9FD /* genvpl.vert in Resources */,
 				748A986C246FC812001BB2B7 /* license.txt in Resources */,
 				748A98AD246FCC1D001BB2B7 /* common.vert in Resources */,
 				748A9577246FB8B4001BB2B7 /* LaunchScreen.storyboard in Resources */,
@@ -802,6 +813,7 @@
 				748A98A6246FCC1D001BB2B7 /* triangle.mesh.xml in Resources */,
 				748A98AF246FCC1D001BB2B7 /* deferredShade.mat.xml in Resources */,
 				748A98A7246FCC1D001BB2B7 /* triangle.model.xml in Resources */,
+				748B74BC2476D4A500C8B9FD /* genvpl.mat.xml in Resources */,
 				748A98A9246FCC1D001BB2B7 /* multTarget.frag in Resources */,
 				748A98AE246FCC1D001BB2B7 /* deferredShade.frag in Resources */,
 				748A98AB246FCC1D001BB2B7 /* common.frag in Resources */,

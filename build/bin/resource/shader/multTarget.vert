@@ -14,11 +14,10 @@ uniform mat4 modelMatrix;
 void main()
 {
     texCoord = vTexCoord;
-    mat4 mvMat = viewMatrix * modelMatrix;
-    position = (mvMat * vec4(vPosition, 1.0)).xyz;
-    mat3 normalMat = mat3(transpose(inverse(mvMat)));
+    position = (modelMatrix * vec4(vPosition, 1.0)).xyz;
+    mat3 normalMat = mat3(transpose(inverse(modelMatrix)));
     normal = normalMat * vNormal;
     color = vColor;
-    gl_Position = projMatrix * mvMat * vec4(vPosition, 1.0);
+    gl_Position = projMatrix * viewMatrix * modelMatrix * vec4(vPosition, 1.0);
 }
 

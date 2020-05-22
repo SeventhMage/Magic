@@ -59,10 +59,13 @@ void CGI::Init(SRenderContext *esContext)
     };
 
     unsigned short quadIndices[] = {0, 1, 2, 0, 2, 3};
-    float ambientLightColor[] = {0.1f, 0.1f, 0.1f};
+    float ambientLightColor[] = {0.0f, 0.0f, 0.0f};
     float directionalLightDir[] = {0.f, 0.f, -1.f};
     float directionalLightColor[] = {.6f, 0.6f, 0.6f};
-    float specCoefficient = 10;
+    float specCoefficient = 80.f;
+    CVector4 red(1, 0, 0, 1);
+    CVector4 white(1, 1, 1, 1);
+    CVector3 lightPos(0, 0, 8);
     
     renderer = mc->GetRenderer();
     float aspect = 1.f * esContext->width / esContext->height;
@@ -75,7 +78,7 @@ void CGI::Init(SRenderContext *esContext)
     ISceneNode *pRootNode = pScene->GetRootNode();
     
     //render target
-    renderTarget = renderer->CreateRenderTarget(esContext->width, esContext->height, true, 3);
+    renderTarget = renderer->CreateRenderTarget(esContext->width * 0.5f, esContext->height * 0.5f, true, 3);
     vplTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 3);
     indirectTarget = renderer->CreateRenderTarget(esContext->width * 0.2f, esContext->height * 0.2f, false, 1);
     
@@ -91,7 +94,7 @@ void CGI::Init(SRenderContext *esContext)
     
     ISceneNode *vplCameraNode = pRootNode->CreateChildNode();
     IGameObject *vplCameraObject = vplCameraNode->AddGameObject();
-    vplCameraNode->SetPosition(CVector3(0, 0, 5));
+    vplCameraNode->SetPosition(lightPos);
     //vplCameraNode->SetRotation(CVector3(DEG_TO_RAD(-45.f), DEG_TO_RAD(45.f), 0.f));
     vplCameraNode->Update();
     CCameraComponent *vplCamera = vplCameraObject->AddComponent<CCameraComponent>();
@@ -112,6 +115,7 @@ void CGI::Init(SRenderContext *esContext)
     boxMaterial = (IMaterial *)resourceMgr->LoadResource("resource/material/multarget.mat.xml", EResourceType::Material);
     uint textureUnit = 0;
     boxMaterial->SetProperty("textureUnit", &textureUnit, sizeof(textureUnit));
+    boxMaterial->SetProperty("_color", white.v, sizeof(CVector4));
     boxMaterial->SetProperty("ambientLightColor", ambientLightColor, sizeof(ambientLightColor));
     boxMaterial->SetProperty("directionalLightDir", directionalLightDir, sizeof(directionalLightDir));
     boxMaterial->SetProperty("directionalLightColor", directionalLightColor, sizeof(directionalLightColor));
@@ -134,6 +138,7 @@ void CGI::Init(SRenderContext *esContext)
     sphereMesh = new CSphere(0.5, 20, 20);
     sphereMaterial = (IMaterial *)resourceMgr->LoadResource("resource/material/multarget.mat.xml", EResourceType::Material);
     sphereMaterial->SetProperty("textureUnit", &textureUnit, sizeof(textureUnit));
+    sphereMaterial->SetProperty("_color", red.v, sizeof(CVector4));
     sphereMaterial->SetProperty("ambientLightColor", ambientLightColor, sizeof(ambientLightColor));
     sphereMaterial->SetProperty("directionalLightDir", directionalLightDir, sizeof(directionalLightDir));
     sphereMaterial->SetProperty("directionalLightColor", directionalLightColor, sizeof(directionalLightColor));
@@ -151,15 +156,30 @@ void CGI::Init(SRenderContext *esContext)
     }
     
     //Indirect light
-    IGameObject *indirectCamera = pRootNode->AddGameObject();
+    static const int RAND_WIDTH = 16;
+    static const int RAND_NUM = RAND_WIDTH * RAND_WIDTH;
+    byte vRandNum[RAND_NUM * 3] = { 0 };
+    for (int i = 0; i < RAND_NUM; ++i)
+    {
+        float randRadius = 1.f * rand() / RAND_MAX;
+        float randRadian = 1.f * rand() / RAND_MAX;
+        float randRadian2 = 1.f * rand() / RAND_MAX;
+        randRadian += randRadian2;
+        vRandNum[3 * i] = (randRadius * sin(PI_2 * randRadian) * 127.f);
+        vRandNum[3 * i + 1] = (randRadius * cos(PI_2 * randRadian) * 127.f);
+    }
+
+    ITexture *pRandNumTex = renderer->CreateTexture(RGB, RAND_WIDTH, RAND_WIDTH, RGB, PIXEL_UNSIGNED_BYTE, (void*)vRandNum);
+
+    IGameObject *indirectCamera = vplCameraNode->AddGameObject();
     IGameObject *indirectObject = pRootNode->AddGameObject();
     CCameraComponent *pIndirectCamera = indirectCamera->AddComponent<CCameraComponent>();
     pIndirectCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
+    //pIndirectCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
     pIndirectCamera->SetClearColor(.0f, .0f, .0f, 0.0f);
     pIndirectCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
     pIndirectCamera->SetRenderTarget(indirectTarget);
     CMeshRendererComponent *pIndirectRenderer = indirectObject->AddComponent<CMeshRendererComponent>();
-    indirectObject->SetSceneNode(pRootNode);
     indirectMesh = new CMesh();
      
     indirectMesh->SetPositions(quadVertices, sizeof(quadVertices));
@@ -177,6 +197,7 @@ void CGI::Init(SRenderContext *esContext)
         indirectMaterial->SetProperty("tRSMPosition", &textureUnit, sizeof(textureUnit));++textureUnit;
         indirectMaterial->SetProperty("tRSMNormal", &textureUnit, sizeof(textureUnit));++textureUnit;
         indirectMaterial->SetProperty("tRSMFlux", &textureUnit, sizeof(textureUnit));++textureUnit;
+        indirectMaterial->SetProperty("tRandNum", &textureUnit, sizeof(textureUnit));++textureUnit;
         
         indirectMaterial->SetProperty("lightDir", directionalLightDir, sizeof(directionalLightDir));
         indirectMaterial->SetProperty("lightColor", directionalLightColor, sizeof(directionalLightColor));
@@ -192,18 +213,19 @@ void CGI::Init(SRenderContext *esContext)
         {
             pIndirectRenderer->SetTexture(i + renderTarget->GetBindTextureCount(), vplTarget->GetBindTexture(i));
         }
+        
+        pIndirectRenderer->SetTexture(renderTarget->GetBindTextureCount() + vplTarget->GetBindTextureCount(), pRandNumTex);
     }
 
     
     //deferred shade
-    IGameObject *deferredCamera = pRootNode->AddGameObject();
+    IGameObject *deferredCamera = cameraNode->AddGameObject();
     IGameObject *deferredObject = pRootNode->AddGameObject();
     CCameraComponent *pDeferredCamera = deferredCamera->AddComponent<CCameraComponent>();
     pDeferredCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
     pDeferredCamera->SetClearColor(.0f, 0.0f, .0f, 0.0f);
     pDeferredCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
     CMeshRendererComponent *pDeferredRenderer = deferredObject->AddComponent<CMeshRendererComponent>();
-    deferredObject->SetSceneNode(pRootNode);
     deferredMesh = new CMesh();
      
     deferredMesh->SetPositions(quadVertices, sizeof(quadVertices));
@@ -248,8 +270,8 @@ void CGI::Init(SRenderContext *esContext)
                 ;//flag = -flag;
             pos.x += flag;
             
-            boxObject->GetSceneNode()->SetRotation(CVector3(0, rot, 0));
-            sphereObject->GetSceneNode()->SetRotation(CVector3(0, rot, 0));
+            boxObject->GetSceneNode()->SetRotation(CVector3(0, DEG_TO_RAD(45.f), 0));
+            //sphereObject->GetSceneNode()->SetRotation(CVector3(0, rot, 0));
             
             rot += flag;
         });
@@ -293,18 +315,28 @@ void CGI::Init(SRenderContext *esContext)
     
     esContext->touchMoveFunc = [=](int index, int dx, int dy, int count){
         CVector3 spherePosition = sphereNode->GetPosition();
-        float flag = 0.1f;
+        float flag = 0.01f;
         if (count == 1)
         {
             spherePosition.x += dx > 0 ? flag : -flag;
             spherePosition.y -= dy > 0 ? flag : -flag;
+            sphereNode->SetPosition(spherePosition);
         }
-        else
+        else if (count == 2)
         {
             spherePosition.x += dx > 0 ? flag : -flag;
             spherePosition.z += dy > 0 ? flag : -flag;
+            sphereNode->SetPosition(spherePosition);
         }
-        sphereNode->SetPosition(spherePosition);
+        else if (count == 3)
+        {
+            CVector3 vplCamPos = vplCameraNode->GetPosition();
+            vplCamPos.x += dx > 0 ? flag : -flag;
+            vplCamPos.y -= dy > 0 ? flag : -flag;
+            vplCameraNode->SetPosition(vplCamPos);
+
+        }
+        
     };
 
     esContext->shutdownFunc = [=](){

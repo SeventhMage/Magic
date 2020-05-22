@@ -124,7 +124,6 @@
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    NSLog(@"UIViewController start touch...");
     UITouch *touch=[touches anyObject];
     NSSet *allTouches = [event allTouches];
     int i = 0;
@@ -161,7 +160,7 @@
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    NSLog(@"UIViewController touch end.");
+
 }
 
 @end
