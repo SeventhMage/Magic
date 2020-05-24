@@ -3,7 +3,8 @@
 
 #include "IModel.h"
 #include "IMesh.h"
-#include "IMaterial.h"
+
+#include <vector>
 
 namespace magic
 {
@@ -12,11 +13,11 @@ class CModel : public IModel
 public:
     CModel();
     virtual ~CModel();
-    
-    virtual bool Load(const char *path);
+    virtual void AddMesh(IMesh *pMesh);
+    virtual IMesh *GetMesh(int index) const;
+    virtual int GetMeshCount() const { return (int)m_MeshVec.size(); }
 private:
-    IMesh *m_pMesh;
-    IMaterial *m_pMaterial;
+    std::vector<IMesh *>m_MeshVec;
 };
 }
 

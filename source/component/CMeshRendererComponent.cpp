@@ -100,10 +100,10 @@ void CMeshRendererComponent::SetMesh(IMesh *pMesh)
                 m_pRenderInput->SetVertexBuffer(positions, positionsSize, 0);
             if (uvs)
                 m_pRenderInput->SetVertexBuffer(uvs, uvsSize, positionsSize);
-            if (colors)
-                m_pRenderInput->SetVertexBuffer(colors, colorsSize, positionsSize + uvsSize);
             if (normals)
-                m_pRenderInput->SetVertexBuffer(normals, normalSize, positionsSize + uvsSize + colorsSize);
+                m_pRenderInput->SetVertexBuffer(normals, normalSize, positionsSize + uvsSize);
+            if (colors)
+                m_pRenderInput->SetVertexBuffer(colors, colorsSize, positionsSize + uvsSize + normalSize);
             
             unsigned short *indices = pMesh->GetIndices();
             if (indices)
@@ -116,10 +116,10 @@ void CMeshRendererComponent::SetMesh(IMesh *pMesh)
                 m_pRenderInput->SetVertexAttribute(index++, 3, 0, 0);
             if (uvsSize > 0)
                 m_pRenderInput->SetVertexAttribute(index++, 2, 0, positionsSize);
-            if (colorsSize > 0)
-                m_pRenderInput->SetVertexAttribute(index++, 4, 0, positionsSize + uvsSize);
             if (normalSize > 0)
-                m_pRenderInput->SetVertexAttribute(index++, 3, 0, positionsSize + uvsSize + colorsSize);
+                m_pRenderInput->SetVertexAttribute(index++, 3, 0, positionsSize + uvsSize);
+            if (colorsSize > 0)
+                m_pRenderInput->SetVertexAttribute(index++, 4, 0, positionsSize + uvsSize + normalSize);
 
             m_pRenderInput->EndInput();
         }

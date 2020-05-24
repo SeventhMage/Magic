@@ -82,7 +82,6 @@
     [EAGLContext setCurrentContext:self.context];
     
     memset( &_esContext, 0, sizeof( _esContext ) );
-    
 }
 
 - (void)tearDownGL
@@ -107,11 +106,16 @@
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    _esContext.width = view.drawableWidth;
-    _esContext.height = view.drawableHeight;
     if (!_esContext.bInitalize)
     {
+        [self setupGL];
+        _esContext.width = view.drawableWidth;
+        _esContext.height = view.drawableHeight;
+        
         _gi.Init(&_esContext);
+        
+        self.preferredFramesPerSecond = _esContext.fps;
+        
         _esContext.bInitalize = true;
     }
     

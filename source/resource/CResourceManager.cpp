@@ -4,6 +4,9 @@
 #include "resource/CShader.h"
 #include "resource/CMesh.h"
 #include "resource/CMaterial.h"
+#include "resource/CModel.h"
+#include "loader/CObjLoader.h"
+#include "loader/CAssimpLoader.h"
 
 #include "FileWrapper.h"
 
@@ -78,7 +81,21 @@ IResource *CResourceManager::LoadMesh(const char *fileName)
 
 IResource *CResourceManager::LoadModel(const char *fileName)
 {
-    return nullptr;
+    std::string extName = GetFileExtName(fileName);
+//    if (extName == "obj")
+//    {
+//        CMesh *pMesh = new CMesh();
+//        CMaterial *pMaterial = new CMaterial(this);
+//
+//        CObjLoader loader;
+//        loader.Load(fileName, pMesh, pMaterial);
+//        return new CModel(pMesh, pMaterial);
+//    }
+    
+    CAssimpLoader loader;
+    IModel *pModel = new CModel();
+    loader.Load(fileName, pModel);
+    return pModel;
 }
 
 }

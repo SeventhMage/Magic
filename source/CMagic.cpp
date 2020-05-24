@@ -8,8 +8,8 @@ namespace magic
 {
 CMagic::CMagic(SRenderContext *context, const char *title, int width, int height)
 :m_pApplication(new CApplication())
-,m_iFPS(30)
-,m_iFixDelta(33.3f)
+,m_iFPS(60)
+,m_iFixDelta(16.67f)
 {
     m_pSceneManager = new CSceneManager();
     m_pResourceManager = new CResourceManager();

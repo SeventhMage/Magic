@@ -43,6 +43,7 @@ void CGI::Init(SRenderContext *esContext)
     esContext->screenResolutionRatio = 1.0f;
     mc = CreateMagic(esContext, "gi", 800, 600);
     mc->SetFPS(120);
+    esContext->fps = mc->GetFPS();
     
     float quadVertices[][3] = {
         -1.f, -1.f, 0.f,
@@ -85,7 +86,7 @@ void CGI::Init(SRenderContext *esContext)
     //camera init
     ISceneNode *cameraNode = pRootNode->CreateChildNode();
     IGameObject *cameraObject = cameraNode->AddGameObject();
-    cameraNode->SetPosition(CVector3(0, 0, 5));
+    cameraNode->SetPosition(CVector3(0, 0, 10));
     CCameraComponent *pCamera = cameraObject->AddComponent<CCameraComponent>();
     pCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
     pCamera->SetClearColor(0.0f, 0.0f, 0.0f, 0.f);
@@ -106,11 +107,12 @@ void CGI::Init(SRenderContext *esContext)
     
     
     //box init
+    IModel *pModel = (IModel *)resourceMgr->LoadResource("resource/model/Cottage/cottage_fbx.fbx", EResourceType::Model);
     ISceneNode *boxNode = pRootNode->CreateChildNode();
     boxNode->SetPosition(CVector3(-1.f, 0, 0));
     IGameObject *boxObject = boxNode->AddGameObject();
     CMeshRendererComponent *pMeshRenderer = boxObject->AddComponent<CMeshRendererComponent>();
-    boxMesh = (IMesh *)resourceMgr->LoadResource("resource/mesh/cube.mesh.xml", EResourceType::Mesh);
+    boxMesh = pModel->GetMesh(0);//(IMesh *)resourceMgr->LoadResource("resource/mesh/cube.mesh.xml", EResourceType::Mesh);
     //boxMesh = new CSphere(1.5, 20, 20);
     boxMaterial = (IMaterial *)resourceMgr->LoadResource("resource/material/multarget.mat.xml", EResourceType::Material);
     uint textureUnit = 0;
@@ -156,7 +158,7 @@ void CGI::Init(SRenderContext *esContext)
     }
     
     //Indirect light
-    static const int RAND_WIDTH = 12;
+    static const int RAND_WIDTH = 16;
     static const int RAND_NUM = RAND_WIDTH * RAND_WIDTH;
     byte vRandNum[RAND_NUM * 3] = { 0 };
     for (int i = 0; i < RAND_NUM; ++i)
@@ -222,7 +224,8 @@ void CGI::Init(SRenderContext *esContext)
     IGameObject *deferredCamera = cameraNode->AddGameObject();
     IGameObject *deferredObject = pRootNode->AddGameObject();
     CCameraComponent *pDeferredCamera = deferredCamera->AddComponent<CCameraComponent>();
-    pDeferredCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
+    //pDeferredCamera->Initialize(renderer, CCameraComponent::Ortho, 2.f, 2.f / aspect, -100.f, 100.f);
+    pDeferredCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
     pDeferredCamera->SetClearColor(.0f, 0.0f, .0f, 0.0f);
     pDeferredCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
     CMeshRendererComponent *pDeferredRenderer = deferredObject->AddComponent<CMeshRendererComponent>();
@@ -338,11 +341,11 @@ void CGI::Init(SRenderContext *esContext)
         }
         else if (count == 3)
         {
-            CVector3 vplCamPos = vplCameraNode->GetPosition();
-            vplCamPos.x += dx > 0 ? flag : -flag;
-            vplCamPos.y -= dy > 0 ? flag : -flag;
-            vplCameraNode->SetPosition(vplCamPos);
-
+            float flag = 0.01f;
+            CVector3 camPos = cameraNode->GetPosition();
+            camPos.x += dx > 0 ? flag : -flag;
+            camPos.z -= dy > 0 ? flag : -flag;
+            cameraNode->SetPosition(camPos);
         }
         
     };

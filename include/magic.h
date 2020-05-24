@@ -8,6 +8,7 @@
 #include "scene/CGameObject.h"
 #include "resource/CMesh.h"
 #include "resource/CMaterial.h"
+#include "resource/IModel.h"
 #include "resource/CShader.h"
 #include "resource/IImage.h"
 #include "component/CCameraComponent.h"
