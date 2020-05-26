@@ -29,9 +29,9 @@ void main()
     vec3 lightColor = ambientLightColor;
     vec3 _normal = normalize(baseNormal.xyz);
     lightColor += max(dot(lightDir, _normal), 0.0) * directionalLightColor;
-    vec3 reflectDir = reflect(-lightDir, _normal);
-    lightColor += pow(max(dot(vec3(0.0, 0.0, 1.0), normalize(viewMatrix * vec4(reflectDir, 1.0)).xyz), 0.0), specCoefficient) * directionalLightColor;
-    fragColor = baseColor * vec4(lightColor + indirectLightColor.rgb, 1.0);
+    vec3 reflectDir = reflect(lightDir, _normal);
+    lightColor = pow(max(dot(vec3(0.0, 0.0, -1.0), normalize(viewMatrix * vec4(reflectDir, 1.0)).xyz), 0.0), specCoefficient) * directionalLightColor;
+    fragColor = baseColor * vec4(lightColor + indirectLightColor.rgb, 1.0) * indirectLightColor.a;
     //fragColor.rgb = baseNormal.xyz;
     //fragColor.rgb = indirectLightColor.rgb;
     //fragColor.rgb = lightColor.rgb;
