@@ -145,4 +145,9 @@ void CMeshRendererComponent::SetTexture(int slot, ITexture *pTexture)
     m_pRenderInput->SetTexture(slot, pTexture);
 }
 
+IShaderProgram *CMeshRendererComponent::GetShaderProgram() const
+{
+    return m_pRenderInput->GetShaderProgram();
+}
+
 }

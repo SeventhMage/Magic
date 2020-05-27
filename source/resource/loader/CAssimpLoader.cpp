@@ -58,10 +58,10 @@ IMesh *CAssimpLoader::processMesh(aiMesh* mesh, const aiScene* scene)
     {
         //switch y and z
         // Positions
-        positions.push_back(CVector3(mesh->mVertices[i].x, mesh->mVertices[i].z, mesh->mVertices[i].y));
+        positions.push_back(CVector3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z));
         // Normals
         if (mesh->mNormals)
-            normals.push_back(CVector3(mesh->mNormals[i].x, mesh->mNormals[i].z, mesh->mNormals[i].y));
+            normals.push_back(CVector3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z));
         // Texture Coordinates
         if(mesh->mTextureCoords[0]) // Does the mesh contain texture coordinates?
         {

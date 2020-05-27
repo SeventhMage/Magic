@@ -9,9 +9,12 @@ uniform sampler2D indirectLightTexture;
 uniform vec3 ambientLightColor;
 uniform vec3 directionalLightDir;
 uniform vec3 directionalLightColor;
+uniform vec3 pointLightPosition;
+uniform vec3 pointLightColor;
 uniform float specCoefficient;
 
 uniform mat4 viewMatrix;
+uniform vec3 viewPosition;
 
 in vec2 texCoord;
 in vec3 position;
@@ -25,14 +28,30 @@ void main()
     vec4 baseColor = texture(colorTexture, texCoord);
     vec4 indirectLightColor = texture(indirectLightTexture, texCoord);
     
-    vec3 lightDir = normalize(-directionalLightDir);
-    vec3 lightColor = ambientLightColor;
     vec3 _normal = normalize(baseNormal.xyz);
+    vec3 viewDir = normalize(viewPosition - basePosition.xyz);
+    
+    vec3 lightColor = ambientLightColor;
+    /*
+    vec3 lightDir = normalize(-directionalLightDir);
     lightColor += max(dot(lightDir, _normal), 0.0) * directionalLightColor;
     vec3 reflectDir = reflect(lightDir, _normal);
-    lightColor = pow(max(dot(vec3(0.0, 0.0, -1.0), normalize(viewMatrix * vec4(reflectDir, 1.0)).xyz), 0.0), specCoefficient) * directionalLightColor;
-    fragColor = baseColor * vec4(lightColor + indirectLightColor.rgb, 1.0) * indirectLightColor.a;
-    //fragColor.rgb = baseNormal.xyz;
+    lightColor += pow(max(dot(viewDir, reflectDir), 0.0), specCoefficient) * directionalLightColor;
+    */
+    
+    float pointLightDis = distance(pointLightPosition, basePosition.xyz);
+    float attenuation = 1.0 / (1.0 + pointLightDis * 0.01 + pointLightDis * pointLightDis * 0.001);
+    vec3 pointLightDir = normalize(pointLightPosition - basePosition.xyz);
+    lightColor += max(dot(pointLightDir, _normal), 0.0) * pointLightColor * attenuation;
+    vec3 pointLightReflectDir = reflect(pointLightDir, _normal);
+    lightColor += pow(max(dot(viewDir, pointLightReflectDir), 0.0), specCoefficient) * pointLightColor * attenuation;
+    lightColor += indirectLightColor.rgb;
+    lightColor *= indirectLightColor.a;
+    clamp(lightColor.r, 0.0, 1.0);
+    clamp(lightColor.g, 0.0, 1.0);
+    clamp(lightColor.b, 0.0, 1.0);
+    fragColor = baseColor * vec4(lightColor, 1.0);
+    //fragColor.rgb =  pointLightReflectDir.xyz;
     //fragColor.rgb = indirectLightColor.rgb;
     //fragColor.rgb = lightColor.rgb;
 }

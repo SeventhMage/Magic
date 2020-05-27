@@ -22,6 +22,7 @@ public:
     void SetMesh(IMesh *pMesh);
     void SetMaterial(IMaterial *pMaterial);
     void SetTexture(int slot, ITexture *pTexture);
+    IShaderProgram *GetShaderProgram() const;
 private:
     IMesh *m_pMesh;
     IMaterial *m_pMaterial;

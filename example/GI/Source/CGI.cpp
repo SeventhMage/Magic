@@ -60,10 +60,12 @@ void CGI::Init(SRenderContext *esContext)
     };
 
     unsigned short quadIndices[] = {0, 1, 2, 0, 2, 3};
-    float ambientLightColor[] = {0.0f, 0.0f, 0.0f};
+    float ambientLightColor[] = {0.2f, 0.2f, 0.2f};
     float directionalLightDir[] = {0.f, 0.f, -1.f};
-    float directionalLightColor[] = {.6f, 0.6f, 0.6f};
-    float specCoefficient = 80.f;
+    float directionalLightColor[] = {.4f, 0.4f, 0.4f};
+    float pointLightPosition[] = {0, 10, 0};
+    float pointLightColor[] = {.4f, 0.4f, 0.4f};
+    float specCoefficient = 200.f;
     CVector4 red(1, 0, 0, 1);
     CVector4 white(1, 1, 1, 1);
     CVector3 lightPos(0, 0, 8);
@@ -81,12 +83,12 @@ void CGI::Init(SRenderContext *esContext)
     //render target
     renderTarget = renderer->CreateRenderTarget(esContext->width, esContext->height, true, 3);
     vplTarget = renderer->CreateRenderTarget(512, 512 / aspect, true, 3);
-    indirectTarget = renderer->CreateRenderTarget(esContext->width * 0.5f, esContext->height * 0.5f, false, 1);
+    indirectTarget = renderer->CreateRenderTarget(esContext->width * 0.2f, esContext->height * 0.2f, false, 1);
     
     //camera init
     ISceneNode *cameraNode = pRootNode->CreateChildNode();
     IGameObject *cameraObject = cameraNode->AddGameObject();
-    cameraNode->SetPosition(CVector3(0, 0, 10));
+    cameraNode->SetPosition(CVector3(0, 0, 100));
     CCameraComponent *pCamera = cameraObject->AddComponent<CCameraComponent>();
     pCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
     pCamera->SetClearColor(0.0f, 0.0f, 0.0f, 0.f);
@@ -107,13 +109,7 @@ void CGI::Init(SRenderContext *esContext)
     
     
     //box init
-    IModel *pModel = (IModel *)resourceMgr->LoadResource("resource/model/Cottage/cottage_fbx.fbx", EResourceType::Model);
-    ISceneNode *boxNode = pRootNode->CreateChildNode();
-    boxNode->SetPosition(CVector3(-1.f, 0, 0));
-    IGameObject *boxObject = boxNode->AddGameObject();
-    CMeshRendererComponent *pMeshRenderer = boxObject->AddComponent<CMeshRendererComponent>();
-    boxMesh = pModel->GetMesh(0);//(IMesh *)resourceMgr->LoadResource("resource/mesh/cube.mesh.xml", EResourceType::Mesh);
-    //boxMesh = new CSphere(1.5, 20, 20);
+    
     boxMaterial = (IMaterial *)resourceMgr->LoadResource("resource/material/multarget.mat.xml", EResourceType::Material);
     uint textureUnit = 0;
     boxMaterial->SetProperty("textureUnit", &textureUnit, sizeof(textureUnit));
@@ -121,29 +117,47 @@ void CGI::Init(SRenderContext *esContext)
     boxMaterial->SetProperty("ambientLightColor", ambientLightColor, sizeof(ambientLightColor));
     boxMaterial->SetProperty("directionalLightDir", directionalLightDir, sizeof(directionalLightDir));
     boxMaterial->SetProperty("directionalLightColor", directionalLightColor, sizeof(directionalLightColor));
+    boxMaterial->SetProperty("pointLightPosition", pointLightPosition, sizeof(pointLightPosition));
+    boxMaterial->SetProperty("pointLightColor", pointLightColor, sizeof(pointLightColor));
     boxMaterial->SetProperty("specCoefficient", &specCoefficient, sizeof(specCoefficient));
-    pMeshRenderer->Initialize(mc->GetRenderer(), pCamera->GetFlag() | vplCamera->GetFlag(), boxMesh, boxMaterial);
-    for (int i=0; i<boxMaterial->GetImageCount(); ++i)
+    
+    IModel *pModel = (IModel *)resourceMgr->LoadResource("resource/model/Room/Room_New.obj", EResourceType::Model);
+    ISceneNode *boxNode = pRootNode->CreateChildNode();
+    boxNode->SetPosition(CVector3(-1.f, 0, 0));
+    for (int i=0; i<pModel->GetMeshCount(); ++i)
     {
-        IImage *pImage = boxMaterial->GetImage(i);
-        if (pImage)
+        IGameObject *boxObject = boxNode->AddGameObject();
+        CMeshRendererComponent *pMeshRenderer = boxObject->AddComponent<CMeshRendererComponent>();
+        boxMesh = pModel->GetMesh(i);//(IMesh *)resourceMgr->LoadResource("resource/mesh/cube.mesh.xml", EResourceType::Mesh);
+        //boxMesh = new CSphere(1.5, 20, 20);
+        
+        pMeshRenderer->Initialize(mc->GetRenderer(), pCamera->GetFlag() | vplCamera->GetFlag(), boxMesh, boxMaterial);
+        
+        for (int i=0; i<boxMaterial->GetImageCount(); ++i)
         {
-            boxTexture = renderer->CreateTexture(pImage->GetComponents(), pImage->GetWidth(), pImage->GetHeight(), pImage->GetFormat(), pImage->GetPixelType(), pImage->GetData());
+            IImage *pImage = boxMaterial->GetImage(i);
+            if (pImage)
+            {
+                boxTexture = renderer->CreateTexture(pImage->GetComponents(), pImage->GetWidth(), pImage->GetHeight(), pImage->GetFormat(), pImage->GetPixelType(), pImage->GetData());
+            }
+            pMeshRenderer->SetTexture(i, boxTexture);
         }
-        pMeshRenderer->SetTexture(i, boxTexture);
     }
     
     //sphere init
     ISceneNode *sphereNode = pRootNode->CreateChildNode();
-    sphereNode->SetPosition(CVector3(.5f, 0, 0));
+    sphereNode->SetPosition(CVector3(.5f, 10, 0));
     IGameObject *sphereObject = sphereNode->AddGameObject();
-    sphereMesh = new CSphere(0.5, 20, 20);
+    sphereMesh = new CSphere(1.5, 20, 20);
     sphereMaterial = (IMaterial *)resourceMgr->LoadResource("resource/material/multarget.mat.xml", EResourceType::Material);
+    
     sphereMaterial->SetProperty("textureUnit", &textureUnit, sizeof(textureUnit));
     sphereMaterial->SetProperty("_color", red.v, sizeof(CVector4));
     sphereMaterial->SetProperty("ambientLightColor", ambientLightColor, sizeof(ambientLightColor));
     sphereMaterial->SetProperty("directionalLightDir", directionalLightDir, sizeof(directionalLightDir));
     sphereMaterial->SetProperty("directionalLightColor", directionalLightColor, sizeof(directionalLightColor));
+    sphereMaterial->SetProperty("pointLightPosition", pointLightPosition, sizeof(pointLightPosition));
+    sphereMaterial->SetProperty("pointLightColor", pointLightColor, sizeof(pointLightColor));
     sphereMaterial->SetProperty("specCoefficient", &specCoefficient, sizeof(specCoefficient));
     CMeshRendererComponent *pSphereMeshRenderer = sphereObject->AddComponent<CMeshRendererComponent>();
     pSphereMeshRenderer->Initialize(mc->GetRenderer(), pCamera->GetFlag() | vplCamera->GetFlag(), sphereMesh, sphereMaterial);
@@ -203,7 +217,10 @@ void CGI::Init(SRenderContext *esContext)
         
         indirectMaterial->SetProperty("lightDir", directionalLightDir, sizeof(directionalLightDir));
         indirectMaterial->SetProperty("lightColor", directionalLightColor, sizeof(directionalLightColor));
+        
+        
         int samplingColCount = RAND_WIDTH;
+        
         indirectMaterial->SetProperty("samplingColCount", &samplingColCount, sizeof(samplingColCount));
         
         pIndirectRenderer->Initialize(renderer, pIndirectCamera->GetFlag(), indirectMesh, indirectMaterial);
@@ -251,6 +268,8 @@ void CGI::Init(SRenderContext *esContext)
         deferredMaterial->SetProperty("ambientLightColor", ambientLightColor, sizeof(ambientLightColor));
         deferredMaterial->SetProperty("directionalLightDir", directionalLightDir, sizeof(directionalLightDir));
         deferredMaterial->SetProperty("directionalLightColor", directionalLightColor, sizeof(directionalLightColor));
+        deferredMaterial->SetProperty("pointLightPosition", pointLightPosition, sizeof(pointLightPosition));
+        deferredMaterial->SetProperty("pointLightColor", pointLightColor, sizeof(pointLightColor));
         deferredMaterial->SetProperty("specCoefficient", &specCoefficient, sizeof(specCoefficient));
         pDeferredRenderer->Initialize(renderer, pDeferredCamera->GetFlag(), deferredMesh, deferredMaterial);
         for (int i=0; i<renderTarget->GetBindTextureCount(); ++i)
@@ -273,7 +292,7 @@ void CGI::Init(SRenderContext *esContext)
                 ;//flag = -flag;
             pos.x += flag;
             
-            boxObject->GetSceneNode()->SetRotation(CVector3(0, DEG_TO_RAD(45.f), 0));
+            //boxObject->GetSceneNode()->SetRotation(CVector3(0, DEG_TO_RAD(45.f), 0));
             //sphereObject->GetSceneNode()->SetRotation(CVector3(0, rot, 0));
             
             rot += flag;
@@ -326,25 +345,33 @@ void CGI::Init(SRenderContext *esContext)
     
     esContext->touchMoveFunc = [=](int index, int dx, int dy, int count){
         CVector3 spherePosition = sphereNode->GetPosition();
-        float flag = 0.01f;
         if (count == 1)
         {
+            float flag = 1.f;
             spherePosition.x += dx > 0 ? flag : -flag;
             spherePosition.y -= dy > 0 ? flag : -flag;
             sphereNode->SetPosition(spherePosition);
+            CVector3 pointLightPosition(spherePosition.x, spherePosition.y + 2, spherePosition.z + 2);
+            pDeferredRenderer->GetShaderProgram()->SetUniform("pointLightPosition", pointLightPosition.v);
         }
         else if (count == 2)
         {
-            spherePosition.x += dx > 0 ? flag : -flag;
-            spherePosition.z += dy > 0 ? flag : -flag;
-            sphereNode->SetPosition(spherePosition);
+            float flag = 0.01f;
+            CVector3 rotation = cameraNode->GetRotation();
+            rotation.y -= dx > 0 ? flag : -flag;
+            //rotation.x -= dy > 0 ? flag : -flag;
+            cameraNode->SetRotation(rotation);
         }
         else if (count == 3)
         {
-            float flag = 0.01f;
+            float flag = 1.f;
             CVector3 camPos = cameraNode->GetPosition();
-            camPos.x += dx > 0 ? flag : -flag;
-            camPos.z -= dy > 0 ? flag : -flag;
+            CVector3 dir(0, 0, -1);
+            CMatrix4 transform = cameraNode->GetAbsluateTransform();
+            transform.SetTranslation(CVector3(0, 0, 0));
+            transform.TransformVect(dir);
+            dir.normalize();
+            camPos -= dir * (dy > 0 ? flag : -flag);
             cameraNode->SetPosition(camPos);
         }
         

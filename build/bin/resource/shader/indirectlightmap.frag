@@ -49,7 +49,7 @@ void calcIndirectLight(int i, vec2 texCoordInValBegin, float stepRate, float sam
 	indirectLC += irradiance;
 	
 	float v = (1.0 - step(0.0, dot(shootDir, valN.xyz))) * step(0.0, dot(-shootDir, gNormal.xyz));
-    shelter += max(dot(-shootDir, gNormal.xyz), 0.0);// / (dis * dis);	
+    shelter += max(dot(-shootDir, gNormal.xyz), 0.0) / (dis * dis);	
 }
 
 
