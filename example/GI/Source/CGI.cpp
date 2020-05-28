@@ -61,11 +61,11 @@ void CGI::Init(SRenderContext *esContext)
 
     unsigned short quadIndices[] = {0, 1, 2, 0, 2, 3};
     float ambientLightColor[] = {0.2f, 0.2f, 0.2f};
-    float directionalLightDir[] = {0.f, 0.f, -1.f};
+    float directionalLightDir[] = {1.f, -1.f, -1.f};
     float directionalLightColor[] = {.4f, 0.4f, 0.4f};
     float pointLightPosition[] = {0, 10, 0};
     float pointLightColor[] = {.4f, 0.4f, 0.4f};
-    float specCoefficient = 200.f;
+    float specCoefficient = 400.f;
     CVector4 red(1, 0, 0, 1);
     CVector4 white(1, 1, 1, 1);
     CVector3 lightPos(0, 0, 8);
@@ -121,7 +121,7 @@ void CGI::Init(SRenderContext *esContext)
     boxMaterial->SetProperty("pointLightColor", pointLightColor, sizeof(pointLightColor));
     boxMaterial->SetProperty("specCoefficient", &specCoefficient, sizeof(specCoefficient));
     
-    IModel *pModel = (IModel *)resourceMgr->LoadResource("resource/model/Room/Room_New.obj", EResourceType::Model);
+    IModel *pModel = (IModel *)resourceMgr->LoadResource("resource/model/Room/Room.obj", EResourceType::Model);
     ISceneNode *boxNode = pRootNode->CreateChildNode();
     boxNode->SetPosition(CVector3(-1.f, 0, 0));
     for (int i=0; i<pModel->GetMeshCount(); ++i)
