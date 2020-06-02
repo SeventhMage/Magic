@@ -41,7 +41,7 @@ void CGI::Init(SRenderContext *esContext)
 {
     printf("Start initalizing Engine ... \n");
     esContext->screenResolutionRatio = 1.0f;
-    mc = CreateMagic(esContext, "gi", 800, 600);
+    mc = CreateMagic(esContext, "gi", 200, 100);
     mc->SetFPS(120);
     esContext->fps = mc->GetFPS();
     
@@ -68,7 +68,8 @@ void CGI::Init(SRenderContext *esContext)
     float specCoefficient = 400.f;
     CVector4 red(1, 0, 0, 1);
     CVector4 white(1, 1, 1, 1);
-    CVector3 lightPos(0, 0, 8);
+
+    CVector3 lightPos(0, 0, 100);
     
     renderer = mc->GetRenderer();
     float aspect = 1.f * esContext->width / esContext->height;
@@ -88,7 +89,7 @@ void CGI::Init(SRenderContext *esContext)
     //camera init
     ISceneNode *cameraNode = pRootNode->CreateChildNode();
     IGameObject *cameraObject = cameraNode->AddGameObject();
-    cameraNode->SetPosition(CVector3(0, 0, 100));
+    cameraNode->SetPosition(CVector3(0, 0, 10));
     CCameraComponent *pCamera = cameraObject->AddComponent<CCameraComponent>();
     pCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
     pCamera->SetClearColor(0.0f, 0.0f, 0.0f, 0.f);
@@ -102,7 +103,7 @@ void CGI::Init(SRenderContext *esContext)
     vplCameraNode->Update();
     CCameraComponent *vplCamera = vplCameraObject->AddComponent<CCameraComponent>();
     //vplCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
-    vplCamera->Initialize(renderer, CCameraComponent::Ortho, 10.f, 10.f / aspect, -100.f, 100.f);
+    vplCamera->Initialize(renderer, CCameraComponent::Ortho, 100.f, 100.f / aspect, -1000.f, 1000.f);
     vplCamera->SetClearColor(0.0f, 0.0f, 0.0f, 0.f);
     vplCamera->SetClearBit(MAGIC_COLOR_BUFFER_BIT | MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT);
     vplCamera->SetRenderTarget(vplTarget);
@@ -121,7 +122,7 @@ void CGI::Init(SRenderContext *esContext)
     boxMaterial->SetProperty("pointLightColor", pointLightColor, sizeof(pointLightColor));
     boxMaterial->SetProperty("specCoefficient", &specCoefficient, sizeof(specCoefficient));
     
-    IModel *pModel = (IModel *)resourceMgr->LoadResource("resource/model/Room/Room.obj", EResourceType::Model);
+    IModel *pModel = (IModel *)resourceMgr->LoadResource("resource/model/Buildings/buildings.obj", EResourceType::Model);
     ISceneNode *boxNode = pRootNode->CreateChildNode();
     boxNode->SetPosition(CVector3(-1.f, 0, 0));
     for (int i=0; i<pModel->GetMeshCount(); ++i)
@@ -148,7 +149,7 @@ void CGI::Init(SRenderContext *esContext)
     ISceneNode *sphereNode = pRootNode->CreateChildNode();
     sphereNode->SetPosition(CVector3(.5f, 10, 0));
     IGameObject *sphereObject = sphereNode->AddGameObject();
-    sphereMesh = new CSphere(1.5, 20, 20);
+    sphereMesh = new CSphere(15, 20, 20);
     sphereMaterial = (IMaterial *)resourceMgr->LoadResource("resource/material/multarget.mat.xml", EResourceType::Material);
     
     sphereMaterial->SetProperty("textureUnit", &textureUnit, sizeof(textureUnit));
@@ -190,7 +191,7 @@ void CGI::Init(SRenderContext *esContext)
     IGameObject *indirectCamera = vplCameraNode->AddGameObject();
     IGameObject *indirectObject = pRootNode->AddGameObject();
     CCameraComponent *pIndirectCamera = indirectCamera->AddComponent<CCameraComponent>();
-    pIndirectCamera->Initialize(renderer, CCameraComponent::Ortho, 10.f, 10.f / aspect, -100.f, 100.f);
+    pIndirectCamera->Initialize(renderer, CCameraComponent::Ortho, 100.f, 100.f / aspect, -1000.f, 1000.f);
     //pIndirectCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 1000.f);
     pIndirectCamera->SetClearColor(.0f, .0f, .0f, 0.0f);
     pIndirectCamera->SetClearBit(MAGIC_DEPTH_BUFFER_BIT | MAGIC_STENCIL_BUFFER_BIT | MAGIC_COLOR_BUFFER_BIT);
@@ -305,34 +306,81 @@ void CGI::Init(SRenderContext *esContext)
 
     esContext->keyFunc = [=](unsigned char key, int x, int y){
         CVector3 spherePosition = sphereNode->GetPosition();
-        float flag = 0.1f;
+		CVector3 camPos = cameraNode->GetPosition();
+		CVector3 dir(0, 0, -1);
+		CVector3 right(1, 0, 0);
+		CVector3 up(0, 1, 0);
+		CMatrix4 transform = cameraNode->GetAbsluateTransform();
+		transform.SetTranslation(CVector3(0, 0, 0));
+		transform.TransformVect(dir);
+		transform.TransformVect(right);
+		transform.TransformVect(up);
+		dir.normalize();
+		right.normalize();
+		up.normalize();
+
+
+		CVector3 rotation = cameraNode->GetRotation();
+
+        float flag = 1.f;
         switch(key)
         {
         case 'W':
         case 'w':
-            spherePosition.z -= 0.1f;
+            spherePosition.z -= flag;
             break;
         case 'S':
         case 's':
-            spherePosition.z += 0.1f;
+            spherePosition.z += flag;
             break;
         case 'A':
         case 'a':
-            spherePosition.x -= 0.1f;
+            spherePosition.x -= flag;
             break;
         case 'D':
         case 'd':
-            spherePosition.x += 0.1f;
+            spherePosition.x += flag;
             break;
-        case 32:
-            spherePosition.y += 0.1f;
+        case 'Q':
+		case 'q':
+            spherePosition.y += flag;
             break;
-        case 'Z':
-        case 'z':
-            spherePosition.y -= 0.1f;
+        case 'E':
+        case 'e':
+            spherePosition.y -= flag;
             break;
-        case 'I':
+		case 'I':
         case 'i':
+			camPos += dir * flag;
+            break;
+        case 'K':
+        case 'k':
+			camPos -= dir * flag;
+            break;
+        case 'J':
+        case 'j':
+			camPos -= right * flag;
+            break;
+        case 'L':
+        case 'l':
+			camPos += right * flag;
+            break;
+        case 'U':
+		case 'u':
+			camPos += up * flag;
+            break;
+        case 'O':
+        case 'o':
+			camPos -= up * flag;
+            break;
+		case 'Y':
+			rotation.y += 0.1f;
+			break;
+		case 'y':
+			rotation.y -= 0.1f;
+			break;
+        case 'G':
+        case 'g':
             pIndirectCamera->SetEnable(!pIndirectCamera->IsEnable());
             break;
         case 'P':
@@ -341,6 +389,8 @@ void CGI::Init(SRenderContext *esContext)
             break;
         }
         sphereNode->SetPosition(spherePosition);
+		cameraNode->SetPosition(camPos);
+		cameraNode->SetRotation(rotation);
     };
     
     esContext->touchMoveFunc = [=](int index, int dx, int dy, int count){

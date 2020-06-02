@@ -27,7 +27,7 @@ void CGLES3Texture::Create2D(EColorFormat internalformat, int width, int height,
 
 	GLDebug(glTexImage2D(GL_TEXTURE_2D, 0, GetGLColorFormat(internalformat), width, height, 0, GetGLColorFormat(format), GetGLPixelType(type), data));
 
-	GLDebug(glGenerateMipmap(GL_TEXTURE_2D));
+	//GLDebug(glGenerateMipmap(GL_TEXTURE_2D));
 
 	GLDebug(glBindTexture(GL_TEXTURE_2D, 0));
 }

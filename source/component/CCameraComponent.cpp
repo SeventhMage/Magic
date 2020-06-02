@@ -50,6 +50,8 @@ void CCameraComponent::Initialize(IRenderer *pRenderer, CameraType type, float f
     m_FarClip = far;
     m_bNeedUpdateView = true;
     m_bNeedUpdateProj = true;
+
+	Update();
 }
 
 void CCameraComponent::SetClearBit(int bit)

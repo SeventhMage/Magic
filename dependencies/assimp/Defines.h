@@ -54,5 +54,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if (!defined UINT_MAX)
 #   define UINT_MAX (~((unsigned int)0))
 #endif
-
 #endif // AI_DEINES_H_INC
+
+#define SIZE_MAX UINT_MAX

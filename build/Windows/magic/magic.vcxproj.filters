@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{21b23fbd-2507-42f2-b33e-05c3e892e5bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{6fcb6ab4-a62f-45b4-870c-d1bca64fef23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{5cd4051f-e415-4b0f-a9d7-2b1f36856e99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dependencies">
+      <UniqueIdentifier>{66aea193-ff18-4d68-a69d-d465ed91a832}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\component">
+      <UniqueIdentifier>{e86e8be2-9483-46e6-8731-dd572c478409}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\render">
+      <UniqueIdentifier>{b45cbe11-f3ea-448d-899f-76465f778abd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\resource">
+      <UniqueIdentifier>{33f5316a-5514-4eab-95e1-48bb9c731fea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\scene">
+      <UniqueIdentifier>{85346771-f3a1-4e46-ac5e-04184463546a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\base">
+      <UniqueIdentifier>{4bc4ab0d-8c49-47fd-aabb-9aa406f215fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\math">
+      <UniqueIdentifier>{4e8cd616-58c7-4b7c-97a4-f9b86b93afec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\component">
+      <UniqueIdentifier>{685db550-ebc3-4547-9988-f9f46e2e8745}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\render">
+      <UniqueIdentifier>{1cca52f4-0c0f-4b7c-85f4-654cd440a126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\resource">
+      <UniqueIdentifier>{dd80053f-a1bc-4fc7-ac1c-667c3a6f6e58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scene">
+      <UniqueIdentifier>{6e4b283d-258f-4aa5-99e5-bf5a953c965b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\render\gles3">
+      <UniqueIdentifier>{f8b62396-8450-499f-a237-5003c4ec3a07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\resource\loader">
+      <UniqueIdentifier>{4bb21e6c-59b6-4050-b374-23b3b68b730b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\IApplication.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\IMagic.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\IObject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\ITime.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\magic.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\component\CComponent.h">
+      <Filter>include\component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\component\CMeshRendererComponent.h">
+      <Filter>include\component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\component\IComponent.h">
+      <Filter>include\component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\component\CCameraComponent.h">
+      <Filter>include\component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\render\IBufferObject.h">
+      <Filter>include\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\render\IRenderer.h">
+      <Filter>include\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\render\IRenderInput.h">
+      <Filter>include\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\render\IRenderPass.h">
+      <Filter>include\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\render\IRenderTarget.h">
+      <Filter>include\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\render\IShaderProgram.h">
+      <Filter>include\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\render\ITexture.h">
+      <Filter>include\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\render\SRenderContext.h">
+      <Filter>include\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\render\SShaderParam.h">
+      <Filter>include\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\render\CMaterialInstance.h">
+      <Filter>include\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\render\CRenderInput.h">
+      <Filter>include\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\render\ERender.h">
+      <Filter>include\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\resource\CMesh.h">
+      <Filter>include\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\resource\CModel.h">
+      <Filter>include\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\resource\CShader.h">
+      <Filter>include\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\resource\CSphere.h">
+      <Filter>include\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\resource\IImage.h">
+      <Filter>include\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\resource\IMaterial.h">
+      <Filter>include\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\resource\IMesh.h">
+      <Filter>include\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\resource\IModel.h">
+      <Filter>include\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\resource\IResource.h">
+      <Filter>include\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\resource\IResourceManager.h">
+      <Filter>include\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\resource\IShader.h">
+      <Filter>include\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\resource\CMaterial.h">
+      <Filter>include\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\scene\CGameUnit.h">
+      <Filter>include\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\scene\IGameObject.h">
+      <Filter>include\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\scene\IScene.h">
+      <Filter>include\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\scene\ISceneManager.h">
+      <Filter>include\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\scene\ISceneNode.h">
+      <Filter>include\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\scene\CGameObject.h">
+      <Filter>include\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\math\CPlane3.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\math\CQuaternion.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\math\CRay.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\math\CVector2.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\math\CVector3.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\math\CVector4.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\math\CBoundingBox.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\math\CFrustum.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\math\CMatrix4.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\base\magicString.h">
+      <Filter>common\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\base\magicType.h">
+      <Filter>common\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\base\SColor.h">
+      <Filter>common\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\base\StringHelper.h">
+      <Filter>common\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\base\base.h">
+      <Filter>common\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\base\CSingleton.h">
+      <Filter>common\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\base\Log.h">
+      <Filter>common\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\base\magicDef.h">
+      <Filter>common\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CApplication.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CMagic.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CTime.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CWindow.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\render\CIndexBufferObject.h">
+      <Filter>source\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\render\CRenderer.h">
+      <Filter>source\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\render\CRenderPass.h">
+      <Filter>source\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\render\CRenderQueue.h">
+      <Filter>source\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\render\CShaderProgram.h">
+      <Filter>source\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\render\CVertexArrayObject.h">
+      <Filter>source\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\render\CVertexBufferObject.h">
+      <Filter>source\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\render\gles3\CGLES3IndexBufferObject.h">
+      <Filter>source\render\gles3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\render\gles3\CGLES3Renderer.h">
+      <Filter>source\render\gles3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\render\gles3\CGLES3RenderTarget.h">
+      <Filter>source\render\gles3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\render\gles3\CGLES3ShaderProgram.h">
+      <Filter>source\render\gles3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\render\gles3\CGLES3Texture.h">
+      <Filter>source\render\gles3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\render\gles3\CGLES3VertexArrayObject.h">
+      <Filter>source\render\gles3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\render\gles3\CGLES3VertexBufferObject.h">
+      <Filter>source\render\gles3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\render\gles3\GLESDebug.h">
+      <Filter>source\render\gles3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\render\gles3\GLESType.h">
+      <Filter>source\render\gles3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\resource\CResourceManager.h">
+      <Filter>source\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\resource\CTGAImage.h">
+      <Filter>source\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\resource\FileWrapper.h">
+      <Filter>source\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\resource\loader\CAssimpLoader.h">
+      <Filter>source\resource\loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\resource\loader\CObjLoader.h">
+      <Filter>source\resource\loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\resource\loader\CResourceLoader.h">
+      <Filter>source\resource\loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\scene\CScene.h">
+      <Filter>source\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\scene\CSceneManager.h">
+      <Filter>source\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\scene\CSceneNode.h">
+      <Filter>source\scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\CApplication.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CMagic.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CTime.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\magic.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\component\CCameraComponent.cpp">
+      <Filter>source\component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\component\CComponent.cpp">
+      <Filter>source\component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\component\CMeshRendererComponent.cpp">
+      <Filter>source\component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\CIndexBufferObject.cpp">
+      <Filter>source\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\CMaterialInstance.cpp">
+      <Filter>source\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\CRenderer.cpp">
+      <Filter>source\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\CRenderInput.cpp">
+      <Filter>source\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\CRenderPass.cpp">
+      <Filter>source\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\CRenderQueue.cpp">
+      <Filter>source\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\CShaderProgram.cpp">
+      <Filter>source\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\CVertexArrayObject.cpp">
+      <Filter>source\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\CVertexBufferObject.cpp">
+      <Filter>source\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\gles3\CGLES3IndexBufferObject.cpp">
+      <Filter>source\render\gles3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\gles3\CGLES3Renderer.cpp">
+      <Filter>source\render\gles3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\gles3\CGLES3RenderTarget.cpp">
+      <Filter>source\render\gles3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\gles3\CGLES3ShaderProgram.cpp">
+      <Filter>source\render\gles3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\gles3\CGLES3Texture.cpp">
+      <Filter>source\render\gles3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\gles3\CGLES3VertexArrayObject.cpp">
+      <Filter>source\render\gles3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\render\gles3\CGLES3VertexBufferObject.cpp">
+      <Filter>source\render\gles3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\resource\CMesh.cpp">
+      <Filter>source\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\resource\CModel.cpp">
+      <Filter>source\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\resource\CResourceManager.cpp">
+      <Filter>source\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\resource\CShader.cpp">
+      <Filter>source\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\resource\CSphere.cpp">
+      <Filter>source\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\resource\CTGAImage.cpp">
+      <Filter>source\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\resource\CMaterial.cpp">
+      <Filter>source\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\resource\loader\CAssimpLoader.cpp">
+      <Filter>source\resource\loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\resource\loader\CObjLoader.cpp">
+      <Filter>source\resource\loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\resource\loader\CResourceLoader.cpp">
+      <Filter>source\resource\loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\scene\CScene.cpp">
+      <Filter>source\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\scene\CSceneManager.cpp">
+      <Filter>source\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\scene\CSceneNode.cpp">
+      <Filter>source\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\scene\CGameObject.cpp">
+      <Filter>source\scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

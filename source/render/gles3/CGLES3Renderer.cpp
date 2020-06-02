@@ -50,16 +50,15 @@ LRESULT WINAPI ESWindowProc(HWND hWnd, ::UINT uMsg, WPARAM wParam, LPARAM lParam
 
   case WM_PAINT:
   {
-     SRenderContext *esContext = (SRenderContext *)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
+	  SRenderContext *esContext = (SRenderContext *)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
 
-     if (esContext && esContext->drawFunc)
-     {
-        if (esContext->drawFunc)
-           esContext->drawFunc();
-        //eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
-     }
+	  if (esContext && esContext->drawFunc)
+	  {
+		  if (esContext->drawFunc)
+			  esContext->drawFunc();
+	  }
 
-     //ValidateRect(hWnd, NULL);
+     InvalidateRect(hWnd, NULL, false);
   }
   break;
 
@@ -325,8 +324,7 @@ IBufferObject *CGLES3Renderer::CreateIndexBufferObject(void *indices, int size, 
 void CGLES3Renderer::Render(IRenderInput *pRenderInput, IRenderPass *pRenderPass)
 {
     //glViewport ( 0, 0, m_esContext->width, m_esContext->height );
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
+    GLDebug(glEnable(GL_DEPTH_TEST));
     CVertexArrayObject *pVAO = (CVertexArrayObject *)pRenderInput->GetVertexArrayObject();
     pVAO->Bind();
     for (int i = 0; i < pRenderInput->GetTextureCount(); ++i)

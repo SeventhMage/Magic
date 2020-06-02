@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\common\base\base.h" />
+    <ClInclude Include="..\..\..\common\base\CSingleton.h" />
+    <ClInclude Include="..\..\..\common\base\Log.h" />
+    <ClInclude Include="..\..\..\common\base\magicDef.h" />
+    <ClInclude Include="..\..\..\common\base\magicString.h" />
+    <ClInclude Include="..\..\..\common\base\magicType.h" />
+    <ClInclude Include="..\..\..\common\base\SColor.h" />
+    <ClInclude Include="..\..\..\common\base\StringHelper.h" />
+    <ClInclude Include="..\..\..\common\math\CBoundingBox.h" />
+    <ClInclude Include="..\..\..\common\math\CFrustum.h" />
+    <ClInclude Include="..\..\..\common\math\CMatrix4.h" />
+    <ClInclude Include="..\..\..\common\math\CPlane3.h" />
+    <ClInclude Include="..\..\..\common\math\CQuaternion.h" />
+    <ClInclude Include="..\..\..\common\math\CRay.h" />
+    <ClInclude Include="..\..\..\common\math\CVector2.h" />
+    <ClInclude Include="..\..\..\common\math\CVector3.h" />
+    <ClInclude Include="..\..\..\common\math\CVector4.h" />
+    <ClInclude Include="..\..\..\include\component\CCameraComponent.h" />
+    <ClInclude Include="..\..\..\include\component\CComponent.h" />
+    <ClInclude Include="..\..\..\include\component\CMeshRendererComponent.h" />
+    <ClInclude Include="..\..\..\include\component\IComponent.h" />
+    <ClInclude Include="..\..\..\include\IApplication.h" />
+    <ClInclude Include="..\..\..\include\IMagic.h" />
+    <ClInclude Include="..\..\..\include\IObject.h" />
+    <ClInclude Include="..\..\..\include\ITime.h" />
+    <ClInclude Include="..\..\..\include\magic.h" />
+    <ClInclude Include="..\..\..\include\render\CMaterialInstance.h" />
+    <ClInclude Include="..\..\..\include\render\CRenderInput.h" />
+    <ClInclude Include="..\..\..\include\render\ERender.h" />
+    <ClInclude Include="..\..\..\include\render\IBufferObject.h" />
+    <ClInclude Include="..\..\..\include\render\IRenderer.h" />
+    <ClInclude Include="..\..\..\include\render\IRenderInput.h" />
+    <ClInclude Include="..\..\..\include\render\IRenderPass.h" />
+    <ClInclude Include="..\..\..\include\render\IRenderTarget.h" />
+    <ClInclude Include="..\..\..\include\render\IShaderProgram.h" />
+    <ClInclude Include="..\..\..\include\render\ITexture.h" />
+    <ClInclude Include="..\..\..\include\render\SRenderContext.h" />
+    <ClInclude Include="..\..\..\include\render\SShaderParam.h" />
+    <ClInclude Include="..\..\..\include\resource\CMaterial.h" />
+    <ClInclude Include="..\..\..\include\resource\CMesh.h" />
+    <ClInclude Include="..\..\..\include\resource\CModel.h" />
+    <ClInclude Include="..\..\..\include\resource\CShader.h" />
+    <ClInclude Include="..\..\..\include\resource\CSphere.h" />
+    <ClInclude Include="..\..\..\include\resource\IImage.h" />
+    <ClInclude Include="..\..\..\include\resource\IMaterial.h" />
+    <ClInclude Include="..\..\..\include\resource\IMesh.h" />
+    <ClInclude Include="..\..\..\include\resource\IModel.h" />
+    <ClInclude Include="..\..\..\include\resource\IResource.h" />
+    <ClInclude Include="..\..\..\include\resource\IResourceManager.h" />
+    <ClInclude Include="..\..\..\include\resource\IShader.h" />
+    <ClInclude Include="..\..\..\include\scene\CGameObject.h" />
+    <ClInclude Include="..\..\..\include\scene\CGameUnit.h" />
+    <ClInclude Include="..\..\..\include\scene\IGameObject.h" />
+    <ClInclude Include="..\..\..\include\scene\IScene.h" />
+    <ClInclude Include="..\..\..\include\scene\ISceneManager.h" />
+    <ClInclude Include="..\..\..\include\scene\ISceneNode.h" />
+    <ClInclude Include="..\..\..\source\CApplication.h" />
+    <ClInclude Include="..\..\..\source\CMagic.h" />
+    <ClInclude Include="..\..\..\source\CTime.h" />
+    <ClInclude Include="..\..\..\source\CWindow.h" />
+    <ClInclude Include="..\..\..\source\render\CIndexBufferObject.h" />
+    <ClInclude Include="..\..\..\source\render\CRenderer.h" />
+    <ClInclude Include="..\..\..\source\render\CRenderPass.h" />
+    <ClInclude Include="..\..\..\source\render\CRenderQueue.h" />
+    <ClInclude Include="..\..\..\source\render\CShaderProgram.h" />
+    <ClInclude Include="..\..\..\source\render\CVertexArrayObject.h" />
+    <ClInclude Include="..\..\..\source\render\CVertexBufferObject.h" />
+    <ClInclude Include="..\..\..\source\render\gles3\CGLES3IndexBufferObject.h" />
+    <ClInclude Include="..\..\..\source\render\gles3\CGLES3Renderer.h" />
+    <ClInclude Include="..\..\..\source\render\gles3\CGLES3RenderTarget.h" />
+    <ClInclude Include="..\..\..\source\render\gles3\CGLES3ShaderProgram.h" />
+    <ClInclude Include="..\..\..\source\render\gles3\CGLES3Texture.h" />
+    <ClInclude Include="..\..\..\source\render\gles3\CGLES3VertexArrayObject.h" />
+    <ClInclude Include="..\..\..\source\render\gles3\CGLES3VertexBufferObject.h" />
+    <ClInclude Include="..\..\..\source\render\gles3\GLESDebug.h" />
+    <ClInclude Include="..\..\..\source\render\gles3\GLESType.h" />
+    <ClInclude Include="..\..\..\source\resource\CResourceManager.h" />
+    <ClInclude Include="..\..\..\source\resource\CTGAImage.h" />
+    <ClInclude Include="..\..\..\source\resource\FileWrapper.h" />
+    <ClInclude Include="..\..\..\source\resource\loader\CAssimpLoader.h" />
+    <ClInclude Include="..\..\..\source\resource\loader\CObjLoader.h" />
+    <ClInclude Include="..\..\..\source\resource\loader\CResourceLoader.h" />
+    <ClInclude Include="..\..\..\source\scene\CScene.h" />
+    <ClInclude Include="..\..\..\source\scene\CSceneManager.h" />
+    <ClInclude Include="..\..\..\source\scene\CSceneNode.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\CApplication.cpp" />
+    <ClCompile Include="..\..\..\source\CMagic.cpp" />
+    <ClCompile Include="..\..\..\source\component\CCameraComponent.cpp" />
+    <ClCompile Include="..\..\..\source\component\CComponent.cpp" />
+    <ClCompile Include="..\..\..\source\component\CMeshRendererComponent.cpp" />
+    <ClCompile Include="..\..\..\source\CTime.cpp" />
+    <ClCompile Include="..\..\..\source\magic.cpp" />
+    <ClCompile Include="..\..\..\source\render\CIndexBufferObject.cpp" />
+    <ClCompile Include="..\..\..\source\render\CMaterialInstance.cpp" />
+    <ClCompile Include="..\..\..\source\render\CRenderer.cpp" />
+    <ClCompile Include="..\..\..\source\render\CRenderInput.cpp" />
+    <ClCompile Include="..\..\..\source\render\CRenderPass.cpp" />
+    <ClCompile Include="..\..\..\source\render\CRenderQueue.cpp" />
+    <ClCompile Include="..\..\..\source\render\CShaderProgram.cpp" />
+    <ClCompile Include="..\..\..\source\render\CVertexArrayObject.cpp" />
+    <ClCompile Include="..\..\..\source\render\CVertexBufferObject.cpp" />
+    <ClCompile Include="..\..\..\source\render\gles3\CGLES3IndexBufferObject.cpp" />
+    <ClCompile Include="..\..\..\source\render\gles3\CGLES3Renderer.cpp" />
+    <ClCompile Include="..\..\..\source\render\gles3\CGLES3RenderTarget.cpp" />
+    <ClCompile Include="..\..\..\source\render\gles3\CGLES3ShaderProgram.cpp" />
+    <ClCompile Include="..\..\..\source\render\gles3\CGLES3Texture.cpp" />
+    <ClCompile Include="..\..\..\source\render\gles3\CGLES3VertexArrayObject.cpp" />
+    <ClCompile Include="..\..\..\source\render\gles3\CGLES3VertexBufferObject.cpp" />
+    <ClCompile Include="..\..\..\source\resource\CMaterial.cpp" />
+    <ClCompile Include="..\..\..\source\resource\CMesh.cpp" />
+    <ClCompile Include="..\..\..\source\resource\CModel.cpp" />
+    <ClCompile Include="..\..\..\source\resource\CResourceManager.cpp" />
+    <ClCompile Include="..\..\..\source\resource\CShader.cpp" />
+    <ClCompile Include="..\..\..\source\resource\CSphere.cpp" />
+    <ClCompile Include="..\..\..\source\resource\CTGAImage.cpp" />
+    <ClCompile Include="..\..\..\source\resource\loader\CAssimpLoader.cpp" />
+    <ClCompile Include="..\..\..\source\resource\loader\CObjLoader.cpp" />
+    <ClCompile Include="..\..\..\source\resource\loader\CResourceLoader.cpp" />
+    <ClCompile Include="..\..\..\source\scene\CGameObject.cpp" />
+    <ClCompile Include="..\..\..\source\scene\CScene.cpp" />
+    <ClCompile Include="..\..\..\source\scene\CSceneManager.cpp" />
+    <ClCompile Include="..\..\..\source\scene\CSceneNode.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{028417E6-8963-420A-9173-573ABD1AFA73}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>magic</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)..\..\..\lib\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)..\..\..\lib\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;DEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>../../../include;../../../common;../../../dependencies;../../../dependencies/gl;../../../dependencies/rapidxml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../../../lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp.lib;libEGL.lib;libGLESv2.lib;libMaliEmulator.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>../../../include;../../../common;../../../dependencies;../../../dependencies/gl;../../../dependencies/rapidxml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../../../lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp.lib;libEGL.lib;libGLESv2.lib;libMaliEmulator.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

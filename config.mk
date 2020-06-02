@@ -12,8 +12,8 @@ endif
 ############MinGW ###################
 ifeq ($(findstring MINGW, $(OS)), MINGW)
 	CROSS ?= 
-	CC	:= $(CROSS)gcc -fPIC -DPIC
-	CPP	:= $(CROSS)g++ -fPIC -DPIC -isystem c:/mingw/lib/gcc/mingw32/6.3.0/include/c++
+	CC	:= $(CROSS)gcc -fPIC -DPIC 
+	CPP	:= $(CROSS)g++ -fPIC -DPIC -isystem C:/MinGW/lib/gcc/mingw32/9.2.0/include/c++ -DWIN32
 	LD	:= $(CROSS)ld
 	AR	:= $(CROSS)ar
 	ASM	:=	yasm -DPIC

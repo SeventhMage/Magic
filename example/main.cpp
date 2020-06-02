@@ -1,5 +1,5 @@
 //#include "HelloTriangle.h"
-#include "CGI.h"
+#include "GI/Source/CGI.h"
 
 #include <stdio.h>
 //#include <Windows.h>
@@ -24,10 +24,7 @@ int main(int argc, char *argv[])
             if (msg.message == WM_QUIT)
                 break;
         }
-        
-         if (content.updateFunc)
-             content.updateFunc();
-    }
+	}
 
     return 0;
 }
