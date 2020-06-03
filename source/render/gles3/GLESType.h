@@ -51,6 +51,7 @@ static int GetUniformTypeSize(GLenum type)
 	case GL_TEXTURE:
 		return 4;
     case GL_SAMPLER_2D:
+    case GL_SAMPLER_2D_SHADOW:
         return 4;
     case GL_SAMPLER_CUBE:
         return 4;

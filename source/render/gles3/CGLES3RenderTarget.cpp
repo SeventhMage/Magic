@@ -63,17 +63,17 @@ CGLES3RenderTarget::~CGLES3RenderTarget()
 void CGLES3RenderTarget::BeginTarget()
 {
     GLDebug(glBindFramebuffer(GL_FRAMEBUFFER, m_fbo));
-	//GLDebug(glClearDepthf(1.0f));
-	if (m_textureCount == 0 && m_depthTexture != nullptr)
+	GLDebug(glClearDepthf(1.0f));
+	if (m_depthTexture != nullptr)
 	{
 		GLDebug(glEnable(GL_POLYGON_OFFSET_FILL));
-		GLDebug(glPolygonOffset(2.0f, 4.0f))
+		GLDebug(glPolygonOffset(4.0f, 100.0f))
 	}
 }
 void CGLES3RenderTarget::EndTarget()
 {
 	GLDebug(glBindFramebuffer(GL_FRAMEBUFFER, m_defaultFrameBuffer));
-	if (m_textureCount == 0 && m_depthTexture != nullptr)
+	if (m_depthTexture != nullptr)
 	{
 		GLDebug(glDisable(GL_POLYGON_OFFSET_FILL));
 	}

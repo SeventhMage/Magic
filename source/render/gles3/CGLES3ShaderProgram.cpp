@@ -328,6 +328,7 @@ void CGLES3ShaderProgram::Bind()
             case GL_INT:
             case GL_SAMPLER_2D:
             case GL_SAMPLER_CUBE:
+            case GL_SAMPLER_2D_SHADOW:
                 GLDebug(glUniform1iv(uniform.m_location, uniform.m_count, (GLint *)uniform.m_value));
                 break;
             case GL_FLOAT_VEC2:

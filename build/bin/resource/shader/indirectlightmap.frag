@@ -11,6 +11,8 @@ uniform sampler2D tRSMNormal;
 
 uniform sampler2D tRandNum;
 
+uniform lowp sampler2DShadow tDepth;
+
 uniform mat4 viewMatrix;
 uniform mat4 projMatrix;
 
@@ -20,7 +22,6 @@ uniform vec3 lightColor;
 uniform int samplingColCount;
 
 in vec2 texCoord;
-in vec3 position;
 
 out vec4 fragColor;
 
@@ -41,15 +42,15 @@ void calcIndirectLight(int i, vec2 texCoordInValBegin, float stepRate, float sam
 	
 	vec3 shootDir = normalize(gPosition - valP.xyz);
 	
-    vec3 shootColor = valC.rgb * valRate * max(dot(shootDir, valN.xyz), 0.0) / 3.14;
+    vec3 shootColor = valC.rgb * valRate * max(dot(shootDir, valN.xyz), 0.0);// / 3.14;
 	
 	float dis = max(distance(valP.xyz, gPosition), 1.0);
-    vec3 irradiance = shootColor * max(dot(gNormal, -shootDir), 0.0) / (pow(dis, 4.0) + 2.0 * pow(dis, 2.0) + 2.0 * dis + 1.0);
+    vec3 irradiance = shootColor * max(dot(gNormal, -shootDir), 0.0) / (pow(dis, 0.0) + 0.0 * pow(dis, 2.0) + 1.0 * dis + 0.0);
 	
 	indirectLC += irradiance;
 	
 	float v = (1.0 - step(0.0, dot(shootDir, valN.xyz))) * step(0.0, dot(-shootDir, gNormal.xyz));
-    shelter += max(dot(-shootDir, gNormal.xyz), 0.0) / (dis * dis);	
+    shelter += max(dot(-shootDir, gNormal.xyz), 0.0) / (dis * dis);
 }
 
 
@@ -60,10 +61,12 @@ void main()
 
 	float dataflag = step(0.001, dot(gNormal.xyz, gNormal.xyz));
     
-	vec4 posInValMap = projMatrix * viewMatrix *  gPosition;
+	vec4 posInValMap = projMatrix * viewMatrix * gPosition;
+    vec4 texCoordInVM = 0.5 * posInValMap + 0.5;
     vec2 texCoordInValMap = (0.5 * posInValMap.xy + 0.5) / posInValMap.w;
-
-	float samplingRate = 0.1;
+    
+    float shadow = textureProj(tDepth, texCoordInVM);
+	float samplingRate = 0.05;
 
     vec2 texCoordInValBegin = texCoordInValMap;// - 0.5 * samplingRate;
 
@@ -77,9 +80,10 @@ void main()
 		calcIndirectLight(i, texCoordInValBegin, samplingRate, float(samplingColCount), gPosition.xyz, gNormal.xyz, indirectLC, shelter);
 	}
 
+    
 	shelter /= max(float(samplingTotalNum), 1.0);
-	fragColor = vec4(indirectLC, 1.0 - shelter);
-    //fragColor.rgb = texture(tRSMFlux, texCoord).rgb;
-	//fragColor.rgb = texture(tRSMNormal, texCoord).rgb;
+	fragColor = vec4(indirectLC, (1.0 - shelter) * shadow);
+    //fragColor.rgb += texture(tRSMFlux, texCoord).rgb;
+	//fragColor.rgb += texture(tRSMNormal, texCoord).rgb;
 	//fragColor.rgb = gPosition.rgb;
 }

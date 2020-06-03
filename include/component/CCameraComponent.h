@@ -32,6 +32,9 @@ public:
     uint GetFlag() { return m_Flag; }
     void SetEnable(bool bEnable);
     bool IsEnable();
+    const CMatrix4 &GetViewProjectMatirx() { return m_vpMatrix; }
+    const CMatrix4 &GetViewMatirx() { return m_viewMatrix; }
+    const CMatrix4 &GetProjectMatirx() { return m_projMatrix; }
 private:
     IRenderPass *m_pRenderPass;
     IRenderer *m_pRenderer;
