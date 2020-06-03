@@ -41,8 +41,8 @@ void CGI::Init(SRenderContext *esContext)
 {
     printf("Start initalizing Engine ... \n");
     esContext->screenResolutionRatio = 1.0f;
-    mc = CreateMagic(esContext, "gi", 800, 600);
-    mc->SetFPS(120);
+    mc = CreateMagic(esContext, "gi", 200, 100);
+    mc->SetMaxFPS(120);
     esContext->fps = mc->GetFPS();
     
     float quadVertices[][3] = {
@@ -88,13 +88,13 @@ void CGI::Init(SRenderContext *esContext)
     
     //render target
     renderTarget = renderer->CreateRenderTarget(esContext->width, esContext->height, true, 3);
-    vplTarget = renderer->CreateRenderTarget(esContext->width * 0.5, esContext->height * 0.5, true, 3);
-    indirectTarget = renderer->CreateRenderTarget(esContext->width * 0.2f, esContext->height * 0.2f, false, 1);
+    vplTarget = renderer->CreateRenderTarget(esContext->width * 0.2, esContext->height * 0.2, true, 3);
+    indirectTarget = renderer->CreateRenderTarget(esContext->width * 0.8f, esContext->height * 0.8f, false, 1);
     
     //camera init
     ISceneNode *cameraNode = pRootNode->CreateChildNode();
     IGameObject *cameraObject = cameraNode->AddGameObject();
-    cameraNode->SetPosition(CVector3(0, 200, 800));
+    cameraNode->SetPosition(CVector3(0, 100, 100));
     CCameraComponent *pCamera = cameraObject->AddComponent<CCameraComponent>();
     pCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 10000.f);
     pCamera->SetClearColor(0.0f, 0.0f, 0.0f, 0.f);
@@ -127,7 +127,7 @@ void CGI::Init(SRenderContext *esContext)
     boxMaterial->SetProperty("pointLightColor", pointLightColor, sizeof(pointLightColor));
     boxMaterial->SetProperty("specCoefficient", &specCoefficient, sizeof(specCoefficient));
     
-    IModel *pModel = (IModel *)resourceMgr->LoadResource("resource/interior.obj", EResourceType::Model);
+    IModel *pModel = (IModel *)resourceMgr->LoadResource("resource/model/HouseInterior/houseinterior.obj", EResourceType::Model);
     ISceneNode *boxNode = pRootNode->CreateChildNode();
     boxNode->SetPosition(CVector3(-1.f, 0, 0));
     for (int i=0; i<pModel->GetMeshCount(); ++i)
@@ -154,7 +154,7 @@ void CGI::Init(SRenderContext *esContext)
     ISceneNode *sphereNode = pRootNode->CreateChildNode();
     sphereNode->SetPosition(CVector3(.5f, 10, 0));
     IGameObject *sphereObject = sphereNode->AddGameObject();
-    sphereMesh = new CSphere(100, 20, 20);
+    sphereMesh = new CSphere(50, 20, 20);
     sphereMaterial = (IMaterial *)resourceMgr->LoadResource("resource/material/multarget.mat.xml", EResourceType::Material);
     
     sphereMaterial->SetProperty("textureUnit", &textureUnit, sizeof(textureUnit));
@@ -178,7 +178,7 @@ void CGI::Init(SRenderContext *esContext)
     }
     
     //Indirect light
-    static const int RAND_WIDTH = 16;
+    static const int RAND_WIDTH = 12;
     static const int RAND_NUM = RAND_WIDTH * RAND_WIDTH;
     byte vRandNum[RAND_NUM * 3] = { 0 };
     for (int i = 0; i < RAND_NUM; ++i)
@@ -312,45 +312,99 @@ void CGI::Init(SRenderContext *esContext)
 
     };
 
-    esContext->keyFunc = [=](unsigned char key, int x, int y){
-        CVector3 spherePosition = sphereNode->GetPosition();
-        float flag = 0.1f;
-        switch(key)
-        {
-        case 'W':
-        case 'w':
-            spherePosition.z -= 0.1f;
-            break;
-        case 'S':
-        case 's':
-            spherePosition.z += 0.1f;
-            break;
-        case 'A':
-        case 'a':
-            spherePosition.x -= 0.1f;
-            break;
-        case 'D':
-        case 'd':
-            spherePosition.x += 0.1f;
-            break;
-        case 32:
-            spherePosition.y += 0.1f;
-            break;
-        case 'Z':
-        case 'z':
-            spherePosition.y -= 0.1f;
-            break;
-        case 'I':
-        case 'i':
-            pIndirectCamera->SetEnable(!pIndirectCamera->IsEnable());
-            break;
-        case 'P':
-        case 'p':
-            printf("-------%d\n", int(1000.f / mc->GetTime()->GetDeltaTime()));
-            break;
-        }
-        sphereNode->SetPosition(spherePosition);
-    };
+	esContext->keyFunc = [=](unsigned char key, int x, int y) {
+		CVector3 spherePosition = sphereNode->GetPosition();
+		CVector3 camPos = cameraNode->GetPosition();
+		CVector3 dir(0, 0, -1);
+		CVector3 right(1, 0, 0);
+		CVector3 up(0, 1, 0);
+		CMatrix4 transform = cameraNode->GetAbsluateTransform();
+		transform.SetTranslation(CVector3(0, 0, 0));
+		transform.TransformVect(dir);
+		transform.TransformVect(right);
+		transform.TransformVect(up);
+		dir.normalize();
+		right.normalize();
+		up.normalize();
+
+
+		CVector3 rotation = cameraNode->GetRotation();
+
+		float flag = 4.f;
+		switch (key)
+		{
+		case 'W':
+		case 'w':
+			spherePosition.z -= flag;
+			break;
+		case 'S':
+		case 's':
+			spherePosition.z += flag;
+			break;
+		case 'A':
+		case 'a':
+			spherePosition.x -= flag;
+			break;
+		case 'D':
+		case 'd':
+			spherePosition.x += flag;
+			break;
+		case 32:
+			spherePosition.y += flag;
+		case 'Q':
+		case 'q':
+			spherePosition.y += flag;
+			break;
+		case 'Z':
+		case 'z':
+			spherePosition.y -= flag;
+		case 'E':
+		case 'e':
+			spherePosition.y -= flag;
+			break;
+		case 'I':
+		case 'i':
+			camPos += dir * flag;
+			break;
+		case 'K':
+		case 'k':
+			camPos -= dir * flag;
+			break;
+		case 'J':
+		case 'j':
+			camPos -= right * flag;
+			break;
+		case 'L':
+		case 'l':
+			camPos += right * flag;
+			break;
+		case 'U':
+		case 'u':
+			camPos += up * flag;
+			break;
+		case 'O':
+		case 'o':
+			camPos -= up * flag;
+			break;
+		case 'Y':
+			rotation.y += 0.1f;
+			break;
+		case 'y':
+			rotation.y -= 0.1f;
+			break;
+		case 'G':
+		case 'g':
+			pIndirectCamera->SetEnable(!pIndirectCamera->IsEnable());
+			break;
+		case 'P':
+		case 'p':
+			LogInfo("FPS:%d\n", mc->GetFPS());
+			break;
+		}
+		sphereNode->SetPosition(spherePosition);
+		cameraNode->SetPosition(camPos);
+		cameraNode->SetRotation(rotation);
+	};
     
     esContext->touchMoveFunc = [=](int index, int dx, int dy, int count){
         CVector3 spherePosition = sphereNode->GetPosition();

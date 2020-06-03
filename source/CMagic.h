@@ -16,8 +16,9 @@ public:
     ~CMagic();
     
     virtual void Run(std::function<void()> fcall = nullptr);
-    virtual void SetFPS(int fps);
-    virtual int GetFPS() const {return m_iFPS;}
+    virtual void SetMaxFPS(int fps);
+    virtual int GetMaxFPS() const {return m_iMaxFPS;}
+    virtual int GetFPS() const;
 
     virtual ISceneManager *GetSceneManager() const { return m_pSceneManager; }
     virtual IRenderer *GetRenderer() const { return m_pRenderer; }
@@ -25,7 +26,7 @@ public:
     virtual ITime *GetTime() const { return m_pTime; }
 private:
     CApplication *m_pApplication;
-    int m_iFPS;
+	int m_iMaxFPS;
     int m_iFixDelta;
 
     ISceneManager *m_pSceneManager;

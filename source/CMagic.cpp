@@ -8,8 +8,8 @@ namespace magic
 {
 CMagic::CMagic(SRenderContext *context, const char *title, int width, int height)
 :m_pApplication(new CApplication())
-,m_iFPS(60)
-,m_iFixDelta(16.67f)
+,m_iMaxFPS(60)
+,m_iFixDelta(16)
 {
     m_pSceneManager = new CSceneManager();
     m_pResourceManager = new CResourceManager();
@@ -51,13 +51,19 @@ void CMagic::Run(std::function<void()> fcall)
     }
 }
 
-void CMagic::SetFPS(int fps)
+void CMagic::SetMaxFPS(int fps)
 {
-    m_iFPS = fps;
-    if (m_iFPS > 0)
+    m_iMaxFPS = fps;
+    if (m_iMaxFPS > 0)
     {
-        m_iFixDelta = 1000 / m_iFPS;
+        m_iFixDelta = 1000 / m_iMaxFPS;
     }
+}
+
+int CMagic::GetFPS() const
+{
+	int deltaTime = (int)m_pTime->GetDeltaTime();
+	return deltaTime > 0 ? 1000 / deltaTime : 0;
 }
 
 } // namespace magic

@@ -4,6 +4,8 @@
 namespace magic
 {
 #define LogError printf
+#define LogDebug printf
+#define LogInfo printf
 }
 
 #endif
