@@ -43,7 +43,7 @@ void CGI::Init(SRenderContext *esContext)
     esContext->screenResolutionRatio = 1.0f;
     mc = CreateMagic(esContext, "gi", 200, 100);
     mc->SetMaxFPS(120);
-    esContext->fps = mc->GetFPS();
+    esContext->maxFps = mc->GetMaxFPS();
     
     float quadVertices[][3] = {
         -1.f, -1.f, 0.f,
@@ -73,7 +73,7 @@ void CGI::Init(SRenderContext *esContext)
     directionalLightDir.rotateYZBy(DEG_TO_RAD(-0.f));
     directionalLightDir.rotateXZBy(DEG_TO_RAD(-0.f));
     directionalLightDir.normalize();
-    CVector3 directionalLightPos = -directionalLightDir * 200;
+    CVector3 directionalLightPos = -directionalLightDir * 400;
     //CVector3 directionalLightRotation(DEG_TO_RAD(0.f), DEG_TO_RAD(0.f), 0.f);
     
     renderer = mc->GetRenderer();
@@ -89,12 +89,12 @@ void CGI::Init(SRenderContext *esContext)
     //render target
     renderTarget = renderer->CreateRenderTarget(esContext->width, esContext->height, true, 3);
     vplTarget = renderer->CreateRenderTarget(esContext->width * 0.2, esContext->height * 0.2, true, 3);
-    indirectTarget = renderer->CreateRenderTarget(esContext->width * 0.8f, esContext->height * 0.8f, false, 1);
+    indirectTarget = renderer->CreateRenderTarget(esContext->width * 0.2f, esContext->height * 0.2f, false, 1);
     
     //camera init
     ISceneNode *cameraNode = pRootNode->CreateChildNode();
     IGameObject *cameraObject = cameraNode->AddGameObject();
-    cameraNode->SetPosition(CVector3(0, 100, 100));
+    cameraNode->SetPosition(CVector3(0, 100, 400));
     CCameraComponent *pCamera = cameraObject->AddComponent<CCameraComponent>();
     pCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 10000.f);
     pCamera->SetClearColor(0.0f, 0.0f, 0.0f, 0.f);
@@ -127,7 +127,7 @@ void CGI::Init(SRenderContext *esContext)
     boxMaterial->SetProperty("pointLightColor", pointLightColor, sizeof(pointLightColor));
     boxMaterial->SetProperty("specCoefficient", &specCoefficient, sizeof(specCoefficient));
     
-    IModel *pModel = (IModel *)resourceMgr->LoadResource("resource/model/HouseInterior/houseinterior.obj", EResourceType::Model);
+    IModel *pModel = (IModel *)resourceMgr->LoadResource("resource/model/interiorroom/interior.obj", EResourceType::Model);
     ISceneNode *boxNode = pRootNode->CreateChildNode();
     boxNode->SetPosition(CVector3(-1.f, 0, 0));
     for (int i=0; i<pModel->GetMeshCount(); ++i)
@@ -178,17 +178,28 @@ void CGI::Init(SRenderContext *esContext)
     }
     
     //Indirect light
-    static const int RAND_WIDTH = 12;
+    static const int RAND_WIDTH = 16;
     static const int RAND_NUM = RAND_WIDTH * RAND_WIDTH;
     byte vRandNum[RAND_NUM * 3] = { 0 };
-    for (int i = 0; i < RAND_NUM; ++i)
+//    for (int i = 0; i < RAND_NUM; ++i)
+//    {
+//        float randRadius = 1.f * rand() / RAND_MAX;
+//        float randRadian = 1.f * rand() / RAND_MAX;
+//        float randRadian2 = 1.f * rand() / RAND_MAX;
+//        randRadian += randRadian2;
+//        vRandNum[3 * i] = (randRadius * sin(PI_2 * randRadian) * 127.f);
+//        vRandNum[3 * i + 1] = (randRadius * cos(PI_2 * randRadian) * 127.f);
+//    }
+    float radius = 128.f;
+    srand(time(0));
+    for (int i=0; i<RAND_NUM; ++i)
     {
-        float randRadius = 1.f * rand() / RAND_MAX;
-        float randRadian = 1.f * rand() / RAND_MAX;
-        float randRadian2 = 1.f * rand() / RAND_MAX;
-        randRadian += randRadian2;
-        vRandNum[3 * i] = (randRadius * sin(PI_2 * randRadian) * 127.f);
-        vRandNum[3 * i + 1] = (randRadius * cos(PI_2 * randRadian) * 127.f);
+        float theta = PI_2 * rand() / RAND_MAX;
+        float phi = PI_2 * rand() / RAND_MAX;
+        
+        vRandNum[3 * i] = radius * sin(theta) * cos(phi);
+        vRandNum[3 * i + 1] = radius * sin(theta) * sin(phi);
+        vRandNum[3 * i + 2] = radius * cos(theta);
     }
 
     ITexture *pRandNumTex = renderer->CreateTexture(RGB, RAND_WIDTH, RAND_WIDTH, RGB, PIXEL_UNSIGNED_BYTE, (void*)vRandNum);

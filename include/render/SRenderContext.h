@@ -30,8 +30,8 @@ struct SRenderContext
     /// Screen resolution ratio
     float screenResolutionRatio;
     
-    /// fps
-    int fps;
+    /// max fps
+    int maxFps;
 #ifndef __APPLE__
     /// Display handle
     EGLNativeDisplayType eglNativeDisplay;

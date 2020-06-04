@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "magic::CGI::Init(magic::SRenderContext*):CGI.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "radius * sin(theta) * cos(phi)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

@@ -114,7 +114,7 @@
         
         _gi.Init(&_esContext);
         
-        self.preferredFramesPerSecond = _esContext.fps;
+        self.preferredFramesPerSecond = _esContext.maxFps;
         
         _esContext.bInitalize = true;
     }
