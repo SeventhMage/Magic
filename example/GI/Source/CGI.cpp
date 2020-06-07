@@ -90,13 +90,13 @@ void CGI::Init(SRenderContext *esContext)
     
     //render target
     renderTarget = renderer->CreateRenderTarget(esContext->width, esContext->height, true, 3);
-    vplTarget = renderer->CreateRenderTarget(esContext->width * 0.2, esContext->height * 0.2, true, 3);
-    indirectTarget = renderer->CreateRenderTarget(esContext->width * 0.4f, esContext->height * 0.4f, false, 1);
+    vplTarget = renderer->CreateRenderTarget(esContext->width * 0.4, esContext->height * 0.4, true, 3);
+    indirectTarget = renderer->CreateRenderTarget(esContext->width * 0.6f, esContext->height * 0.6f, false, 1);
     
     //camera init
     ISceneNode *cameraNode = pRootNode->CreateChildNode();
     IGameObject *cameraObject = cameraNode->AddGameObject();
-    cameraNode->SetPosition(CVector3(20, 100, 450));
+    cameraNode->SetPosition(CVector3(20, 60, 450));
     CCameraComponent *pCamera = cameraObject->AddComponent<CCameraComponent>();
     pCamera->Initialize(renderer, CCameraComponent::Projection, PI / 3, aspect, 1.f, 10000.f);
     pCamera->SetClearColor(0.0f, 0.0f, 0.0f, 0.f);
@@ -262,7 +262,6 @@ void CGI::Init(SRenderContext *esContext)
 
     }
 
-	/*
 	//blur
 	IGameObject *gaussianHObject = pRootNode->AddGameObject();
     CMeshRendererComponent *pGaussianHRenderer = gaussianHObject->AddComponent<CMeshRendererComponent>();
@@ -338,7 +337,6 @@ void CGI::Init(SRenderContext *esContext)
         pGaussianVRenderer->Initialize(renderer, pIndirectCamera->GetFlag(), gaussianMesh, gaussianVMaterial);
 		pGaussianVRenderer->SetTexture(0, indirectTarget->GetBindTexture(0));
 	}
-	*/
     
     //deferred shade
     IGameObject *deferredCamera = cameraNode->AddGameObject();

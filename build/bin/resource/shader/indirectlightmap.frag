@@ -78,7 +78,7 @@ void calc(int i, float samplingColCount, vec4 gPosition, vec3 gNormal, inout vec
     
     vec3 shootDir = normalize(gPosition.xyz - valP.xyz);
 
-    vec3 shootColor = 2.0 * valC.rgb * lightColor * valRate * (max(dot(shootDir, valN.xyz), 0.0)) / 3.14;
+    vec3 shootColor = 3.0 * valC.rgb * lightColor * valRate * (max(dot(shootDir, valN.xyz), 0.0)) / 3.14;
     
     float dis = max(distance(valP.xyz, gPosition.xyz), 1.0);
     vec3 irradiance = shootColor * max(dot(gNormal, -shootDir), 0.0) / (0.0 * pow(dis, 4.0) + 0.0 * pow(dis, 2.0) + 1.0 * dis + 0.0);
@@ -98,13 +98,13 @@ void main()
     vec4 texCoordInVM = 0.5 * posInValMap + 0.5;
     //vec2 texCoordInValMap = (0.5 * posInValMap.xy + 0.5) / posInValMap.w;
     
-    float shadow = textureProj(tDepth, texCoordInVM);
+    //float shadow = textureProj(tDepth, texCoordInVM);
     float x, y;
     float sum = 0.0;
     for (x = -2.0; x <= 2.0; x += 2.0)
         for (y = -2.0; y <= 2.0; y += 2.0)
             sum += lookup(texCoordInVM, x, y);
-    //float shadow = sum * 0.11;
+    float shadow = sum * 0.11;
 
 	float samplingRate = 0.2;
 
@@ -123,4 +123,6 @@ void main()
 
 	//shelter /= max(float(samplingTotalNum), 1.0);
 	fragColor = vec4(indirectLC, shadow );
+    //fragColor *= 0.00001;
+    //fragColor = texture(tRSMFlux, texCoord);
 }
