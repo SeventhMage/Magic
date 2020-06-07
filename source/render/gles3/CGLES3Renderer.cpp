@@ -161,7 +161,7 @@ CGLES3Renderer::CGLES3Renderer(SRenderContext *esContext, const char *title, GLi
         LogError("Initialize GLES3Renderer failed\n");
     GLDebug(glGetIntegerv(GL_FRAMEBUFFER_BINDING, &m_defaultFrameBuffer));
     float ratio = esContext->screenResolutionRatio > 0 ? esContext->screenResolutionRatio : 1.f;
-    m_FinalRenderTarget = CreateRenderTarget(esContext->width * ratio, esContext->height * ratio, true);
+    //m_FinalRenderTarget = CreateRenderTarget(esContext->width * ratio, esContext->height * ratio, true);
 }
 
 CGLES3Renderer::~CGLES3Renderer()

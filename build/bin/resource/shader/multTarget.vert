@@ -16,7 +16,7 @@ void main()
     texCoord = vTexCoord;
     position = (modelMatrix * vec4(vPosition, 1.0)).xyz;
     mat3 normalMat = mat3(transpose(inverse(modelMatrix)));
-    normal = normalMat * vNormal;
+    normal = normalMat * normalize(vNormal);
     color = vColor;
     gl_Position = projMatrix * viewMatrix * modelMatrix * vec4(vPosition, 1.0);
 }

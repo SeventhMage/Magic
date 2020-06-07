@@ -1,5 +1,5 @@
 #version 300 es
-precision mediump float;
+precision highp float;
 
 uniform sampler2D positionTexture;
 uniform sampler2D normalTexture;
@@ -17,7 +17,9 @@ uniform float specCoefficient;
 uniform mat4 viewMatrix;
 uniform vec3 viewPosition;
 
-uniform mat4 dirLitVPMat;
+uniform float indirectLightSwitch;
+uniform float directLightSwitch;
+uniform float shadowSwitch;
 
 in vec2 texCoord;
 
@@ -49,23 +51,20 @@ void main()
     lightColor += pow(max(dot(viewDir, pointLightReflectDir), 0.0), specCoefficient) * pointLightColor *  attenuation;
     */
      
-    
-    lightColor *= indirectLightColor.a;
+    lightColor *= directLightSwitch;
+    lightColor *= max(indirectLightColor.a,  shadowSwitch);
     lightColor += ambientLightColor;
-    lightColor += indirectLightColor.rgb;
+    lightColor += indirectLightColor.rgb * indirectLightSwitch;
     
     clamp(lightColor.r, 0.0, 1.0);
     clamp(lightColor.g, 0.0, 1.0);
     clamp(lightColor.b, 0.0, 1.0);
     fragColor = baseColor * vec4(lightColor, 1.0);
-    //fragColor.rgb = indirectLightColor.aaa;
+    //fragColor *= 0.00001;
+    //fragColor.rgb += indirectLightColor.rgb;
+    //fragColor.a = 1.0;
     //fragColor = baseColor * indirectLightColor.a;
     //fragColor.rgb = lightColor;
-    //viewDir = normalize(viewDir);
-//    if (viewDir.x > 1.0 || viewDir.z > 1.0 || viewDir.y > 1.0)
-//        fragColor.rgb = vec3(len, len, len);
-//    else
-//        fragColor.rgb = vec3(0, 0, 0);
     //fragColor.rgb =  pointLightReflectDir.xyz;
     //fragColor.rgb = indirectLightColor.rgb;
     //fragColor.rgb = lightColor.rgb;

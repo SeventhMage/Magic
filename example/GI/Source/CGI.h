@@ -42,6 +42,11 @@ private:
     //indirect light
     IMesh *indirectMesh;
     IMaterial *indirectMaterial;
+
+	//gaussian blur
+    IMesh *gaussianMesh;
+    IMaterial *gaussianHMaterial;
+    IMaterial *gaussianVMaterial;
 };
 }
 
