@@ -51,9 +51,9 @@ void main()
     lightColor += pow(max(dot(viewDir, pointLightReflectDir), 0.0), specCoefficient) * pointLightColor *  attenuation;
     */
      
-    lightColor *= directLightSwitch;
     lightColor *= max(indirectLightColor.a,  shadowSwitch);
     lightColor += ambientLightColor;
+    lightColor *= directLightSwitch;
     lightColor += indirectLightColor.rgb * indirectLightSwitch;
     
     clamp(lightColor.r, 0.0, 1.0);
