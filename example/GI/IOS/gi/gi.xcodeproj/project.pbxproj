@@ -22,6 +22,26 @@
 		746F8BD2247A6D9C00B0491A /* monkey.obj in Resources */ = {isa = PBXBuildFile; fileRef = 746F8BD1247A6D9C00B0491A /* monkey.obj */; };
 		748545602470E34E00268577 /* indirectlightmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 7485455F2470E34E00268577 /* indirectlightmap.frag */; };
 		748545622472090500268577 /* indirectLight.mat.xml in Resources */ = {isa = PBXBuildFile; fileRef = 748545612472090500268577 /* indirectLight.mat.xml */; };
+		74858758248CF1DC003C81AB /* teble wood uv.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 74858744248CF1DC003C81AB /* teble wood uv.jpg */; };
+		74858759248CF1DC003C81AB /* floor uv texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 74858745248CF1DC003C81AB /* floor uv texture.jpg */; };
+		7485875A248CF1DC003C81AB /* floor uv.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 74858746248CF1DC003C81AB /* floor uv.jpg */; };
+		7485875B248CF1DC003C81AB /* sopha wood uv.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 74858747248CF1DC003C81AB /* sopha wood uv.jpg */; };
+		7485875C248CF1DC003C81AB /* wall edge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 74858748248CF1DC003C81AB /* wall edge.jpg */; };
+		7485875D248CF1DC003C81AB /* double sopha wood right uv texture .jpg in Resources */ = {isa = PBXBuildFile; fileRef = 74858749248CF1DC003C81AB /* double sopha wood right uv texture .jpg */; };
+		7485875E248CF1DC003C81AB /* teble wood uv texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7485874A248CF1DC003C81AB /* teble wood uv texture.jpg */; };
+		7485875F248CF1DC003C81AB /* houseinterior.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 7485874B248CF1DC003C81AB /* houseinterior.mtl */; };
+		74858760248CF1DC003C81AB /* double sopha wood base bace uv .jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7485874C248CF1DC003C81AB /* double sopha wood base bace uv .jpg */; };
+		74858761248CF1DC003C81AB /* IN UV PAINTING TEXTURE.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7485874D248CF1DC003C81AB /* IN UV PAINTING TEXTURE.jpg */; };
+		74858762248CF1DC003C81AB /* double sopha wood base uv .jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7485874E248CF1DC003C81AB /* double sopha wood base uv .jpg */; };
+		74858763248CF1DC003C81AB /* IN UV PAINTING texture 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7485874F248CF1DC003C81AB /* IN UV PAINTING texture 2.jpg */; };
+		74858764248CF1DC003C81AB /* IN UV PAINTING texture 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 74858750248CF1DC003C81AB /* IN UV PAINTING texture 3.jpg */; };
+		74858765248CF1DC003C81AB /* wall texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 74858751248CF1DC003C81AB /* wall texture.jpg */; };
+		74858766248CF1DC003C81AB /* houseinterior.obj in Resources */ = {isa = PBXBuildFile; fileRef = 74858752248CF1DC003C81AB /* houseinterior.obj */; };
+		74858767248CF1DC003C81AB /* IN UV PAINTING.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 74858753248CF1DC003C81AB /* IN UV PAINTING.jpg */; };
+		74858768248CF1DC003C81AB /* sopha wood uv texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 74858754248CF1DC003C81AB /* sopha wood uv texture.jpg */; };
+		74858769248CF1DC003C81AB /* double sopha wood back uv texture .jpg in Resources */ = {isa = PBXBuildFile; fileRef = 74858755248CF1DC003C81AB /* double sopha wood back uv texture .jpg */; };
+		7485876A248CF1DC003C81AB /* double sopha wood right uv .jpg in Resources */ = {isa = PBXBuildFile; fileRef = 74858756248CF1DC003C81AB /* double sopha wood right uv .jpg */; };
+		7485876B248CF1DC003C81AB /* double sopha wood back uv .jpg in Resources */ = {isa = PBXBuildFile; fileRef = 74858757248CF1DC003C81AB /* double sopha wood back uv .jpg */; };
 		748A9566246FB8B0001BB2B7 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 748A9565246FB8B0001BB2B7 /* AppDelegate.mm */; };
 		748A9569246FB8B0001BB2B7 /* SceneDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 748A9568246FB8B0001BB2B7 /* SceneDelegate.mm */; };
 		748A956C246FB8B0001BB2B7 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 748A956B246FB8B0001BB2B7 /* ViewController.mm */; };
@@ -123,6 +143,26 @@
 		746F8BD1247A6D9C00B0491A /* monkey.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = monkey.obj; sourceTree = "<group>"; };
 		7485455F2470E34E00268577 /* indirectlightmap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = indirectlightmap.frag; sourceTree = "<group>"; };
 		748545612472090500268577 /* indirectLight.mat.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = indirectLight.mat.xml; sourceTree = "<group>"; };
+		74858744248CF1DC003C81AB /* teble wood uv.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "teble wood uv.jpg"; sourceTree = "<group>"; };
+		74858745248CF1DC003C81AB /* floor uv texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "floor uv texture.jpg"; sourceTree = "<group>"; };
+		74858746248CF1DC003C81AB /* floor uv.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "floor uv.jpg"; sourceTree = "<group>"; };
+		74858747248CF1DC003C81AB /* sopha wood uv.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "sopha wood uv.jpg"; sourceTree = "<group>"; };
+		74858748248CF1DC003C81AB /* wall edge.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "wall edge.jpg"; sourceTree = "<group>"; };
+		74858749248CF1DC003C81AB /* double sopha wood right uv texture .jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "double sopha wood right uv texture .jpg"; sourceTree = "<group>"; };
+		7485874A248CF1DC003C81AB /* teble wood uv texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "teble wood uv texture.jpg"; sourceTree = "<group>"; };
+		7485874B248CF1DC003C81AB /* houseinterior.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = houseinterior.mtl; sourceTree = "<group>"; };
+		7485874C248CF1DC003C81AB /* double sopha wood base bace uv .jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "double sopha wood base bace uv .jpg"; sourceTree = "<group>"; };
+		7485874D248CF1DC003C81AB /* IN UV PAINTING TEXTURE.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "IN UV PAINTING TEXTURE.jpg"; sourceTree = "<group>"; };
+		7485874E248CF1DC003C81AB /* double sopha wood base uv .jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "double sopha wood base uv .jpg"; sourceTree = "<group>"; };
+		7485874F248CF1DC003C81AB /* IN UV PAINTING texture 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "IN UV PAINTING texture 2.jpg"; sourceTree = "<group>"; };
+		74858750248CF1DC003C81AB /* IN UV PAINTING texture 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "IN UV PAINTING texture 3.jpg"; sourceTree = "<group>"; };
+		74858751248CF1DC003C81AB /* wall texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "wall texture.jpg"; sourceTree = "<group>"; };
+		74858752248CF1DC003C81AB /* houseinterior.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = houseinterior.obj; sourceTree = "<group>"; };
+		74858753248CF1DC003C81AB /* IN UV PAINTING.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "IN UV PAINTING.jpg"; sourceTree = "<group>"; };
+		74858754248CF1DC003C81AB /* sopha wood uv texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "sopha wood uv texture.jpg"; sourceTree = "<group>"; };
+		74858755248CF1DC003C81AB /* double sopha wood back uv texture .jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "double sopha wood back uv texture .jpg"; sourceTree = "<group>"; };
+		74858756248CF1DC003C81AB /* double sopha wood right uv .jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "double sopha wood right uv .jpg"; sourceTree = "<group>"; };
+		74858757248CF1DC003C81AB /* double sopha wood back uv .jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "double sopha wood back uv .jpg"; sourceTree = "<group>"; };
 		748A9561246FB8B0001BB2B7 /* gi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		748A9564246FB8B0001BB2B7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		748A9565246FB8B0001BB2B7 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -415,6 +455,7 @@
 		746F8BB4247A0F2E00B0491A /* model */ = {
 			isa = PBXGroup;
 			children = (
+				74858743248CF1DC003C81AB /* HouseInterior */,
 				74D8EA272487200500E7DFDD /* interiorroom */,
 				746F8BD1247A6D9C00B0491A /* monkey.obj */,
 				746F8BCF247A5BF200B0491A /* cube.obj */,
@@ -447,6 +488,33 @@
 				746F8BBF247A0F2E00B0491A /* low poly buildings.obj */,
 			);
 			path = Buildings;
+			sourceTree = "<group>";
+		};
+		74858743248CF1DC003C81AB /* HouseInterior */ = {
+			isa = PBXGroup;
+			children = (
+				74858744248CF1DC003C81AB /* teble wood uv.jpg */,
+				74858745248CF1DC003C81AB /* floor uv texture.jpg */,
+				74858746248CF1DC003C81AB /* floor uv.jpg */,
+				74858747248CF1DC003C81AB /* sopha wood uv.jpg */,
+				74858748248CF1DC003C81AB /* wall edge.jpg */,
+				74858749248CF1DC003C81AB /* double sopha wood right uv texture .jpg */,
+				7485874A248CF1DC003C81AB /* teble wood uv texture.jpg */,
+				7485874B248CF1DC003C81AB /* houseinterior.mtl */,
+				7485874C248CF1DC003C81AB /* double sopha wood base bace uv .jpg */,
+				7485874D248CF1DC003C81AB /* IN UV PAINTING TEXTURE.jpg */,
+				7485874E248CF1DC003C81AB /* double sopha wood base uv .jpg */,
+				7485874F248CF1DC003C81AB /* IN UV PAINTING texture 2.jpg */,
+				74858750248CF1DC003C81AB /* IN UV PAINTING texture 3.jpg */,
+				74858751248CF1DC003C81AB /* wall texture.jpg */,
+				74858752248CF1DC003C81AB /* houseinterior.obj */,
+				74858753248CF1DC003C81AB /* IN UV PAINTING.jpg */,
+				74858754248CF1DC003C81AB /* sopha wood uv texture.jpg */,
+				74858755248CF1DC003C81AB /* double sopha wood back uv texture .jpg */,
+				74858756248CF1DC003C81AB /* double sopha wood right uv .jpg */,
+				74858757248CF1DC003C81AB /* double sopha wood back uv .jpg */,
+			);
+			path = HouseInterior;
 			sourceTree = "<group>";
 		};
 		748A9558246FB8B0001BB2B7 = {
@@ -1084,16 +1152,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				748A98AC246FCC1D001BB2B7 /* multTarget.vert in Resources */,
+				7485875C248CF1DC003C81AB /* wall edge.jpg in Resources */,
+				74858763248CF1DC003C81AB /* IN UV PAINTING texture 2.jpg in Resources */,
+				74858762248CF1DC003C81AB /* double sopha wood base uv .jpg in Resources */,
+				74858769248CF1DC003C81AB /* double sopha wood back uv texture .jpg in Resources */,
+				74858759248CF1DC003C81AB /* floor uv texture.jpg in Resources */,
+				7485876A248CF1DC003C81AB /* double sopha wood right uv .jpg in Resources */,
+				74858765248CF1DC003C81AB /* wall texture.jpg in Resources */,
 				748A98B1246FCC1D001BB2B7 /* multarget.mat.xml in Resources */,
 				746F8BC6247A0F2E00B0491A /* low poly buildings.c4d in Resources */,
 				748A98A8246FCC1D001BB2B7 /* crate.tga in Resources */,
 				746F8BCE247A17C300B0491A /* buildings.obj in Resources */,
+				7485875D248CF1DC003C81AB /* double sopha wood right uv texture .jpg in Resources */,
 				746F8BC9247A0F2E00B0491A /* low poly buildings.obj in Resources */,
+				74858767248CF1DC003C81AB /* IN UV PAINTING.jpg in Resources */,
 				748545602470E34E00268577 /* indirectlightmap.frag in Resources */,
+				7485875A248CF1DC003C81AB /* floor uv.jpg in Resources */,
 				748A98A5246FCC1D001BB2B7 /* cube.mesh.xml in Resources */,
 				748A98AD246FCC1D001BB2B7 /* common.vert in Resources */,
 				748A9577246FB8B4001BB2B7 /* LaunchScreen.storyboard in Resources */,
 				748A9574246FB8B4001BB2B7 /* Assets.xcassets in Resources */,
+				74858766248CF1DC003C81AB /* houseinterior.obj in Resources */,
 				746F8BC8247A0F2E00B0491A /* low poly buildings.fbx in Resources */,
 				746F8BC3247A0F2E00B0491A /* cottage_fbx.fbx in Resources */,
 				748A98AA246FCC1D001BB2B7 /* deferredShade.vert in Resources */,
@@ -1106,7 +1185,13 @@
 				74D8EC662487269000E7DFDD /* manual.html in Resources */,
 				748A98A7246FCC1D001BB2B7 /* triangle.model.xml in Resources */,
 				748A98A9246FCC1D001BB2B7 /* multTarget.frag in Resources */,
+				74858768248CF1DC003C81AB /* sopha wood uv texture.jpg in Resources */,
+				74858764248CF1DC003C81AB /* IN UV PAINTING texture 3.jpg in Resources */,
 				74D8EC602487269000E7DFDD /* vector2.inl in Resources */,
+				74858758248CF1DC003C81AB /* teble wood uv.jpg in Resources */,
+				7485876B248CF1DC003C81AB /* double sopha wood back uv .jpg in Resources */,
+				7485875E248CF1DC003C81AB /* teble wood uv texture.jpg in Resources */,
+				74858760248CF1DC003C81AB /* double sopha wood base bace uv .jpg in Resources */,
 				746F8BD2247A6D9C00B0491A /* monkey.obj in Resources */,
 				74D8EC652487269000E7DFDD /* license.txt in Resources */,
 				74D8EA2B2487200500E7DFDD /* interior.mtl in Resources */,
@@ -1117,6 +1202,7 @@
 				748A98AB246FCC1D001BB2B7 /* common.frag in Resources */,
 				748A956F246FB8B0001BB2B7 /* Main.storyboard in Resources */,
 				74D8EC632487269000E7DFDD /* matrix3x3.inl in Resources */,
+				7485875B248CF1DC003C81AB /* sopha wood uv.jpg in Resources */,
 				748545622472090500268577 /* indirectLight.mat.xml in Resources */,
 				746F8BC1247A0F2E00B0491A /* cottage_normal.png in Resources */,
 				746F8BC5247A0F2E00B0491A /* cottage_diffuse.png in Resources */,
@@ -1125,9 +1211,11 @@
 				74D8EC612487269000E7DFDD /* matrix4x4.inl in Resources */,
 				74D8EC5D2487269000E7DFDD /* config.h.in in Resources */,
 				74D8EC5B2487269000E7DFDD /* quaternion.inl in Resources */,
+				74858761248CF1DC003C81AB /* IN UV PAINTING TEXTURE.jpg in Resources */,
 				746F8BCA247A0F2E00B0491A /* Website.txt in Resources */,
 				74D8EC642487269000E7DFDD /* SmoothingGroups.inl in Resources */,
 				746F8BC7247A0F2E00B0491A /* low poly buildings.3ds in Resources */,
+				7485875F248CF1DC003C81AB /* houseinterior.mtl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
